@@ -4,13 +4,13 @@ public class Parallax : MonoBehaviour
 {
     [SerializeField] private Transform[] _objects;
     [SerializeField] private Vector3 _speed;
-    [SerializeField] private int distance;
-    private float maxArea;
-    private float minArea;
+    [SerializeField] private int _distance;
+    private float _maxArea;
+    private float _minArea;
     void Start()
     {
-        maxArea = _objects[0].transform.position.z + distance;
-        minArea = _objects[0].transform.position.z - distance;
+        _maxArea = _objects[0].transform.position.z + _distance;
+        _minArea = _objects[0].transform.position.z - _distance;
     }
 
     void Update()
@@ -19,9 +19,9 @@ public class Parallax : MonoBehaviour
         for(int i = 0; i < _objects.Length; i++)
         {
             _objects[i].transform.Translate(-_speed);
-            if (_objects[i].transform.position.z < minArea)
+            if (_objects[i].transform.position.z < _minArea)
             {
-                _objects[i].transform.position = new Vector3(_objects[i].transform.position.x, _objects[i].transform.position.y,maxArea);
+                _objects[i].transform.position = new Vector3(_objects[i].transform.position.x, _objects[i].transform.position.y,_maxArea);
             }
         }
     }

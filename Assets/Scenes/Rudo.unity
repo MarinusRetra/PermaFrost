@@ -508,6 +508,7 @@ GameObject:
   - component: {fileID: 1793032796}
   - component: {fileID: 1793032795}
   - component: {fileID: 1793032800}
+  - component: {fileID: 1793032801}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -650,6 +651,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   DamageInvincibility: 0.5
   HealInvincibility: 3
+--- !u!114 &1793032801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793032794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 253125e44de3b0540af299b0f1dbacf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusEffects
+  LosingSanity: 0
+  InsanityDeath: 20
+  IsFreezing: 0
+  FrostbiteDeath: 30
 --- !u!1001 &5762943260396638258
 PrefabInstance:
   m_ObjectHideFlags: 0

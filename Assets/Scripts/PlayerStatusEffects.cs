@@ -47,6 +47,7 @@ public class PlayerStatusEffects : MonoBehaviour
     public void AddInstantInsanity(int instantAmount)
     {
         _currentInsanity += instantAmount;
+        if(_currentInsanity < 0) { _currentInsanity = 0; }
     }
 
     //Frostbite related variables
@@ -80,5 +81,6 @@ public class PlayerStatusEffects : MonoBehaviour
     public void AddInstantFrostbite(int instantAmount)
     {
         _currentFrostbite += instantAmount;
+        if( _currentFrostbite < 0 ) { _currentFrostbite = 0; }
     }
 }

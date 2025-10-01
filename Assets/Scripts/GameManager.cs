@@ -16,10 +16,14 @@ namespace Gameplay
         private void HandlePause()
         {
             _pauseMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
         }
         private void HandleResume()
-        { 
+        {
             _pauseMenu.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private void OnDisable()

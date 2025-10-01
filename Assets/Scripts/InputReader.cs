@@ -27,16 +27,16 @@ namespace Gameplay
         /// </summary>
         public void SetGameplayActions()
         {
-             _gameInput.Gameplay.Enable();
-             _gameInput.UI.Disable();
+            _gameInput.Gameplay.Enable();
+            _gameInput.UI.Disable();
         }
         /// <summary>
         /// Set Gameplay controls uit en UI controls aan.
         /// </summary>
         public void SetUIActions()
         {
-            _gameInput.Gameplay.Disable();
             _gameInput.UI.Enable();
+            _gameInput.Gameplay.Disable();
         }
 
         // Gameplay Action Events
@@ -51,11 +51,11 @@ namespace Gameplay
         public event Action SprintEvent;
         public event Action SprintCancelEvent;
         public event Action PauseEvent;
-        
+
         // UI Action Events
         public event Action<Vector2> NavigateEvent;
         public event Action<Vector2> ScrollEvent;
-        public event Action ResumeEvent; 
+        public event Action ResumeEvent;
         public event Action CancelEvent;
         public event Action ClickEvent;
         public event Action SubmitEvent;
@@ -67,7 +67,7 @@ namespace Gameplay
             if (context.phase == InputActionPhase.Performed)
             {
                 UseEvent?.Invoke();
-            } 
+            }
         }
 
         public void OnCrouch(InputAction.CallbackContext context)
@@ -189,6 +189,16 @@ namespace Gameplay
             {
                 SubmitEvent?.Invoke();
             }
+        }
+        void OnDisable()
+        {
+            _gameInput.UI.Disable();
+            _gameInput.Gameplay.Disable();
+        }
+        void OnDestroy()
+        {
+            _gameInput.UI.Disable();
+            _gameInput.Gameplay.Disable();
         }
     }
 }

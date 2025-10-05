@@ -121,6 +121,10 @@ namespace Gameplay
             {
                 MoveEvent?.Invoke(context.ReadValue<Vector2>());
             }
+            else
+            { 
+                MoveEvent?.Invoke(Vector2.zero);
+            }
         }
         public void OnSprint(InputAction.CallbackContext context)
         {

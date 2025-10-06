@@ -4,7 +4,7 @@
 - Active scene:
   - Name: Marinus
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI
 - Active game object:

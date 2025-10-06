@@ -117,14 +117,14 @@ namespace Gameplay
 
         public void OnMove(InputAction.CallbackContext context)
         {
-           if (context.phase == InputActionPhase.Performed)
-           {
-               MoveEvent?.Invoke(context.ReadValue<Vector2>());
-           }
-           else
-           {
-               MoveEvent?.Invoke(context.ReadValue<Vector2>());
-           }
+            if (context.phase == InputActionPhase.Performed)
+            {
+                MoveEvent?.Invoke(context.ReadValue<Vector2>());
+            }
+            else
+            { 
+                MoveEvent?.Invoke(Vector2.zero);
+            }
         }
         public void OnSprint(InputAction.CallbackContext context)
         {

@@ -2,7 +2,7 @@
 - Project name: PortfolioProject
 - Unity version: Unity 6000.2.2f1
 - Active scene:
-  - Name: Marinus
+  - Name: SampleScene
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
   - Layers:

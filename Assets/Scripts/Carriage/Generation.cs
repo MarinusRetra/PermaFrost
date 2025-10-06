@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using Unity.AI.Navigation;
 
 public class Generation : MonoBehaviour
 {
     [Header("Rooms")]
     [SerializeField] private List<GameObject> _rooms;
     [SerializeField] private GameObject _endRoom;
+
+    [SerializeField] private NavMeshSurface _meshSurface;
 
     private List<GameObject> _initializedRooms = new List<GameObject>();
 
@@ -14,6 +18,7 @@ public class Generation : MonoBehaviour
     void Start()
     {
         GenerateRooms();
+        StartCoroutine(GenerateNavmesh());
     }
 
     void PositionGeneratedRoom(GameObject room, GameObject previousRoom)
@@ -43,9 +48,17 @@ public class Generation : MonoBehaviour
             }
 
             _initializedRooms.Add(randomRoom);
+
+            randomRoom.transform.parent = transform;
         }
 
         GameObject endRoom = Instantiate(_endRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
+    }
+
+    private IEnumerator GenerateNavmesh()
+    {
+        yield return new WaitForEndOfFrame();
+        _meshSurface.BuildNavMesh();
     }
 }

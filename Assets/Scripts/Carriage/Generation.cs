@@ -13,7 +13,7 @@ public class Generation : MonoBehaviour
 
     private List<GameObject> _initializedRooms = new List<GameObject>();
 
-    private int _amountOfRooms = 5;
+    private int _amountOfRooms = 15;
 
     void Start()
     {

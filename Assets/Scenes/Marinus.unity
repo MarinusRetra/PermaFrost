@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 4031807}
   - component: {fileID: 4031806}
   - component: {fileID: 4031809}
+  - component: {fileID: 4031810}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -269,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.GameManager
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  _pauseMenu: {fileID: 488856314}
+  _pauseMenu: {fileID: 0}
 --- !u!1 &7884865
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +787,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.1080556, y: 0.7079898, z: 1.1318809}
+  m_Size: {x: 0.8530046, y: 0.7079898, z: 0.856683}
   m_Center: {x: 0, y: 0.6460051, z: 0}
 --- !u!1 &1372977296
 GameObject:
@@ -1563,8 +1564,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 488856315}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1811,3 +1811,4 @@ SceneRoots:
   - {fileID: 693359300}
   - {fileID: 1590579907}
   - {fileID: 1763952612}
+  - {fileID: 1834916753}

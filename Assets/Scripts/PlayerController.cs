@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Gameplay
@@ -28,6 +29,7 @@ namespace Gameplay
         private bool _isHoldingCrouch = false;
         private bool _isCrouching = false;
         private bool _canGetUp = true;
+        private bool _isChangingSize = false;
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
 
@@ -117,8 +119,8 @@ namespace Gameplay
         }
         private void HandleCrouch()
         {
-            CrouchDown();
             _isHoldingCrouch = true;
+            CrouchDown();
         }
 
         private void HandleCrouchCancel()
@@ -132,7 +134,10 @@ namespace Gameplay
 
         private void HandleSprint()
         {
-            _currentMoveSpeed = _sprintSpeed;
+            if (!_isCrouching)
+            { 
+                _currentMoveSpeed = _sprintSpeed;
+            }
         }
 
         private void HandleSprintCancel()
@@ -183,10 +188,10 @@ namespace Gameplay
         {
             _canGetUp = true;
         }
-        void OnTriggerStay(Collider other)
-        {
-            _canGetUp = false;
-        }
+        // void OnTriggerStay(Collider other)
+        // {
+        //     _canGetUp = false;
+        // }
 
         private void OnDestroy()
         {

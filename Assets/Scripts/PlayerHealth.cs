@@ -1,3 +1,4 @@
+using Gameplay;
 using System.Collections;
 using UnityEngine;
 
@@ -17,13 +18,15 @@ public class PlayerHealth : MonoBehaviour
         {
             print(collision.transform.name + "Has hit the player");
             StartCoroutine(DamagePlayer());
+            collision.gameObject.GetComponent<Monster>().Deaggro();
         }
     }
 
-    private IEnumerator DamagePlayer()
+    public IEnumerator DamagePlayer()
     {
         if (_damageInvincible || _healInvincible) yield break;
 
+        print("Ow owwieee ouch");
         if (_isVunerable) 
         {
             GameOver();

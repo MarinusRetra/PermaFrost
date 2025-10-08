@@ -7,8 +7,8 @@ namespace Gameplay
 {
     public class AllEars : Monster
     {
-        public enum earStates {wandering,agressive}
-        public earStates _currentState = earStates.wandering;
+        private enum earStates {Wandering,Agressive,Idle}
+        private earStates _currentState = earStates.Wandering;
 
         private Transform _player;
         [SerializeField] private float _playerRadius;
@@ -27,7 +27,6 @@ namespace Gameplay
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            instance = this;
             //Fetch the player
             _player = FindAnyObjectByType<PlayerHealth>().transform;
 
@@ -42,34 +41,26 @@ namespace Gameplay
             StartCoroutine(HandleMovement());
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
         private IEnumerator HandleMovement()
         {
             while (true)
             {
                 switch (_currentState)
                 {
-                    case earStates.wandering:
+                    case earStates.Wandering:
                         Vector3 goal = GetRandomRoomPosition();
                         _agent.destination = goal;
                         yield return new WaitForSeconds(Random.Range(_randomTimeBetweenMoves.x, _randomTimeBetweenMoves.y));
                         continue;
-                    case earStates.agressive:
+                    case earStates.Agressive:
                         //check if area reached
                         if (_agent.remainingDistance < 0.1f)
                         {
-                            print("We are so good bro");
-                            float speed = _agent.speed;
                             _agent.isStopped = true;
                             Attack();
                             yield return new WaitForSeconds(3);
                             _agent.isStopped = false;
-                            if(_agent.remainingDistance < 0.1f)
+                            if(_agent.remainingDistance < 1f)
                             {
                                 Deaggro();
                             }
@@ -137,22 +128,16 @@ namespace Gameplay
 
         public override void Deaggro()
         {
-            _currentState = earStates.wandering;
+            _currentState = earStates.Wandering;
             _agent.speed = 1;
         }
 
         public override void Aggro(Vector3 location)
         {
             if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y) return;
-            _currentState = earStates.agressive;
-            _agent.destination = location;
+            _currentState = earStates.Agressive;
+            _agent.destination = new Vector3(location.x, 3.08f, location.z);
             _agent.speed = 7;
-        }
-
-        public static AllEars instance;
-        public static void ILoveTesting()
-        {
-            instance.Aggro(instance._player.position);
         }
     }
 }

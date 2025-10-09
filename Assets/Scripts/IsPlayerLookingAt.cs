@@ -19,7 +19,16 @@ namespace Gameplay
             CameraArea = GeometryUtility.CalculateFrustumPlanes(Cam);
             if (GeometryUtility.TestPlanesAABB(CameraArea, bounds))
             {
-                return true;
+                //check for walls
+                Ray ray = new Ray(lookingObject.transform.position, (Cam.transform.position - lookingObject.transform.position));
+                if(Physics.Raycast(ray, out RaycastHit hit, 20))
+                {
+                    if (hit.collider != null && hit.collider.CompareTag("Player"))
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
             else
             {

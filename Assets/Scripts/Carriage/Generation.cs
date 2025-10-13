@@ -5,6 +5,7 @@ public class Generation : MonoBehaviour
 {
     [Header("Rooms")]
     [SerializeField] private List<GameObject> _rooms;
+    [SerializeField] private GameObject _startRoom;
     [SerializeField] private GameObject _endRoom;
 
     private List<GameObject> _initializedRooms = new List<GameObject>();
@@ -32,15 +33,14 @@ public class Generation : MonoBehaviour
 
     void GenerateRooms()
     {
+        GameObject startRoom = Instantiate(_startRoom);
+        _initializedRooms.Add(startRoom);
+
         for (int i = 0; i < _amountOfRooms; i++)
         {
             GameObject randomRoom = Instantiate(_rooms[Random.Range(0, _rooms.Count)]);
-
-            if (i > 0)
-            {
-                GameObject previousRoom = _initializedRooms[i - 1];
-                PositionGeneratedRoom(randomRoom, previousRoom);
-            }
+            GameObject previousRoom = _initializedRooms[i];
+            PositionGeneratedRoom(randomRoom, previousRoom);
 
             _initializedRooms.Add(randomRoom);
         }

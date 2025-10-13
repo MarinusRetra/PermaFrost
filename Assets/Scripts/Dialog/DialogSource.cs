@@ -8,8 +8,7 @@ namespace Gameplay
 {
 	public class DialogSource : MonoBehaviour
 	{
-		[TextArea(5, 10)]
-		public List<string> DialogTexts;
+		public List<DialogList> DialogTexts;
 
 		private int _index = 0;
 
@@ -22,7 +21,6 @@ namespace Gameplay
 		private void Awake()
 		{
 			_dialogParent = GameObject.Find("@parent");
-			if (_dialogParent) print("Found");
 		}
 
 		public IEnumerator DialogRoutine()
@@ -30,13 +28,15 @@ namespace Gameplay
 			GameObject child = _dialogParent.transform.GetChild(0).gameObject;
 			child.SetActive(true);
 
-			yield return new WaitUntil(() => _dialogParent == true);
-			
+			yield return new WaitUntil(() => child == true);
+
 			_title = GameObject.Find("@title").GetComponent<TextMeshProUGUI>();
 			_dialog = GameObject.Find("@dialog").GetComponent<TextMeshProUGUI>();
 
-			_title.text = gameObject.name;
-			_dialog.text = DialogTexts[_index];
+			if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
+			else _title.text = "Me:".ToString();
+
+			_dialog.text = DialogTexts[_index].Text;
 
 			while (true)
 			{
@@ -46,17 +46,31 @@ namespace Gameplay
 
 					if (_index >= DialogTexts.Count)
 					{
-						_index = 0;
 						child.SetActive(false);
+						_index = 0;
+						_title.text = "";
+						_dialog.text = "";
 						InteractionManager.run = null;
 						yield break;
 					}
 
-					_dialog.text = DialogTexts[_index];
+					if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
+					else _title.text = "Me:".ToString();
+
+					_dialog.text = DialogTexts[_index].Text;
 				}
 
 				yield return null;
 			}
 		}
+	}
+
+	[System.Serializable]
+	public class DialogList
+	{
+		[TextArea(5, 10)]
+		public string Text;
+
+		public bool IsPlayer;
 	}
 }

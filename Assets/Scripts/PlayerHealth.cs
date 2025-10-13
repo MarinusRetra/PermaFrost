@@ -12,6 +12,13 @@ public class PlayerHealth : MonoBehaviour
 
     private bool _isVunerable = false;
 
+    private Camera _cam;
+
+    private void Start()
+    {
+        _cam = transform.Find("Main Camera").GetComponent<Camera>();
+        StartCoroutine(MakeSurePlayerDoesntFall());
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -57,5 +64,30 @@ public class PlayerHealth : MonoBehaviour
         _healInvincible = true;
         yield return new WaitForSeconds(HealInvincibility);
         _healInvincible = false;
+    }
+
+    private IEnumerator MakeSurePlayerDoesntFall()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1);
+            if (transform.position.y < 0)
+            {
+                if (_cam.fieldOfView < 60) continue;
+                print("Why is bro so low");
+                while(_cam.fieldOfView > 5)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    _cam.fieldOfView -= 1;
+                }
+                yield return new WaitForSeconds(1);
+                //Send to current room
+                while (_cam.fieldOfView < 60)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    _cam.fieldOfView += 1;
+                }
+            }
+        }
     }
 }

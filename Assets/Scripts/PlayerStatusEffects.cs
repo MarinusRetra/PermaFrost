@@ -33,7 +33,7 @@ public class PlayerStatusEffects : MonoBehaviour
             if (_insanityCauses.Count == 0 && _currentInsanity > 0) { _currentInsanity--; }
 
             if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver(); }
-            print(_currentInsanity);
+            //print(_currentInsanity);
             yield return new WaitForSeconds(1);
         }
     }

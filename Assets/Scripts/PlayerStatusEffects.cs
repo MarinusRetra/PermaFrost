@@ -44,6 +44,7 @@ public class PlayerStatusEffects : MonoBehaviour
             _insanityCauses.Remove(name);
             return;
         }
+        if (_insanityCauses.Contains(name)) return;
         _insanityCauses.Add(name);
     }
     public void AddInstantInsanity(int instantAmount)
@@ -55,8 +56,8 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    private int _currentFrostbite = 0;
-    private List<string> _frostbiteCauses = new();
+    public int _currentFrostbite = 0;
+    public List<string> _frostbiteCauses = new();
 
     //Frostbite related functions
     private IEnumerator HandleFrostbite()
@@ -78,6 +79,7 @@ public class PlayerStatusEffects : MonoBehaviour
             _frostbiteCauses.Remove(name);
             return;
         }
+        if (_frostbiteCauses.Contains(name)) return;
         _frostbiteCauses.Add(name);
     }
     public void AddInstantFrostbite(int instantAmount)

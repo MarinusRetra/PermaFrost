@@ -40,6 +40,11 @@ namespace Gameplay
             }
         }
 
+        public void Stun()
+        {
+
+        }
+
         private void Attack()
         {
             //check area for player

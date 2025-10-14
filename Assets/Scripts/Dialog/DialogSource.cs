@@ -40,25 +40,24 @@ namespace Gameplay
 
 			while (true)
 			{
-				if (Keyboard.current.eKey.wasPressedThisFrame)
+				if (_index >= DialogTexts.Count)
 				{
-					_index++;
-
-					if (_index >= DialogTexts.Count)
-					{
-						child.SetActive(false);
-						_index = 0;
-						_title.text = "";
-						_dialog.text = "";
-						InteractionManager.run = null;
-						yield break;
-					}
-
-					if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
-					else _title.text = "Me:".ToString();
-
-					_dialog.text = DialogTexts[_index].Text;
+					child.SetActive(false);
+					_index = 0;
+					_title.text = "";
+					_dialog.text = "";
+					InteractionManager.run = null;
+					yield break;
 				}
+
+				if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
+				else _title.text = "Me:".ToString();
+
+				_dialog.text = DialogTexts[_index].Text;
+
+				yield return new WaitForSeconds(DialogTexts[_index].Timer);
+
+				_index++;
 
 				yield return null;
 			}
@@ -72,5 +71,7 @@ namespace Gameplay
 		public string Text;
 
 		public bool IsPlayer;
+
+		public float Timer;
 	}
 }

@@ -29,7 +29,9 @@ namespace Gameplay
         {
             hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
-
+        /// <summary>
+        /// Triggers the interact logic of the interacted item.
+        /// </summary>
         private void HandleInteract()
         {
             hit.collider.GetComponent<InteractObject>()?.Interact();

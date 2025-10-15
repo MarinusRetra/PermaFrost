@@ -2,13 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
 	public class DialogSource : MonoBehaviour
 	{
 		public List<DialogList> DialogTexts;
+		public float typingSpeed = 0.03f;
 
 		private int _index = 0;
 
@@ -50,7 +50,7 @@ namespace Gameplay
 
 				_index++;
 
-				yield return null;
+				yield return new WaitForSeconds(0.5f);
 			}
 		}
 
@@ -61,23 +61,41 @@ namespace Gameplay
 			else
 				_child = _dialogParent.transform.GetChild(0).gameObject;
 
-
 			_child.SetActive(true);
 
 			_dialog = GameObject.Find("@dialog").GetComponent<TextMeshProUGUI>();
+			_dialog.text = "";
+
+			string fullText;
 
 			if (DialogTexts[_index].Chats == DialogList.ChatTypes.Thought)
 			{
-				_dialog.text = $"\"{DialogTexts[_index].Text}\"";
+				fullText = $"\"{DialogTexts[_index].Text}\"";
 			}
 			else
 			{
 				_title = GameObject.Find("@title").GetComponent<TextMeshProUGUI>();
-				_title.text = DialogTexts[_index].Chats == DialogList.ChatTypes.ChatAsPlayer ? "Me:" : gameObject.name + ":";
-				_dialog.text = DialogTexts[_index].Text;
+				_title.text = DialogTexts[_index].Chats == DialogList.ChatTypes.ChatAsPlayer
+					? "Me:"
+					: gameObject.name + ":";
+
+				fullText = DialogTexts[_index].Text;
 			}
 
-			yield return null;
+			yield return StartCoroutine(TypeText(fullText));
+
+			yield break;
+		}
+
+		private IEnumerator TypeText(string text)
+		{
+			_dialog.text = "";
+
+			foreach (char letter in text)
+			{
+				_dialog.text += letter;
+				yield return new WaitForSeconds(typingSpeed);
+			}
 		}
 	}
 
@@ -87,7 +105,8 @@ namespace Gameplay
 		[TextArea(5, 10)]
 		public string Text;
 
-		public enum ChatTypes{
+		public enum ChatTypes
+		{
 			ChatAsPlayer,
 			ChatAsNpc,
 			Thought

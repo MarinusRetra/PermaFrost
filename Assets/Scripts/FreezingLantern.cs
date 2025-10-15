@@ -6,6 +6,7 @@ namespace Gameplay
 {
     public class FreezingLantern : MonoBehaviour
     {
+        
         public bool LanternOn;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -44,7 +45,20 @@ namespace Gameplay
                 {
                     PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
                 }
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        public void ChangeLanternState(bool on)
+        {
+            if (on)
+            {
+                LanternOn = true;
+                //turn on lantern idk
+            }
+            else
+            {
+                LanternOn= false;
             }
         }
 
@@ -60,6 +74,7 @@ namespace Gameplay
             if (objec.GetComponent<HotDude>())
             {
                 objec.GetComponent<HotDude>().Stun();
+                return true;
             }
             return false;
         }

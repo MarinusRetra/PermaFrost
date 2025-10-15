@@ -36,27 +36,74 @@ namespace Gameplay
                         _agent.destination = _player.position;
                         yield return new WaitForSeconds(0.1f);
                         continue;
+                    default:
+                        yield return new WaitForSeconds(0.5f);
+                        continue;
                 }
             }
         }
 
+        private bool _isStunning = false;
         public void Stun()
         {
-
-        }
-
-        private void Attack()
-        {
-            //check area for player
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
-            foreach (var hitCollider in hitColliders)
+            if (!_isStunning)
             {
-                if (hitCollider.CompareTag("Player"))
+                _isStunning = true;
+                StartCoroutine(StunWTime());
+            }
+        }
+        private IEnumerator StunWTime()
+        {
+            _agent.speed = 1;
+            bool _stoppedStun = false;
+            for(int i = 0; i < 10; i++)
+            {
+                yield return new WaitForSeconds(0.2f);
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+                bool _stillOn = false;
+                foreach (var hitCollider in hitColliders)
                 {
-                    StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer());
+                    if (hitCollider.GetComponent<FreezingLantern>())
+                    {
+                        _stillOn = true;
+                    }
+                }
+                if (!_stillOn)
+                {
+                    yield return null;
+                    _stoppedStun = true;
+                    i = 10;
                 }
             }
-            //do visuals or something
+            if (!_stoppedStun)
+            {
+                bool doneFreezing = false;
+                _currentState = hotStates.Stunned;
+                _agent.isStopped = true;
+                while (!doneFreezing)
+                {
+                    yield return new WaitForSeconds(0.2f);
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+                    bool _continueFreeze = false;
+                    foreach (var hitCollider in hitColliders)
+                    {
+                        if (hitCollider.GetComponent<FreezingLantern>() && hitCollider.GetComponent<FreezingLantern>().LanternOn)
+                        {
+                            _continueFreeze = true;
+                        }
+                    }
+                    if (!_continueFreeze)
+                    {
+                        yield return new WaitForSeconds(5);
+                        doneFreezing = true;
+                    }
+                }
+            }
+            _agent.isStopped = false;
+            _currentState = hotStates.Agressive;
+            _agent.speed = 3;
+            _isStunning = false;
+
         }
     }
 }

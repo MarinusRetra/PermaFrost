@@ -16,6 +16,8 @@ namespace Gameplay
 		private TextMeshProUGUI _title;
 		private TextMeshProUGUI _dialog;
 
+		private GameObject _child;
+
 		public static bool IsActive { get; private set; } = false;
 
 		private void Awake()
@@ -25,24 +27,10 @@ namespace Gameplay
 
 		public IEnumerator DialogRoutine()
 		{
-			GameObject child = _dialogParent.transform.GetChild(0).gameObject;
-			child.SetActive(true);
-
-			yield return new WaitUntil(() => child == true);
-
-			_title = GameObject.Find("@title").GetComponent<TextMeshProUGUI>();
-			_dialog = GameObject.Find("@dialog").GetComponent<TextMeshProUGUI>();
-
-			if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
-			else _title.text = "Me:".ToString();
-
-			_dialog.text = DialogTexts[_index].Text;
-
 			while (true)
 			{
 				if (_index >= DialogTexts.Count)
 				{
-					child.SetActive(false);
 					_index = 0;
 					_title.text = "";
 					_dialog.text = "";
@@ -50,17 +38,46 @@ namespace Gameplay
 					yield break;
 				}
 
-				if (DialogTexts[_index].IsPlayer == false) _title.text = gameObject.name + ":".ToString();
-				else _title.text = "Me:".ToString();
+				yield return StartCoroutine(InitializeDialog());
 
-				_dialog.text = DialogTexts[_index].Text;
+				_child.SetActive(true);
+
+				yield return new WaitUntil(() => _child.activeSelf);
 
 				yield return new WaitForSeconds(DialogTexts[_index].Timer);
+
+				_child.SetActive(false);
 
 				_index++;
 
 				yield return null;
 			}
+		}
+
+		private IEnumerator InitializeDialog()
+		{
+			if (DialogTexts[_index].Chats == DialogList.ChatTypes.Thought)
+				_child = _dialogParent.transform.GetChild(1).gameObject;
+			else
+				_child = _dialogParent.transform.GetChild(0).gameObject;
+
+
+			_child.SetActive(true);
+
+			_dialog = GameObject.Find("@dialog").GetComponent<TextMeshProUGUI>();
+
+			if (DialogTexts[_index].Chats == DialogList.ChatTypes.Thought)
+			{
+				_dialog.text = $"\"{DialogTexts[_index].Text}\"";
+			}
+			else
+			{
+				_title = GameObject.Find("@title").GetComponent<TextMeshProUGUI>();
+				_title.text = DialogTexts[_index].Chats == DialogList.ChatTypes.ChatAsPlayer ? "Me:" : gameObject.name + ":";
+				_dialog.text = DialogTexts[_index].Text;
+			}
+
+			yield return null;
 		}
 	}
 
@@ -70,7 +87,13 @@ namespace Gameplay
 		[TextArea(5, 10)]
 		public string Text;
 
-		public bool IsPlayer;
+		public enum ChatTypes{
+			ChatAsPlayer,
+			ChatAsNpc,
+			Thought
+		}
+
+		public ChatTypes Chats;
 
 		public float Timer;
 	}

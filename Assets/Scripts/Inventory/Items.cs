@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 
 public static class Items
 {
-    public static InventoryItem[] AllItems;
-
+    public static List<InventoryItem> AllItems;
     public static InventoryItem FindInventoryItem(string itemName)
     {
         foreach (var item in AllItems)

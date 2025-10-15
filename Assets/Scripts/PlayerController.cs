@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Gameplay
@@ -10,11 +11,17 @@ namespace Gameplay
     {
         [Header("Movement values")]
         [SerializeField] private InputReader _input;
-        [SerializeField] private Transform _camera;
         [SerializeField] private float _crouchSpeed = 3;
-        [SerializeField] private float _sprintSpeed= 7;
         [SerializeField] private float _baseSpeed = 4;
+
+        [Header("Sprint values")]
+        [SerializeField] private float _sprintSpeed = 7;
+        [SerializeField] private int _totalStamina = 10;
+        private int _currentStamina = 10;
+        private bool isSprinting = false;
+
         [Header("Camera values")]
+        private Transform _camera;
         [SerializeField] private float _sensitivity = 0.4f;
         [SerializeField] private float _crouchCameraHeight = 0f;
         [SerializeField] private float _standCameraHeight = 0.5f;
@@ -28,12 +35,13 @@ namespace Gameplay
         private bool _isHoldingCrouch = false;
         private bool _isCrouching = false;
         private bool _canGetUp = true;
-        private bool _isChangingSize = false;
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
 
         private void Start()
         {
+            
+            _camera = Camera.main.transform;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
@@ -46,6 +54,8 @@ namespace Gameplay
             _input.SprintCancelEvent += HandleSprintCancel;
             _input.SprintEvent += HandleSprint;
             _input.LookEvent += HandleLook;
+
+            StartCoroutine(Sprint());
         }
 
         private void FixedUpdate()
@@ -101,12 +111,42 @@ namespace Gameplay
             if (!_isCrouching)
             { 
                 _currentMoveSpeed = _sprintSpeed;
+                isSprinting = true;
             }
         }
 
         private void HandleSprintCancel()
         {
             _currentMoveSpeed = _baseSpeed;
+            isSprinting = false;
+        }
+
+        private IEnumerator Sprint()
+        {
+            while (true)
+            {
+                //stamina goes down when running
+                if (isSprinting)
+                {
+                    _currentStamina--;
+                    if (_currentStamina < 0)
+                    {
+                        HandleSprintCancel();
+                    }
+                    yield return new WaitForSeconds(0.1f);
+                }
+                else if (_currentStamina < _totalStamina)
+                {
+                    //goes up when not running
+                    yield return new WaitForSeconds(0.2f);
+                    _currentStamina++;
+                }
+                else
+                {
+                    //wait when at max stamina
+                    yield return new WaitForSeconds(0.1f);
+                }
+            }
         }
 
 

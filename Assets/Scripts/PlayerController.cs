@@ -46,10 +46,6 @@ namespace Gameplay
             _input.SprintCancelEvent += HandleSprintCancel;
             _input.SprintEvent += HandleSprint;
             _input.LookEvent += HandleLook;
-            _input.NextPreviousEvent += HandleHotbarNav;
-            _input.HotbarSelectEvent += HandleHotbarSelect;
-            _input.UseEvent += HandleUse;
-            _input.InteractEvent += HandleInteract;
         }
 
         private void FixedUpdate()
@@ -74,38 +70,6 @@ namespace Gameplay
         }
 
         /// <summary>
-        /// Triggers the interact logic of the interacted item.
-        /// </summary>
-        private void HandleInteract()
-        {
-
-        }
-
-        /// <summary>
-        /// Use item in selected hotbar slot by triggering the item's logic.
-        /// </summary>
-        private void HandleUse()
-        {
-
-        }
-
-        /// <summary>
-        /// Uses a float from 0 to 9 and sets the selected inventory slot to that float.
-        /// </summary>
-        private void HandleHotbarSelect(float number)
-        {
-
-        }
-
-        /// <summary>
-        /// A positive or negative number used to navigate either left or right through the hotbar for scrolling and controller navigation.
-        /// </summary>
-        private void HandleHotbarNav(float obj)
-        {
-
-        }
-
-        /// <summary>
         /// Uses mouse position to or joystick delta to rotate the first person camera.
         /// </summary>
         void HandleLook(Vector2 obj)
@@ -115,6 +79,7 @@ namespace Gameplay
 
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, 0, 0);
+            // TODO: Make it work properly with the joystick as well.
         }
         private void HandleCrouch()
         {
@@ -187,10 +152,6 @@ namespace Gameplay
         {
             _canGetUp = true;
         }
-        // void OnTriggerStay(Collider other)
-        // {
-        //     _canGetUp = false;
-        // }
 
         private void OnDestroy()
         {

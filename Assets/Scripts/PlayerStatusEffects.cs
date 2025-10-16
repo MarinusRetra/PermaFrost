@@ -8,7 +8,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
     private PlayerHealth _playerHP;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         _playerHP = FindAnyObjectByType<PlayerHealth>();
@@ -22,7 +22,7 @@ public class PlayerStatusEffects : MonoBehaviour
     [Header("Sanity")]
     public int InsanityDeath = 20;
     private int _currentInsanity = 0;
-    private List<string> _insanityCauses = new();
+    [SerializeField] private List<string> _insanityCauses = new();
 
     //Sanity related functions
     private IEnumerator HandleInsanity()

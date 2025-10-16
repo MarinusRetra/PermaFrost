@@ -63,7 +63,7 @@ public class PlayerStatusEffects : MonoBehaviour
     {
         while (true)
         {
-            if (_frostbiteCauses.Count > 0) { _currentFrostbite += 2; }
+            if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite--; }
 
             if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }

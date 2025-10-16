@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Gameplay
 {
@@ -14,12 +12,6 @@ namespace Gameplay
         void Start()
         {
             StartCoroutine(HandleBehaviour());
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
 
         private IEnumerator HandleBehaviour()

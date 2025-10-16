@@ -36,6 +36,10 @@ namespace Gameplay
                         _agent.destination = _player.position;
                         yield return new WaitForSeconds(0.1f);
                         continue;
+                    case hotStates.Idle:
+                        yield return new WaitForSeconds(5);
+                        _currentState = hotStates.Agressive;
+                        continue;
                     default:
                         yield return new WaitForSeconds(0.5f);
                         continue;
@@ -113,6 +117,11 @@ namespace Gameplay
             _agent.speed = 3;
             _isStunning = false;
 
+        }
+
+        public override void Deaggro()
+        {
+            _currentState = hotStates.Idle;
         }
     }
 }

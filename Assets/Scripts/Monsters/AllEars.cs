@@ -24,7 +24,7 @@ namespace Gameplay
         [SerializeField] private NavMeshAgent _agent;
 
         [SerializeField] private Vector2 _randomTimeBetweenMoves = new Vector2(3,6);
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             //Fetch the player

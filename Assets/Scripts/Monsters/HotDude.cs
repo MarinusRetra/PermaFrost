@@ -14,7 +14,7 @@ namespace Gameplay
         public Transform CurrentRoom;
 
         [SerializeField] private NavMeshAgent _agent;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             //Fetch the player
@@ -32,7 +32,7 @@ namespace Gameplay
                 switch (_currentState)
                 {
                     case hotStates.Agressive:
-                        //check if area reached
+                        //Only way to stop em is by freezing em.
                         _agent.destination = _player.position;
                         yield return new WaitForSeconds(0.1f);
                         continue;
@@ -56,9 +56,13 @@ namespace Gameplay
         {
             _agent.speed = 1;
             bool _stoppedStun = false;
+
+            //dont stun instantly
             for(int i = 0; i < 10; i++)
             {
                 yield return new WaitForSeconds(0.2f);
+
+                //double check that there is still a lantern in the area
                 Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
                 bool _stillOn = false;
                 foreach (var hitCollider in hitColliders)
@@ -77,12 +81,15 @@ namespace Gameplay
             }
             if (!_stoppedStun)
             {
+                //stun
                 bool doneFreezing = false;
                 _currentState = hotStates.Stunned;
                 _agent.isStopped = true;
                 while (!doneFreezing)
                 {
                     yield return new WaitForSeconds(0.2f);
+
+                    //while the lantern is still on, stay stunned
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
                     bool _continueFreeze = false;
                     foreach (var hitCollider in hitColliders)
@@ -99,6 +106,8 @@ namespace Gameplay
                     }
                 }
             }
+
+            //unstun
             _agent.isStopped = false;
             _currentState = hotStates.Agressive;
             _agent.speed = 3;

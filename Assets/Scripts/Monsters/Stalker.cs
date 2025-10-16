@@ -8,7 +8,6 @@ namespace Gameplay
         private enum StalkerStates { Watching,Watched,Moving,Idle}
         private StalkerStates _currentState = StalkerStates.Watching;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             StartCoroutine(HandleBehaviour());
@@ -49,16 +48,6 @@ namespace Gameplay
         private void Attack()
         {
             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", false);
-        }
-
-        public override void Deaggro()
-        {
-            
-        }
-
-        public override void Aggro(Vector3 location)
-        {
-            
         }
     }
 }

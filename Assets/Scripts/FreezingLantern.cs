@@ -24,14 +24,21 @@ namespace Gameplay
                 if (LanternOn)
                 {
                     _objectsInAreaRightNow.Clear();
+
+                    //Get all the objects in the area
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
                     foreach (var hitCollider in hitColliders)
                     {
                         if (_objectsInAreaRightNow.Contains(hitCollider.gameObject)) continue;
+
+                        //Remove object from list if its still here
                         if (_objectsInAreaLastCheck.Contains(hitCollider.gameObject)) { _objectsInAreaLastCheck.Remove(hitCollider.gameObject); }
+                        
                         bool wasChanged = AffectObject(hitCollider.gameObject,true);
                         if(wasChanged) _objectsInAreaRightNow.Add(hitCollider.gameObject);
                     }
+
+                    //Unfreeze any object that wasnt removed from the list
                     foreach(GameObject unfreezingObject in _objectsInAreaLastCheck)
                     {
                         AffectObject(unfreezingObject, false);
@@ -43,6 +50,7 @@ namespace Gameplay
                 }
                 else
                 {
+                    //Remove frostbite whenever the lantern is off
                     PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
                 }
                 yield return new WaitForSeconds(0.1f);
@@ -62,12 +70,18 @@ namespace Gameplay
             }
         }
 
+        /// <summary>
+        /// Check if object is affected by the lantern, and affects then if they are.
+        /// </summary>
+        /// <param name="objec"></param>
+        /// <param name="turnOn"></param>
+        /// <returns></returns>
         private bool AffectObject(GameObject objec, bool turnOn)
         {
             if (objec.CompareTag("Player"))
             {
                 PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", !turnOn);
-                print("freeze or something idk man");
+                print("Player is freezing due to the lantern");
                 return true;
             }
 

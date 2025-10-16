@@ -7,7 +7,6 @@ namespace Gameplay
         public static Camera Cam;
         public static Plane[] CameraArea;
         public Camera SelectedCamera;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             Cam = SelectedCamera;

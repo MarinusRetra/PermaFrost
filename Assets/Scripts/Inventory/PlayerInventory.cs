@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,12 +7,21 @@ namespace Gameplay
 {
     public class PlayerInventory : MonoBehaviour
     {
-        [SerializeField] InventoryItem EmptyItem;
-        [SerializeField] GameObject _HotbarObject;
-        private List<RectTransform> _hotbarUIElements;
-        [SerializeField] private List<InventoryItem> _hotbar;
-        private InventoryItem _selectedHotbarItem;
-        [SerializeField] InputReader _input;
+        [Header("Hotbar slot sizes")]
+        [SerializeField] private Vector3 _normalSlotSize = new(0.5f, 0.5f, 1f);
+        [SerializeField] private Vector3 _selectedSlotSize = new(0.6f, 0.6f, 1.2f);
+
+        [Header("Empty slot prefab here")]
+        [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _emptyItemSlot;
+
+        [Header("Inventory item and Hotbarslot transforms")]
+        [SerializeField] private List<SerializedKeyValuePair<InventoryItem, RectTransform>> _hotbar; // The key is the item in a slot and the value is a reference to that slot's UI element transform.
+
+        [Header("Reference to input sytem")]
+        [SerializeField] private InputReader _input;
+
+        private SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
+        private readonly List<SerializedKeyValuePair<InventoryItem, RectTransform>> _removedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
 
         void Awake()
         {
@@ -23,33 +32,40 @@ namespace Gameplay
 
         void Start()
         {
-            _hotbarUIElements = _HotbarObject.GetComponentsInChildren<RectTransform>().ToList();
-
-            IEnumerable<RectTransform> query = _hotbarUIElements.Where(_HotbarElement => _HotbarElement.CompareTag("HUD"));
-            _hotbarUIElements = query.Cast<RectTransform>().ToList();
-
+            // Sets the color and sprite for all hotbar elements. (Might become redundant depending on how the restart system will work.)
+            for (int i = 0; i < _hotbar.Count; i++)
+            {
+                var currentImage = _hotbar[i].Value.GetComponentInChildren<Image>();
+                currentImage.sprite = _hotbar[i].Key.sprite;
+                currentImage.color = _hotbar[i].Key.color;
+            }
+            for (int i = 0; i < _hotbar.Count; i++)
+            {
+                if (_hotbar[i].Key == _emptyItemSlot.Key)
+                {
+                    RemoveSlot(i);
+                }
+            }
             _selectedHotbarItem = _hotbar[0];
-            UpdateSlots();
         }
 
         /// <summary>
         /// Uses a float from 0 to 9 and sets the selected inventory slot to that float.
         /// </summary>
-        private void HandleHotbarSelect(float number)
+        private void HandleHotbarSelect(float numberIn)
         {
-            if (number > _hotbar.Count-1)
+            int _numberIn = (int)numberIn;
+            if (numberIn > _hotbar.Count - 1)
             {
                 return;
             }
-            foreach (var element in _hotbarUIElements) //TODO: vervang dit door iets dat het laatste geselecteerde element normaal zet.
+            // ALs removed elements geen selected slot heeft zet dan de waarde goed
+            if (_removedHotbarElements[_numberIn].Value != _selectedHotbarItem.Value)
             {
-                element.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+                _hotbar[_numberIn].Value.localScale = _normalSlotSize;
             }
-            _selectedHotbarItem = _hotbar[(int)number];
-
-            _hotbarUIElements[(int)number].transform.localScale = new(0.6f, 0.6f, 1.2f);
-
-            RemoveEmptySlots();
+            _selectedHotbarItem = _hotbar[_numberIn];
+            _hotbar[_numberIn].Value.localScale = _selectedSlotSize;
         }
 
         /// <summary>
@@ -62,7 +78,14 @@ namespace Gameplay
 
         public void PickupItem(string itemIn)
         {
-            _hotbar.Add(Items.FindInventoryItem(itemIn));
+            try { _hotbar.Add(_removedHotbarElements[0]); }
+            catch
+            {
+                Debug.Log("Cannot exceed max inventory size");
+                return;
+            }
+            //_hotbar.Add(Het item waar je nu naar kijkt));
+            SetSelectedSlotSprite();
         }
 
         /// <summary>
@@ -70,56 +93,39 @@ namespace Gameplay
         /// </summary>
         private void HandleUse()
         {
-            if (_selectedHotbarItem != EmptyItem && _hotbar.Count > 0)
+            if (_selectedHotbarItem.Key != _emptyItemSlot.Key && _hotbar.Count > 0)
             {
-                _selectedHotbarItem?.Use();
-                _selectedHotbarItem = EmptyItem;
-                RemoveEmptySlots();
+                _selectedHotbarItem.Key.Use();
+                _selectedHotbarItem = _emptyItemSlot;
+                RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
             }
         }
 
         public void DropItem()
         {
-            _hotbar.Remove(_selectedHotbarItem);
             // Instantiate item
+            RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
         }
         /// <summary>
         /// Clears out all the slots with an EmptyItem inside.
         /// </summary>
-        void RemoveEmptySlots()
+        void RemoveSlot(int indexIn)
         {
-            for (var i = 0; i < _hotbarUIElements.Count; i++)
-            {
-                if (_hotbar[i] == EmptyItem)
-                {
-                    _hotbar.RemoveAt(i);
-                    _hotbarUIElements[i].gameObject.SetActive(false);
-                    _hotbarUIElements.RemoveAt(i);
-                }
-                UpdateSlots();
-            }
+            _hotbar.RemoveAt(indexIn);
+            _removedHotbarElements.Add(_hotbar[indexIn]);
+            _hotbar[indexIn].Value.gameObject.SetActive(false);
+            _hotbar.RemoveAt(indexIn);
+            Debug.Log(_removedHotbarElements[^1]);
         }
 
         /// <summary>
-        /// Will set the sprite and color of every slot to sprite and color of the contained item.
+        /// Will set the sprite and color of the selected slot to the sprite and color of the contained item.
         /// </summary>
-        void UpdateSlots()
+        void SetSelectedSlotSprite()
         {
-            //Zet de _hotbarUIElements gelijk met _hotbar en zet de images van de hotbar.
-            for (var i = 0; i < _hotbarUIElements.Count; i++)
-            {
-                var currentImage = _hotbarUIElements[i].gameObject.GetComponentInChildren<Image>();
-                if (_hotbar[i] != EmptyItem)
-                {
-                    currentImage.sprite = _hotbar[i].sprite;
-                    currentImage.color = _hotbar[i].color;
-                }
-                else
-                {
-                    currentImage.sprite = EmptyItem.sprite;
-                    currentImage.color = EmptyItem.color;
-                }
-            }
+            var currentImage = _selectedHotbarItem.Value.GetComponentInChildren<Image>();
+            currentImage.sprite = _selectedHotbarItem.Key.sprite;
+            currentImage.color = _selectedHotbarItem.Key.color;
         }
         void OnDestroy()
         {
@@ -133,5 +139,13 @@ namespace Gameplay
             _input.NextPreviousEvent -= HandleHotbarNav;
             _input.UseEvent -= HandleUse;
         }
+    }
+
+
+[Serializable]
+    public struct SerializedKeyValuePair<TKey, TValue>
+    {
+        [SerializeField] public TKey Key;
+        [SerializeField] public TValue Value;
     }
 }

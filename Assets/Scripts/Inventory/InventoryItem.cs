@@ -24,7 +24,6 @@ public class HeatPack : InventoryItem
 {
     public HeatPack() 
     {
-        Items.AllItems.Add(this);
         Debug.Log(ToString());
     }
     public override void Use()
@@ -36,9 +35,6 @@ public class HeatPack : InventoryItem
 
 public class NoiseMonkey : InventoryItem
 {
-    public NoiseMonkey()
-    { Items.AllItems.Add(this); }
-
     public override void Use()
     {
         //
@@ -48,9 +44,6 @@ public class NoiseMonkey : InventoryItem
 
 public class SpeedSyringe : InventoryItem
 {
-    public SpeedSyringe() 
-    { Items.AllItems.Add(this); }
-
     public override void Use()
     {
         //
@@ -59,8 +52,6 @@ public class SpeedSyringe : InventoryItem
 [CreateAssetMenu(menuName = "Item/Key")]
 public class Key : InventoryItem
 {
-    public Key() 
-    { Items.AllItems.Add(this); }
 
     public override void Use()
     {
@@ -70,9 +61,6 @@ public class Key : InventoryItem
 [CreateAssetMenu(menuName = "Item/Bell")]
 public class Bell : InventoryItem
 {
-    public Bell() 
-    { Items.AllItems.Add(this); }
-
     public override void Use()
     {
         //
@@ -81,9 +69,6 @@ public class Bell : InventoryItem
 [CreateAssetMenu(menuName = "Item/LockPick")]
 public class Lockpick : InventoryItem
 {
-    public Lockpick() 
-    { Items.AllItems.Add(this); }
-
     public override void Use()
     {
         //

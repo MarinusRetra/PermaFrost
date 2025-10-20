@@ -3,29 +3,18 @@ using UnityEngine;
 public class InventoryItem : ScriptableObject
 {
     public Sprite sprite = null;
-    public Color color = new Color(1,1,1,255);
+    public Color color = new(1,1,1,255);
     public GameObject HoldObject = null;
     public virtual void Use() { }
-
-    public InventoryItem()
+    public InventoryItem ReturnSelf()
     {
-        SetColorAndSprite(color, sprite);
-    }
-
-    public void SetColorAndSprite(Color colorIn, Sprite sprinteIn)
-    {
-        color = colorIn;
-        sprite = sprinteIn;
+        return this;
     }
 }
 [CreateAssetMenu(menuName = "Item/HeatPack")]
 
 public class HeatPack : InventoryItem
 {
-    public HeatPack() 
-    {
-        Debug.Log(ToString());
-    }
     public override void Use()
     {
         //
@@ -52,7 +41,6 @@ public class SpeedSyringe : InventoryItem
 [CreateAssetMenu(menuName = "Item/Key")]
 public class Key : InventoryItem
 {
-
     public override void Use()
     {
         //

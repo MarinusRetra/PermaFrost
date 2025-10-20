@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2928332354326024531}
   - component: {fileID: 970189918314066740}
   - component: {fileID: 1254099496149342190}
+  - component: {fileID: -7478491463518871839}
   m_Layer: 0
   m_Name: TestItem DACUBE
   m_TagString: Untagged
@@ -111,3 +112,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7478491463518871839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3876437935209853021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
+  _interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _outlineScale: 1.1
+  _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}

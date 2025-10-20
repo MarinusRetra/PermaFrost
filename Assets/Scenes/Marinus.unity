@@ -793,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.27062526, b: 0.7264151, a: 0.15294118}
+  m_Color: {r: 0.6971823, g: 0.7254902, b: 0, a: 0.15294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1134,6 +1134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d937bafe1ea3c8a438b47d76c1dac568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerInventory
+  _normalSlotSize: {x: 0.5, y: 0.5, z: 1}
+  _selectedSlotSize: {x: 0.6, y: 0.6, z: 1.2}
   _emptyItemSlot:
     Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 1841889813569152925, guid: 3f53f3b2abc432246b296db83145967f, type: 3}
@@ -1149,6 +1151,10 @@ MonoBehaviour:
   - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 1195905247}
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
+  _selectedHotbarItem:
+    Key: {fileID: 0}
+    Value: {fileID: 0}
+  _removedHotbarElements: []
 --- !u!1 &1195905246
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,14 +1411,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.27062526, b: 0.7264151, a: 1}
+  m_Color: {r: 0.6971823, g: 0.7254902, b: 0, a: 0.15294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9e9e1623ef33e134e899d612827bc186, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1683,7 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.27062526, b: 0.7264151, a: 0.15294118}
+  m_Color: {r: 0.6971823, g: 0.7254902, b: 0, a: 0.15294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2899,7 +2905,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.27062526, b: 0.7264151, a: 0.15294118}
+  m_Color: {r: 0.6971823, g: 0.7254902, b: 0, a: 0.15294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2947,7 +2953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.27062526, b: 0.7264151, a: 0.15294118}
+  m_Color: {r: 0.6971823, g: 0.7254902, b: 0, a: 0.15294118}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

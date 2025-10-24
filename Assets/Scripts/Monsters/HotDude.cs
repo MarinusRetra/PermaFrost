@@ -11,8 +11,6 @@ namespace Gameplay
 
         private Transform _player;
 
-        public Transform CurrentRoom;
-
         [SerializeField] private NavMeshAgent _agent;
 
         void Start()

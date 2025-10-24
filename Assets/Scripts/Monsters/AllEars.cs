@@ -18,7 +18,6 @@ namespace Gameplay
         [SerializeField] private float _lastPosRadius;
         [SerializeField] private Vector2 _lastPosition;
 
-        public Transform CurrentRoom;
         [SerializeField] private Vector2[] _roomCorners;
 
         [SerializeField] private NavMeshAgent _agent;

@@ -9,5 +9,8 @@ namespace Gameplay
         public virtual void Deaggro() { }
 
         public virtual void Aggro(Vector3 location) { }
+
+        //update this for any monster that does effects and such
+        public virtual void DestroyMonster() { Destroy(gameObject); }
     }
 }

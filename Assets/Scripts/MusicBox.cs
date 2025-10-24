@@ -17,13 +17,12 @@ namespace Gameplay
         }
         private void Update()
         {
-            if (_playerEffects.transform.position.z > transform.position.z + 30) { gameObject.SetActive(false); }
+            if (_playerEffects.transform.position.z > transform.position.z + 5) { gameObject.SetActive(false); }
         }
 
         public void SilenceBox()
         {
             if (!outlineVisual.enabled) return;
-            print("Silence");
             outlineVisual.enabled = false;
             StartCoroutine(ChargeBox());
         }
@@ -31,13 +30,12 @@ namespace Gameplay
         public void StartBox()
         {
             if (!outlineVisual.enabled) return;
-            print("Timing minigame");
             _playerEffects.ManageInsanityCauses("Music", false);
         }
 
         private IEnumerator ChargeBox()
         {
-            //let things load
+            //let player status effects load
             yield return new WaitForSeconds(0.1f);
             _playerEffects.ManageInsanityCauses("Music", true);
             yield return new WaitForSeconds(Random.Range(boxRechargeTimes.x,boxRechargeTimes.y));

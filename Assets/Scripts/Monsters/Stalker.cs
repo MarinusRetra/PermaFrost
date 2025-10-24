@@ -21,7 +21,7 @@ namespace Gameplay
                 {
                     case StalkerStates.Watching:
                         yield return new WaitForSeconds(0.1f);
-                        if (IsPlayerLookingAt.IsPlayerLookingAtObj(GetComponent<Collider>()))
+                        if (PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
                         {
                             _currentState = StalkerStates.Watched;
                             Attack();
@@ -29,7 +29,7 @@ namespace Gameplay
                         break;
                     case StalkerStates.Watched:
                         //prevent moving
-                        if (!IsPlayerLookingAt.IsPlayerLookingAtObj(GetComponent<Collider>()))
+                        if (!PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
                         {
                             _currentState = StalkerStates.Watching;
                             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
@@ -48,6 +48,12 @@ namespace Gameplay
         private void Attack()
         {
             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", false);
+        }
+
+        public override void DestroyMonster() 
+        {
+            PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
+            Destroy(gameObject); 
         }
     }
 }

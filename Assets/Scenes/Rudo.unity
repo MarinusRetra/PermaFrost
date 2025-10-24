@@ -907,10 +907,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5208402116666062658, guid: c7bc0576ef7ca5441b00629bf92a343b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8911620083669883455, guid: c7bc0576ef7ca5441b00629bf92a343b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 406610197}
     - targetCorrespondingSourceObject: {fileID: 4319467282856787375, guid: c7bc0576ef7ca5441b00629bf92a343b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 406610194}
@@ -932,8 +936,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f34bb4dbfbe394186c5496cc5bb731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _interactDistance: 1000
+  _interactDistance: 4
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
+--- !u!1 &406610195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8911620083669883455, guid: c7bc0576ef7ca5441b00629bf92a343b, type: 3}
+  m_PrefabInstance: {fileID: 406610192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &406610196 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7622613988856048623, guid: c7bc0576ef7ca5441b00629bf92a343b, type: 3}
+  m_PrefabInstance: {fileID: 406610192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &406610197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406610195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1832c113bc8cd4b4caba486417a663fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerMonsterManager
+  SelectedCamera: {fileID: 406610196}
 --- !u!1 &420888594
 GameObject:
   m_ObjectHideFlags: 0

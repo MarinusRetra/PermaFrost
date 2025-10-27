@@ -8,6 +8,8 @@ namespace Gameplay
         [SerializeField] private float _shadowmanSpeed = 1;
         private Transform _exitRoom;
         private Transform _entryRoom;
+
+        private bool _hasStarted = false;
         private void Start()
         {
             _exitRoom = CurrentRoom.Find("Exit");
@@ -20,6 +22,8 @@ namespace Gameplay
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
             yield return new WaitForSeconds(5);
+            _hasStarted = true;
+            transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             transform.position = _entryRoom.position;
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, _shadowmanSpeed), ForceMode.Impulse);
 
@@ -33,7 +37,7 @@ namespace Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") && !PlayerMonsterManager.Instance.InSideroom)
+            if (other.CompareTag("Player") && !PlayerMonsterManager.Instance.InSideroom && _hasStarted)
             {
                 StartCoroutine(PlayerHealth.Instance.DamagePlayer());
             }

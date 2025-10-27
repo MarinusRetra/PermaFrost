@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance;
     public float DamageInvincibility = 0.5f;
     public float HealInvincibility = 2.0f;
 
@@ -16,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         _cam = Camera.main;
         StartCoroutine(PlayerOutOfBoundsCheck());
     }

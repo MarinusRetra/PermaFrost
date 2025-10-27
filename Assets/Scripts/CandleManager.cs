@@ -28,11 +28,11 @@ namespace Gameplay
         public IEnumerator FlickerCandles()
         {
             TurnOffCandles();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2f);
             TurnOnCandles();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.5f);
             TurnOffCandles();
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2f);
             TurnOnCandles();
         }
     }

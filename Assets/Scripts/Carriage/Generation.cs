@@ -9,6 +9,7 @@ public class Generation : MonoBehaviour
     [SerializeField] private List<GameObject> _rooms;
     [SerializeField] private GameObject _startRoom;
     [SerializeField] private GameObject _endRoom;
+    [SerializeField] private GameObject _spawnPoint;
 
     [SerializeField] private NavMeshSurface _meshSurface;
 

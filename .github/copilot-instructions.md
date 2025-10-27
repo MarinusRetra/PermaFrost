@@ -2,13 +2,13 @@
 - Project name: PortfolioProject
 - Unity version: Unity 6000.2.7f2
 - Active scene:
-  - Name: StartRoom
+  - Name: CarriageGeneration
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, IgnorePlayer
 - Active game object:
-  - Name: Exit
+  - Name: StartRoom
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

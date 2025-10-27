@@ -8,10 +8,10 @@ public class CarriageClass : MonoBehaviour
     public Transform exitPoint;
     public Transform mainObject;
 
-    static public List<Transform> spawnPoints;
+    public List<Transform> spawnPoints;
 
 
-    static public void SpawnRandomItem()
+    public void SpawnRandomItem()
     {
         Transform randomLocation = spawnPoints[Random.Range(0, spawnPoints.Count)];
     }

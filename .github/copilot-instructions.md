@@ -4,11 +4,11 @@
 - Active scene:
   - Name: CarriageGeneration
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy, HUD
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, IgnorePlayer
+    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog
 - Active game object:
-  - Name: StartRoom
+  - Name: Hotbar
   - Tag: Untagged
-  - Layer: Default
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

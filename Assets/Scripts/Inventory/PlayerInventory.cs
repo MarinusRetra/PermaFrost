@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +51,7 @@ namespace Gameplay
             {
                 _selectedHotbarItem = _hotbar.First();
             }
-            catch { }
+            catch { Debug.LogWarning("Cannot find any elements in _hotbar");}
             _selectedHotbarItem.Value.localScale = _selectedSlotSize;
         }
 
@@ -90,9 +91,11 @@ namespace Gameplay
         {
             if (_selectedHotbarItem.Key != _emptyItemSlot.Key && _hotbar.Count > 0)
             {
-                _selectedHotbarItem.Key.Use();
-                RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
-                _selectedHotbarItem = _emptyItemSlot;
+                if (_selectedHotbarItem.Key.Use())
+                {
+                    RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
+                    _selectedHotbarItem = _emptyItemSlot;
+                }
             }
         }
 

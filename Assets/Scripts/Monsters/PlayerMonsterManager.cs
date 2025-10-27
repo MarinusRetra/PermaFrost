@@ -10,6 +10,9 @@ namespace Gameplay
             //td: turn off music box, make things disappear, make sure to reset sanity and freezing causes apart from lantern
         }
 
+        public bool HasFoundTicket = false;
+        public bool InSideroom = false;
+
         //IsPlayerLookingAt
         private static Camera _cam;
         private static Plane[] _cameraArea;
@@ -68,6 +71,16 @@ namespace Gameplay
             {
                 allEars[i].Aggro(Instance.transform.position);
             }
+        }
+
+        public void GrabTicket()
+        {
+            HasFoundTicket = true;
+        }
+
+        public void ResetTicket()
+        {
+            HasFoundTicket = false;
         }
     }
 }

@@ -19,7 +19,6 @@ namespace Gameplay
             _collider = GetComponent<Collider>();
             _renderer = GetComponent<MeshRenderer>();
             _pmm = PlayerMonsterManager.Instance;
-            print(_pmm.gameObject.name);
             StartCoroutine(HandleMovement());
         }
 
@@ -53,16 +52,20 @@ namespace Gameplay
         {
             _collider.enabled = true;
             _renderer.enabled = true;
+
             Vector3 _playerPos = _pmm.transform.position;
             transform.position = new Vector3(_playerPos.x,_playerPos.y, _playerPos.z - 5);
             tooFar = transform.position.z - 2;
+
             _currentState = lookStates.Moving;
         }
 
         public override void Deaggro()
         {
+            //this practically turns lookpick off
             _collider.enabled = false;
             _renderer.enabled = false;
+
             _currentState = lookStates.Idle;
         }
     }

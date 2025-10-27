@@ -174,6 +174,15 @@ namespace Controls
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lantern"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cdb9f5f-605e-4583-b961-76ead7150d84"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -592,6 +601,17 @@ namespace Controls
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""489b3f18-0da5-492a-9cfa-a2e65298187b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Lantern"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1108,6 +1128,7 @@ namespace Controls
             m_Gameplay_NextPrevious = m_Gameplay.FindAction("Next/Previous", throwIfNotFound: true);
             m_Gameplay_HotbarSelect = m_Gameplay.FindAction("HotbarSelect", throwIfNotFound: true);
             m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+            m_Gameplay_Lantern = m_Gameplay.FindAction("Lantern", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1206,6 +1227,7 @@ namespace Controls
         private readonly InputAction m_Gameplay_NextPrevious;
         private readonly InputAction m_Gameplay_HotbarSelect;
         private readonly InputAction m_Gameplay_Pause;
+        private readonly InputAction m_Gameplay_Lantern;
         /// <summary>
         /// Provides access to input actions defined in input action map "Gameplay".
         /// </summary>
@@ -1253,6 +1275,10 @@ namespace Controls
             /// Provides access to the underlying input action "Gameplay/Pause".
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+            /// <summary>
+            /// Provides access to the underlying input action "Gameplay/Lantern".
+            /// </summary>
+            public InputAction @Lantern => m_Wrapper.m_Gameplay_Lantern;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1306,6 +1332,9 @@ namespace Controls
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Lantern.started += instance.OnLantern;
+                @Lantern.performed += instance.OnLantern;
+                @Lantern.canceled += instance.OnLantern;
             }
 
             /// <summary>
@@ -1344,6 +1373,9 @@ namespace Controls
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Lantern.started -= instance.OnLantern;
+                @Lantern.performed -= instance.OnLantern;
+                @Lantern.canceled -= instance.OnLantern;
             }
 
             /// <summary>
@@ -1663,6 +1695,13 @@ namespace Controls
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Lantern" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnLantern(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

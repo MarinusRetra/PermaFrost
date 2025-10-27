@@ -1,14 +1,14 @@
 <!-- UNITY CODE ASSIST INSTRUCTIONS START -->
 - Project name: PortfolioProject
-- Unity version: Unity 6000.2.2f1
+- Unity version: Unity 6000.2.7f2
 - Active scene:
-  - Name: Marinus
+  - Name: CarriageGeneration
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Player, Water, UI
+    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, IgnorePlayer
 - Active game object:
-  - Name: Player
-  - Tag: Player
-  - Layer: Player
+  - Name: StartRoom
+  - Tag: Untagged
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

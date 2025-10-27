@@ -10,8 +10,8 @@ namespace Gameplay
         private Transform _entryRoom;
         private void Start()
         {
-            _exitRoom = CurrentRoom.Find("exit");
-            _entryRoom = CurrentRoom.Find("entry");
+            _exitRoom = CurrentRoom.Find("Exit");
+            _entryRoom = CurrentRoom.Find("Entry");
             //turn off candles, apart from ones in side rooms (so player can figure that out)
             StartCoroutine(StartAttack());
         }

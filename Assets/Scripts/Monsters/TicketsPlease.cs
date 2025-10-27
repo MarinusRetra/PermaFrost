@@ -18,8 +18,8 @@ namespace Gameplay
             //open exit door (idk how)
             //spawn ticket/tickets (up to ryan)
             _agent = GetComponent<NavMeshAgent>();
-            _exitRoom = CurrentRoom.Find("exit");
-            _entryRoom = CurrentRoom.Find("entry");
+            _exitRoom = CurrentRoom.Find("Exit");
+            _entryRoom = CurrentRoom.Find("Entry");
             transform.position = _exitRoom.position;
             _agent.destination = new Vector3(_entryRoom.position.x,transform.position.y,_entryRoom.position.z);
         }

@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 6963618443102133046}
   - component: {fileID: 4838782456818296922}
   - component: {fileID: 2234687034363745608}
+  - component: {fileID: 4447884648024040894}
   m_Layer: 0
   m_Name: Room2
   m_TagString: Untagged
@@ -901,10 +902,19 @@ MonoBehaviour:
   entryPoint: {fileID: 514055829910928460}
   exitPoint: {fileID: 2843110173262804061}
   mainObject: {fileID: 4651034862574250094}
-  spawnPoints:
-  - {fileID: 3507929200996137785}
-  - {fileID: 9102338462993060337}
-  - {fileID: 6937178581931307215}
+--- !u!114 &4447884648024040894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856635622646669744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d12f3aea8aaf0b4e90cdf5dbd9987ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.CandleManager
+  AllCandles: []
 --- !u!1 &6533620032274942309
 GameObject:
   m_ObjectHideFlags: 0

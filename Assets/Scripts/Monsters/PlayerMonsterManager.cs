@@ -20,6 +20,7 @@ namespace Gameplay
         void Start()
         {
             Instance = this;
+            print("Set da things");
             _cam = SelectedCamera;
         }
 

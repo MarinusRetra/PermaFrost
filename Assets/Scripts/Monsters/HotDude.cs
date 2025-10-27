@@ -65,7 +65,7 @@ namespace Gameplay
                 yield return new WaitForSeconds(0.2f);
 
                 //double check that there is still a lantern in the area
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern._range);
                 bool _stillOn = false;
                 foreach (var hitCollider in hitColliders)
                 {
@@ -103,7 +103,7 @@ namespace Gameplay
                     }
                     if (!_continueFreeze)
                     {
-                        yield return new WaitForSeconds(5);
+                        yield return new WaitForSeconds(9);
                         doneFreezing = true;
                     }
                 }

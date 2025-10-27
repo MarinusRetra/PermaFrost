@@ -185,7 +185,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -198,7 +198,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9907799}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -256,11 +256,11 @@ Transform:
   m_GameObject: {fileID: 9907799}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.23, y: 0, z: 0.601}
+  m_LocalPosition: {x: 0.23, y: -0.6, z: 0.6209998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1499321284}
+  m_Father: {fileID: 639499241}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9907804
 MonoBehaviour:
@@ -275,7 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.FreezingLantern
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  LanternOn: 1
+  LanternOn: 0
+  _visual: {fileID: 0}
   _objectsInAreaRightNow: []
   _objectsInAreaLastCheck: []
 --- !u!1 &15807743
@@ -7410,6 +7411,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632831791}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &639499241 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5724968589220926100, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+  m_PrefabInstance: {fileID: 689862579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &665317778
 GameObject:
   m_ObjectHideFlags: 0
@@ -7790,7 +7796,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 252552923276254981, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 5724968589220926100, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9907803}
     m_AddedComponents: []
@@ -10177,6 +10183,10 @@ PrefabInstance:
     - target: {fileID: 5767753004786997229, guid: 93d5a3b73f4fc4a49ba8b33172f5d7aa, type: 3}
       propertyPath: m_Name
       value: lock but not really
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767753004786997229, guid: 93d5a3b73f4fc4a49ba8b33172f5d7aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8514717768825086714, guid: 93d5a3b73f4fc4a49ba8b33172f5d7aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17847,11 +17857,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 100, y: 0, z: 0}
---- !u!4 &1499321284 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 252552923276254981, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
-  m_PrefabInstance: {fileID: 689862579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1503659155
 GameObject:
   m_ObjectHideFlags: 0
@@ -24189,6 +24194,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicBox
       objectReference: {fileID: 0}
+    - target: {fileID: 436190131171165251, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2059480137507135627, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.15
@@ -24286,6 +24295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AllEars
       objectReference: {fileID: 0}
+    - target: {fileID: 1401329279350570423, guid: 996fa99332a88e94a95b7e0a94997a3c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2818639611922986930, guid: 996fa99332a88e94a95b7e0a94997a3c, type: 3}
       propertyPath: CurrentRoom
       value: 
@@ -24309,7 +24322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1928853206828352608, guid: 07c42d109262b1549be9463334205a0d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5155483558037539963, guid: 07c42d109262b1549be9463334205a0d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24412,6 +24425,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadowman
       objectReference: {fileID: 0}
+    - target: {fileID: 5294650661134290325, guid: 054c9409b496a8f43b2651852d7f2bbd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5620274837913671935, guid: 054c9409b496a8f43b2651852d7f2bbd, type: 3}
       propertyPath: CurrentRoom
       value: 
@@ -24432,6 +24449,10 @@ PrefabInstance:
     - target: {fileID: 4591356222916448958, guid: 35b65efb0604af349987741f9361bb54, type: 3}
       propertyPath: m_Name
       value: Ticket
+      objectReference: {fileID: 0}
+    - target: {fileID: 4591356222916448958, guid: 35b65efb0604af349987741f9361bb54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8902446113738241807, guid: 35b65efb0604af349987741f9361bb54, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24532,7 +24553,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8244606800680952717, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24591,6 +24612,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lookpick
       objectReference: {fileID: 0}
+    - target: {fileID: 6587499791990036914, guid: eb63f7aec119de74589bb156e2455e5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24614,7 +24639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5231567514796447616, guid: faef25231c49a8e41b6544a30d10c063, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5940932028156360000, guid: faef25231c49a8e41b6544a30d10c063, type: 3}
       propertyPath: m_LocalPosition.x

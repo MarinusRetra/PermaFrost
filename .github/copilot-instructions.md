@@ -4,7 +4,7 @@
 - Active scene:
   - Name: CarriageGeneration
   - Tags:
-    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy
+    - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy, HUD
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI, IgnorePlayer
 - Active game object:

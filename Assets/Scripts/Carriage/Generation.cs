@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using Unity.AI.Navigation;
+using Gameplay;
 
 public class Generation : MonoBehaviour
 {
@@ -13,8 +14,8 @@ public class Generation : MonoBehaviour
     [SerializeField] private NavMeshSurface _meshSurface;
 
     private List<GameObject> _initializedRooms = new List<GameObject>();
-
     private int _amountOfRooms = 15;
+    public GameObject player;
 
     void Start()
     {
@@ -34,12 +35,21 @@ public class Generation : MonoBehaviour
 
         room.transform.position = exit.position + entryOffset;
         room.transform.rotation = exit.rotation * Quaternion.Inverse(entry.rotation);
+
+        currentCarriage.SpawnRandomItem();
     }
 
     void GenerateRooms()
     {
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
+        // playerInventory = startRoom.transform.Find("Player").GetComponent<PlayerInventory>();
+
+        if (startRoom.GetComponent<CarriageClass>().spawnPoint)
+        {
+            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().spawnPoint.transform.position;
+            player.SetActive(true);
+        }
 
         for (int i = 0; i < _amountOfRooms; i++)
         {
@@ -48,7 +58,6 @@ public class Generation : MonoBehaviour
             PositionGeneratedRoom(randomRoom, previousRoom);
 
             _initializedRooms.Add(randomRoom);
-
             randomRoom.transform.parent = transform;
         }
 

@@ -59,8 +59,9 @@ namespace Gameplay
         public event Action CancelEvent;
         public event Action ClickEvent;
         public event Action SubmitEvent;
+        public event Action LanternEvent;
 
-
+  
         // Gameplay Actions
         public void OnUse(InputAction.CallbackContext context)
         {
@@ -203,6 +204,14 @@ namespace Gameplay
         {
             _gameInput.UI.Disable();
             _gameInput.Gameplay.Disable();
+        }
+
+        public void OnLantern(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                LanternEvent?.Invoke();
+            }
         }
     }
 }

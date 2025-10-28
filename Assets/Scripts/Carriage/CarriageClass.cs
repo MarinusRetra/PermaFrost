@@ -12,7 +12,7 @@ public class CarriageClass : MonoBehaviour
 
     public List<Transform> spawnPoints;
     public List<InventoryItem> allowedDrops;
-    public PlayerInventory playerInventory;
+    public Generation generationClass;
 
     [SerializeField] private GameObject droppedItemPrefab;
 
@@ -24,13 +24,19 @@ public class CarriageClass : MonoBehaviour
         var interactObject = newDroppedItem.GetComponent<InteractObject>();
         if (interactObject != null)
         {
-            newDroppedItem.GetComponent<MeshRenderer>().material.color = allowedDrops[Random.Range(0, allowedDrops.Count)].color;
-            interactObject._interactEvent.AddListener(() => OnItemInteracted(newDroppedItem));
+            InventoryItem inventoryItem = allowedDrops[Random.Range(0, allowedDrops.Count)];
+            newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
+            interactObject._interactEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
         }
     }
 
-    private void OnItemInteracted(GameObject item)
+    private void OnItemInteracted(GameObject item, InventoryItem inventoryItem)
     {
         Debug.Log("Player interacted with " + item.name);
+
+        PlayerInventory playerInventory = generationClass.player.GetComponent<PlayerInventory>();
+        playerInventory.PickupItem(inventoryItem);
+
+        Destroy(item);
     }
 }

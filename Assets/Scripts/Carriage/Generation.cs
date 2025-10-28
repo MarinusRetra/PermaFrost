@@ -36,6 +36,9 @@ public class Generation : MonoBehaviour
         room.transform.position = exit.position + entryOffset;
         room.transform.rotation = exit.rotation * Quaternion.Inverse(entry.rotation);
 
+        currentCarriage.generationClass = this;
+        prevCarriage.generationClass = this;
+
         currentCarriage.SpawnRandomItem();
     }
 
@@ -43,7 +46,6 @@ public class Generation : MonoBehaviour
     {
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
-        // playerInventory = startRoom.transform.Find("Player").GetComponent<PlayerInventory>();
 
         if (startRoom.GetComponent<CarriageClass>().spawnPoint)
         {

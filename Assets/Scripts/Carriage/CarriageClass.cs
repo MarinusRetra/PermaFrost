@@ -9,10 +9,16 @@ public class CarriageClass : MonoBehaviour
     public Transform mainObject;
 
     public List<Transform> spawnPoints;
+    public List<InventoryItem> allowedDrops;
+
+    [SerializeField] private GameObject droppedItemPrefab;
+    [SerializeField] private Transform dropParent;
 
 
     public void SpawnRandomItem()
     {
         Transform randomLocation = spawnPoints[Random.Range(0, spawnPoints.Count)];
+        GameObject newDroppedItem = Instantiate(droppedItemPrefab, dropParent);
+
     }
 }

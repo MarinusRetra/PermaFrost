@@ -2085,7 +2085,7 @@ GameObject:
   - component: {fileID: 212717989}
   - component: {fileID: 212717988}
   - component: {fileID: 212717992}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FreezingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6729,6 +6729,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5176859719669386347, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9188160094882526209, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_Name
       value: Player (1)
@@ -7784,7 +7788,7 @@ GameObject:
   - component: {fileID: 813636312}
   - component: {fileID: 813636311}
   - component: {fileID: 813636315}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SoundArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16382,7 +16386,7 @@ GameObject:
   - component: {fileID: 1549935728}
   - component: {fileID: 1549935727}
   - component: {fileID: 1549935731}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SideroomArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21960,10 +21964,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MusicBox
       objectReference: {fileID: 0}
-    - target: {fileID: 436190131171165251, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2059480137507135627, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.15
@@ -22004,14 +22004,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6952937239151356786, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
-      propertyPath: _musicClip
-      value: 
-      objectReference: {fileID: 8300000, guid: dfe129046d5ed5e4388515bf8f50ff4d, type: 3}
-    - target: {fileID: 6952937239151356786, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
-      propertyPath: _chargeClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 328037c2d514bc744901869d7efea4ac, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22199,10 +22191,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadowman
       objectReference: {fileID: 0}
-    - target: {fileID: 5294650661134290325, guid: 054c9409b496a8f43b2651852d7f2bbd, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5620274837913671935, guid: 054c9409b496a8f43b2651852d7f2bbd, type: 3}
       propertyPath: CurrentRoom
       value: 
@@ -22325,25 +22313,9 @@ PrefabInstance:
       propertyPath: CurrentRoom
       value: 
       objectReference: {fileID: 1273818540}
-    - target: {fileID: 6810944972995150095, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
-      propertyPath: _wallRadius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6810944972995150095, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
-      propertyPath: _playerRadius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6810944972995150095, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
-      propertyPath: _lastPosRadius
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 8244606800680952717, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
       propertyPath: m_Name
       value: Stalker
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244606800680952717, guid: 48cf0a05aa6ff0e4f9113ea0c5bb0b55, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

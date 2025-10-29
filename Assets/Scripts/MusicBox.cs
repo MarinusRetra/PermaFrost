@@ -21,15 +21,19 @@ namespace Gameplay
         }
         private void Update()
         {
-            if (_playerEffects.transform.position.z > transform.position.z + 5) { gameObject.SetActive(false); }
+            if (_playerEffects.transform.position.z > transform.position.z + 5) { SilenceBox(false); gameObject.SetActive(false); }
         }
 
-        public void SilenceBox()
+        public void SilenceBox(bool _startANew = true)
         {
             if (!outlineVisual.enabled) return;
             Destroy(_currentAudioSource);
             outlineVisual.enabled = false;
-            StartCoroutine(ChargeBox());
+
+            if (_startANew)
+            {
+                StartCoroutine(ChargeBox());
+            }
         }
 
         public void StartBox()

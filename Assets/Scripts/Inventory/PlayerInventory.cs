@@ -59,8 +59,8 @@ namespace Gameplay
 
             if (_numberIn > _hotbar.Count - 1 || _hotbar[_numberIn].GetHashCode() == _selectedHotbarItem.GetHashCode())
             {
-                _selectedHotbarItem.Value.localScale = _normalSlotSize;
-                _selectedHotbarItem = _emptyItemSlot;
+               _selectedHotbarItem.Value.localScale = _normalSlotSize;
+               _selectedHotbarItem = _emptyItemSlot;
                 return;
             }
 
@@ -104,11 +104,15 @@ namespace Gameplay
 
             _removedHotbarElements[0] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = incomingItem, Value = _removedHotbarElements[0].Value };
             _hotbar.Add(_removedHotbarElements[0]);
-            SetSlotSprite(_hotbar.IndexOf(_removedHotbarElements[0]));
+
+            int indexOfHotbarElement = _hotbar.IndexOf(_removedHotbarElements[0]);
+
+            SetSlotSprite(indexOfHotbarElement);
+            //CorrectUIValue(indexOfHotbarElement);
             _removedHotbarElements.Remove(_removedHotbarElements[0]);
             _hotbar[^1].Value.gameObject.SetActive(true);
 
-            // Bubbles one item to the end of the list only one item is added so only one pass is ever needed
+            // Bubbles one item to the end of the list. Only one item is added each time so only one pass is ever needed
             for (var i = 1; i < _hotbar.Count; i++)
             {
                 if (_hotbar[i - 1].Value.name[^1] > _hotbar[i].Value.name[^1])
@@ -116,7 +120,18 @@ namespace Gameplay
                     (_hotbar[i], _hotbar[i - 1]) = (_hotbar[i - 1], _hotbar[i]);
                 }
             }
+
+
         }
+        /// <summary>
+        /// Sets the ui element to the index passed so the index matches with the value of the inventory item.
+        /// </summary>
+        // void CorrectUIValue(int indexIn)
+        // {
+        //     var swapVar = _hotbar[indexIn].Value;
+        //     _hotbar[indexIn] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _hotbar[indexIn].Key, Value = _removedHotbarElements[indexIn].Value };
+        //     _removedHotbarElements[indexIn] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _hotbar[indexIn].Key, Value = swapVar };
+        // }
 
         public void DropItem()
         {

@@ -13,32 +13,57 @@ namespace Gameplay
             _instance = this;
             _player = PlayerMonsterManager.Instance.transform;
         }
-        public static void PlaySound(AudioClip _clip, Vector3 location)
+        public static GameObject PlaySound(AudioClip _clip, Vector3 location, bool _loop = false)
         {
-            _instance.PlaySoundInArea(_clip,location);
+            return _instance.PlaySoundInArea(_clip,location,_loop);
         }
 
-        public static void PlaySound(AudioClip _clip)
+        public static GameObject PlaySound(AudioClip _clip, bool _loop = false)
         {
-            _instance.PlaySoundOnPlayer(_clip);
+            return _instance.PlaySoundOnPlayer(_clip,_loop);
         }
 
-        public void PlaySoundInArea(AudioClip _clip, Vector3 location)
+        public GameObject PlaySoundInArea(AudioClip _clip, Vector3 location, bool _loop = false)
         {
-            print("Tried to sound ");
             GameObject _currentSource = Instantiate(SoundSourcePrefab);
             AudioSource _source = _currentSource.GetComponent<AudioSource>();
             _source.clip = _clip;
 
             _currentSource.transform.position = location;
+
+            if (_loop)
+            {
+                _source.loop = true;
+            }
+            else
+            {
+                Destroy(_currentSource, _source.clip.length);
+            }
+
+            _source.Play();
+
+            return _currentSource;
         }
 
-        public void PlaySoundOnPlayer(AudioClip _clip)
+        public GameObject PlaySoundOnPlayer(AudioClip _clip, bool _loop = false)
         {
             GameObject _currentSource = Instantiate(SoundSourcePrefab);
             AudioSource _source = _currentSource.GetComponent<AudioSource>();
             _source.clip = _clip;
             _currentSource.transform.parent = _player;
+
+            if (_loop)
+            {
+                _source.loop = true;
+            }
+            else
+            {
+                Destroy(_currentSource, _source.clip.length);
+            }
+
+            _source.Play();
+
+            return _currentSource;
         }
     }
 }

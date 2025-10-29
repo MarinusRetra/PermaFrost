@@ -7785,7 +7785,7 @@ GameObject:
   - component: {fileID: 813636311}
   - component: {fileID: 813636315}
   m_Layer: 0
-  m_Name: FreezingArea (1)
+  m_Name: SoundArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7837,7 +7837,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: a3d800b099a06e0478fb790c5e79057a, type: 3}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7877,8 +7877,8 @@ Transform:
   m_GameObject: {fileID: 813636309}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0092, y: 1.9661, z: 80.32}
-  m_LocalScale: {x: 5.181322, y: 3.9006343, z: 11.20025}
+  m_LocalPosition: {x: -0.0092, y: 1.9661, z: 39.4}
+  m_LocalScale: {x: 5.181322, y: 3.9006343, z: 0.48063046}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7896,7 +7896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.SoundTrigger
   _disabledAfterPlayed: 0
-  _audioClip: {fileID: 0}
+  _loop: 0
+  _cooldown: 1
+  _audioClip: {fileID: 8300000, guid: 328037c2d514bc744901869d7efea4ac, type: 3}
 --- !u!1 &824075059
 GameObject:
   m_ObjectHideFlags: 0
@@ -21960,7 +21962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 436190131171165251, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2059480137507135627, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22002,6 +22004,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6952937239151356786, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
+      propertyPath: _musicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dfe129046d5ed5e4388515bf8f50ff4d, type: 3}
+    - target: {fileID: 6952937239151356786, guid: d8af251dec9edaa469db1b0495ba328c, type: 3}
+      propertyPath: _chargeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 328037c2d514bc744901869d7efea4ac, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

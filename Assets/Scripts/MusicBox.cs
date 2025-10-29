@@ -8,6 +8,10 @@ namespace Gameplay
         private MeshRenderer outlineVisual;
         [SerializeField] private Vector2 boxRechargeTimes;
         private PlayerStatusEffects _playerEffects;
+
+        public GameObject _currentAudioSource;
+        [SerializeField] private AudioClip _chargeClip;
+        [SerializeField] private AudioClip _musicClip;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -23,6 +27,7 @@ namespace Gameplay
         public void SilenceBox()
         {
             if (!outlineVisual.enabled) return;
+            Destroy(_currentAudioSource);
             outlineVisual.enabled = false;
             StartCoroutine(ChargeBox());
         }
@@ -31,6 +36,7 @@ namespace Gameplay
         {
             if (!outlineVisual.enabled) return;
             _playerEffects.ManageInsanityCauses("Music", false);
+            _currentAudioSource = Soundsystem.PlaySound(_musicClip, transform.position,true);
         }
 
         private IEnumerator ChargeBox()
@@ -40,8 +46,10 @@ namespace Gameplay
             _playerEffects.ManageInsanityCauses("Music", true);
             yield return new WaitForSeconds(Random.Range(boxRechargeTimes.x,boxRechargeTimes.y));
             outlineVisual.enabled = true;
+            _currentAudioSource = Soundsystem.PlaySound(_chargeClip, transform.position);
             //Charge sfx
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(4);
+            Destroy(_currentAudioSource);
             //Actually play
             StartBox();
         }

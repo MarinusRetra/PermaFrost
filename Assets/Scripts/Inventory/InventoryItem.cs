@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Item")]
-//[Serializable]
+[Serializable]
 public class InventoryItem : ScriptableObject
 {
     public Sprite sprite = null;
@@ -86,7 +86,7 @@ public class Bell : InventoryItem
         return true;
     }
 }
-[CreateAssetMenu(menuName = "Item/LockPick")]
+[CreateAssetMenu(menuName = "Item/Lockpick")]
 public class Lockpick : InventoryItem
 {
     public override bool Use()

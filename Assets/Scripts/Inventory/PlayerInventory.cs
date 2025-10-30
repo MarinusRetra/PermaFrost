@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,15 +36,18 @@ namespace Gameplay
             // Sets the color and sprite for all hotbar elements and removes all empty inventory slots.
             for (int i = 0; i < _hotbar.Count; i++)
             {
-                var currentImage = _hotbar[i].Value.GetChild(0).GetComponent<Image>();
-                currentImage.sprite = _hotbar[i].Key.sprite;
-                currentImage.color = _hotbar[i].Key.color;
+                SetSlotSprite(i);
                 if (_hotbar[i].Key == _emptyItemSlot.Key)
                 {
                     RemoveSlot(i);
                     i--;
                 }
             }
+            for (int i = 0; i < _hotbar.Count; i++)
+            {
+                CorrectUIValue(i);
+            }
+
             _selectedHotbarItem = _emptyItemSlot;
         }
 
@@ -105,33 +107,72 @@ namespace Gameplay
             _removedHotbarElements[0] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = incomingItem, Value = _removedHotbarElements[0].Value };
             _hotbar.Add(_removedHotbarElements[0]);
 
-            int indexOfHotbarElement = _hotbar.IndexOf(_removedHotbarElements[0]);
+            int lastHotbarElement = _hotbar.Count-1;//_hotbar.IndexOf(_removedHotbarElements[0]);
 
-            SetSlotSprite(indexOfHotbarElement);
-            //CorrectUIValue(indexOfHotbarElement);
+            // Kan als het goed is ook gewoon het laatste element van de _hotbar pakken
+            CorrectUIValue(lastHotbarElement);
             _removedHotbarElements.Remove(_removedHotbarElements[0]);
-            _hotbar[^1].Value.gameObject.SetActive(true);
 
             // Bubbles one item to the end of the list. Only one item is added each time so only one pass is ever needed
-            for (var i = 1; i < _hotbar.Count; i++)
-            {
-                if (_hotbar[i - 1].Value.name[^1] > _hotbar[i].Value.name[^1])
-                {
-                    (_hotbar[i], _hotbar[i - 1]) = (_hotbar[i - 1], _hotbar[i]);
-                }
-            }
+            // for (var i = 1; i < _hotbar.Count; i++)
+            // {
+            //     if (_hotbar[i - 1].Value.name[^1] > _hotbar[i].Value.name[^1])
+            //     {
+            //         (_hotbar[i], _hotbar[i - 1]) = (_hotbar[i - 1], _hotbar[i]);
+            //     }
+            // }
 
 
         }
         /// <summary>
         /// Sets the ui element to the index passed so the index matches with the value of the inventory item.
         /// </summary>
-        // void CorrectUIValue(int indexIn)
-        // {
-        //     var swapVar = _hotbar[indexIn].Value;
-        //     _hotbar[indexIn] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _hotbar[indexIn].Key, Value = _removedHotbarElements[indexIn].Value };
-        //     _removedHotbarElements[indexIn] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _hotbar[indexIn].Key, Value = swapVar };
-        // }
+        void CorrectUIValue(int indexIn)
+        {
+            //Save _hotbar[indexIn] value to swap later
+            //Grab ui element matching the index
+            //Set _hotbar[indexIn].Value to the matched ui element
+            //Set the element behind the matched ui element from _removedHotbarElements[indexIn] to the saved hotbar variable
+
+            var swapVar = _hotbar[indexIn];
+            foreach (var pair in _removedHotbarElements)
+            {
+
+                //If UI element from _removedHotbarElements matches index from provided index swap them
+                if (pair.Value.name[^1] - 48 == indexIn)
+                {
+                    swapVar.Value.gameObject.SetActive(false);
+                    _hotbar[indexIn] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _hotbar[indexIn].Key, Value = pair.Value };
+                    _removedHotbarElements[_removedHotbarElements.IndexOf(pair)] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = _emptyItemSlot.Key, Value = swapVar.Value };
+                    _hotbar[indexIn].Value.gameObject.SetActive(true);
+                    break;
+                }
+            }
+
+            //If current hotbar index does not match its UI element swap them with the matching element
+            for (var i = 0; i < _hotbar.Count; i++)
+            {
+                if (_hotbar[i].Value.name[^1] - 48 != i)
+                {
+                    foreach (var hotbarPair in _hotbar)
+                    {
+                        if (hotbarPair.Value.name[^1] - 48 == i)
+                        {
+                            Debug.Log($"Index: {i} current hotbar transform name: {_hotbar[i].Value.gameObject.name}, currentPair {hotbarPair.Value.name}");
+                            _hotbar[i].Value.gameObject.SetActive(false);
+                            _hotbar[i] = hotbarPair;
+                            _hotbar[_hotbar.IndexOf(hotbarPair)] = swapVar;
+                            _hotbar[i].Value.gameObject.SetActive(true);
+                            Debug.Log($"Index: {i} current hotbar transform name: {_hotbar[i].Value.gameObject.name}, currentPair{hotbarPair.Value.name}");
+                            SetSlotSprite(i);
+                            SetSlotSprite(_hotbar.IndexOf(hotbarPair));
+                            break;
+                        }
+                    }
+                }
+            }
+            SetSlotSprite(indexIn);
+        }
 
         public void DropItem()
         {
@@ -148,6 +189,7 @@ namespace Gameplay
             _removedHotbarElements.Add(_hotbar[indexIn]);
             _hotbar[indexIn].Value.gameObject.SetActive(false);
             _hotbar.RemoveAt(indexIn);
+            
         }
 
         /// <summary>

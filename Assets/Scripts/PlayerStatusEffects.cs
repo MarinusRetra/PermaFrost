@@ -8,7 +8,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
     private PlayerHealth _playerHP;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
         _playerHP = FindAnyObjectByType<PlayerHealth>();
@@ -22,7 +22,7 @@ public class PlayerStatusEffects : MonoBehaviour
     [Header("Sanity")]
     public int InsanityDeath = 20;
     private int _currentInsanity = 0;
-    private List<string> _insanityCauses = new();
+    [SerializeField] private List<string> _insanityCauses = new();
 
     //Sanity related functions
     private IEnumerator HandleInsanity()
@@ -33,7 +33,6 @@ public class PlayerStatusEffects : MonoBehaviour
             if (_insanityCauses.Count == 0 && _currentInsanity > 0) { _currentInsanity--; }
 
             if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver(); }
-            //print(_currentInsanity);
             yield return new WaitForSeconds(1);
         }
     }
@@ -64,7 +63,7 @@ public class PlayerStatusEffects : MonoBehaviour
     {
         while (true)
         {
-            if (_frostbiteCauses.Count > 0) { _currentFrostbite += 2; }
+            if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite--; }
 
             if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }

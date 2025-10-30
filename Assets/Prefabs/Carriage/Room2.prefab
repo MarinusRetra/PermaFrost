@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 6963618443102133046}
   - component: {fileID: 4838782456818296922}
   - component: {fileID: 2234687034363745608}
+  - component: {fileID: 2174178221799526684}
   m_Layer: 0
   m_Name: Room2
   m_TagString: Untagged
@@ -933,6 +934,7 @@ MonoBehaviour:
   entryPoint: {fileID: 514055829910928460}
   exitPoint: {fileID: 2843110173262804061}
   mainObject: {fileID: 4651034862574250094}
+  spawnPoint: {fileID: 0}
   spawnPoints:
   - {fileID: 3507929200996137785}
   - {fileID: 9102338462993060337}
@@ -940,8 +942,33 @@ MonoBehaviour:
   allowedDrops:
   - {fileID: 11400000, guid: a3a01cd41237f784f9520fe8e518d59c, type: 2}
   - {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
+  allowedEvents: []
+  generationClass: {fileID: 0}
+  EnterTriggered: 0
+  ExitTriggered: 0
+  TriggerTriggered: 0
   droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
-  dropParent: {fileID: 1117272816884518531}
+--- !u!65 &2174178221799526684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856635622646669744}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.66908264, z: 9.999999}
+  m_Center: {x: 0, y: 0.3295412, z: 0}
 --- !u!1 &6533620032274942309
 GameObject:
   m_ObjectHideFlags: 0

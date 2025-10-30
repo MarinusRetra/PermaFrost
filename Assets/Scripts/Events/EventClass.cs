@@ -5,17 +5,27 @@ using UnityEngine;
 [Serializable]
 public class EventClass : ScriptableObject
 {
-    public virtual bool Enter() { return false; }
-    public virtual bool Exit() { return false; }
-    public virtual bool Trigger() { return false; }
+    public virtual bool Entered() { return false; }
+    public virtual bool Exited() { return false; }
+    public virtual bool Triggered() { return false; }
 }
 
 [CreateAssetMenu(menuName = "Events/TestEvent")]
 public class TestEvent: EventClass
 {
-    public override bool Enter()
+    public override bool Entered()
     {
-        Debug.Log("Entered");
+        Debug.Log("Test Entered");
+        return true;
+    }
+    public override bool Exited()
+    {
+        Debug.Log("Test Exited");
+        return true;
+    }
+    public override bool Triggered()
+    {
+        Debug.Log("Test Triggered");
         return true;
     }
 }

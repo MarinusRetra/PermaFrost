@@ -165,6 +165,7 @@ MonoBehaviour:
   _startRoom: {fileID: 1205754546425908704, guid: 87e56b15d4250084089bb219f686bdd7, type: 3}
   _endRoom: {fileID: 961721063309621672, guid: 1cb8f41e50bd8fd44bb612883df0f806, type: 3}
   _meshSurface: {fileID: 128722905}
+  _initializedRooms: []
   player: {fileID: 913358552}
 --- !u!4 &128722904
 Transform:
@@ -800,6 +801,10 @@ PrefabInstance:
       propertyPath: _hotbar.Array.data[4].Value
       value: 
       objectReference: {fileID: 653155801}
+    - target: {fileID: 4209446480207758167, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9188160094882526209, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_Name
       value: Player

@@ -19,6 +19,9 @@ namespace Gameplay
 
         private Transform _player;
 
+        [SerializeField] private AudioClip _appearSound;
+        [SerializeField] private AudioClip _disappearSound;
+
         void Start()
         {
             _player = PlayerMonsterManager.Instance.transform;
@@ -65,9 +68,11 @@ namespace Gameplay
                         break;
                     case StalkerStates.Moving:
                         //begone
-                        transform.position = Vector3.zero;
+                        Soundsystem.PlaySound(_disappearSound, transform.position);
+                        transform.position = new Vector3(-100,-100,-100);
                         yield return new WaitForSeconds(1f);
                         transform.position = GetRandomRoomPosition();
+                        Soundsystem.PlaySound(_appearSound, transform.position);
                         _currentState = StalkerStates.Watching;
                         //beback
                         break;

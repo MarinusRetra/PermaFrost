@@ -186,6 +186,7 @@ namespace Gameplay
 
         void OnTriggerEnter(Collider other)
         {
+            if(other.gameObject.layer == 9) { return; }
             _canGetUp = false;
         }
         void OnTriggerExit(Collider other)
@@ -210,5 +211,7 @@ namespace Gameplay
             _input.CrouchEvent -= HandleCrouch;
             _input.CrouchCancelEvent -= HandleCrouchCancel;
         }
+
+        public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);
     }
 }

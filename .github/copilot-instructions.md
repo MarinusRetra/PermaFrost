@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog
 - Active game object:
-  - Name: Player
-  - Tag: Player
-  - Layer: Player
+  - Name: Room1(Clone)
+  - Tag: Untagged
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

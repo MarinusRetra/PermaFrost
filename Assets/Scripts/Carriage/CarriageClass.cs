@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Gameplay;
-using UnityEditor.PackageManager;
 using UnityEngine;
+using Gameplay;
 
 public class CarriageClass : MonoBehaviour
 {
@@ -23,7 +22,8 @@ public class CarriageClass : MonoBehaviour
     private bool playerInside = false;
 
     [SerializeField] private GameObject droppedItemPrefab;
-    [SerializeField] private EventClass selectedEventClass;
+    [SerializeField] private List<EventClass> selectedEventClasses;
+    [SerializeField] private int amountOfEvents;
     
 
     public void SpawnRandomItem()
@@ -57,27 +57,31 @@ public class CarriageClass : MonoBehaviour
     {
         if (allowedEvents.Count > 0)
         {
-            selectedEventClass = allowedEvents[Random.Range(0, allowedEvents.Count)];
+            amountOfEvents = Random.Range(1, allowedEvents.Count + 1);
+            for (int i = 0; i < amountOfEvents; i++)
+                selectedEventClasses.Add(allowedEvents[Random.Range(0, allowedEvents.Count)]);
         }
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && selectedEventClass)
+        if (other.gameObject.layer == 3 && !playerInside && selectedEventClasses.Count > 0)
         {
             playerInside = true;
             // Add your logic here
-            selectedEventClass.Entered();
+            foreach(EventClass selectedEventClass in selectedEventClasses)
+                selectedEventClass.Entered();   
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 3 && playerInside && selectedEventClass)
+        if (other.gameObject.layer == 3 && playerInside && selectedEventClasses.Count > 0)
         {
             playerInside = false;
             // Add your logic here
-            selectedEventClass.Exited();
+            foreach(EventClass selectedEventClass in selectedEventClasses)
+                selectedEventClass.Exited();   
         }
     }
 }

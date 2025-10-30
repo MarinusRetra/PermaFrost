@@ -30,6 +30,10 @@ namespace Gameplay
             Vector3 _boundingCorner2 = CurrentRoom.transform.position + (CurrentRoom.transform.lossyScale / 2);
 
             _roomCorners = new Vector3[] { new Vector3(_boundingCorner1.x + _wallRadius, _boundingCorner1.y + _wallRadius, _boundingCorner1.z + _wallRadius), new Vector3(_boundingCorner2.x - _wallRadius, _boundingCorner2.y + _wallRadius, _boundingCorner2.z - _wallRadius) };
+
+            transform.position = GetRandomRoomPosition();
+            Soundsystem.PlaySound(_appearSound, transform.position);
+            _currentState = StalkerStates.Watching;
             StartCoroutine(HandleBehaviour());
         }
 

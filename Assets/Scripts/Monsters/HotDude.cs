@@ -11,10 +11,8 @@ namespace Gameplay
 
         private Transform _player;
 
-        public Transform CurrentRoom;
-
         [SerializeField] private NavMeshAgent _agent;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             //Fetch the player
@@ -32,9 +30,13 @@ namespace Gameplay
                 switch (_currentState)
                 {
                     case hotStates.Agressive:
-                        //check if area reached
+                        //Only way to stop em is by freezing em.
                         _agent.destination = _player.position;
                         yield return new WaitForSeconds(0.1f);
+                        continue;
+                    case hotStates.Idle:
+                        yield return new WaitForSeconds(5);
+                        _currentState = hotStates.Agressive;
                         continue;
                     default:
                         yield return new WaitForSeconds(0.5f);
@@ -56,10 +58,14 @@ namespace Gameplay
         {
             _agent.speed = 1;
             bool _stoppedStun = false;
+
+            //dont stun instantly
             for(int i = 0; i < 10; i++)
             {
                 yield return new WaitForSeconds(0.2f);
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
+
+                //double check that there is still a lantern in the area
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern._range);
                 bool _stillOn = false;
                 foreach (var hitCollider in hitColliders)
                 {
@@ -77,12 +83,15 @@ namespace Gameplay
             }
             if (!_stoppedStun)
             {
+                //stun
                 bool doneFreezing = false;
                 _currentState = hotStates.Stunned;
                 _agent.isStopped = true;
                 while (!doneFreezing)
                 {
                     yield return new WaitForSeconds(0.2f);
+
+                    //while the lantern is still on, stay stunned
                     Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
                     bool _continueFreeze = false;
                     foreach (var hitCollider in hitColliders)
@@ -94,16 +103,23 @@ namespace Gameplay
                     }
                     if (!_continueFreeze)
                     {
-                        yield return new WaitForSeconds(5);
+                        yield return new WaitForSeconds(9);
                         doneFreezing = true;
                     }
                 }
             }
+
+            //unstun
             _agent.isStopped = false;
             _currentState = hotStates.Agressive;
             _agent.speed = 3;
             _isStunning = false;
 
+        }
+
+        public override void Deaggro()
+        {
+            _currentState = hotStates.Idle;
         }
     }
 }

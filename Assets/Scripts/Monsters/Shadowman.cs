@@ -9,6 +9,8 @@ namespace Gameplay
         private Transform _exitRoom;
         private Transform _entryRoom;
 
+        [SerializeField] private AudioClip _dashingClip;
+
         private bool _hasStarted = false;
         private void Start()
         {
@@ -22,6 +24,8 @@ namespace Gameplay
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
             yield return new WaitForSeconds(5);
+            GameObject _noises = Soundsystem.PlaySound(_dashingClip, transform.position, true);
+            _noises.transform.parent = transform;
             _hasStarted = true;
             transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             transform.position = _entryRoom.position;

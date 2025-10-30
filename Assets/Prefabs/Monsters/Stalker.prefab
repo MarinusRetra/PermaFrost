@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8244606800680952717}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7107919, z: -0, w: 0.7034024}
+  m_LocalRotation: {x: 0, y: 0.71079326, z: 0, w: 0.703401}
   m_LocalPosition: {x: -5.4973006, y: 4.4, z: 2.2842793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -125,6 +125,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b326be5218bcd44a5ed935c2eaa08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Stalker
+  CurrentRoom: {fileID: 0}
+  _playerRadius: 0.5
+  _wallRadius: 0.5
+  _lastPosRadius: 0.3
+  _lastPosition: {x: 0, y: 0, z: 0}
+  _roomCorners: []
+  _appearSound: {fileID: 8300000, guid: 127fb2c589054d34684e08fb0f6189b2, type: 3}
+  _disappearSound: {fileID: 8300000, guid: fb475a8279a54af439ddbf7c482776ea, type: 3}
 --- !u!1001 &7255110242572244434
 PrefabInstance:
   m_ObjectHideFlags: 0

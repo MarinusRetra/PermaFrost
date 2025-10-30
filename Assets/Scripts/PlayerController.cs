@@ -11,13 +11,13 @@ namespace Gameplay
     {
         [Header("Movement values")]
         [SerializeField] private InputReader _input;
-        public float CrouchSpeed = 3;
-        public float BaseSpeed = 4;
+        [SerializeField] private float _crouchSpeed = 3;
+        [SerializeField] private float _baseSpeed = 4;
 
         [Header("Sprint values")]
-        public float SprintSpeed = 7;
+        [SerializeField] private float _sprintSpeed = 7;
         [SerializeField] private int _totalStamina = 10;
-        private int _currentStamina;
+        private int _currentStamina = 10;
         private bool isSprinting = false;
 
         [Header("Camera values")]
@@ -110,22 +110,20 @@ namespace Gameplay
         {
             if (!_isCrouching)
             { 
-                _currentMoveSpeed = SprintSpeed;
+                _currentMoveSpeed = _sprintSpeed;
                 isSprinting = true;
             }
         }
 
         private void HandleSprintCancel()
         {
-            _currentMoveSpeed = BaseSpeed;
+            _currentMoveSpeed = _baseSpeed;
             isSprinting = false;
         }
 
         private IEnumerator Sprint()
         {
-			_currentStamina = _totalStamina;
-
-			while (true)
+            while (true)
             {
                 //stamina goes down when running
                 if (isSprinting)
@@ -168,7 +166,7 @@ namespace Gameplay
         {
             if (!_isCrouching)
             {
-                _currentMoveSpeed = CrouchSpeed;
+                _currentMoveSpeed = _crouchSpeed;
                 _playerCollider.height = _crouchHitboxHeight.x;
                 _playerCollider.center = new(0, _crouchHitboxHeight.y, 0);
                 _camera.localPosition = new Vector3(0, _crouchCameraHeight, 0);
@@ -177,7 +175,7 @@ namespace Gameplay
         }
         public void StandUp()
         {
-            _currentMoveSpeed = BaseSpeed;
+            _currentMoveSpeed = _baseSpeed;
             _playerCollider.height = _standHitboxHeight.x;
             _playerCollider.center = new(0, _standHitboxHeight.y, 0);
             _camera.localPosition = new Vector3(0, _standCameraHeight, 0);
@@ -188,6 +186,7 @@ namespace Gameplay
 
         void OnTriggerEnter(Collider other)
         {
+            if(other.gameObject.layer == 9) { return; }
             _canGetUp = false;
         }
         void OnTriggerExit(Collider other)
@@ -213,6 +212,6 @@ namespace Gameplay
             _input.CrouchCancelEvent -= HandleCrouchCancel;
         }
 
-		public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);
-	}
+        public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);
+    }
 }

@@ -102,5 +102,15 @@ namespace Gameplay
             }
             return false;
         }
+
+        private void OnDestroy()
+        {
+            _input.LanternEvent -= ChangeLanternState;
+        }
+
+        private void OnDisable()
+        {
+            _input.LanternEvent -= ChangeLanternState;
+        }
     }
 }

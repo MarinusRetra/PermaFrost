@@ -41,7 +41,7 @@ namespace Gameplay
         private void Start()
         {
             
-            _camera = Camera.main.transform;
+            _camera = transform.Find("PlayerCamera");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 

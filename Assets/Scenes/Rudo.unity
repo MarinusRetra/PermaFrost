@@ -452,14 +452,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 675114716}
-  exitPoint: {fileID: 2035202662}
-  mainObject: {fileID: 23863098}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &23863100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -751,14 +757,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 864216084}
-  exitPoint: {fileID: 358370912}
-  mainObject: {fileID: 28574529}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &28574532
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1282,14 +1294,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 231537281}
-  exitPoint: {fileID: 1418852382}
-  mainObject: {fileID: 65895511}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &65895513
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2289,14 +2307,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1445263888}
-  exitPoint: {fileID: 2145315233}
-  mainObject: {fileID: 153553990}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &153553992
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2431,14 +2455,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 963913093}
-  exitPoint: {fileID: 669597705}
-  mainObject: {fileID: 42668162}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!1 &167827628
 GameObject:
   m_ObjectHideFlags: 0
@@ -4974,14 +5004,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 2087053545}
-  exitPoint: {fileID: 238197027}
-  mainObject: {fileID: 333830132}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &333830135
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5856,14 +5892,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 895303743}
-  exitPoint: {fileID: 1441761164}
-  mainObject: {fileID: 420888595}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &420888597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7388,14 +7430,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1088135566}
-  exitPoint: {fileID: 684480013}
-  mainObject: {fileID: 565595999}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &565596001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7718,14 +7766,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 568433663}
-  exitPoint: {fileID: 953958363}
-  mainObject: {fileID: 590989306}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &590989309
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8033,14 +8087,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 996943760}
-  exitPoint: {fileID: 841949709}
-  mainObject: {fileID: 606385310}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &606385313
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8279,14 +8339,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1349581539}
-  exitPoint: {fileID: 1620538546}
-  mainObject: {fileID: 614313776}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &614313778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8733,14 +8799,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1033106647}
-  exitPoint: {fileID: 471450598}
-  mainObject: {fileID: 665317779}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &665317782
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9227,14 +9299,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 805967575}
-  exitPoint: {fileID: 327815447}
-  mainObject: {fileID: 696633535}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &696633538
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9384,14 +9462,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 714166583}
-  exitPoint: {fileID: 1777724266}
-  mainObject: {fileID: 708589226}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &708589229
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9723,14 +9807,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1764642807}
-  exitPoint: {fileID: 1698651303}
-  mainObject: {fileID: 715571135}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &715571137
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11961,14 +12051,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1249832074}
-  exitPoint: {fileID: 1917036783}
-  mainObject: {fileID: 872002958}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &872002961
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -12691,14 +12787,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1785250295}
-  exitPoint: {fileID: 292431768}
-  mainObject: {fileID: 923415685}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &923415687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13066,6 +13168,7 @@ MonoBehaviour:
   _startRoom: {fileID: 0}
   _endRoom: {fileID: 6480803346452082044, guid: 1cb8f41e50bd8fd44bb612883df0f806, type: 3}
   _meshSurface: {fileID: 946146082}
+  _initializedRooms: []
   player: {fileID: 0}
 --- !u!4 &946146084
 Transform:
@@ -14713,14 +14816,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1938073194}
-  exitPoint: {fileID: 595563366}
-  mainObject: {fileID: 1067846873}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &1067846870
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -15206,14 +15315,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 710507171}
-  exitPoint: {fileID: 1901278598}
-  mainObject: {fileID: 1076600212}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1076600214
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16741,7 +16856,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1178684804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16792,6 +16907,7 @@ MonoBehaviour:
   _startRoom: {fileID: 1205754546425908704, guid: 87e56b15d4250084089bb219f686bdd7, type: 3}
   _endRoom: {fileID: 961721063309621672, guid: 1cb8f41e50bd8fd44bb612883df0f806, type: 3}
   _meshSurface: {fileID: 1178684804}
+  _initializedRooms: []
   player: {fileID: 0}
 --- !u!4 &1178684806
 Transform:
@@ -17287,14 +17403,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1462347759}
-  exitPoint: {fileID: 2098746718}
-  mainObject: {fileID: 1225536145}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1225536147
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18939,14 +19061,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1410815925}
-  exitPoint: {fileID: 1272113157}
-  mainObject: {fileID: 1331557184}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1331557186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20584,6 +20712,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386600943}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1392138460 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9188160094882526209, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+  m_PrefabInstance: {fileID: 689862579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1393062112
 GameObject:
   m_ObjectHideFlags: 0
@@ -21229,14 +21362,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1182363158}
-  exitPoint: {fileID: 1639775672}
-  mainObject: {fileID: 1444230310}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &1444230313
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21441,7 +21580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1461001084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21455,12 +21594,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Generation
   _rooms:
-  - {fileID: 2241164819487446649, guid: 4def1a3038e226c45bee042bab9453af, type: 3}
-  - {fileID: 5856635622646669744, guid: e55f213deb50a0c4c90efbee30158686, type: 3}
+  - {fileID: 156139790384277241, guid: c860460426b35a649b0e048de0554371, type: 3}
+  - {fileID: 1716650124283320330, guid: 802c0da7637878741b44dde94e357cde, type: 3}
   _startRoom: {fileID: 1205754546425908704, guid: 87e56b15d4250084089bb219f686bdd7, type: 3}
   _endRoom: {fileID: 961721063309621672, guid: 1cb8f41e50bd8fd44bb612883df0f806, type: 3}
   _meshSurface: {fileID: 1461001086}
-  player: {fileID: 0}
+  _initializedRooms: []
+  player: {fileID: 1392138460}
 --- !u!4 &1461001085
 Transform:
   m_ObjectHideFlags: 0
@@ -22559,14 +22699,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 713143722}
-  exitPoint: {fileID: 572185508}
-  mainObject: {fileID: 1535432309}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1535432311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23880,14 +24026,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 215461627}
-  exitPoint: {fileID: 1352265254}
-  mainObject: {fileID: 1653862948}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1653862950
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25025,14 +25177,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 2010891370}
-  exitPoint: {fileID: 1030593023}
-  mainObject: {fileID: 1787942103}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1787942105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25251,14 +25409,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 692594628}
-  exitPoint: {fileID: 1579407342}
-  mainObject: {fileID: 1273818540}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!114 &1795395426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25386,14 +25550,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1560283129}
-  exitPoint: {fileID: 1123492166}
-  mainObject: {fileID: 1813107421}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &1813107423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25660,14 +25830,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 2012593273}
-  exitPoint: {fileID: 989141055}
-  mainObject: {fileID: 1838084788}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &1838084785
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -27608,14 +27784,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 273492093}
-  exitPoint: {fileID: 1806965957}
-  mainObject: {fileID: 1942135864}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &1942135867
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -28917,14 +29099,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1631068167}
-  exitPoint: {fileID: 94189278}
-  mainObject: {fileID: 2023279053}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &2023279056
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29550,14 +29738,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1010985949}
-  exitPoint: {fileID: 1916837364}
-  mainObject: {fileID: 2045803602}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &2045803605
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -29818,14 +30012,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1100121496}
-  exitPoint: {fileID: 1917419495}
-  mainObject: {fileID: 2062399315}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!64 &2062399318
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -30031,14 +30231,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 1714229320}
-  exitPoint: {fileID: 1503659156}
-  mainObject: {fileID: 2082590140}
-  spawnPoint: {fileID: 0}
-  spawnPoints: []
-  allowedDrops: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  droppedItemPrefab: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &2082590142
 BoxCollider:
   m_ObjectHideFlags: 0

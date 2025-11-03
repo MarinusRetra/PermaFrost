@@ -246,9 +246,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 4023744531036831505}
-  exitPoint: {fileID: 1655445805515378825}
-  mainObject: {fileID: 5508613836068004880}
+  EntryPoint: {fileID: 4023744531036831505}
+  ExitPoint: {fileID: 1655445805515378825}
+  MainObject: {fileID: 5508613836068004880}
+  SpawnPoint: {fileID: 1655445805515378825}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
+  generationClass: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!1 &1745245315698371343
 GameObject:
   m_ObjectHideFlags: 0

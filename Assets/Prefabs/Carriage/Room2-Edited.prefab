@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4901308453116599033}
   - component: {fileID: 7672131714331475404}
   - component: {fileID: 4700587393584198981}
+  - component: {fileID: 9191223519094123049}
   m_Layer: 0
   m_Name: Room2-Edited
   m_TagString: Untagged
@@ -126,6 +127,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.CandleManager
   AllCandles: []
+--- !u!65 &9191223519094123049
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716650124283320330}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1944302568893761682
 GameObject:
   m_ObjectHideFlags: 0

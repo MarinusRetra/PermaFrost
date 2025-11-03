@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 2970386027390588879}
   - component: {fileID: 2457184536980670889}
   - component: {fileID: 5559636275587878192}
+  - component: {fileID: 4176300282522396567}
   m_Layer: 0
   m_Name: Room1
   m_TagString: Untagged
@@ -251,6 +252,7 @@ MonoBehaviour:
   entryPoint: {fileID: 7280953881157771676}
   exitPoint: {fileID: 3897875399239616003}
   mainObject: {fileID: 4067449673697323985}
+  spawnPoint: {fileID: 0}
   spawnPoints:
   - {fileID: 2080870287959275104}
   - {fileID: 520210756803876700}
@@ -261,8 +263,36 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb605c63805a08f45981ca1f46461656, type: 2}
   - {fileID: 11400000, guid: a47ed354e77946948b25ff2945700186, type: 2}
   - {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
+  allowedEvents:
+  - {fileID: 11400000, guid: b076f167035846b4caaf3b05ab3c1ba2, type: 2}
+  - {fileID: 11400000, guid: 5359ea260ef74e34987c07cc66272a9c, type: 2}
+  generationClass: {fileID: 0}
+  EnterTriggered: 0
+  ExitTriggered: 0
+  TriggerTriggered: 0
   droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
-  dropParent: {fileID: 1200128550466905793}
+  selectedEventClass: {fileID: 0}
+--- !u!65 &4176300282522396567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2241164819487446649}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.6634342, z: 10}
+  m_Center: {x: 0, y: 0.32671723, z: 0}
 --- !u!1 &2328030314992359274
 GameObject:
   m_ObjectHideFlags: 0

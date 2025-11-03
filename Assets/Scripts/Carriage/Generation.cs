@@ -13,7 +13,7 @@ public class Generation : MonoBehaviour
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
-    private List<GameObject> _initializedRooms = new List<GameObject>();
+    [SerializeField] private List<GameObject> _initializedRooms = new List<GameObject>();
     private int _amountOfRooms = 15;
     public GameObject player;
 
@@ -65,6 +65,7 @@ public class Generation : MonoBehaviour
 
         GameObject endRoom = Instantiate(_endRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
+        _initializedRooms.Add(endRoom);
     }
 
     private IEnumerator GenerateNavmesh()

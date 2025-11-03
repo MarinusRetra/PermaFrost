@@ -13,12 +13,12 @@ public class Parallax : MonoBehaviour
         _minArea = _objects[0].transform.position.z - _distance;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //move the objects
         for(int i = 0; i < _objects.Length; i++)
         {
-            _objects[i].transform.Translate(-_speed);
+            _objects[i].transform.Translate(-_speed * 5);
             if (_objects[i].transform.position.z < _minArea)
             {
                 _objects[i].transform.position = new Vector3(_objects[i].transform.position.x, _objects[i].transform.position.y,_maxArea);

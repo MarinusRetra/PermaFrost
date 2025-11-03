@@ -10,33 +10,33 @@ public class CarriageClass : MonoBehaviour
     public Transform mainObject;
     public Transform spawnPoint;
 
-    [SerializeField] private List<Transform> spawnPoints;
-    [SerializeField] private List<InventoryItem> allowedDrops;
-    [SerializeField] private List<EventClass> allowedEvents;
+    [SerializeField] private List<Transform> _spawnPoints;
+    [SerializeField] private List<InventoryItem> _allowedDrops;
+    [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
 
-    [SerializeField] private bool EnterTriggered;
-    [SerializeField] private bool ExitTriggered;
-    [SerializeField] private bool TriggerTriggered;
+    [SerializeField] private bool _enterTriggered;
+    [SerializeField] private bool _exitTriggered;
+    [SerializeField] private bool _triggerTriggered;
 
     private bool playerInside = false;
 
-    [SerializeField] private GameObject droppedItemPrefab;
-    [SerializeField] private List<EventClass> selectedEventClasses;
-    [SerializeField] private int amountOfEvents;
+    [SerializeField] private GameObject _droppedItemPrefab;
+    [SerializeField] private List<EventClass> _selectedEventClasses;
+    [SerializeField] private int _amountOfEvents;
     
 
     public void SpawnRandomItem()
     {
-        if (spawnPoints.Count > 0)
+        if (_spawnPoints.Count > 0)
         {
-            Transform randomLocation = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            GameObject newDroppedItem = Instantiate(droppedItemPrefab, randomLocation.position, Quaternion.identity);
+            Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+            GameObject newDroppedItem = Instantiate(_droppedItemPrefab, randomLocation.position, Quaternion.identity);
 
             var interactObject = newDroppedItem.GetComponent<InteractObject>();
             if (interactObject != null)
             {
-                InventoryItem inventoryItem = allowedDrops[Random.Range(0, allowedDrops.Count)];
+                InventoryItem inventoryItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
                 interactObject._interactEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
             }
@@ -55,48 +55,48 @@ public class CarriageClass : MonoBehaviour
 
     void Start()
     {
-        if (allowedEvents.Count > 0)
+        if (_allowedEvents.Count > 0)
         {
-            amountOfEvents = Random.Range(1, allowedEvents.Count + 1);
-            for (int i = 0; i < amountOfEvents; i++)
-                selectedEventClasses.Add(allowedEvents[Random.Range(0, allowedEvents.Count)]);
+            _amountOfEvents = Random.Range(1, _allowedEvents.Count + 1);
+            for (int i = 0; i < _amountOfEvents; i++)
+                _selectedEventClasses.Add(_allowedEvents[Random.Range(0, _allowedEvents.Count)]);
         }
     }
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && selectedEventClasses.Count > 0 && EnterTriggered != true)
+        if (other.gameObject.layer == 3 && !playerInside && _selectedEventClasses.Count > 0 && _enterTriggered != true)
         {
             playerInside = true;
-            EnterTriggered = true;
+            _enterTriggered = true;
             // Add your logic here
 
-            foreach(EventClass selectedEventClass in selectedEventClasses)
+            foreach(EventClass selectedEventClass in _selectedEventClasses)
                 selectedEventClass.Entered();   
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 3 && playerInside && selectedEventClasses.Count > 0 && ExitTriggered != true)
+        if (other.gameObject.layer == 3 && playerInside && _selectedEventClasses.Count > 0 && _exitTriggered != true)
         {
             playerInside = false;
-            ExitTriggered = true;
+            _exitTriggered = true;
 
             // Add your logic here
-            foreach (EventClass selectedEventClass in selectedEventClasses)
+            foreach (EventClass selectedEventClass in _selectedEventClasses)
                 selectedEventClass.Exited();
         }
     }
     
     private void OnTriggerCalled()
     {
-        if (TriggerTriggered != true)
+        if (_triggerTriggered != true)
         {
-            TriggerTriggered = true;
+            _triggerTriggered = true;
 
             // Add your logic here
-            foreach (EventClass selectedEventClass in selectedEventClasses)
+            foreach (EventClass selectedEventClass in _selectedEventClasses)
                 selectedEventClass.Triggered();
         }
     }

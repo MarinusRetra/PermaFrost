@@ -5,9 +5,9 @@
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy, HUD
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog
+    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand
 - Active game object:
-  - Name: Room2
+  - Name: Room1-Edited
   - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

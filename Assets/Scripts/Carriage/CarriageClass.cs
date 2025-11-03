@@ -65,10 +65,12 @@ public class CarriageClass : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && selectedEventClasses.Count > 0)
+        if (other.gameObject.layer == 3 && !playerInside && selectedEventClasses.Count > 0 && EnterTriggered != true)
         {
             playerInside = true;
+            EnterTriggered = true;
             // Add your logic here
+
             foreach(EventClass selectedEventClass in selectedEventClasses)
                 selectedEventClass.Entered();   
         }
@@ -76,12 +78,26 @@ public class CarriageClass : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 3 && playerInside && selectedEventClasses.Count > 0)
+        if (other.gameObject.layer == 3 && playerInside && selectedEventClasses.Count > 0 && ExitTriggered != true)
         {
             playerInside = false;
+            ExitTriggered = true;
+
             // Add your logic here
-            foreach(EventClass selectedEventClass in selectedEventClasses)
-                selectedEventClass.Exited();   
+            foreach (EventClass selectedEventClass in selectedEventClasses)
+                selectedEventClass.Exited();
+        }
+    }
+    
+    private void OnTriggerCalled()
+    {
+        if (TriggerTriggered != true)
+        {
+            TriggerTriggered = true;
+
+            // Add your logic here
+            foreach (EventClass selectedEventClass in selectedEventClasses)
+                selectedEventClass.Triggered();
         }
     }
 }

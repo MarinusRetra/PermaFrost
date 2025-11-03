@@ -5,10 +5,10 @@ using Gameplay;
 public class CarriageClass : MonoBehaviour
 {
     [Header("Transforms")]
-    public Transform entryPoint;
-    public Transform exitPoint;
-    public Transform mainObject;
-    public Transform spawnPoint;
+    public Transform EntryPoint;
+    public Transform ExitPoint;
+    public Transform MainObject;
+    public Transform SpawnPoint;
 
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<InventoryItem> _allowedDrops;

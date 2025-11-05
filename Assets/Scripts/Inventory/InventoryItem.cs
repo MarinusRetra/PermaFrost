@@ -19,8 +19,10 @@ public class InventoryItem : ScriptableObject
 
 public class HeatPack : InventoryItem
 {
+    [SerializeField] private int value = -20;
     public override bool Use()
     {
+        PlayerStatusEffects.Instance.AddInstantFrostbite(value);
         Debug.Log("Heatpack");
         return true;
     }
@@ -80,8 +82,10 @@ public class Key : InventoryItem
 [CreateAssetMenu(menuName = "Item/Bell")]
 public class Bell : InventoryItem
 {
+    [SerializeField] private int value = -20;
     public override bool Use()
     {
+        PlayerStatusEffects.Instance.AddInstantInsanity(value);
         Debug.Log("Bell");
         return true;
     }

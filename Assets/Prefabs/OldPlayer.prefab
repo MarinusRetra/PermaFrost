@@ -284,10 +284,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerController
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  _camera: {fileID: 0}
-  _crouchSpeed: 3
-  _sprintSpeed: 7
-  _baseSpeed: 4
+  CrouchSpeed: 3
+  BaseSpeed: 4
+  SprintSpeed: 7
+  _totalStamina: 10
   _sensitivity: 0.4
   _crouchCameraHeight: 0
   _standCameraHeight: 0.5
@@ -366,4 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusEffects
   InsanityDeath: 20
+  _insanityCauses: []
   FrostbiteDeath: 30
+  _currentFrostbite: 0
+  _frostbiteCauses: []

@@ -28,6 +28,8 @@ public class CarriageClass : MonoBehaviour
 
     public void SpawnRandomItem()
     {
+        //THIS FULLY BREAKS THE BUILD FIX BEFORE REACTIVATING
+        return;
         if (_spawnPoints.Count > 0)
         {
             Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];

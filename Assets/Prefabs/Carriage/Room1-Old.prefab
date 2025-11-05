@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5559636275587878192}
   - component: {fileID: 4176300282522396567}
   m_Layer: 0
-  m_Name: Room1
+  m_Name: Room1-Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,29 +249,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 7280953881157771676}
-  exitPoint: {fileID: 3897875399239616003}
-  mainObject: {fileID: 4067449673697323985}
-  spawnPoint: {fileID: 0}
-  spawnPoints:
-  - {fileID: 2080870287959275104}
-  - {fileID: 520210756803876700}
-  allowedDrops:
-  - {fileID: 11400000, guid: 1d542ae3372ac6e4fa180ff8d9270385, type: 2}
-  - {fileID: 11400000, guid: cb70f15f94ffddd4b8b812432ae1730a, type: 2}
-  - {fileID: 11400000, guid: a3a01cd41237f784f9520fe8e518d59c, type: 2}
-  - {fileID: 11400000, guid: cb605c63805a08f45981ca1f46461656, type: 2}
-  - {fileID: 11400000, guid: a47ed354e77946948b25ff2945700186, type: 2}
-  - {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
-  allowedEvents:
-  - {fileID: 11400000, guid: b076f167035846b4caaf3b05ab3c1ba2, type: 2}
-  - {fileID: 11400000, guid: 5359ea260ef74e34987c07cc66272a9c, type: 2}
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  EnterTriggered: 0
-  ExitTriggered: 0
-  TriggerTriggered: 0
-  droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
-  selectedEventClass: {fileID: 0}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _droppedItemPrefab: {fileID: 0}
+  _selectedEventClasses: []
+  _amountOfEvents: 0
 --- !u!65 &4176300282522396567
 BoxCollider:
   m_ObjectHideFlags: 0

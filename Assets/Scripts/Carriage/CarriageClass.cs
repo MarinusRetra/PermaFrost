@@ -57,7 +57,8 @@ public class CarriageClass : MonoBehaviour
     {
         if (_allowedEvents.Count > 0)
         {
-            _amountOfEvents = Random.Range(1, _allowedEvents.Count + 1);
+            _amountOfEvents = Random.Range(0, _amountOfEvents + 1);
+            if (_amountOfEvents == 0) _amountOfEvents = 1;
             for (int i = 0; i < _amountOfEvents; i++)
                 _selectedEventClasses.Add(_allowedEvents[Random.Range(0, _allowedEvents.Count)]);
         }

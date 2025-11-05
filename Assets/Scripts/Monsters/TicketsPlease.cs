@@ -15,12 +15,9 @@ namespace Gameplay
         private bool _reachedEnd = false;
         private void Start()
         {
-            //open exit door (idk how)
-            //spawn ticket/tickets (up to ryan)
             _agent = GetComponent<NavMeshAgent>();
             _exitRoom = CurrentRoom.Find("Exit");
             _entryRoom = CurrentRoom.Find("Entry");
-            transform.position = _exitRoom.position;
             _agent.destination = new Vector3(_entryRoom.position.x,transform.position.y,_entryRoom.position.z);
         }
 
@@ -60,7 +57,7 @@ namespace Gameplay
             _isChasing = true;
             //VERY fast, so player cant just run past and despawn them by going into the next room.
             _agent.speed = 8;
-            while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing)
+            while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing || transform.position.z < _entryRoom.position.z + 30)
             {
                 _agent.destination = PlayerMonsterManager.Instance.transform.position;
                 yield return new WaitForSeconds(0.2f);
@@ -73,7 +70,18 @@ namespace Gameplay
             //look I would make this all fancy and stuff but we do not have time for that at all.
             _reachedEnd = true;
             yield return new WaitForSeconds(10f);
-            Destroy(gameObject);
+            DestroyMonster();
+        }
+
+        public override void DestroyMonster()
+        {
+            _agent.enabled = false;
+            ParticleSystem parti = transform.Find("Particle System").GetComponent<ParticleSystem>();
+            parti.gameObject.SetActive(true);
+            parti.Play();
+            parti.transform.parent = null;
+            Destroy(parti.gameObject,parti.main.duration);
+            Destroy(gameObject, parti.main.duration / 2);
         }
     }
 }

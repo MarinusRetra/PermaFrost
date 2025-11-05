@@ -152,6 +152,7 @@ namespace Gameplay
 
         public override void DestroyMonster()
         {
+            gameObject.name = "Despawning";
             despawning = true;
             GetComponent<Collider>().enabled = false;
             StartCoroutine(DespawnAnim());

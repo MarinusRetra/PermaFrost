@@ -47,6 +47,7 @@ namespace Gameplay
         public void Interact()
         {
             _interactEvent.Invoke();
+            print("Interacted");
         }
     }
 }

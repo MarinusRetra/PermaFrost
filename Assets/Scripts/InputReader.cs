@@ -60,6 +60,7 @@ namespace Gameplay
         public event Action ClickEvent;
         public event Action SubmitEvent;
         public event Action LanternEvent;
+        public event Action DropEvent;
 
   
         // Gameplay Actions
@@ -211,6 +212,14 @@ namespace Gameplay
             if (context.phase == InputActionPhase.Performed)
             {
                 LanternEvent?.Invoke();
+            }
+        }
+
+        public void OnDrop(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                DropEvent.Invoke();
             }
         }
     }

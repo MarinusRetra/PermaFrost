@@ -13,7 +13,7 @@ public class Generation : MonoBehaviour
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
-    private List<GameObject> _initializedRooms = new List<GameObject>();
+    [SerializeField] private List<GameObject> _initializedRooms = new List<GameObject>();
     private int _amountOfRooms = 15;
     public GameObject player;
 
@@ -28,8 +28,8 @@ public class Generation : MonoBehaviour
         CarriageClass currentCarriage = room.GetComponent<CarriageClass>();
         CarriageClass prevCarriage = previousRoom.GetComponent<CarriageClass>();
 
-        Transform entry = currentCarriage.entryPoint;
-        Transform exit = prevCarriage.exitPoint;
+        Transform entry = currentCarriage.EntryPoint;
+        Transform exit = prevCarriage.ExitPoint;
 
         Vector3 entryOffset = room.transform.position - entry.position;
 
@@ -47,9 +47,9 @@ public class Generation : MonoBehaviour
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
 
-        if (startRoom.GetComponent<CarriageClass>().spawnPoint)
+        if (startRoom.GetComponent<CarriageClass>().SpawnPoint)
         {
-            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().spawnPoint.transform.position;
+            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().SpawnPoint.transform.position;
             player.SetActive(true);
         }
 
@@ -65,6 +65,7 @@ public class Generation : MonoBehaviour
 
         GameObject endRoom = Instantiate(_endRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
+        _initializedRooms.Add(endRoom);
     }
 
     private IEnumerator GenerateNavmesh()

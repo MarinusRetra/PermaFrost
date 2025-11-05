@@ -72,7 +72,7 @@ public class CarriageClass : MonoBehaviour
             // Add your logic here
 
             foreach(EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Entered();   
+                selectedEventClass.Entered(gameObject);   
         }
     }
 
@@ -85,7 +85,7 @@ public class CarriageClass : MonoBehaviour
 
             // Add your logic here
             foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Exited();
+                selectedEventClass.Exited(gameObject);
         }
     }
     
@@ -97,7 +97,7 @@ public class CarriageClass : MonoBehaviour
 
             // Add your logic here
             foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Triggered();
+                selectedEventClass.Triggered(gameObject);
         }
     }
 }

@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7966362662517179556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137664621607658699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3349189085432679493}
+  m_Layer: 0
+  m_Name: Monsters
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3349189085432679493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137664621607658699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 0.1653342, y: 0.161124, z: 0.051568113}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4901308453116599033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716650124283320330
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +94,7 @@ Transform:
   m_LocalScale: {x: 6.0483556, y: 6.2064, z: 19.391827}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3349189085432679493}
   - {fileID: 7943119580479514850}
   - {fileID: 3692943711247553066}
   - {fileID: 6071681020226706344}
@@ -104,7 +136,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb605c63805a08f45981ca1f46461656, type: 2}
   - {fileID: 11400000, guid: fef5fa737aa2b48478ed163201aee498, type: 2}
   - {fileID: 11400000, guid: 83cac72470165be459c69f6c34ccbe23, type: 2}
-  _allowedEvents: []
+  _allowedEvents:
+  - {fileID: 11400000, guid: b45e2399dc2bea74c8320445244c1fe1, type: 2}
   generationClass: {fileID: 0}
   _enterTriggered: 0
   _exitTriggered: 0

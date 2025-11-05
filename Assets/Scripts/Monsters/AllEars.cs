@@ -24,6 +24,8 @@ namespace Gameplay
 
         [SerializeField] private Vector2 _randomTimeBetweenMoves = new Vector2(3,6);
 
+        private bool despawning = false;
+
         void Start()
         {
             //Fetch the player
@@ -42,7 +44,16 @@ namespace Gameplay
 
         private IEnumerator HandleMovement()
         {
-            while (true)
+            Transform model = transform.GetChild(0);
+            while(model.localPosition.y < -2 && !despawning)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y + 0.2f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+
+            GetComponent<Collider>().enabled = true;
+
+            while (!despawning)
             {
                 switch (_currentState)
                 {
@@ -137,6 +148,24 @@ namespace Gameplay
             _currentState = earStates.Agressive;
             _agent.destination = new Vector3(location.x, 3.08f, location.z);
             _agent.speed = 7;
+        }
+
+        public override void DestroyMonster()
+        {
+            despawning = true;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(DespawnAnim());
+        }
+
+        private IEnumerator DespawnAnim()
+        {
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y > -7)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.2f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            Destroy(gameObject);
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Gameplay
         [SerializeField] private AudioClip _appearSound;
         [SerializeField] private AudioClip _disappearSound;
 
+        private bool despawning = false;
+
         void Start()
         {
             _player = PlayerMonsterManager.Instance.transform;
@@ -40,7 +42,14 @@ namespace Gameplay
         int _amountOfTimesNot = 0;
         private IEnumerator HandleBehaviour()
         {
-            while (true)
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y > 0 && !despawning)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.3f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            GetComponent<Collider>().enabled = true;
+            while (!despawning)
             {
                 switch (_currentState)
                 {
@@ -133,8 +142,22 @@ namespace Gameplay
 
         public override void DestroyMonster() 
         {
+            gameObject.name = "Despawning";
             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
-            Destroy(gameObject); 
+            despawning = true;
+            StartCoroutine(DespawnMonster());
+        }
+
+        public IEnumerator DespawnMonster()
+        {
+            GetComponent<Collider>().enabled = false;
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y < 10)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y + 0.3f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            Destroy(gameObject);
         }
     }
 }

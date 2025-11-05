@@ -57,7 +57,7 @@ namespace Gameplay
             _isChasing = true;
             //VERY fast, so player cant just run past and despawn them by going into the next room.
             _agent.speed = 8;
-            while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing || transform.position.z < _entryRoom.position.z + 30)
+            while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
             {
                 _agent.destination = PlayerMonsterManager.Instance.transform.position;
                 yield return new WaitForSeconds(0.2f);
@@ -75,6 +75,7 @@ namespace Gameplay
 
         public override void DestroyMonster()
         {
+            transform.parent.gameObject.name = "Despawning";
             _agent.enabled = false;
             ParticleSystem parti = transform.Find("Particle System").GetComponent<ParticleSystem>();
             parti.gameObject.SetActive(true);

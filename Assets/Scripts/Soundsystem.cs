@@ -15,8 +15,7 @@ namespace Gameplay
         }
         public static GameObject PlaySound(AudioClip _clip, Vector3 location, bool _loop = false)
         {
-            return new GameObject();
-            //return _instance.PlaySoundInArea(_clip,location,_loop);
+            return _instance.PlaySoundInArea(_clip,location,_loop);
         }
 
         public static GameObject PlaySound(AudioClip _clip, bool _loop = false)

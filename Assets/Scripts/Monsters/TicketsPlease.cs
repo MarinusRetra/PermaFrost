@@ -48,7 +48,7 @@ namespace Gameplay
         public override void Deaggro()
         {
             _isChasing = false;
-            _agent.speed = 1;
+            _agent.speed = 0.75f;
             _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z);
         }
 

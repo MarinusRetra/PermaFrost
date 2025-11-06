@@ -8,10 +8,11 @@ namespace Gameplay
         {
             InteractEvent.AddListener(() =>
             {
-                //check item thing
-                StartCoroutine( PlayerHealth.Instance.HealPlayer());
+                if (PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().RemoveSelectedSlot())
+                {
+                    StartCoroutine(PlayerHealth.Instance.HealPlayer());
+                }
             });
-            print("Da listener is add");
             base.Start();
         }
     }

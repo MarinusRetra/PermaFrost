@@ -183,6 +183,15 @@ namespace Controls
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0d78c69-9835-48c7-9682-27f758373f10"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -612,6 +621,17 @@ namespace Controls
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Lantern"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d0e076f-88c8-4d96-b168-5ed7d6aeb54e"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1129,6 +1149,7 @@ namespace Controls
             m_Gameplay_HotbarSelect = m_Gameplay.FindAction("HotbarSelect", throwIfNotFound: true);
             m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
             m_Gameplay_Lantern = m_Gameplay.FindAction("Lantern", throwIfNotFound: true);
+            m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1228,6 +1249,7 @@ namespace Controls
         private readonly InputAction m_Gameplay_HotbarSelect;
         private readonly InputAction m_Gameplay_Pause;
         private readonly InputAction m_Gameplay_Lantern;
+        private readonly InputAction m_Gameplay_Drop;
         /// <summary>
         /// Provides access to input actions defined in input action map "Gameplay".
         /// </summary>
@@ -1279,6 +1301,10 @@ namespace Controls
             /// Provides access to the underlying input action "Gameplay/Lantern".
             /// </summary>
             public InputAction @Lantern => m_Wrapper.m_Gameplay_Lantern;
+            /// <summary>
+            /// Provides access to the underlying input action "Gameplay/Drop".
+            /// </summary>
+            public InputAction @Drop => m_Wrapper.m_Gameplay_Drop;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -1335,6 +1361,9 @@ namespace Controls
                 @Lantern.started += instance.OnLantern;
                 @Lantern.performed += instance.OnLantern;
                 @Lantern.canceled += instance.OnLantern;
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
             }
 
             /// <summary>
@@ -1376,6 +1405,9 @@ namespace Controls
                 @Lantern.started -= instance.OnLantern;
                 @Lantern.performed -= instance.OnLantern;
                 @Lantern.canceled -= instance.OnLantern;
+                @Drop.started -= instance.OnDrop;
+                @Drop.performed -= instance.OnDrop;
+                @Drop.canceled -= instance.OnDrop;
             }
 
             /// <summary>
@@ -1702,6 +1734,13 @@ namespace Controls
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnLantern(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnDrop(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

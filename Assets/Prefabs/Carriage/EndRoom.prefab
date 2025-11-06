@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 950967087435752469}
   - component: {fileID: 5312435419519639992}
   - component: {fileID: 9165616020200320187}
+  - component: {fileID: 2939184666265710574}
   m_Layer: 0
   m_Name: EndRoom
   m_TagString: Untagged
@@ -252,14 +253,36 @@ MonoBehaviour:
   SpawnPoint: {fileID: 1655445805515378825}
   _spawnPoints: []
   _allowedDrops: []
-  _allowedEvents: []
+  _allowedEvents:
+  - {fileID: 11400000, guid: d1b120f6b0414374a8e71fa1758403d2, type: 2}
   generationClass: {fileID: 0}
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
   _droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
   _selectedEventClasses: []
-  _amountOfEvents: 0
+  _amountOfEvents: 1
+--- !u!65 &2939184666265710574
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961721063309621672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.999999, y: 0.7760388, z: 7.343886}
+  m_Center: {x: 0, y: 0.27663288, z: 1.3280587}
 --- !u!1 &1745245315698371343
 GameObject:
   m_ObjectHideFlags: 0

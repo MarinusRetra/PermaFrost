@@ -8,7 +8,7 @@ namespace Gameplay
         public GameObject SoundSourcePrefab;
         private Transform _player;
 
-        private void Start()
+        private void Awake()
         {
             _instance = this;
             _player = PlayerMonsterManager.Instance.transform;

@@ -35,8 +35,7 @@ namespace Gameplay
             {
                 yield return new WaitForSeconds(0.5f);
             }
-            print("Shadowman despawning");
-            Destroy(gameObject);
+            DestroyMonster();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -45,6 +44,24 @@ namespace Gameplay
             {
                 StartCoroutine(PlayerHealth.Instance.DamagePlayer());
             }
+        }
+
+        public override void DestroyMonster()
+        {
+            print("Shadowman despawning");
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(DespawnAnim());
+        }
+
+        private IEnumerator DespawnAnim()
+        {
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y > -7)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.2f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            Destroy(gameObject);
         }
     }
 }

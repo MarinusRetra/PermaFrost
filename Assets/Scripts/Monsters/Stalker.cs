@@ -22,6 +22,8 @@ namespace Gameplay
         [SerializeField] private AudioClip _appearSound;
         [SerializeField] private AudioClip _disappearSound;
 
+        private bool despawning = false;
+
         void Start()
         {
             _player = PlayerMonsterManager.Instance.transform;
@@ -30,13 +32,24 @@ namespace Gameplay
             Vector3 _boundingCorner2 = CurrentRoom.transform.position + (CurrentRoom.transform.lossyScale / 2);
 
             _roomCorners = new Vector3[] { new Vector3(_boundingCorner1.x + _wallRadius, _boundingCorner1.y + _wallRadius, _boundingCorner1.z + _wallRadius), new Vector3(_boundingCorner2.x - _wallRadius, _boundingCorner2.y + _wallRadius, _boundingCorner2.z - _wallRadius) };
+
+            transform.position = GetRandomRoomPosition();
+            Soundsystem.PlaySound(_appearSound, transform.position);
+            _currentState = StalkerStates.Watching;
             StartCoroutine(HandleBehaviour());
         }
 
         int _amountOfTimesNot = 0;
         private IEnumerator HandleBehaviour()
         {
-            while (true)
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y > 0 && !despawning)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.3f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            GetComponent<Collider>().enabled = true;
+            while (!despawning)
             {
                 switch (_currentState)
                 {
@@ -129,8 +142,22 @@ namespace Gameplay
 
         public override void DestroyMonster() 
         {
+            gameObject.name = "Despawning";
             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
-            Destroy(gameObject); 
+            despawning = true;
+            StartCoroutine(DespawnMonster());
+        }
+
+        public IEnumerator DespawnMonster()
+        {
+            GetComponent<Collider>().enabled = false;
+            Transform model = transform.GetChild(0);
+            while (model.localPosition.y < 10)
+            {
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y + 0.3f, model.localPosition.z);
+                yield return new WaitForSeconds(0.05f);
+            }
+            Destroy(gameObject);
         }
     }
 }

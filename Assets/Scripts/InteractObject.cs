@@ -12,10 +12,10 @@ namespace Gameplay
     {
         private Material[] _materials;
         private bool _isHovered = false;
-        [SerializeField] public UnityEvent _interactEvent;
+        public UnityEvent InteractEvent;
         [SerializeField] float _outlineScale;
         [SerializeField] Material _outlineMat;
-        void Start()
+        public virtual void Start()
         {
             _materials = GetComponent<MeshRenderer>().materials;
             if (_materials[^1].color == _outlineMat.color)
@@ -44,9 +44,9 @@ namespace Gameplay
             _isHovered = false;
         }
 
-        public void Interact()
+        public virtual void Interact()
         {
-            _interactEvent.Invoke();
+            InteractEvent.Invoke();
         }
     }
 }

@@ -201,7 +201,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 22339807}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 580186783}
+        m_TargetAssemblyTypeName: Gameplay.UIManager, Assembly-CSharp
+        m_MethodName: SettingsToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &22339807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,7 +1506,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 576059125}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 580186783}
+        m_TargetAssemblyTypeName: Gameplay.UIManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &576059125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1545,6 +1569,7 @@ GameObject:
   - component: {fileID: 580186782}
   - component: {fileID: 580186781}
   - component: {fileID: 580186780}
+  - component: {fileID: 580186783}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1637,6 +1662,20 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &580186783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580186778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472954e85916dba4c973ed431bffce7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PauseMenu
+  _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
+  _settingsPanel: {fileID: 2119849838}
 --- !u!1 &592195202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2550,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1087517109}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 580186783}
+        m_TargetAssemblyTypeName: Gameplay.UIManager, Assembly-CSharp
+        m_MethodName: SettingsToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1087517109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3032,7 +3083,6 @@ GameObject:
   - component: {fileID: 1586538442}
   - component: {fileID: 1586538444}
   - component: {fileID: 1586538443}
-  - component: {fileID: 1586538445}
   m_Layer: 5
   m_Name: Pause
   m_TagString: Untagged
@@ -3101,24 +3151,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586538441}
   m_CullTransparentMesh: 1
---- !u!114 &1586538445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586538441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472954e85916dba4c973ed431bffce7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PauseMenu
-  _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  _resumeButton: {fileID: 1827046329}
-  _settingsButton: {fileID: 1087517108}
-  _quitSettingsButton: {fileID: 22339806}
-  _quitButton: {fileID: 576059124}
-  _settingsPanel: {fileID: 2119849838}
 --- !u!1 &1622572550
 GameObject:
   m_ObjectHideFlags: 0
@@ -3945,13 +3977,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 580186783}
+        m_TargetAssemblyTypeName: Gameplay.UIManager, Assembly-CSharp
+        m_MethodName: OnResume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

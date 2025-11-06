@@ -109,9 +109,13 @@ namespace Gameplay
 
         public void DropItem()
         {
-            Instantiate(_selectedHotbarItem.Key.HoldObject, transform.position, transform.rotation);
-            RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
-            _selectedHotbarItem = _emptyItemSlot;
+            try
+            {
+                Instantiate(_selectedHotbarItem.Key.HoldObject, transform.position, transform.rotation);
+                RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
+                _selectedHotbarItem = _emptyItemSlot;
+            }
+            catch { new NullReferenceException(); }
         }
 
         /// <summary>

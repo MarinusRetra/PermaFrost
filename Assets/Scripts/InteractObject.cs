@@ -12,7 +12,7 @@ namespace Gameplay
     {
         private Material[] _materials;
         private bool _isHovered = false;
-        [SerializeField] UnityEvent _interactEvent;
+        [SerializeField] public UnityEvent _interactEvent;
         [SerializeField] float _outlineScale;
         [SerializeField] Material _outlineMat;
         void Start()

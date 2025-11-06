@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -151,7 +152,7 @@ namespace Gameplay
             _input.NextPreviousEvent -= HandleHotbarNav;
             _input.UseEvent -= HandleUse;
         }
-    }
+	}
 
     [Serializable]
     public struct SerializedKeyValuePair<TKey, TValue>

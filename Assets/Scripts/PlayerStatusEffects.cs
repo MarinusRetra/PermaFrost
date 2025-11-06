@@ -8,8 +8,9 @@ public class PlayerStatusEffects : MonoBehaviour
 
     private PlayerHealth _playerHP;
 
-    void Start()
+    void Awake()
     {
+        Instance = this;
         _playerHP = FindAnyObjectByType<PlayerHealth>();
         
         //Sanity and Frostbite update every second
@@ -21,7 +22,7 @@ public class PlayerStatusEffects : MonoBehaviour
     [Header("Sanity")]
     public int InsanityDeath = 20;
     private int _currentInsanity = 0;
-    private List<string> _insanityCauses = new();
+    [SerializeField] private List<string> _insanityCauses = new();
 
     //Sanity related functions
     private IEnumerator HandleInsanity()
@@ -42,6 +43,7 @@ public class PlayerStatusEffects : MonoBehaviour
             _insanityCauses.Remove(name);
             return;
         }
+        if (_insanityCauses.Contains(name)) return;
         _insanityCauses.Add(name);
     }
     public void AddInstantInsanity(int instantAmount)
@@ -53,15 +55,15 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    private int _currentFrostbite = 0;
-    private List<string> _frostbiteCauses = new();
+    public int _currentFrostbite = 0;
+    public List<string> _frostbiteCauses = new();
 
     //Frostbite related functions
     private IEnumerator HandleFrostbite()
     {
         while (true)
         {
-            if (_frostbiteCauses.Count > 0) { _currentFrostbite += 2; }
+            if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite--; }
 
             if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }
@@ -76,6 +78,7 @@ public class PlayerStatusEffects : MonoBehaviour
             _frostbiteCauses.Remove(name);
             return;
         }
+        if (_frostbiteCauses.Contains(name)) return;
         _frostbiteCauses.Add(name);
     }
     public void AddInstantFrostbite(int instantAmount)

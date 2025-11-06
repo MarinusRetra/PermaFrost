@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5030697498974305369}
   - component: {fileID: 7680030532129829818}
   - component: {fileID: 6004710190513379293}
-  - component: {fileID: 5906078440535998443}
   - component: {fileID: -7890135874412350714}
+  - component: {fileID: 1622018625665191694}
   m_Layer: 6
   m_Name: SpeedSyringe
   m_TagString: Untagged
@@ -114,35 +114,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5906078440535998443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6580180848101388467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  _interactEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
-        m_TargetAssemblyTypeName: Gameplay.PlayerInventory, Assembly-CSharp
-        m_MethodName: PickupItem
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
-          m_ObjectArgumentAssemblyTypeName: InventoryItem, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _outlineScale: 1.1
-  _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}
 --- !u!54 &-7890135874412350714
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -170,3 +141,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1622018625665191694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580180848101388467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c331980d6b97448b5545cfa6267920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.ItemInteractable
+  InteractEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _outlineScale: 1.1
+  _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}
+  _item: {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}

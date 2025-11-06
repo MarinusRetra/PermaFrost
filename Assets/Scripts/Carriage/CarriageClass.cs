@@ -38,7 +38,7 @@ public class CarriageClass : MonoBehaviour
             {
                 InventoryItem inventoryItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
-                interactObject._interactEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
+                interactObject.InteractEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
             }
         }
     }

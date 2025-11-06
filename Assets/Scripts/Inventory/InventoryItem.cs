@@ -1,4 +1,6 @@
+using Gameplay;
 using System;
+using System.Collections;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Item")]
 [Serializable]
@@ -17,8 +19,10 @@ public class InventoryItem : ScriptableObject
 
 public class HeatPack : InventoryItem
 {
+    [SerializeField] private int value = -20;
     public override bool Use()
     {
+        PlayerStatusEffects.Instance.AddInstantFrostbite(value);
         Debug.Log("Heatpack");
         return true;
     }
@@ -37,10 +41,33 @@ public class NoiseMonkey : InventoryItem
 
 public class SpeedSyringe : InventoryItem
 {
+    PlayerController controller;
+
     public override bool Use()
     {
         Debug.Log("SpeedSyringe");
+        controller = GameObject.FindWithTag("Player")?.GetComponent<PlayerController>();
+        controller.StartRoutine(Run());
         return true;
+    }
+
+    IEnumerator Run()
+    {
+        float multiplier = 1.5f;
+
+        float baseSpeed = controller.BaseSpeed;
+        float crouchSpeed = controller.CrouchSpeed;
+        float sprintSpeed = controller.SprintSpeed;
+
+        controller.BaseSpeed = baseSpeed * multiplier;
+        controller.CrouchSpeed = crouchSpeed * multiplier;
+        controller.SprintSpeed = sprintSpeed * multiplier;
+
+        yield return new WaitForSeconds(10);
+
+        controller.BaseSpeed = baseSpeed;
+        controller.CrouchSpeed = crouchSpeed;
+        controller.SprintSpeed = sprintSpeed;
     }
 }
 [CreateAssetMenu(menuName = "Item/Key")]
@@ -55,8 +82,10 @@ public class Key : InventoryItem
 [CreateAssetMenu(menuName = "Item/Bell")]
 public class Bell : InventoryItem
 {
+    [SerializeField] private int value = -20;
     public override bool Use()
     {
+        PlayerStatusEffects.Instance.AddInstantInsanity(value);
         Debug.Log("Bell");
         return true;
     }

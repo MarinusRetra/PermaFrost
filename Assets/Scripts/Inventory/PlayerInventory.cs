@@ -129,6 +129,20 @@ namespace Gameplay
             _hotbar.RemoveAt(indexIn);
         }
 
+        public bool RemoveSelectedSlot()
+        {
+            if (_selectedHotbarItem.Key == _emptyItemSlot.Key || _hotbar.Count == 0)
+            {
+                return false;
+            }
+            
+            _selectedHotbarItem.Value.localScale = _normalSlotSize;
+            RemovedHotbarElements.Add(_selectedHotbarItem);
+            _selectedHotbarItem.Value.gameObject.SetActive(false);
+            _hotbar.RemoveAt(_hotbar.IndexOf(_selectedHotbarItem));
+            return true;
+        }
+
         /// <summary>
         /// Will set the sprite and color of the passed element at the index of hotbar and set the slot's sprite.
         /// </summary>

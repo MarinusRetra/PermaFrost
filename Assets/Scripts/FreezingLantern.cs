@@ -9,19 +9,20 @@ namespace Gameplay
         [SerializeField] private InputReader _input;
         public bool LanternOn;
         public static float _range = 10;
-        [SerializeField] private MeshRenderer _visual;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _input.LanternEvent += ChangeLanternState;
-            _visual = GetComponent<MeshRenderer>();
             StartCoroutine(HandleLantern());
         }
 
         private void ChangeLanternState()
         {
             LanternOn = !LanternOn;
-            _visual.enabled = LanternOn;
+            for(int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(LanternOn);
+            }
         }
 
         public List<GameObject> _objectsInAreaRightNow = new List<GameObject>();

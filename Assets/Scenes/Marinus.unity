@@ -606,17 +606,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.732154, y: 4.177317, z: 3.6330974}
   m_Center: {x: 2.9960237, y: 0.482121, z: -0.4293512}
---- !u!114 &1086603889 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
-  m_PrefabInstance: {fileID: 458517263937679916}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d937bafe1ea3c8a438b47d76c1dac568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerInventory
 --- !u!1 &1372977296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1771,7 @@ PrefabInstance:
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[2].Key
       value: 
-      objectReference: {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
+      objectReference: {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[3].Key
       value: 
@@ -1828,10 +1817,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: _interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1086603889}
     - target: {fileID: 5687983931066264282, guid: a9aafbc42878d2941909e5e3efa7247d, type: 3}
       propertyPath: m_Name
       value: Key
@@ -1946,10 +1931,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: _interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1086603889}
     - target: {fileID: 2308428115491412920, guid: fac6a1770667ac946892f2265904918b, type: 3}
       propertyPath: m_Name
       value: NoiseMonkey
@@ -2104,10 +2085,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1086603889}
     - target: {fileID: 8161579611960054099, guid: 7fd5e883c0b6ec1438085b7210672200, type: 3}
       propertyPath: m_Name
       value: Bell
@@ -2169,10 +2146,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LockPick
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1086603889}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2226,10 +2199,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _interactEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1086603889}
     - target: {fileID: 5458958971818635449, guid: 5b978afb698a0c3458b22eed70c5be14, type: 3}
       propertyPath: m_Name
       value: Heatpack

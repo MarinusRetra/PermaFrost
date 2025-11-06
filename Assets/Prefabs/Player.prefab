@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 375729847493347209}
   serializedVersion: 2
   m_LocalRotation: {x: -0.11447136, y: -0.044477753, z: -0.01727375, w: 0.99228007}
-  m_LocalPosition: {x: 0.33, y: 0.54699993, z: -0.266}
+  m_LocalPosition: {x: 0.541, y: 0.47799993, z: -0.23300001}
   m_LocalScale: {x: 0.17779998, y: 0.1553, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -165,8 +165,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2167895748305581227}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.44599998, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -137.182, y: 1.37995, z: -16.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -886,9 +886,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerController
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  _crouchSpeed: 3
-  _baseSpeed: 4
-  _sprintSpeed: 10
+  CrouchSpeed: 3
+  BaseSpeed: 4
+  SprintSpeed: 7
   _totalStamina: 35
   _sensitivity: 0.4
   _crouchCameraHeight: 0
@@ -949,15 +949,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1
+      value: 0.311
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.293
+      value: -0.154
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.27
+      value: 0.303
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_LocalRotation.w

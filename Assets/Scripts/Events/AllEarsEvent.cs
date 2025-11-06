@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/AllEars")]
+    [CreateAssetMenu(menuName = "Events/AllEarsEvent")]
     public class AllEarsEvent : EventClass
     {
         [SerializeField] private GameObject _allEarsPrefab;

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/MusicBox")]
+    [CreateAssetMenu(menuName = "Events/MusicBoxEvent")]
     public class MusicBoxEvent : EventClass
     {
         [SerializeField]

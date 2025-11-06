@@ -116,6 +116,7 @@ namespace Gameplay
         {
             Instantiate(_selectedHotbarItem.Key.HoldObject, transform.position, transform.rotation);
             RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
+            _selectedHotbarItem = _emptyItemSlot;
         }
 
         /// <summary>

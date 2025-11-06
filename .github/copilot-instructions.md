@@ -8,7 +8,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand
 - Active game object:
-  - Name: SpeedSyringe
+  - Name: Ground
   - Tag: Untagged
-  - Layer: Enemy
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

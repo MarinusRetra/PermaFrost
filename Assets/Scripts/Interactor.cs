@@ -9,7 +9,7 @@ namespace Gameplay
         [SerializeField] private float _interactDistance = 5f;
         [SerializeField] private InputReader _input;
         private Ray ray;
-        private RaycastHit hit;
+        public RaycastHit hit;
         private Transform _cameraTransform;
 
         void Start()

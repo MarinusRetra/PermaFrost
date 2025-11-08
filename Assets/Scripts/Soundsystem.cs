@@ -8,10 +8,10 @@ namespace Gameplay
         public GameObject SoundSourcePrefab;
         private Transform _player;
 
-        private void Awake()
+        private void Start()
         {
             _instance = this;
-            _player = PlayerMonsterManager.Instance.transform;
+            _player = PlayerStatusEffects.Instance.transform;
         }
         public static GameObject PlaySound(AudioClip _clip, Vector3 location, bool _loop = false)
         {

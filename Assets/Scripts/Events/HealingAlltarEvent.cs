@@ -1,36 +1,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/MusicBoxEvent")]
-    public class MusicBoxEvent : EventClass
+    [CreateAssetMenu(menuName = "Events/HealingAltarEvent")]
+    public class HealingAlltarEvent : EventClass
     {
         [SerializeField]
-        private GameObject _musicBoxPrefab;
+        private GameObject _altarPrefab;
         private Transform _chosenSpot;
         public override bool Entered(GameObject room)
         {
             List<Transform> _availableSpots = room.transform.Find("MusicBoxSpots").GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
-            if (_chosenSpot.name == "CHOSENBYALTAR")
+            if(_chosenSpot.name == "CHOSENBYBOX")
             {
                 _availableSpots.Remove(_chosenSpot);
                 _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
             }
-            _chosenSpot.name = "CHOSENBYBOX";
-            GameObject _box = Instantiate(_musicBoxPrefab);
-            _box.transform.parent = room.transform;
-            _box.transform.position = _chosenSpot.position;
-            _box.transform.rotation = _chosenSpot.rotation;
+            _chosenSpot.name = "CHOSENBYALTAR";
+            GameObject _altar = Instantiate(_altarPrefab);
+            _altar.transform.parent = room.transform;
+            _altar.transform.position = _chosenSpot.position;
+            _altar.transform.rotation = _chosenSpot.rotation;
             return true;
         }
         public override bool Exited(GameObject room)
         {
-            Destroy(room.transform.Find("MusicBox(Clone)").gameObject);
+            Destroy(room.transform.Find("HealingAltar(Clone)").gameObject);
             return true;
         }
         public override bool Triggered(GameObject room)

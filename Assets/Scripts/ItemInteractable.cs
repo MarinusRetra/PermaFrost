@@ -11,6 +11,10 @@ namespace Gameplay
             _player = PlayerStatusEffects.Instance.gameObject;
             InteractEvent.AddListener(() =>
             {
+                if (_player.GetComponent<PlayerInventory>().RemovedHotbarElements.Count == 0)
+                {
+                    return;
+                }
                 _player.GetComponent<PlayerInventory>().PickupItem(_item);
                 Destroy(gameObject);
             });

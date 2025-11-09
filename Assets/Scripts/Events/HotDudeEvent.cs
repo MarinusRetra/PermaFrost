@@ -14,6 +14,7 @@ namespace Gameplay
         }
         public override bool Exited(GameObject room)
         {
+            if (!room.transform.Find("Monsters").Find("HotDude(Clone)")) return false;
             room.transform.Find("Monsters").Find("HotDude(Clone)").GetComponent<Monster>().DestroyMonster();
             return true;
         }

@@ -14,7 +14,7 @@ namespace Gameplay
         [SerializeField] private Vector3 _selectedSlotSize = new(0.6f, 0.6f, 1.2f);
 
         [Header("Empty slot prefab here")]
-        [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _emptyItemSlot;
+        [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _emptyItemSlot = new() { Key = null, Value = null };
 
         [Header("Inventory item and Hotbarslot transforms")]
         [SerializeField] private List<SerializedKeyValuePair<InventoryItem, RectTransform>> _hotbar; // The key is the item in a slot and the value is a reference to that slot's UI element transform.
@@ -24,7 +24,7 @@ namespace Gameplay
 
         [Header("Debug variables do not assign anything")]
         [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
-        [SerializeField] private List<SerializedKeyValuePair<InventoryItem, RectTransform>> _removedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
+        public List<SerializedKeyValuePair<InventoryItem, RectTransform>> RemovedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
 
         void Awake()
         {
@@ -97,26 +97,25 @@ namespace Gameplay
         /// </summary>
         public void PickupItem(InventoryItem incomingItem)
         {
-            if (_removedHotbarElements.Count == 0)
-            {
-                return;
-            }
+            RemovedHotbarElements[0] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = incomingItem, Value = RemovedHotbarElements[0].Value };
+            RemovedHotbarElements[0].Value.gameObject.SetActive(true);
 
-            _removedHotbarElements[0] = new SerializedKeyValuePair<InventoryItem, RectTransform> { Key = incomingItem, Value = _removedHotbarElements[0].Value };
-            _removedHotbarElements[0].Value.gameObject.SetActive(true);
-
-            _hotbar.Add(_removedHotbarElements[0]);
+            _hotbar.Add(RemovedHotbarElements[0]);
             SetSlotSprite(_hotbar.Count - 1);
-            _removedHotbarElements.RemoveAt(0);
+            RemovedHotbarElements.RemoveAt(0);
 
             _hotbar = _hotbar.OrderBy(x => x.Value.gameObject.name[^1]).ToList();
         }
 
         public void DropItem()
         {
-            Instantiate(_selectedHotbarItem.Key.HoldObject, transform.position, transform.rotation);
-            RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
-            _selectedHotbarItem = _emptyItemSlot;
+            try
+            {
+                Instantiate(_selectedHotbarItem.Key.HoldObject, transform.position, transform.rotation);
+                RemoveSlot(_hotbar.IndexOf(_selectedHotbarItem));
+                _selectedHotbarItem = _emptyItemSlot;
+            }
+            catch { new NullReferenceException(); }
         }
 
         /// <summary>
@@ -125,9 +124,23 @@ namespace Gameplay
         void RemoveSlot(int indexIn)
         {
             _hotbar[indexIn].Value.localScale = _normalSlotSize;
-            _removedHotbarElements.Add(_hotbar[indexIn]);
+            RemovedHotbarElements.Add(_hotbar[indexIn]);
             _hotbar[indexIn].Value.gameObject.SetActive(false);
             _hotbar.RemoveAt(indexIn);
+        }
+
+        public bool RemoveSelectedSlot()
+        {
+            if (_selectedHotbarItem.Key == _emptyItemSlot.Key || _hotbar.Count == 0)
+            {
+                return false;
+            }
+            
+            _selectedHotbarItem.Value.localScale = _normalSlotSize;
+            RemovedHotbarElements.Add(_selectedHotbarItem);
+            _selectedHotbarItem.Value.gameObject.SetActive(false);
+            _hotbar.RemoveAt(_hotbar.IndexOf(_selectedHotbarItem));
+            return true;
         }
 
         /// <summary>

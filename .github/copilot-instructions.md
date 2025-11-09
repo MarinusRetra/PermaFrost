@@ -2,13 +2,13 @@
 - Project name: PortfolioProject
 - Unity version: Unity 6000.2.7f2
 - Active scene:
-  - Name: Marinus
+  - Name: CarriageGeneration
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy, HUD
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand
 - Active game object:
-  - Name: Player
-  - Tag: Player
-  - Layer: Player
+  - Name: Walls (2)
+  - Tag: Untagged
+  - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

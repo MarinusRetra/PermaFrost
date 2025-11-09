@@ -68,27 +68,33 @@ public class CarriageClass : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && _selectedEventClasses.Count > 0 && _enterTriggered != true)
+        if (other.gameObject.layer == 3 && !playerInside && _selectedEventClasses.Count > 0 && !_enterTriggered)
         {
-            playerInside = true;
-            _enterTriggered = true;
-            // Add your logic here
+            // Check if player is in front (higher Z position than the carriage)
+            if (generationClass.player.transform.position.z < transform.position.z)
+            {
+                playerInside = true;
+                _enterTriggered = true;
 
-            foreach(EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Entered(gameObject);   
+                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    selectedEventClass.Entered(gameObject);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 3 && playerInside && _selectedEventClasses.Count > 0 && _exitTriggered != true)
+        if (other.gameObject.layer == 3 && playerInside && _selectedEventClasses.Count > 0 && !_exitTriggered)
         {
-            playerInside = false;
-            _exitTriggered = true;
+            // Check if player left through the back (lower Z position than the carriage)
+            if (generationClass.player.transform.position.z > transform.position.z)
+            {
+                playerInside = false;
+                _exitTriggered = true;
 
-            // Add your logic here
-            foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Exited(gameObject);
+                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    selectedEventClass.Exited(gameObject);
+            }
         }
     }
     

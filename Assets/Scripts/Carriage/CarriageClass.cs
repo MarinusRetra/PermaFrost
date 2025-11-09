@@ -11,7 +11,7 @@ public class CarriageClass : MonoBehaviour
     public Transform SpawnPoint;
 
     [SerializeField] private List<Transform> _spawnPoints;
-    [SerializeField] private List<InventoryItem> _allowedDrops;
+    // [SerializeField] private List<Inventory> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
 
@@ -26,34 +26,34 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private int _amountOfEvents;
     
 
-    public void SpawnRandomItem()
-    {
-        //THIS FULLY BREAKS THE BUILD FIX BEFORE REACTIVATING
-        return;
-        if (_spawnPoints.Count > 0)
-        {
-            Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-            GameObject newDroppedItem = Instantiate(_droppedItemPrefab, randomLocation.position, Quaternion.identity);
+    // public void SpawnRandomItem()
+    // {
+    //     //THIS FULLY BREAKS THE BUILD FIX BEFORE REACTIVATING
+    //     return;
+    //     if (_spawnPoints.Count > 0)
+    //     {
+    //         Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+    //         GameObject newDroppedItem = Instantiate(_droppedItemPrefab, randomLocation.position, Quaternion.identity);
 
-            var interactObject = newDroppedItem.GetComponent<InteractObject>();
-            if (interactObject != null)
-            {
-                InventoryItem inventoryItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
-                interactObject.InteractEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
-            }
-        }
-    }
+    //         var interactObject = newDroppedItem.GetComponent<InteractObject>();
+    //         if (interactObject != null)
+    //         {
+    //             InventoryItem inventoryItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+    //             newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
+    //             interactObject.InteractEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
+    //         }
+    //     }
+    // }
 
-    private void OnItemInteracted(GameObject item, InventoryItem inventoryItem)
-    {
-        Debug.Log("Player interacted with " + item.name);
+    // private void OnItemInteracted(GameObject item, InventoryItem inventoryItem)
+    // {
+    //     Debug.Log("Player interacted with " + item.name);
 
-        PlayerInventory playerInventory = generationClass.player.GetComponent<PlayerInventory>();
-        playerInventory.PickupItem(inventoryItem);
+    //     PlayerInventory playerInventory = generationClass.player.GetComponent<PlayerInventory>();
+    //     playerInventory.PickupItem(inventoryItem);
 
-        Destroy(item);
-    }
+    //     Destroy(item);
+    // }
 
     void Start()
     {

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Gameplay;
 
 public class CarriageClass : MonoBehaviour
 {
@@ -57,14 +56,20 @@ public class CarriageClass : MonoBehaviour
 
     void Start()
     {
-        if (_allowedEvents.Count > 0)
+        if (_allowedEvents.Count > 0 && _amountOfEvents > 0)
         {
-            _amountOfEvents = Random.Range(0, _amountOfEvents + 1);
-            if (_amountOfEvents == 0) _amountOfEvents = 1;
-            for (int i = 0; i < _amountOfEvents; i++)
-                _selectedEventClasses.Add(_allowedEvents[Random.Range(0, _allowedEvents.Count)]);
+            int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
+            List<EventClass> availableEvents = new List<EventClass>(_allowedEvents);
+
+            for (int i = 0; i < count; i++)
+            {
+                int randomIndex = Random.Range(0, availableEvents.Count);
+                _selectedEventClasses.Add(availableEvents[randomIndex]);
+                availableEvents.RemoveAt(randomIndex);
+            }
         }
     }
+
     
     private void OnTriggerEnter(Collider other)
     {

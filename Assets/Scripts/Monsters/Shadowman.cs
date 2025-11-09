@@ -24,7 +24,7 @@ namespace Gameplay
         private IEnumerator StartAttack()
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
-            yield return new WaitForSeconds(Random.Range(7f,13f));
+            yield return new WaitForSeconds(Random.Range(7f,11f));
             GameObject _noises = Soundsystem.PlaySound(_dashingClip, transform.position, true);
             _noises.transform.parent = transform;
             _hasStarted = true;

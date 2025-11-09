@@ -39,7 +39,7 @@ public class Generation : MonoBehaviour
         currentCarriage.generationClass = this;
         prevCarriage.generationClass = this;
 
-        currentCarriage.SpawnRandomItem();
+        // currentCarriage.SpawnRandomItem();
     }
 
     void GenerateRooms()

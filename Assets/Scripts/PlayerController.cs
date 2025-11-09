@@ -68,6 +68,13 @@ namespace Gameplay
                     StandUp();
                 }
             }
+            else
+            {
+                if(_moveDirection != Vector3.zero)
+                {
+                    PlayerMonsterManager.MakeNoise();
+                }
+            }
         }
 
         /// <summary>
@@ -117,7 +124,7 @@ namespace Gameplay
 
         private void HandleSprintCancel()
         {
-            _currentMoveSpeed = BaseSpeed;
+            _currentMoveSpeed = _isCrouching ? CrouchSpeed : BaseSpeed;
             isSprinting = false;
         }
 

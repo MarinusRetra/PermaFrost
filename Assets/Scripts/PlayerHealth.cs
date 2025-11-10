@@ -14,6 +14,8 @@ public class PlayerHealth : MonoBehaviour
     private bool _isVunerable = false;
 
     private Camera _cam;
+    [SerializeField]private GameObject _deathUI;
+    [SerializeField] private InputReader _reader;
 
     private void Start()
     {
@@ -52,7 +54,13 @@ public class PlayerHealth : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.LogWarning("Player death is not implemented yet.");
+        _deathUI.SetActive(true);
+        transform.Find("CamBrain").parent = _deathUI.transform;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Destroy(_deathUI.transform.parent.Find("Pause").gameObject);
+        gameObject.SetActive(false);
+        //Debug.LogWarning("Player death is not implemented yet.");
     }
 
     public IEnumerator HealPlayer()

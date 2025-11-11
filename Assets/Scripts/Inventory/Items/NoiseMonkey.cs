@@ -6,10 +6,14 @@ namespace Gameplay
 
     public class NoiseMonkey : InventoryItem
     {
-      public override bool Use()
-      {
-        Debug.Log("NoiseMonkey");
-        return true;
-      }
+        [SerializeField] private GameObject _noiseMonkeyPrefab;
+        public override bool Use()
+        {
+            GameObject spawnedMonkey = Instantiate(_noiseMonkeyPrefab, Camera.main.gameObject.transform.position, Camera.main.gameObject.transform.rotation);
+            Vector3 direction =  spawnedMonkey.transform.forward;
+            spawnedMonkey.GetComponent<Rigidbody>().AddForce(direction * 1000);
+            Debug.Log("NoiseMonkey");
+            return true;
+        }
     }
 }

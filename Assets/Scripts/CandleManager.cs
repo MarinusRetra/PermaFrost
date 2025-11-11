@@ -9,7 +9,7 @@ namespace Gameplay
     public class CandleManager : MonoBehaviour
     {
         [SerializeField] private GameObject _candleHolder;
-        public List<ParticleSystem> _allCandles;
+        private List<ParticleSystem> _allCandles;
 
         private void Start()
         {

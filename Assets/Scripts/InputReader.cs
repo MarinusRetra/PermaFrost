@@ -93,6 +93,12 @@ namespace Gameplay
             }
         }
 
+        public void KillPause()
+        {
+            PauseEvent = null;
+            ResumeEvent = null;
+        }
+
         public void OnHotbarSelect(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)

@@ -16,6 +16,9 @@ namespace Gameplay
         [Header("Empty slot prefab here")]
         [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _emptyItemSlot = new() { Key = null, Value = null };
 
+        [Header("Items that cant be removed")]
+        [SerializeField] private List<InventoryItem> _unkillableItems;
+
         [Header("Inventory item and Hotbarslot transforms")]
         [SerializeField] private List<SerializedKeyValuePair<InventoryItem, RectTransform>> _hotbar; // The key is the item in a slot and the value is a reference to that slot's UI element transform.
 
@@ -131,7 +134,7 @@ namespace Gameplay
 
         public bool RemoveSelectedSlot()
         {
-            if (_selectedHotbarItem.Key == _emptyItemSlot.Key || _hotbar.Count == 0)
+            if (_selectedHotbarItem.Key == _emptyItemSlot.Key || _hotbar.Count == 0 || _unkillableItems.Contains(_selectedHotbarItem.Key))
             {
                 return false;
             }

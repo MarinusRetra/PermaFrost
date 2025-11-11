@@ -2,14 +2,18 @@ using UnityEngine;
 
 namespace Gameplay
 {
-[CreateAssetMenu(menuName = "Item/Key")]
-public class Key : InventoryItem
-{
-    public override bool Use()
+    [CreateAssetMenu(menuName = "Item/Key")]
+    public class Key : InventoryItem
     {
-        Debug.Log("Key");
+        public override bool Use()
+        {
+            GameObject lookinAt = Camera.main.GetComponent<Interactor>().hit.collider?.gameObject;
+            if (lookinAt && lookinAt.CompareTag("Door"))
+            {
+                Destroy(lookinAt);
+                return true;
+            }
             return false;
-        //If door return true
+        }
     }
-}
 }

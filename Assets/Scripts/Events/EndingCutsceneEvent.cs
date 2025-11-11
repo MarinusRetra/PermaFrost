@@ -9,8 +9,10 @@ namespace Gameplay
         private GameObject _endingCutscenePrefab;
         public override bool Entered(GameObject room)
         {
-           GameObject cut =  Instantiate(_endingCutscenePrefab);
+            GameObject cut =  Instantiate(_endingCutscenePrefab);
             cut.transform.position = new Vector3(300, 300, 300);
+            PlayerStatusEffects.Instance.transform.Find("CamBrain").parent = cut.transform;
+            PlayerStatusEffects.Instance.gameObject.SetActive(false);
             return true;
         }
         public override bool Exited(GameObject room)

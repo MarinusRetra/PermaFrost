@@ -1,38 +1,50 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Gameplay
 {
     public class CandleManager : MonoBehaviour
     {
-        public GameObject[] AllCandles;
+        [SerializeField] private GameObject _candleHolder;
+        public List<ParticleSystem> _allCandles;
 
+        private void Start()
+        {
+            _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+            _allCandles.RemoveAt(0);
+            
+        }
         public void TurnOffCandles()
         {
-            for(int i = 0; i < AllCandles.Length; i++)
+            for(int i = 0; i < _allCandles.Count; i++)
             {
                 //change when we get actual candles
-                AllCandles[i].SetActive(false);
+                _allCandles[i].Stop();
+                _allCandles[i].transform.GetChild(0).gameObject.SetActive(false);
             }
         }
 
         public void TurnOnCandles()
         {
-            for (int i = 0; i < AllCandles.Length; i++)
+            for (int i = 0; i < _allCandles.Count; i++)
             {
                 //change when we get actual candles
-                AllCandles[i].SetActive(true);
+                _allCandles[i].Play();
+                _allCandles[i].transform.GetChild(0).gameObject.SetActive(true);
             }
         }
 
         public IEnumerator FlickerCandles()
         {
             TurnOffCandles();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             TurnOnCandles();
             yield return new WaitForSeconds(0.5f);
             TurnOffCandles();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
             TurnOnCandles();
         }
     }

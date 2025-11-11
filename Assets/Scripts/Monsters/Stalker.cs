@@ -24,6 +24,8 @@ namespace Gameplay
 
         private bool despawning = false;
 
+        private int moveRNG = 0;
+
         void Start()
         {
             _player = PlayerMonsterManager.Instance.transform;
@@ -36,6 +38,7 @@ namespace Gameplay
             transform.position = GetRandomRoomPosition();
             Soundsystem.PlaySound(_appearSound, transform.position);
             _currentState = StalkerStates.Watching;
+            moveRNG = Random.Range(-50, 100);
             StartCoroutine(HandleBehaviour());
         }
 
@@ -63,7 +66,7 @@ namespace Gameplay
                         else
                         {
                             _amountOfTimesNot++;
-                            if(_amountOfTimesNot >= 100)
+                            if(_amountOfTimesNot >= 100 + moveRNG)
                             {
                                 _currentState = StalkerStates.Moving;
                                 _amountOfTimesNot = 0;
@@ -104,7 +107,7 @@ namespace Gameplay
                 }
 
                 float _ranX = Random.Range(_roomCorners[0].x, _roomCorners[1].x);
-                float _ranY = Random.Range(_roomCorners[0].y + (_roomCorners[1].y/2), _roomCorners[1].y);
+                float _ranY = Random.Range(_roomCorners[0].y + (_roomCorners[1].y/6), _roomCorners[1].y);
                 float _ranZ = Random.Range(_roomCorners[0].z, _roomCorners[1].z);
 
                 if (CheckIfAroundArea(_ranX, _player.position.x, _playerRadius) && CheckIfAroundArea(_ranY, _player.position.y, _playerRadius) && CheckIfAroundArea(_ranZ, _player.position.z, _playerRadius))

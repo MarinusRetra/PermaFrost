@@ -26,6 +26,8 @@ namespace Gameplay
 
         private bool despawning = false;
 
+        private bool _spawning = true;
+
         void Start()
         {
             //Fetch the player
@@ -52,6 +54,7 @@ namespace Gameplay
             }
 
             GetComponent<Collider>().enabled = true;
+            _spawning = false;
 
             while (!despawning)
             {
@@ -144,10 +147,10 @@ namespace Gameplay
 
         public override void Aggro(Vector3 location)
         {
-            if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y) return;
+            if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y || _spawning) return;
             _currentState = earStates.Agressive;
             _agent.destination = new Vector3(location.x, 3.08f, location.z);
-            _agent.speed = 7;
+            _agent.speed = 5;
         }
 
         public override void DestroyMonster()

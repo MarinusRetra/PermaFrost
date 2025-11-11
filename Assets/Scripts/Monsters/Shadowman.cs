@@ -14,6 +14,7 @@ namespace Gameplay
         private bool _hasStarted = false;
         private void Start()
         {
+            transform.position = new Vector3(-300, -300, -300);
             _exitRoom = CurrentRoom.Find("Exit");
             _entryRoom = CurrentRoom.Find("Entry");
             //turn off candles, apart from ones in side rooms (so player can figure that out)
@@ -23,7 +24,7 @@ namespace Gameplay
         private IEnumerator StartAttack()
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(Random.Range(7f,11f));
             GameObject _noises = Soundsystem.PlaySound(_dashingClip, transform.position, true);
             _noises.transform.parent = transform;
             _hasStarted = true;

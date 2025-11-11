@@ -10,7 +10,7 @@ public class CarriageClass : MonoBehaviour
     public Transform SpawnPoint;
 
     [SerializeField] private List<Transform> _spawnPoints;
-    // [SerializeField] private List<Inventory> _allowedDrops;
+    [SerializeField] private List<InventoryItem> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
 
@@ -19,40 +19,26 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private bool _triggerTriggered;
 
     private bool playerInside = false;
-
-    [SerializeField] private GameObject _droppedItemPrefab;
     [SerializeField] private List<EventClass> _selectedEventClasses;
     [SerializeField] private int _amountOfEvents;
-    
+    [SerializeField] private int _maxAmountOfItems = 1;
 
-    // public void SpawnRandomItem()
-    // {
-    //     //THIS FULLY BREAKS THE BUILD FIX BEFORE REACTIVATING
-    //     return;
-    //     if (_spawnPoints.Count > 0)
-    //     {
-    //         Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-    //         GameObject newDroppedItem = Instantiate(_droppedItemPrefab, randomLocation.position, Quaternion.identity);
 
-    //         var interactObject = newDroppedItem.GetComponent<InteractObject>();
-    //         if (interactObject != null)
-    //         {
-    //             InventoryItem inventoryItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-    //             newDroppedItem.GetComponent<MeshRenderer>().material.color = inventoryItem.color;
-    //             interactObject.InteractEvent.AddListener(() => OnItemInteracted(newDroppedItem, inventoryItem));
-    //         }
-    //     }
-    // }
+    public void SpawnItems()
+    {
+        if (_spawnPoints.Count > 0)
+        {
+            for(int i = 0; i < Random.Range(0,_maxAmountOfItems + 1); i++)
+            {
+                Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+                InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
 
-    // private void OnItemInteracted(GameObject item, InventoryItem inventoryItem)
-    // {
-    //     Debug.Log("Player interacted with " + item.name);
-
-    //     PlayerInventory playerInventory = generationClass.player.GetComponent<PlayerInventory>();
-    //     playerInventory.PickupItem(inventoryItem);
-
-    //     Destroy(item);
-    // }
+                //prevent 2 items in 1 spot
+                _spawnPoints.Remove(randomLocation);
+            }
+        }
+    }
 
     void Start()
     {

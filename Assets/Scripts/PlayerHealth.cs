@@ -59,8 +59,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_healInvincible) yield break;
 
-        //Handle anything with items before this or in here
-
         _isVunerable = false;
 
         _healInvincible = true;

@@ -63,10 +63,11 @@ namespace Gameplay
         public override void Deaggro()
         {
             //this practically turns lookpick off
-            _collider.enabled = false;
-            _renderer.enabled = false;
+            Vector3 _playerPos = _pmm.transform.position;
+            transform.position = new Vector3(_playerPos.x, _playerPos.y, _playerPos.z - 5);
+            tooFar = transform.position.z - 2;
 
-            _currentState = lookStates.Idle;
+            _currentState = lookStates.Moving;
         }
     }
 }

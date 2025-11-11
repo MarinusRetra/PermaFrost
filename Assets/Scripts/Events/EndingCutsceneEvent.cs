@@ -13,6 +13,7 @@ namespace Gameplay
             cut.transform.position = new Vector3(300, 300, 300);
             PlayerStatusEffects.Instance.transform.Find("CamBrain").parent = cut.transform;
             PlayerStatusEffects.Instance.gameObject.SetActive(false);
+            CutsceneManager.instance.StartEndingCutscene();
             return true;
         }
         public override bool Exited(GameObject room)

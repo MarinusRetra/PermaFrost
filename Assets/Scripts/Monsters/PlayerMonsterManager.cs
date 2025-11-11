@@ -46,6 +46,7 @@ namespace Gameplay
             }
         }
 
+        public bool OverridePlayerSounds = false;
         //Noise
 
         /// <summary>
@@ -66,6 +67,7 @@ namespace Gameplay
         /// </summary>
         public static void MakeNoise()
         {
+            if (PlayerMonsterManager.Instance.OverridePlayerSounds) { return; }
             var allEars = FindObjectsByType<AllEars>(FindObjectsSortMode.None);
             for (int i = 0; i < allEars.Length; i++)
             {

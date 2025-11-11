@@ -62,7 +62,7 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    public int _currentFrostbite = 0;
+    private int _currentFrostbite = 0;
     public List<string> _frostbiteCauses = new();
 
     //Frostbite related functions

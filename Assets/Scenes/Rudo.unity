@@ -3893,7 +3893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4741671994732222255, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: FrostbiteDeath
-      value: 120
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 4741671994732222255, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _freezingSlider
@@ -7914,6 +7914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1419843197}
   - component: {fileID: 1419843198}
+  - component: {fileID: 1419843199}
   m_Layer: 0
   m_Name: CutsceneManager
   m_TagString: Untagged
@@ -7951,6 +7952,28 @@ MonoBehaviour:
   _ui: {fileID: 1021404897}
   _startingTimeline: {fileID: 11400000, guid: e03e0bb55dce27f48a28ca49c22cc9dd, type: 2}
   _endingTimeline: {fileID: 11400000, guid: 583ed6a4f3132244c8c9d72e09f8f9bb, type: 2}
+--- !u!95 &1419843199
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419843196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1428556432
 GameObject:
   m_ObjectHideFlags: 0

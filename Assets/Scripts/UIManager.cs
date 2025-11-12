@@ -35,5 +35,10 @@ namespace Gameplay
 		public void LoadScene(int id) => SceneManager.LoadScene(id);
 
 		public void QuitGame() => Application.Quit();
+
+        private void OnDisable()
+        {
+            if (_input) _input.ResumeEvent -= OnResume;
+        }
     }
 }

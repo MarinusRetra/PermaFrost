@@ -37,7 +37,6 @@ namespace Gameplay
         private bool _canGetUp = true;
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
-
         private void Start()
         {
             
@@ -208,6 +207,7 @@ namespace Gameplay
             _input.MoveEvent -= HandleMove;
             _input.CrouchEvent -= HandleCrouch;
             _input.CrouchCancelEvent -= HandleCrouchCancel;
+            _input.LookEvent -= HandleLook;
         }
 
         private void OnDisable()
@@ -217,6 +217,7 @@ namespace Gameplay
             _input.MoveEvent -= HandleMove;
             _input.CrouchEvent -= HandleCrouch;
             _input.CrouchCancelEvent -= HandleCrouchCancel;
+            _input.LookEvent -= HandleLook;
         }
 
         public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);

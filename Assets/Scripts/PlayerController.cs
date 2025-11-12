@@ -16,8 +16,8 @@ namespace Gameplay
 
         [Header("Sprint values")]
         public float SprintSpeed = 7;
-        [SerializeField] private int _totalStamina = 10;
-        private int _currentStamina = 10;
+        public int TotalStamina = 10;
+        public int CurrentStamina = 10;
         private bool isSprinting = false;
 
         [Header("Camera values")]
@@ -37,6 +37,8 @@ namespace Gameplay
         private bool _canGetUp = true;
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
+
+        public SprintBehaviour SprintBehav;
         private void Start()
         {
             
@@ -129,29 +131,36 @@ namespace Gameplay
 
         private IEnumerator Sprint()
         {
+            SprintBehav.MaxSprint(TotalStamina);
+            CurrentStamina = TotalStamina;
             while (true)
             {
                 //stamina goes down when running
                 if (isSprinting)
                 {
-                    _currentStamina--;
-                    if (_currentStamina < 0)
+                    CurrentStamina -= 2;
+                    if (CurrentStamina < 0)
                     {
                         HandleSprintCancel();
                     }
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.05f);
                 }
-                else if (_currentStamina < _totalStamina)
+                else if (CurrentStamina < TotalStamina)
                 {
                     //goes up when not running
-                    yield return new WaitForSeconds(0.2f);
-                    _currentStamina++;
+                    yield return new WaitForSeconds(0.05f);
+                    CurrentStamina++;
                 }
                 else
                 {
+                    if (CurrentStamina < 0)
+                    {
+                        HandleSprintCancel();
+                    }
                     //wait when at max stamina
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.05f);
                 }
+                SprintBehav.UpdateSprintBar(CurrentStamina);
             }
         }
 

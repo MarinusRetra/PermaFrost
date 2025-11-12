@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6506228536308270695}
   m_Layer: 0
   m_Name: Hand
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5618125620296340342}
   m_Layer: 0
   m_Name: Point Light
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 2696411421193406093}
   m_Layer: 3
   m_Name: Lantern
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -969,7 +969,7 @@ MonoBehaviour:
     Value: {fileID: 0}
   - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
+  - Key: {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
     Value: {fileID: 0}
   - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 0}
@@ -1012,10 +1012,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253125e44de3b0540af299b0f1dbacf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusEffects
+  _insanitySlider: {fileID: 0}
+  _freezingSlider: {fileID: 0}
   InsanityDeath: 20
   _insanityCauses: []
   FrostbiteDeath: 30
-  _currentFrostbite: 0
   _frostbiteCauses: []
 --- !u!114 &4605853214314879402
 MonoBehaviour:
@@ -1031,6 +1032,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   DamageInvincibility: 0.5
   HealInvincibility: 3
+  _deathUI: {fileID: 0}
+  _reader: {fileID: 0}
 --- !u!114 &2481520789753704852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,6 +1049,7 @@ MonoBehaviour:
   HasFoundTicket: 0
   InSideroom: 0
   SelectedCamera: {fileID: 5990134823720351312}
+  OverridePlayerSounds: 0
 --- !u!1001 &4644713824374859465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,6 +1105,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766212503428324877, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8702430246359457498, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1182,6 +1198,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8d1e737cc75939943b8d80c1791edd7b, type: 3}
       propertyPath: m_Name
       value: AllEarsBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d1e737cc75939943b8d80c1791edd7b, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

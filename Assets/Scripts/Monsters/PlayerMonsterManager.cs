@@ -17,7 +17,7 @@ namespace Gameplay
         private static Camera _cam;
         private static Plane[] _cameraArea;
         public Camera SelectedCamera;
-        void Start()
+        void Awake()
         {
             Instance = this;
             _cam = SelectedCamera;

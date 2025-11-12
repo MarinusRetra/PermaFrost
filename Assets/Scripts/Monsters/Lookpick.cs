@@ -6,40 +6,43 @@ namespace Gameplay
     public class Lookpick : Monster
     {
         private Collider _collider;
-        private MeshRenderer _renderer;
         private PlayerMonsterManager _pmm;
-
-        [SerializeField] private float _moveSpeed = 2.5f;
-        [SerializeField] private float _returnSpeed = 5f;
+        private Animator _animator;
+        [SerializeField] private Transform _transform;
+        [SerializeField] private float _moveSpeed = 0.2f;
+        [SerializeField] private float _returnSpeed = -0.6f;
 
         private enum lookStates { Moving, Idle }
         private lookStates _currentState = lookStates.Idle;
         private void Start()
         {
             _collider = GetComponent<Collider>();
-            _renderer = GetComponent<MeshRenderer>();
+            _animator = GetComponentInParent<Animator>();
             _pmm = PlayerMonsterManager.Instance;
+            _animator.enabled = false;
+            Aggro();
+            _animator.enabled = true;
             StartCoroutine(HandleMovement());
         }
 
-        private float tooFar;
         private IEnumerator HandleMovement()
         {
+            _animator.Play("Move");
             while (true)
             {
                 switch (_currentState)
                 {
                     case lookStates.Moving:
-                        //td: comments, clean, ect.
                         yield return new WaitForSeconds(0.05f);
-                        if (PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
+                        if (PlayerMonsterManager.IsPlayerLookingAtObj(_collider))
                         {
-                            if(transform.position.z !>= tooFar)
-                            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - (_returnSpeed / 50));
+                            _animator.SetFloat("direction", _returnSpeed);
+                            print("BBBBBBBBBBBB");
                         }
                         else
                         {
-                            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (_moveSpeed / 50));
+                            _animator.SetFloat("direction", _moveSpeed);
+                            print("AAAAAAAAAAAAAA");
                         }
                         continue;
                     default:
@@ -51,21 +54,17 @@ namespace Gameplay
         public override void Aggro()
         {
             _collider.enabled = true;
-            _renderer.enabled = true;
 
             Vector3 _playerPos = _pmm.transform.position;
-            transform.position = new Vector3(_playerPos.x,_playerPos.y, _playerPos.z - 5);
-            tooFar = transform.position.z - 2;
+            _transform.position = new Vector3(_playerPos.x,_playerPos.y, _playerPos.z - 14);
 
             _currentState = lookStates.Moving;
         }
 
         public override void Deaggro()
         {
-            //this practically turns lookpick off
-            Vector3 _playerPos = _pmm.transform.position;
-            transform.position = new Vector3(_playerPos.x, _playerPos.y, _playerPos.z - 5);
-            tooFar = transform.position.z - 2;
+            _animator.Play("Move", -1, 0);
+            print("SWAG");
 
             _currentState = lookStates.Moving;
         }

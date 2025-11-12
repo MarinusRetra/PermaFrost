@@ -43,6 +43,8 @@ namespace Gameplay
         {
             _ui.SetActive(false);
             yield return new WaitForSeconds((float)_endingTimeline.duration);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             SceneManager.LoadScene(0);
         }
     }

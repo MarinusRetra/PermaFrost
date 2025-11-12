@@ -11,7 +11,7 @@ public class SpeedSyringe : InventoryItem
     public override bool Use()
     {
         Debug.Log("SpeedSyringe");
-        controller = GameObject.FindWithTag("Player")?.GetComponent<PlayerController>();
+        controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
         controller.StartRoutine(Run());
         return true;
     }

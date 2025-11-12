@@ -14,7 +14,7 @@ namespace Gameplay
         public void SetMainVolume()
         {
             float volume = _mainVolumeSlider.value;
-            _audioMixer.SetFloat("Main Volume", Mathf.Log10(volume) * 20);
+            _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
         }
 
     }

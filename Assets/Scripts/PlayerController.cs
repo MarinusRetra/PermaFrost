@@ -39,6 +39,17 @@ namespace Gameplay
         private Vector2 _standHitboxHeight = new(2, 0);
 
         public SprintBehaviour SprintBehav;
+
+        private void OnEnable()
+        {
+            _input.MoveEvent += HandleMove;
+            _input.CrouchEvent += HandleCrouch;
+            _input.CrouchCancelEvent += HandleCrouchCancel;
+            _input.SprintCancelEvent += HandleSprintCancel;
+            _input.SprintEvent += HandleSprint;
+            _input.LookEvent += HandleLook;
+        }
+
         private void Start()
         {
             
@@ -48,13 +59,6 @@ namespace Gameplay
 
             _rb = GetComponent<Rigidbody>();
             _playerCollider = GetComponent<CapsuleCollider>();
-
-            _input.MoveEvent += HandleMove;
-            _input.CrouchEvent += HandleCrouch;
-            _input.CrouchCancelEvent += HandleCrouchCancel;
-            _input.SprintCancelEvent += HandleSprintCancel;
-            _input.SprintEvent += HandleSprint;
-            _input.LookEvent += HandleLook;
 
             StartCoroutine(Sprint());
         }

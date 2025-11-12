@@ -23,6 +23,7 @@ namespace Gameplay
             {
                 transform.GetChild(i).gameObject.SetActive(LanternOn);
             }
+            PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", !LanternOn);
         }
 
         public List<GameObject> _objectsInAreaRightNow = new List<GameObject>();
@@ -73,11 +74,13 @@ namespace Gameplay
             if (on)
             {
                 LanternOn = true;
+                PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", false);
                 //turn on lantern idk
             }
             else
             {
                 LanternOn= false;
+                PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
             }
         }
 
@@ -91,8 +94,6 @@ namespace Gameplay
         {
             if (objec.CompareTag("Player"))
             {
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", !turnOn);
-                print("Player is freezing due to the lantern");
                 return true;
             }
 

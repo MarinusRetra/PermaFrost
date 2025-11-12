@@ -156,7 +156,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.ItemInteractable
   InteractEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1256378865621962535}
+        m_TargetAssemblyTypeName: Gameplay.ItemInteractable, Assembly-CSharp
+        m_MethodName: DoThing
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _outlineScale: 1.1
   _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}
   _item: {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}

@@ -11,7 +11,7 @@ namespace Gameplay
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
             _freeze.transform.parent = room.transform;
-            _freeze.transform.localScale = new Vector3(3,1,1);
+            _freeze.transform.localScale = new Vector3(3,1,0.85f);
             _freeze.transform.position = room.transform.position;
 
             //break windows visually

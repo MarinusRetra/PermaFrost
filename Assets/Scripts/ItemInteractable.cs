@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace Gameplay
 {
@@ -8,16 +9,17 @@ namespace Gameplay
         public override void Start()
         {
             base.Start();
+        }
+
+        public void DoThing()
+        {
             _player = PlayerStatusEffects.Instance.gameObject;
-            InteractEvent.AddListener(() =>
+            if (_player.GetComponent<PlayerInventory>().RemovedHotbarElements.Count == 0)
             {
-                if (_player.GetComponent<PlayerInventory>().RemovedHotbarElements.Count == 0)
-                {
-                    return;
-                }
-                _player.GetComponent<PlayerInventory>().PickupItem(_item);
-                Destroy(gameObject);
-            });
+                return;
+            }
+            _player.GetComponent<PlayerInventory>().PickupItem(_item);
+            Destroy(gameObject);
         }
     }
 }

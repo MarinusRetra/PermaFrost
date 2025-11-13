@@ -1,3 +1,4 @@
+using Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,10 @@ public class PlayerStatusEffects : MonoBehaviour
     {
         Instance = this;
         _playerHP = FindAnyObjectByType<PlayerHealth>();
-        
+    }
+
+    private void Start()
+    {
         //Sanity and Frostbite update every second
         StartCoroutine(HandleInsanity());
         StartCoroutine(HandleFrostbite());
@@ -62,16 +66,22 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    private int _currentFrostbite = 0;
+    public int _currentFrostbite = 0;
     public List<string> _frostbiteCauses = new();
+
+    public bool _playSoundNextTick = true;
+    [SerializeField] private AudioClip _freezeSFX;
 
     //Frostbite related functions
     private IEnumerator HandleFrostbite()
     {
+        yield return new WaitForSeconds(1);
         _freezingSlider.maxValue = FrostbiteDeath;
         while (true)
         {
             _freezingSlider.gameObject.SetActive(_currentFrostbite == 0 ? false: true);
+            if(_currentFrostbite == 0) { _playSoundNextTick = true; }
+            if(_playSoundNextTick && _currentFrostbite > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position).transform.parent = transform.parent; _playSoundNextTick = false; }
             if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite--; }
             _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;

@@ -11,6 +11,8 @@ namespace Gameplay
         private GameObject _freezingPrefab;
 
         [SerializeField] private Mesh[] _possibleWindowMeshes;
+
+        [SerializeField] private AudioClip _windowBreakingClip;
         public override bool Entered(GameObject room)
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
@@ -26,6 +28,8 @@ namespace Gameplay
             {
                 window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
             }
+
+            Soundsystem.PlaySound(_windowBreakingClip,room.transform.position);
             return true;
         }
         public override bool Exited(GameObject room)

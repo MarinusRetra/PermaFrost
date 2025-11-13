@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,7 +32,10 @@ namespace Gameplay
         }
         public override bool Exited(GameObject room)
         {
-            Destroy(room.transform.Find("BoxHolder").Find("MusicBox(Clone)").gameObject);
+            Transform box = room.transform.Find("BoxHolder").Find("MusicBox(Clone)");
+            box.GetComponent<MusicBox>().SilenceBox(false);
+            Destroy(box.gameObject);
+            PlayerStatusEffects.Instance.ManageInsanityCauses("Music", true);
             return true;
         }
         public override bool Triggered(GameObject room)

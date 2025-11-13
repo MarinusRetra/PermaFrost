@@ -616,7 +616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &95597326
 Transform:
   m_ObjectHideFlags: 0
@@ -4333,23 +4333,23 @@ PrefabInstance:
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[0].Key
       value: 
-      objectReference: {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
+      objectReference: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[1].Key
       value: 
-      objectReference: {fileID: 11400000, guid: c45722bfbfe0e5346ac3a6597da584cc, type: 2}
+      objectReference: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[2].Key
       value: 
-      objectReference: {fileID: 11400000, guid: 83cac72470165be459c69f6c34ccbe23, type: 2}
+      objectReference: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[3].Key
       value: 
-      objectReference: {fileID: 11400000, guid: fef5fa737aa2b48478ed163201aee498, type: 2}
+      objectReference: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[4].Key
       value: 
-      objectReference: {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
+      objectReference: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hotbar.Array.data[0].Value
       value: 
@@ -4370,21 +4370,25 @@ PrefabInstance:
       propertyPath: _hotbar.Array.data[4].Value
       value: 
       objectReference: {fileID: 1541215199}
+    - target: {fileID: 1255865286293581571, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: _interactDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -137.182
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.44599998
+      value: 1.0999501
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -16.01
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalRotation.x
@@ -4392,7 +4396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2555212114544712263, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8909,6 +8913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Generation
   _rooms:
   - {fileID: 156139790384277241, guid: c860460426b35a649b0e048de0554371, type: 3}
+  - {fileID: 1716650124283320330, guid: 802c0da7637878741b44dde94e357cde, type: 3}
   _startRoom: {fileID: 1205754546425908704, guid: 87e56b15d4250084089bb219f686bdd7, type: 3}
   _endRoom: {fileID: 961721063309621672, guid: 1cb8f41e50bd8fd44bb612883df0f806, type: 3}
   _meshSurface: {fileID: 1461001086}

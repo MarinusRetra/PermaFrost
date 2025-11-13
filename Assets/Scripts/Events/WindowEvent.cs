@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Gameplay
@@ -7,6 +9,8 @@ namespace Gameplay
     {
         [SerializeField]
         private GameObject _freezingPrefab;
+
+        [SerializeField] private Mesh[] _possibleWindowMeshes;
         public override bool Entered(GameObject room)
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
@@ -14,7 +18,14 @@ namespace Gameplay
             _freeze.transform.localScale = new Vector3(3,1,0.85f);
             _freeze.transform.position = room.transform.position;
 
+            List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
+            possibleWindows.RemoveAt(0);
+
             //break windows visually
+            foreach(Transform window in possibleWindows)
+            {
+                window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
+            }
             return true;
         }
         public override bool Exited(GameObject room)

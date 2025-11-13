@@ -22,7 +22,7 @@ namespace Gameplay
             }
             _chosenSpot.name = "CHOSENBYALTAR";
             GameObject _altar = Instantiate(_altarPrefab);
-            _altar.transform.parent = room.transform;
+            _altar.transform.parent =_chosenSpot.transform;
             _altar.transform.position = _chosenSpot.position;
             _altar.transform.rotation = _chosenSpot.rotation;
             return true;

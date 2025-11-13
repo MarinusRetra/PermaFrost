@@ -13,7 +13,7 @@ namespace Gameplay
             GameObject _hotDude = Instantiate(_hotDudePrefab);
             _hotDude.transform.parent = room.transform.Find("Monsters");
             Transform _entry = room.transform.Find("Exit");
-            _hotDude.transform.position = new Vector3(_entry.position.x, _entry.position.y + 0.1f, _entry.position.z + 0.5f);
+            _hotDude.transform.position = new Vector3(_entry.position.x, _entry.position.y + 0.1f, _entry.position.z - 0.5f);
             _hotDude.GetComponent<NavMeshAgent>().enabled = true;
             return true;
         }

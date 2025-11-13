@@ -23,14 +23,15 @@ namespace Gameplay
             }
             _chosenSpot.name = "CHOSENBYBOX";
             GameObject _box = Instantiate(_musicBoxPrefab);
-            _box.transform.parent = room.transform;
+            _box.transform.parent = room.transform.Find("BoxHolder");
+            _box.transform.localScale = new Vector3(1, 1, 1);
             _box.transform.position = _chosenSpot.position;
             _box.transform.rotation = _chosenSpot.rotation;
             return true;
         }
         public override bool Exited(GameObject room)
         {
-            Destroy(room.transform.Find("MusicBox(Clone)").gameObject);
+            Destroy(room.transform.Find("BoxHolder").Find("MusicBox(Clone)").gameObject);
             return true;
         }
         public override bool Triggered(GameObject room)

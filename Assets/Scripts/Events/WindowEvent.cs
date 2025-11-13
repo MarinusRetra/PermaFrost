@@ -17,7 +17,7 @@ namespace Gameplay
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
             _freeze.transform.parent = room.transform;
-            _freeze.transform.localScale = new Vector3(3,1,0.85f);
+            _freeze.transform.localScale = new Vector3(3,1,1.75f);
             _freeze.transform.position = room.transform.position;
 
             List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
@@ -27,6 +27,7 @@ namespace Gameplay
             foreach(Transform window in possibleWindows)
             {
                 window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
+                window.localScale = new Vector3(1, 1, 1);
             }
 
             Soundsystem.PlaySound(_windowBreakingClip,room.transform.position);

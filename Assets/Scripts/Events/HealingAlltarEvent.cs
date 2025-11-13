@@ -22,14 +22,15 @@ namespace Gameplay
             }
             _chosenSpot.name = "CHOSENBYALTAR";
             GameObject _altar = Instantiate(_altarPrefab);
-            _altar.transform.parent =_chosenSpot.transform;
+            _altar.transform.parent = room.transform.Find("BoxHolder");
+            _altar.transform.localScale = new Vector3(1, 1, 1);
             _altar.transform.position = _chosenSpot.position;
             _altar.transform.rotation = _chosenSpot.rotation;
             return true;
         }
         public override bool Exited(GameObject room)
         {
-            Destroy(room.transform.Find("HealingAltar(Clone)").gameObject);
+            Destroy(room.transform.Find("BoxHolder").Find("HealingAltar(Clone)").gameObject);
             return true;
         }
         public override bool Triggered(GameObject room)

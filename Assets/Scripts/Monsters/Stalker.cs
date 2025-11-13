@@ -30,15 +30,15 @@ namespace Gameplay
         {
             _player = PlayerMonsterManager.Instance.transform;
             //Get the rooms corners
-            Vector3 _boundingCorner1 = CurrentRoom.transform.position - (CurrentRoom.transform.lossyScale / 2);
-            Vector3 _boundingCorner2 = CurrentRoom.transform.position + (CurrentRoom.transform.lossyScale / 2);
+            Vector3 _boundingCorner1 = CurrentRoom.transform.localPosition - (CurrentRoom.transform.localScale / 2);
+            Vector3 _boundingCorner2 = CurrentRoom.transform.localPosition + (CurrentRoom.transform.localScale / 2);
 
             _roomCorners = new Vector3[] { new Vector3(_boundingCorner1.x + _wallRadius, _boundingCorner1.y + _wallRadius, _boundingCorner1.z + _wallRadius), new Vector3(_boundingCorner2.x - _wallRadius, _boundingCorner2.y + _wallRadius, _boundingCorner2.z - _wallRadius) };
 
             transform.position = GetRandomRoomPosition();
             Soundsystem.PlaySound(_appearSound, transform.position);
             _currentState = StalkerStates.Watching;
-            moveRNG = Random.Range(-50, 100);
+            moveRNG = Random.Range(-75, 25);
             StartCoroutine(HandleBehaviour());
         }
 
@@ -48,7 +48,7 @@ namespace Gameplay
             Transform model = transform.GetChild(0);
             while (model.localPosition.y > 0 && !despawning)
             {
-                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.3f, model.localPosition.z);
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.45f, model.localPosition.z);
                 yield return new WaitForSeconds(0.05f);
             }
             GetComponent<Collider>().enabled = true;

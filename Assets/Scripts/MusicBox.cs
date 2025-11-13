@@ -19,10 +19,6 @@ namespace Gameplay
             SilenceBox();
             _playerEffects = PlayerStatusEffects.Instance;
         }
-        private void Update()
-        {
-            if (_playerEffects.transform.position.z > transform.position.z + 5) { SilenceBox(false); gameObject.SetActive(false); }
-        }
 
         public void SilenceBox(bool _startANew = true)
         {

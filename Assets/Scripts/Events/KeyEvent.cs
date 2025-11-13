@@ -16,7 +16,7 @@ namespace Gameplay
             List<Transform> _availableSpots = room.transform.Find("SpawnPoints").GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
-            Vector3 doorPos = room.transform.Find("Exit").position + new Vector3(0, 1, 0);
+            Vector3 doorPos = room.transform.Find("Exit").position + new Vector3(0, 1.4f, 0);
             GameObject door = Instantiate(_doorPrefab,doorPos, Quaternion.identity);
 
             GameObject newKey = Instantiate(_keyPrefab, randomLocation.position, Quaternion.identity);

@@ -38,19 +38,21 @@ namespace Gameplay
             _gameInput.UI.Enable();
             _gameInput.Gameplay.Disable();
         }
-
         // Gameplay Action Events
         public event Action<Vector2> MoveEvent;
         public event Action<Vector2> LookEvent;
         public event Action<float> NextPreviousEvent;
         public event Action<float> HotbarSelectEvent;
         public event Action UseEvent;
+        public event Action UseEventCancelled;
         public event Action CrouchEvent;
         public event Action CrouchCancelEvent;
         public event Action InteractEvent;
         public event Action SprintEvent;
         public event Action SprintCancelEvent;
         public event Action PauseEvent;
+        public event Action DropEvent;
+        public event Action LanternEvent;
 
         // UI Action Events
         public event Action<Vector2> NavigateEvent;
@@ -59,16 +61,21 @@ namespace Gameplay
         public event Action CancelEvent;
         public event Action ClickEvent;
         public event Action SubmitEvent;
-        public event Action LanternEvent;
-        public event Action DropEvent;
 
-  
+
         // Gameplay Actions
         public void OnUse(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
             {
                 UseEvent?.Invoke();
+            }
+        }
+        public void OnUseCancelled(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                UseEventCancelled?.Invoke();
             }
         }
 
@@ -91,12 +98,6 @@ namespace Gameplay
                 PauseEvent?.Invoke();
                 SetUIActions();
             }
-        }
-
-        public void KillPause()
-        {
-            PauseEvent = null;
-            ResumeEvent = null;
         }
 
         public void OnHotbarSelect(InputAction.CallbackContext context)

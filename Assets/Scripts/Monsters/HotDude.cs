@@ -13,12 +13,15 @@ namespace Gameplay
 
         [SerializeField] private NavMeshAgent _agent;
 
+        private ParticleSystem _particles;
+
         void Start()
         {
             //Fetch the player
             _player = FindAnyObjectByType<PlayerHealth>().transform;
 
             _agent = GetComponent<NavMeshAgent>();
+            _particles = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
 
             StartCoroutine(HandleMovement());
         }
@@ -87,6 +90,7 @@ namespace Gameplay
                 bool doneFreezing = false;
                 _currentState = hotStates.Stunned;
                 _agent.isStopped = true;
+                _particles.Stop();
                 while (!doneFreezing)
                 {
                     yield return new WaitForSeconds(0.2f);
@@ -114,6 +118,7 @@ namespace Gameplay
             _currentState = hotStates.Agressive;
             _agent.speed = 3;
             _isStunning = false;
+            _particles.Play();
 
         }
 

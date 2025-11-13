@@ -15,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
 
     private Camera _cam;
     [SerializeField]private GameObject _deathUI;
+    [SerializeField] private GameObject _hitUI;
     [SerializeField] private InputReader _reader;
 
     private void Start()
@@ -45,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         }
         
         _isVunerable = true;
+        _hitUI.SetActive(true);
 
         //Make sure the player doesnt get multihit by the enemies
         _damageInvincible = true;
@@ -68,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
         if (_healInvincible) yield break;
 
         _isVunerable = false;
+        _hitUI.SetActive(false);
 
         _healInvincible = true;
         yield return new WaitForSeconds(HealInvincibility);

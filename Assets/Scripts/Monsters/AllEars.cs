@@ -28,6 +28,8 @@ namespace Gameplay
 
         private bool _spawning = true;
 
+        [SerializeField] private AudioClip _aggroSound;
+
         void Start()
         {
             //Fetch the player
@@ -145,12 +147,25 @@ namespace Gameplay
             _agent.speed = 1;
         }
 
+        private bool _canPlaySound = true;
         public override void Aggro(Vector3 location)
         {
             if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y || _spawning) return;
             _currentState = earStates.Agressive;
             _agent.destination = new Vector3(location.x, 3.08f, location.z);
             _agent.speed = 5;
+            if (_canPlaySound)
+            {
+                Soundsystem.PlaySound(_aggroSound, transform.position);
+                StartCoroutine(SoundCooldown());
+            }
+        }
+
+        public IEnumerator SoundCooldown()
+        {
+            _canPlaySound = false;
+            yield return new WaitForSeconds(2);
+            _canPlaySound = true;
         }
 
         public override void DestroyMonster()

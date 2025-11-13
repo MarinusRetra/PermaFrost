@@ -15,6 +15,9 @@ namespace Gameplay
 
         private ParticleSystem _particles;
 
+        [SerializeField] private AudioClip _stunSound;
+        [SerializeField] private AudioClip _unstunSound;
+
         void Start()
         {
             //Fetch the player
@@ -91,6 +94,7 @@ namespace Gameplay
                 _currentState = hotStates.Stunned;
                 _agent.isStopped = true;
                 _particles.Stop();
+                Soundsystem.PlaySound(_stunSound, transform.position);
                 while (!doneFreezing)
                 {
                     yield return new WaitForSeconds(0.2f);
@@ -119,6 +123,7 @@ namespace Gameplay
             _agent.speed = 3;
             _isStunning = false;
             _particles.Play();
+            Soundsystem.PlaySound(_unstunSound, transform.position);
 
         }
 

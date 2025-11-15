@@ -1,5 +1,3 @@
-using System.Collections;
-using Controls;
 using UnityEngine;
 
 namespace Gameplay
@@ -7,50 +5,36 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "Item/Lockpick")]
     public class Lockpick : InventoryItem
     {
-        private bool _cancelledLockpicking = false;
-        private float _lockPickingTime = 0;
-        private float _lockPickFinishTime = 4;
+        [SerializeField] private float _lockPickFinishTime = 4f;
+        [SerializeField] private InputReader _input;
+        [SerializeField] private GameObject _lookPickPrefab;
+        private GameObject _currentLookPickInstance;
         private GameObject lookinAt;
-        private PlayerController _controller;
 
         public override bool Use()
         {
-            _cancelledLockpicking = false;
-            _controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
             lookinAt = Camera.main.GetComponent<Interactor>().hit.collider?.gameObject;
             if (lookinAt && lookinAt.CompareTag("Door"))
             {
-                _controller._input.UseEventCancelled += OnLeftClickRelease;
-                _controller.StartCoroutine(Lockpicking());
+                StartTimer(_lockPickFinishTime);
+                _currentLookPickInstance = Instantiate(_lookPickPrefab);
+                _input.CanModifyHotbar = false;
             }
             return false;
         }
-        IEnumerator Lockpicking()
+        public override void UseCancelled()
         {
-            while (!_cancelledLockpicking)
-            {
-                yield return new WaitForSeconds(0.1f);
-                _lockPickingTime += 0.1f;
-                if (_lockPickingTime >= _lockPickFinishTime)
-                {
-                    Destroy(lookinAt);
-                    break;
-                }
-            }
+            base.UseCancelled();
+            Destroy(_currentLookPickInstance);
+            _input.CanModifyHotbar = true;
         }
-        private void OnLeftClickRelease()
-        {
-            _lockPickingTime = 0;
-            _cancelledLockpicking = true;
-        }
-        void OnDestroy()
-        {
-            _controller._input.UseEventCancelled -= OnLeftClickRelease;
 
-        }
-        void OnDisable()
+        public override void CompleteTimer()
         {
-            _controller._input.UseEventCancelled -= OnLeftClickRelease;
+            Destroy(lookinAt);
+            Destroy(_currentLookPickInstance);
+            Camera.main.GetComponentInParent<PlayerInventory>().RemoveSelectedSlot();
+            _input.CanModifyHotbar = true;
         }
     }
 }

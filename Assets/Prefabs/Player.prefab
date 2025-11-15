@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 4741671994732222255}
   - component: {fileID: 4605853214314879402}
   - component: {fileID: 2481520789753704852}
+  - component: {fileID: 1058295031561131540}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -996,10 +997,12 @@ MonoBehaviour:
   CrouchSpeed: 3
   BaseSpeed: 4
   SprintSpeed: 7
-  _totalStamina: 35
+  TotalStamina: 10
+  CurrentStamina: 10
   _sensitivity: 0.4
   _crouchCameraHeight: 0
   _standCameraHeight: 0.5
+  SprintBehav: {fileID: 0}
 --- !u!114 &4741671994732222255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1020,10 @@ MonoBehaviour:
   InsanityDeath: 20
   _insanityCauses: []
   FrostbiteDeath: 30
+  _currentFrostbite: 0
   _frostbiteCauses: []
+  _playSoundNextTick: 1
+  _freezeSFX: {fileID: 0}
 --- !u!114 &4605853214314879402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,6 +1039,7 @@ MonoBehaviour:
   DamageInvincibility: 0.5
   HealInvincibility: 3
   _deathUI: {fileID: 0}
+  _hitUI: {fileID: 0}
   _reader: {fileID: 0}
 --- !u!114 &2481520789753704852
 MonoBehaviour:
@@ -1050,6 +1057,19 @@ MonoBehaviour:
   InSideroom: 0
   SelectedCamera: {fileID: 5990134823720351312}
   OverridePlayerSounds: 0
+--- !u!114 &1058295031561131540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188160094882526209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c09f44bd45616e48b2bf8a221a3d660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimerListener
+  _inventoryTimer: {fileID: 0}
 --- !u!1001 &4644713824374859465
 PrefabInstance:
   m_ObjectHideFlags: 0

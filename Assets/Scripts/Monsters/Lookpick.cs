@@ -56,7 +56,7 @@ namespace Gameplay
             _collider.enabled = true;
 
             Vector3 _playerPos = _pmm.transform.position;
-            _transform.position = new Vector3(_playerPos.x,_playerPos.y, _playerPos.z - 14);
+            _transform.position = new Vector3(_playerPos.x,_playerPos.y-1, _playerPos.z - 14);
 
             _currentState = lookStates.Moving;
         }

@@ -7,7 +7,7 @@
   - Layers:
     - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand
 - Active game object:
-  - Name: Room1-Edited
-  - Tag: Untagged
-  - Layer: Default
+  - Name: Lookpick
+  - Tag: Enemy
+  - Layer: Enemy
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

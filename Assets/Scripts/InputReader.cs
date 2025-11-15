@@ -8,7 +8,8 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "inputReader")]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
     {
-        private Controls.GameInput _gameInput;
+        private GameInput _gameInput;
+        public bool CanModifyHotbar = true;
 
         private void OnEnable()
         {
@@ -70,10 +71,7 @@ namespace Gameplay
             {
                 UseEvent?.Invoke();
             }
-        }
-        public void OnUseCancelled(InputAction.CallbackContext context)
-        {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Canceled)
             {
                 UseEventCancelled?.Invoke();
             }
@@ -87,7 +85,7 @@ namespace Gameplay
             }
             else if (context.phase == InputActionPhase.Canceled)
             {
-                CrouchCancelEvent.Invoke();
+                CrouchCancelEvent?.Invoke();
             }
         }
 
@@ -102,7 +100,7 @@ namespace Gameplay
 
         public void OnHotbarSelect(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Performed && CanModifyHotbar)
             {
                 HotbarSelectEvent?.Invoke(context.ReadValue<float>());
             }
@@ -148,7 +146,7 @@ namespace Gameplay
         }
         public void OnNextPrevious(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Performed && CanModifyHotbar)
             {
                 NextPreviousEvent?.Invoke(context.ReadValue<float>());
             }

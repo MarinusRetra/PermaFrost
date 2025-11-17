@@ -11,11 +11,11 @@ namespace Gameplay
         [SerializeField] private Transform _transform;
         [SerializeField] private float _moveSpeed = 0.2f;
         [SerializeField] private float _returnSpeed = -0.6f;
-
         private enum lookStates { Moving, Idle }
         private lookStates _currentState = lookStates.Idle;
         private void Start()
         {
+
             _collider = GetComponent<Collider>();
             _animator = GetComponentInParent<Animator>();
             _pmm = PlayerMonsterManager.Instance;
@@ -37,17 +37,19 @@ namespace Gameplay
                         if (PlayerMonsterManager.IsPlayerLookingAtObj(_collider))
                         {
                             _animator.SetFloat("direction", _returnSpeed);
-                            print("BBBBBBBBBBBB");
+                        }
+                        else if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+                        {
+                            _animator.SetFloat("direction", _moveSpeed);
                         }
                         else
                         {
-                            _animator.SetFloat("direction", _moveSpeed);
-                            print("AAAAAAAAAAAAAA");
+                            _animator.SetFloat("direction", 0);
                         }
                         continue;
                     default:
                         yield return new WaitForSeconds(0.1f);
-                        break;
+                    break;
                 }
             }
         }
@@ -56,7 +58,7 @@ namespace Gameplay
             _collider.enabled = true;
 
             Vector3 _playerPos = _pmm.transform.position;
-            _transform.position = new Vector3(_playerPos.x,_playerPos.y-1, _playerPos.z - 14);
+            _transform.position = new Vector3(_playerPos.x,_playerPos.y-1, _playerPos.z - 10);
 
             _currentState = lookStates.Moving;
         }
@@ -64,9 +66,6 @@ namespace Gameplay
         public override void Deaggro()
         {
             _animator.Play("Move", -1, 0);
-            print("SWAG");
-
-            _currentState = lookStates.Moving;
         }
     }
 }

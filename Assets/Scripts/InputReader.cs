@@ -8,7 +8,8 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "inputReader")]
     public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
     {
-        private Controls.GameInput _gameInput;
+        private GameInput _gameInput;
+        public bool CanModifyHotbar = true;
 
         private void OnEnable()
         {
@@ -38,19 +39,21 @@ namespace Gameplay
             _gameInput.UI.Enable();
             _gameInput.Gameplay.Disable();
         }
-
         // Gameplay Action Events
         public event Action<Vector2> MoveEvent;
         public event Action<Vector2> LookEvent;
         public event Action<float> NextPreviousEvent;
         public event Action<float> HotbarSelectEvent;
         public event Action UseEvent;
+        public event Action UseEventCancelled;
         public event Action CrouchEvent;
         public event Action CrouchCancelEvent;
         public event Action InteractEvent;
         public event Action SprintEvent;
         public event Action SprintCancelEvent;
         public event Action PauseEvent;
+        public event Action DropEvent;
+        public event Action LanternEvent;
 
         // UI Action Events
         public event Action<Vector2> NavigateEvent;
@@ -59,16 +62,18 @@ namespace Gameplay
         public event Action CancelEvent;
         public event Action ClickEvent;
         public event Action SubmitEvent;
-        public event Action LanternEvent;
-        public event Action DropEvent;
 
-  
+
         // Gameplay Actions
         public void OnUse(InputAction.CallbackContext context)
         {
             if (context.phase == InputActionPhase.Performed)
             {
                 UseEvent?.Invoke();
+            }
+            if (context.phase == InputActionPhase.Canceled)
+            {
+                UseEventCancelled?.Invoke();
             }
         }
 
@@ -80,7 +85,7 @@ namespace Gameplay
             }
             else if (context.phase == InputActionPhase.Canceled)
             {
-                CrouchCancelEvent.Invoke();
+                CrouchCancelEvent?.Invoke();
             }
         }
 
@@ -93,15 +98,9 @@ namespace Gameplay
             }
         }
 
-        public void KillPause()
-        {
-            PauseEvent = null;
-            ResumeEvent = null;
-        }
-
         public void OnHotbarSelect(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Performed && CanModifyHotbar)
             {
                 HotbarSelectEvent?.Invoke(context.ReadValue<float>());
             }
@@ -147,7 +146,7 @@ namespace Gameplay
         }
         public void OnNextPrevious(InputAction.CallbackContext context)
         {
-            if (context.phase == InputActionPhase.Performed)
+            if (context.phase == InputActionPhase.Performed && CanModifyHotbar)
             {
                 NextPreviousEvent?.Invoke(context.ReadValue<float>());
             }

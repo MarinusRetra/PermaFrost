@@ -10,7 +10,7 @@ namespace Gameplay
     public class PlayerController : MonoBehaviour
     {
         [Header("Movement values")]
-        [SerializeField] private InputReader _input;
+        [SerializeField] public InputReader _input;
 		public float CrouchSpeed = 3;
 		public float BaseSpeed = 4;
 

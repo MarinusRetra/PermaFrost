@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -34,7 +33,8 @@ namespace Gameplay
             _input.HotbarSelectEvent += HandleHotbarSelect;
             _input.NextPreviousEvent += HandleHotbarNav;
             _input.UseEvent += HandleUse;
-            _input.DropEvent += DropItem;
+            _input.DropEvent += HandleDrop;
+            _input.UseEventCancelled += HandleCancelUse;
         }
 
         void Start()
@@ -95,6 +95,11 @@ namespace Gameplay
             }
         }
 
+        private void HandleCancelUse()
+        {
+            _selectedHotbarItem.Key.UseCancelled();
+        }
+
         /// <summary>
         /// Adds the incoming item to the hotbar if room exists by grabbing the lowest ui element from the removed elements and adding it.
         /// </summary>
@@ -110,7 +115,7 @@ namespace Gameplay
             _hotbar = _hotbar.OrderBy(x => x.Value.gameObject.name[^1]).ToList();
         }
 
-        public void DropItem()
+        public void HandleDrop()
         {
             try
             {
@@ -124,7 +129,7 @@ namespace Gameplay
         /// <summary>
         /// Clears out all the slots with an EmptyItem inside.
         /// </summary>
-        void RemoveSlot(int indexIn)
+        void  RemoveSlot(int indexIn)
         {
             _hotbar[indexIn].Value.localScale = _normalSlotSize;
             RemovedHotbarElements.Add(_hotbar[indexIn]);
@@ -160,14 +165,16 @@ namespace Gameplay
             _input.HotbarSelectEvent -= HandleHotbarSelect;
             _input.NextPreviousEvent -= HandleHotbarNav;
             _input.UseEvent -= HandleUse;
-            _input.DropEvent -= DropItem;
+            _input.DropEvent -= HandleDrop;
+            _input.UseEventCancelled -= HandleCancelUse;
         }
         void OnDisable()
         {
-            _input.DropEvent -= DropItem;
+            _input.DropEvent -= HandleDrop;
             _input.HotbarSelectEvent -= HandleHotbarSelect;
             _input.NextPreviousEvent -= HandleHotbarNav;
             _input.UseEvent -= HandleUse;
+            _input.UseEventCancelled -= HandleCancelUse;
         }
 	}
 

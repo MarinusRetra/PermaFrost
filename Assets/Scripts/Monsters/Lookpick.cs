@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Gameplay
 {
@@ -11,11 +13,14 @@ namespace Gameplay
         [SerializeField] private Transform _transform;
         [SerializeField] private float _moveSpeed = 0.2f;
         [SerializeField] private float _returnSpeed = -0.6f;
-        private enum lookStates { Moving, Idle }
-        private lookStates _currentState = lookStates.Idle;
+        [SerializeField] VolumeProfile _postProcessing;
+        private Vignette vignette;
+        private enum LookStates { Moving, Idle }
+        private LookStates _currentState = LookStates.Idle;
         private void Start()
         {
-
+            _postProcessing.TryGet(out vignette);
+            vignette.intensity.overrideState = true;
             _collider = GetComponent<Collider>();
             _animator = GetComponentInParent<Animator>();
             _pmm = PlayerMonsterManager.Instance;
@@ -32,7 +37,7 @@ namespace Gameplay
             {
                 switch (_currentState)
                 {
-                    case lookStates.Moving:
+                    case LookStates.Moving:
                         yield return new WaitForSeconds(0.05f);
                         if (PlayerMonsterManager.IsPlayerLookingAtObj(_collider))
                         {
@@ -46,6 +51,7 @@ namespace Gameplay
                         {
                             _animator.SetFloat("direction", 0);
                         }
+                        vignette.intensity.value = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime + 0.2f - 0.2f;
                         continue;
                     default:
                         yield return new WaitForSeconds(0.1f);
@@ -60,12 +66,19 @@ namespace Gameplay
             Vector3 _playerPos = _pmm.transform.position;
             _transform.position = new Vector3(_playerPos.x,_playerPos.y-1, _playerPos.z - 10);
 
-            _currentState = lookStates.Moving;
+            _currentState = LookStates.Moving;
         }
 
         public override void Deaggro()
         {
             _animator.Play("Move", -1, 0);
+            vignette.intensity.value = 0.2f;
+        }
+
+        void OnDestroy()
+        {
+            vignette.intensity.value = 0.2f;
+            vignette.intensity.overrideState = false;
         }
     }
 }

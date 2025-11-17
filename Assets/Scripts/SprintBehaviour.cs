@@ -11,8 +11,7 @@ public class SprintBehaviour : MonoBehaviour
     }
     public void UpdateSprintBar(int _stamina)
     {
-        if (_bar == null) return;
-        _bar.transform.parent.gameObject.SetActive(_stamina == _max ? false : true);
+        _bar.transform.parent.gameObject.SetActive(_stamina != _max);
 
         _stamina = Mathf.Clamp(_stamina, 0, _max);
         float normalized = _stamina / (float)_max;

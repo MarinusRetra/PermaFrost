@@ -25,6 +25,7 @@ public class TimerListener : MonoBehaviour
     {
         _currentTimerRoutine = StartCoroutine(TimerCoroutine(_timeIn));
         _maxTime = _timeIn;
+        _bar.transform.parent.gameObject.SetActive(true);
     }
 
     private void HandleCancelTimer()
@@ -39,18 +40,27 @@ public class TimerListener : MonoBehaviour
             _lookinAt = Camera.main.GetComponent<Gameplay.Interactor>().hit.collider?.gameObject;
             if (_lookinAt && _lookinAt.CompareTag("Door"))
             {
-              i += 0.2f;
-              print(i);
+              i += 0.3f;
             }
             else if(i >= 0)
             {
               i -= 0.1f;
-              print(i);
             }
             yield return _waitForSecondsCached;
             UpdateLockPickbar(i);
         }
         _inventoryTimer.CompleteTimer();
+        _bar.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void UpdateLockPickbar(float _progress)
+    {
+        _progress = Mathf.Clamp(_progress, 0, _maxTime);
+        float normalized = _progress / _maxTime;
+
+        Vector3 scale = _bar.transform.localScale;
+        scale.x = normalized;
+        _bar.transform.localScale = scale;
     }
 
     private void OnDisable()
@@ -62,15 +72,5 @@ public class TimerListener : MonoBehaviour
     {
         _inventoryTimer.StartTimerEvent -= HandleStartTimer;
         _inventoryTimer.CancelledTimerEvent -= HandleCancelTimer;
-    }
-
-    public void UpdateLockPickbar(float progress)
-    {
-        progress = Mathf.Clamp(progress, 0, _maxTime);
-        float normalized = progress / _maxTime;
-
-        Vector3 scale = _bar.transform.localScale;
-        scale.x = normalized;
-        _bar.transform.localScale = scale;
     }
 }

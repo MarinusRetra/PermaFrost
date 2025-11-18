@@ -11,6 +11,8 @@ namespace Gameplay
 
         [SerializeField] private AudioClip _dashingClip;
 
+        [SerializeField] private EventClass freezingEvent;
+
         private bool _hasStarted = false;
         private void Start()
         {
@@ -24,7 +26,9 @@ namespace Gameplay
         private IEnumerator StartAttack()
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
-            yield return new WaitForSeconds(Random.Range(7f,11f));
+
+            //makes shadowman appear faster if the room also has freezing, so the player isnt guarenteed to take too much freezing
+            yield return new WaitForSeconds(CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 11f) : Random.Range(6f, 8.5f));
             GameObject _noises = Soundsystem.PlaySound(_dashingClip, transform.position, true);
             _noises.transform.parent = transform;
             _hasStarted = true;

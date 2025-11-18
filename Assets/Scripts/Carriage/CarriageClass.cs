@@ -19,7 +19,7 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private bool _triggerTriggered;
 
     private bool playerInside = false;
-    [SerializeField] private List<EventClass> _selectedEventClasses;
+    public List<EventClass> _selectedEventClasses;
     [SerializeField] private int _amountOfEvents;
     [SerializeField] private int _maxAmountOfItems = 1;
 

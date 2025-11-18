@@ -807,8 +807,8 @@ GameObject:
   - component: {fileID: 4838782456818296922}
   - component: {fileID: 2234687034363745608}
   - component: {fileID: 2174178221799526684}
-  m_Layer: 0
-  m_Name: Room2
+  m_Layer: 10
+  m_Name: Room2-Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -931,23 +931,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b998522cee1a6c4a8969a4f8b59cb1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
-  entryPoint: {fileID: 514055829910928460}
-  exitPoint: {fileID: 2843110173262804061}
-  mainObject: {fileID: 4651034862574250094}
-  spawnPoint: {fileID: 0}
-  spawnPoints:
-  - {fileID: 3507929200996137785}
-  - {fileID: 9102338462993060337}
-  - {fileID: 6937178581931307215}
-  allowedDrops:
-  - {fileID: 11400000, guid: a3a01cd41237f784f9520fe8e518d59c, type: 2}
-  - {fileID: 11400000, guid: 6ced19d9ab4ae1f448e10b1634285be5, type: 2}
-  allowedEvents: []
+  EntryPoint: {fileID: 0}
+  ExitPoint: {fileID: 0}
+  MainObject: {fileID: 0}
+  SpawnPoint: {fileID: 0}
+  _spawnPoints: []
+  _allowedDrops: []
+  _allowedEvents: []
   generationClass: {fileID: 0}
-  EnterTriggered: 0
-  ExitTriggered: 0
-  TriggerTriggered: 0
-  droppedItemPrefab: {fileID: 1186667652792004298, guid: f5eaf6f82704869448364f573fb7f646, type: 3}
+  _enterTriggered: 0
+  _exitTriggered: 0
+  _triggerTriggered: 0
+  _selectedEventClasses: []
+  _amountOfEvents: 0
+  _maxAmountOfItems: 1
 --- !u!65 &2174178221799526684
 BoxCollider:
   m_ObjectHideFlags: 0

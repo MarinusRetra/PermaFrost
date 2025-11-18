@@ -19,8 +19,7 @@ public class Generation : MonoBehaviour
 
     void Start()
     {
-        GenerateRooms();
-        StartCoroutine(GenerateNavmesh());
+        StartCoroutine(GenerateRooms());
     }
 
     void PositionGeneratedRoom(GameObject room, GameObject previousRoom)
@@ -42,8 +41,9 @@ public class Generation : MonoBehaviour
         currentCarriage.SpawnItems();
     }
 
-    void GenerateRooms()
+    IEnumerator GenerateRooms()
     {
+        yield return new WaitForSeconds(0.3f);
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
 
@@ -52,7 +52,7 @@ public class Generation : MonoBehaviour
             player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().SpawnPoint.transform.position;
             player.SetActive(true);
         }
-
+        yield return new WaitForSeconds(1);
         for (int i = 0; i < _amountOfRooms; i++)
         {
             GameObject randomRoom = Instantiate(_rooms[Random.Range(0, _rooms.Count)]);
@@ -61,11 +61,14 @@ public class Generation : MonoBehaviour
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;
+            yield return new WaitForSeconds(0.3f);
         }
 
         GameObject endRoom = Instantiate(_endRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
+        yield return new WaitForSeconds(10f);
+        StartCoroutine(GenerateNavmesh());
     }
 
     private IEnumerator GenerateNavmesh()

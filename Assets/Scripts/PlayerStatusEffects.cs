@@ -38,7 +38,7 @@ public class PlayerStatusEffects : MonoBehaviour
         _insanitySlider.maxValue = InsanityDeath;
         while (true)
         {
-            _insanitySlider.gameObject.SetActive(_currentInsanity == 0 ? false : true);
+            _insanitySlider.gameObject.SetActive(_currentInsanity <= 0 ? false : true);
             if (_insanityCauses.Count > 0) { _currentInsanity += 2; }
             if (_insanityCauses.Count == 0 && _currentInsanity > 0) { _currentInsanity -= 1; }
             _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
@@ -60,7 +60,7 @@ public class PlayerStatusEffects : MonoBehaviour
     public void AddInstantInsanity(int instantAmount)
     {
         _currentInsanity += instantAmount;
-        if(_currentInsanity < 0) { _currentInsanity = 0; }
+        if(_currentInsanity < -InsanityDeath) { _currentInsanity = -InsanityDeath; }
     }
 
     //Frostbite related variables
@@ -79,11 +79,11 @@ public class PlayerStatusEffects : MonoBehaviour
         _freezingSlider.maxValue = FrostbiteDeath;
         while (true)
         {
-            _freezingSlider.gameObject.SetActive(_currentFrostbite == 0 ? false: true);
+            _freezingSlider.gameObject.SetActive(_currentFrostbite <= 0 ? false: true);
             if(_currentFrostbite == 0) { _playSoundNextTick = true; }
             if(_playSoundNextTick && _currentFrostbite > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position).transform.parent = transform.parent; _playSoundNextTick = false; }
             if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
-            if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite--; }
+            if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite -= 3; }
             _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
 
             if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }

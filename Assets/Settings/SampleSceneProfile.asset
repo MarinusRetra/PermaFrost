@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   skipIterations:
     m_OverrideState: 1
     m_Value: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5e1dc532bcb41949b58bc4f2abfbb7e, type: 3}
   m_Name: LensDistortion
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LensDistortion
-  active: 1
+  active: 0
   intensity:
     m_OverrideState: 1
     m_Value: -0.1
@@ -231,7 +231,7 @@ MonoBehaviour:
   active: 1
   temperature:
     m_OverrideState: 1
-    m_Value: -3
+    m_Value: -5
   tint:
     m_OverrideState: 1
     m_Value: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ShadowsMidtonesHighlights
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -547,7 +547,7 @@ MonoBehaviour:
     m_Value: 10
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 100
   gaussianMaxRadius:
     m_OverrideState: 1
     m_Value: 1.5
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb60a22f311433c4c962b888d1393f88, type: 3}
   m_Name: PaniniProjection
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.PaniniProjection
-  active: 1
+  active: 0
   distance:
     m_OverrideState: 1
     m_Value: 1

@@ -15,18 +15,13 @@ namespace Gameplay
         void Start()
         {
             _input.InteractEvent += HandleInteract;
-            _input.LookEvent += PlayerRaycastFromLook;
             _cameraTransform = Camera.main.transform;
-        }
-
-        private void PlayerRaycastFromLook(Vector2 mousepos)
-        {
-            ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-            Physics.Raycast(ray, out hit, _interactDistance);
         }
 
         void FixedUpdate()
         {
+            ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+            Physics.Raycast(ray, out hit, _interactDistance);
             hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
         /// <summary>
@@ -40,13 +35,11 @@ namespace Gameplay
         void OnDestroy()
         {
             _input.InteractEvent -= HandleInteract;
-            _input.LookEvent -= PlayerRaycastFromLook;
 
         }
         void OnDisable()
         {
             _input.InteractEvent -= HandleInteract;
-            _input.LookEvent -= PlayerRaycastFromLook;
         }
     }
 }

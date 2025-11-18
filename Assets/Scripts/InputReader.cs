@@ -13,6 +13,8 @@ namespace Gameplay
 
         private void OnEnable()
         {
+            CanModifyHotbar = true;
+
             if (_gameInput == null)
             {
                 _gameInput = new GameInput();

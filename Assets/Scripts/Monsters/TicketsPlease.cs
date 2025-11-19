@@ -23,7 +23,7 @@ namespace Gameplay
 
         private void Update()
         {
-            if (_agent.remainingDistance < 0.1f && !_isChasing)
+            if (_agent.isOnNavMesh && _agent?.remainingDistance < 0.1f && !_isChasing)
             {
                 _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z - 20);
                 if (!_reachedEnd)

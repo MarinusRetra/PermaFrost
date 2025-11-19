@@ -10,11 +10,11 @@ namespace Gameplay
         private hotStates _currentState = hotStates.Agressive;
 
         private Transform _player;
-
         [SerializeField] private NavMeshAgent _agent;
 
         private ParticleSystem _particles;
 
+        [Header("Sounds")]
         [SerializeField] private AudioClip _stunSound;
         [SerializeField] private AudioClip _unstunSound;
 
@@ -35,11 +35,12 @@ namespace Gameplay
             {
                 switch (_currentState)
                 {
+                    //HotDude will always chase the player unless its stunned
                     case hotStates.Agressive:
-                        //Only way to stop em is by freezing em.
                         _agent.destination = _player.position;
                         yield return new WaitForSeconds(0.1f);
                         continue;
+                    //Wait for 5 seconds before starting again
                     case hotStates.Idle:
                         yield return new WaitForSeconds(5);
                         _currentState = hotStates.Agressive;
@@ -51,12 +52,12 @@ namespace Gameplay
             }
         }
 
-        private bool _isStunning = false;
+        private bool _isBeingStunned = false;
         public void Stun()
         {
-            if (!_isStunning)
+            if (!_isBeingStunned)
             {
-                _isStunning = true;
+                _isBeingStunned = true;
                 StartCoroutine(StunWTime());
             }
         }
@@ -71,7 +72,7 @@ namespace Gameplay
                 yield return new WaitForSeconds(0.2f);
 
                 //double check that there is still a lantern in the area
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern._range);
+                Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern.Range);
                 bool _stillOn = false;
                 foreach (var hitCollider in hitColliders)
                 {
@@ -121,12 +122,13 @@ namespace Gameplay
             _agent.isStopped = false;
             _currentState = hotStates.Agressive;
             _agent.speed = 3;
-            _isStunning = false;
+            _isBeingStunned = false;
             _particles.Play();
             Soundsystem.PlaySound(_unstunSound, transform.position);
 
         }
 
+        //on hit, stun for 5 seconds
         public override void Deaggro()
         {
             _currentState = hotStates.Idle;

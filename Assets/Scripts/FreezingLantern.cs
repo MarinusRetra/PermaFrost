@@ -8,15 +8,16 @@ namespace Gameplay
     {
         [SerializeField] private InputReader _input;
         public bool LanternOn;
-        public static float _range = 10;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        //needs to be static for FireGuy
+        public static float Range = 10;
         void Start()
         {
             _input.LanternEvent += ChangeLanternState;
             StartCoroutine(HandleLantern());
         }
 
-        private void ChangeLanternState()
+        public void ChangeLanternState()
         {
             LanternOn = !LanternOn;
             for(int i = 0; i < transform.childCount; i++)
@@ -26,8 +27,8 @@ namespace Gameplay
             PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", !LanternOn);
         }
 
-        public List<GameObject> _objectsInAreaRightNow = new List<GameObject>();
-        public List<GameObject> _objectsInAreaLastCheck = new List<GameObject>();
+        private List<GameObject> _objectsInAreaRightNow = new List<GameObject>();
+        private List<GameObject> _objectsInAreaLastCheck = new List<GameObject>();
         private IEnumerator HandleLantern()
         {
             yield return new WaitForSeconds(1);
@@ -38,7 +39,7 @@ namespace Gameplay
                     _objectsInAreaRightNow.Clear();
 
                     //Get all the objects in the area
-                    Collider[] hitColliders = Physics.OverlapSphere(transform.position, _range);
+                    Collider[] hitColliders = Physics.OverlapSphere(transform.position, Range);
                     foreach (var hitCollider in hitColliders)
                     {
                         if (_objectsInAreaRightNow.Contains(hitCollider.gameObject)) continue;
@@ -66,21 +67,6 @@ namespace Gameplay
                     PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
                 }
                 yield return new WaitForSeconds(0.1f);
-            }
-        }
-
-        public void ChangeLanternState(bool on)
-        {
-            if (on)
-            {
-                LanternOn = true;
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", false);
-                //turn on lantern idk
-            }
-            else
-            {
-                LanternOn= false;
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
             }
         }
 

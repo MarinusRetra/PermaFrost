@@ -6,20 +6,21 @@ namespace Gameplay
     public class MusicBox : MonoBehaviour
     {
         private MeshRenderer outlineVisual;
-        [SerializeField] private Vector2 boxRechargeTimes;
+        [SerializeField] private Vector2 _boxRechargeTimes;
         private PlayerStatusEffects _playerEffects;
 
-        public GameObject _currentAudioSource;
+        [Header("Sound")]
+        private GameObject _currentAudioSource;
         [SerializeField] private AudioClip _chargeClip;
         [SerializeField] private AudioClip _musicClip;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _playerEffects = PlayerStatusEffects.Instance;
             outlineVisual = GetComponent<MeshRenderer>();
             SilenceBox();
-            _playerEffects = PlayerStatusEffects.Instance;
         }
 
+        //Turn off the box, with all sound stopping
         public void SilenceBox(bool _startANew = true)
         {
             if (!outlineVisual.enabled) return;
@@ -32,6 +33,7 @@ namespace Gameplay
             }
         }
 
+        //Turn on box
         public void StartBox()
         {
             if (!outlineVisual.enabled) return;
@@ -44,7 +46,7 @@ namespace Gameplay
             //let player status effects load
             yield return new WaitForSeconds(0.1f);
             _playerEffects.ManageInsanityCauses("Music", true);
-            yield return new WaitForSeconds(Random.Range(boxRechargeTimes.x,boxRechargeTimes.y));
+            yield return new WaitForSeconds(Random.Range(_boxRechargeTimes.x,_boxRechargeTimes.y));
             outlineVisual.enabled = true;
             _currentAudioSource = Soundsystem.PlaySound(_chargeClip, transform.position);
             //Charge sfx

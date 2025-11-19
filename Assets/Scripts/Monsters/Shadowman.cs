@@ -29,14 +29,14 @@ namespace Gameplay
 
             //makes shadowman appear faster if the room also has freezing, so the player isnt guarenteed to take too much freezing
             yield return new WaitForSeconds(CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 11f) : Random.Range(6f, 8.5f));
-            GameObject _noises = Soundsystem.PlaySound(_dashingClip, transform.position, true);
-            _noises.transform.parent = transform;
+            
+            Soundsystem.PlaySound(_dashingClip, transform.position, true).transform.parent = transform;
             _hasStarted = true;
-            transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             transform.position = _entryRoom.position;
             GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, _shadowmanSpeed), ForceMode.Impulse);
 
-            while (transform.position.z < _exitRoom.position.z + 20)
+            //Check every half second if its passed
+            while (transform.position.z < _exitRoom.position.z + 50)
             {
                 yield return new WaitForSeconds(0.5f);
             }

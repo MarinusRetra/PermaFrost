@@ -51,7 +51,7 @@ namespace Gameplay
                         {
                             _animator.SetFloat("direction", 0);
                         }
-                        vignette.intensity.value = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime + 0.2f - 0.2f;
+                        vignette.intensity.value = Mathf.Clamp(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 0.2f, 0.2f, 1f);
                         continue;
                     default:
                         yield return new WaitForSeconds(0.1f);

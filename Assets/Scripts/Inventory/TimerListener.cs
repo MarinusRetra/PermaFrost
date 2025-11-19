@@ -31,6 +31,7 @@ public class TimerListener : MonoBehaviour
     private void HandleCancelTimer()
     {
         StopCoroutine(_currentTimerRoutine);
+        _bar.transform.parent.gameObject.SetActive(false);
     }
 
     private IEnumerator TimerCoroutine(float _timeIn)

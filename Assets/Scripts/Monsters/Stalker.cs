@@ -8,10 +8,9 @@ namespace Gameplay
         private enum StalkerStates { Watching,Watched,Moving,Idle}
         private StalkerStates _currentState = StalkerStates.Watching;
 
+        [Header("Not allowed radius")]
         [SerializeField] private float _playerRadius;
-
         [SerializeField] private float _wallRadius;
-
         [SerializeField] private float _lastPosRadius;
         [SerializeField] private Vector3 _lastPosition;
 
@@ -19,16 +18,19 @@ namespace Gameplay
 
         private Transform _player;
 
+        [Header("Sounds")]
         [SerializeField] private AudioClip _appearSound;
         [SerializeField] private AudioClip _disappearSound;
 
-        private bool despawning = false;
+        private bool _despawning = false;
 
-        private int moveRNG = 0;
+        private int _moveRNG = 0;
 
         void Start()
         {
             _player = PlayerMonsterManager.Instance.transform;
+            _moveRNG = Random.Range(-75, 25);
+
             //Get the rooms corners
             Vector3 _boundingCorner1 = CurrentRoom.transform.localPosition - (CurrentRoom.transform.localScale / 2);
             Vector3 _boundingCorner2 = CurrentRoom.transform.localPosition + (CurrentRoom.transform.localScale / 2);
@@ -38,24 +40,26 @@ namespace Gameplay
             transform.position = GetRandomRoomPosition();
             Soundsystem.PlaySound(_appearSound, transform.position);
             _currentState = StalkerStates.Watching;
-            moveRNG = Random.Range(-75, 25);
             StartCoroutine(HandleBehaviour());
         }
 
-        int _amountOfTimesNot = 0;
+        private int _amountOfTimesNot = 0;
         private IEnumerator HandleBehaviour()
         {
+            //Spawning visual
             Transform model = transform.GetChild(0);
-            while (model.localPosition.y > 0 && !despawning)
+            while (model.localPosition.y > 0 && !_despawning)
             {
                 model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.45f, model.localPosition.z);
                 yield return new WaitForSeconds(0.05f);
             }
             GetComponent<Collider>().enabled = true;
-            while (!despawning)
+
+            while (!_despawning)
             {
                 switch (_currentState)
                 {
+                    //Practically idle, doesnt move but checks for player looking at it
                     case StalkerStates.Watching:
                         yield return new WaitForSeconds(0.1f);
                         if (PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
@@ -66,15 +70,15 @@ namespace Gameplay
                         else
                         {
                             _amountOfTimesNot++;
-                            if(_amountOfTimesNot >= 100 + moveRNG)
+                            if(_amountOfTimesNot >= 100 + _moveRNG)
                             {
                                 _currentState = StalkerStates.Moving;
                                 _amountOfTimesNot = 0;
                             }
                         }
-                            break;
+                        break;
+                    //Prevent it from moving when the player is looking at it
                     case StalkerStates.Watched:
-                        //prevent moving
                         if (!PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
                         {
                             _currentState = StalkerStates.Watching;
@@ -82,15 +86,18 @@ namespace Gameplay
                         }
                         yield return new WaitForSeconds(0.1f);
                         break;
+                    //Stalker actively teleporting to a different spot
                     case StalkerStates.Moving:
-                        //begone
                         Soundsystem.PlaySound(_disappearSound, transform.position);
+
+                        //Temporary teleport to -100
                         transform.position = new Vector3(-100,-100,-100);
+
                         yield return new WaitForSeconds(1f);
+
                         transform.position = GetRandomRoomPosition();
                         Soundsystem.PlaySound(_appearSound, transform.position);
                         _currentState = StalkerStates.Watching;
-                        //beback
                         break;
                 }
             }
@@ -147,12 +154,13 @@ namespace Gameplay
         {
             gameObject.name = "Despawning";
             PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
-            despawning = true;
+            _despawning = true;
             StartCoroutine(DespawnMonster());
         }
 
         public IEnumerator DespawnMonster()
         {
+            //fly back up before destroying
             GetComponent<Collider>().enabled = false;
             Transform model = transform.GetChild(0);
             while (model.localPosition.y < 10)

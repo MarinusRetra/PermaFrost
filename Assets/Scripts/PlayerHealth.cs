@@ -5,15 +5,15 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth Instance;
-    public float DamageInvincibility = 0.5f;
-    public float HealInvincibility = 2.0f;
 
+    //Invincibility
+    [SerializeField] private float _damageInvincibility = 0.5f;
+    [SerializeField] private float _healInvincibility = 2.0f;
     private bool _damageInvincible = false;
     private bool _healInvincible = false;
 
     private bool _isVunerable = false;
 
-    private Camera _cam;
     [SerializeField]private GameObject _deathUI;
     [SerializeField] private GameObject _hitUI;
     [SerializeField] private InputReader _reader;
@@ -21,14 +21,11 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        _cam = Camera.main;
-        StartCoroutine(PlayerOutOfBoundsCheck());
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            print(collision.transform.name + "Has hit the player");
             StartCoroutine(DamagePlayer());
             collision.gameObject.GetComponent<Monster>().Deaggro();
         }
@@ -38,7 +35,6 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_damageInvincible || _healInvincible) yield break;
 
-        print("Player has been hit");
         if (_isVunerable) 
         {
             GameOver();
@@ -50,19 +46,21 @@ public class PlayerHealth : MonoBehaviour
 
         //Make sure the player doesnt get multihit by the enemies
         _damageInvincible = true;
-        yield return new WaitForSeconds(DamageInvincibility);
+        yield return new WaitForSeconds(_damageInvincibility);
         _damageInvincible = false;
     }
 
     public void GameOver()
     {
-        _deathUI.SetActive(true);
-        transform.Find("CamBrain").parent = _deathUI.transform;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        //ui
+        _deathUI.SetActive(true);
+        transform.Find("CamBrain").parent = _deathUI.transform;
         Destroy(_deathUI.transform.parent.Find("Pause").gameObject);
+
         gameObject.SetActive(false);
-        //Debug.LogWarning("Player death is not implemented yet.");
     }
 
     public IEnumerator HealPlayer()
@@ -73,19 +71,7 @@ public class PlayerHealth : MonoBehaviour
         _hitUI.SetActive(false);
 
         _healInvincible = true;
-        yield return new WaitForSeconds(HealInvincibility);
+        yield return new WaitForSeconds(_healInvincibility);
         _healInvincible = false;
-    }
-
-    private IEnumerator PlayerOutOfBoundsCheck()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(1);
-            if (transform.position.y < 0)
-            {
-                print("Player below the map");
-            }
-        }
     }
 }

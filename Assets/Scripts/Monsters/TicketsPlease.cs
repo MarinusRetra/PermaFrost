@@ -8,21 +8,21 @@ namespace Gameplay
     {
         private NavMeshAgent _agent;
         [SerializeField] private GameObject _hitbox;
-        private Transform _exitRoom;
         private Transform _entryRoom;
 
         private bool _isChasing = false;
         private bool _reachedEnd = false;
         private void Start()
         {
-            _agent = GetComponent<NavMeshAgent>();
-            _exitRoom = CurrentRoom.Find("Exit");
             _entryRoom = CurrentRoom.Find("Entry");
+
+            _agent = GetComponent<NavMeshAgent>();
             _agent.destination = new Vector3(_entryRoom.position.x,transform.position.y,_entryRoom.position.z);
         }
 
         private void Update()
         {
+            //Check if it has reached the end
             if (_agent.isOnNavMesh && _agent?.remainingDistance < 0.1f && !_isChasing)
             {
                 _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z - 20);
@@ -47,6 +47,7 @@ namespace Gameplay
 
         public override void Deaggro()
         {
+            //force it to stop chasing
             _isChasing = false;
             _agent.speed = 0.75f;
             _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z);
@@ -55,7 +56,7 @@ namespace Gameplay
         private IEnumerator ChasePlayer()
         {
             _isChasing = true;
-            //VERY fast, so player cant just run past and despawn them by going into the next room.
+            //VERY fast, so player cant just run past and despawn them by going into the next room. (they still can most of the time)
             _agent.speed = 8;
             while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
             {
@@ -67,7 +68,7 @@ namespace Gameplay
 
         private IEnumerator ReachedEnd()
         {
-            //look I would make this all fancy and stuff but we do not have time for that at all.
+            //Make ticketsplease explode 10 seconds after it gets to the exit. During this time its destination is set 20 away, so it should continue walking if there is enough space
             _reachedEnd = true;
             yield return new WaitForSeconds(10f);
             DestroyMonster();

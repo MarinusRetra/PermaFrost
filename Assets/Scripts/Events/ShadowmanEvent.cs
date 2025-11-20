@@ -14,17 +14,7 @@ namespace Gameplay
             _shadowman.transform.parent = room.transform.Find("Monsters");
             return true;
         }
-        public override bool Exited(GameObject room)
-        {
-            if (room.transform.Find("Monsters").Find("Shadowman(Clone)"))
-            {
-                room.transform.Find("Monsters").Find("Shadowman(Clone)").GetComponent<Monster>().DestroyMonster();
-            }
-            return true;
-        }
-        public override bool Triggered(GameObject room)
-        {
-            return true;
-        }
+        public override bool Exited(GameObject room) {return true;}
+        public override bool Triggered(GameObject room) { return true; }
     }
 }

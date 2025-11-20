@@ -11,21 +11,19 @@ namespace Gameplay
         private earStates _currentState = earStates.Wandering;
 
         private Transform _player;
+
+        [Header("Not allowed radius")]
         [SerializeField] private float _playerRadius;
-
         [SerializeField] private float _wallRadius;
-
         [SerializeField] private float _lastPosRadius;
         [SerializeField] private Vector2 _lastPosition;
 
         [SerializeField] private Vector2[] _roomCorners;
-
         [SerializeField] private NavMeshAgent _agent;
 
         [SerializeField] private Vector2 _randomTimeBetweenMoves = new Vector2(3,6);
 
-        private bool despawning = false;
-
+        private bool _despawning = false;
         private bool _spawning = true;
 
         [SerializeField] private AudioClip _aggroSound;
@@ -48,8 +46,9 @@ namespace Gameplay
 
         private IEnumerator HandleMovement()
         {
+            //Spawning "animation"
             Transform model = transform.GetChild(0);
-            while(model.localPosition.y < -2 && !despawning)
+            while(model.localPosition.y < -2 && !_despawning)
             {
                 model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y + 0.2f, model.localPosition.z);
                 yield return new WaitForSeconds(0.05f);
@@ -58,17 +57,18 @@ namespace Gameplay
             GetComponent<Collider>().enabled = true;
             _spawning = false;
 
-            while (!despawning)
+            while (!_despawning)
             {
                 switch (_currentState)
                 {
+                    //Keep walking around the current room
                     case earStates.Wandering:
                         Vector3 goal = GetRandomRoomPosition();
                         _agent.destination = goal;
                         yield return new WaitForSeconds(Random.Range(_randomTimeBetweenMoves.x, _randomTimeBetweenMoves.y));
                         continue;
+                    //Run straight towards its destination
                     case earStates.Agressive:
-                        //check if area reached
                         if (_agent.remainingDistance < 0.1f)
                         {
                             _agent.isStopped = true;
@@ -97,7 +97,6 @@ namespace Gameplay
                     StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer());
                 }
             }
-            //do visuals or something
         }
 
         public Vector3 GetRandomRoomPosition()
@@ -150,10 +149,14 @@ namespace Gameplay
         private bool _canPlaySound = true;
         public override void Aggro(Vector3 location)
         {
+            //It cant be aggrod to things outside its room
             if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y || _spawning) return;
+            
+            //go to whatever called the aggro at a fast speed
             _currentState = earStates.Agressive;
             _agent.destination = new Vector3(location.x, 3.08f, location.z);
-            _agent.speed = 5;
+            _agent.speed = 8;
+
             if (_canPlaySound)
             {
                 Soundsystem.PlaySound(_aggroSound, transform.position);
@@ -161,6 +164,7 @@ namespace Gameplay
             }
         }
 
+        //Some things spam Aggro, so this is to prevent that
         public IEnumerator SoundCooldown()
         {
             _canPlaySound = false;
@@ -171,7 +175,7 @@ namespace Gameplay
         public override void DestroyMonster()
         {
             gameObject.name = "Despawning";
-            despawning = true;
+            _despawning = true;
             GetComponent<Collider>().enabled = false;
             StartCoroutine(DespawnAnim());
         }

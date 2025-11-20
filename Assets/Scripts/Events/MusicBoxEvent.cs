@@ -16,12 +16,16 @@ namespace Gameplay
             List<Transform> _availableSpots = room.transform.Find("MusicBoxSpots").GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
+
+            //Make sure altar and box cant spawn on the same spot
             if (_chosenSpot.name == "CHOSENBYALTAR")
             {
                 _availableSpots.Remove(_chosenSpot);
                 _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
             }
             _chosenSpot.name = "CHOSENBYBOX";
+
+            //Spawn box
             GameObject _box = Instantiate(_musicBoxPrefab);
             _box.transform.parent = room.transform.Find("BoxHolder");
             _box.transform.localScale = new Vector3(1, 1, 1);
@@ -37,9 +41,6 @@ namespace Gameplay
             PlayerStatusEffects.Instance.ManageInsanityCauses("Music", true);
             return true;
         }
-        public override bool Triggered(GameObject room)
-        {
-            return true;
-        }
+        public override bool Triggered(GameObject room) { return true; }
     }
 }

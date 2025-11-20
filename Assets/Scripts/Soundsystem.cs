@@ -13,11 +13,25 @@ namespace Gameplay
             _instance = this;
             _player = PlayerStatusEffects.Instance.transform;
         }
+
+        /// <summary>
+        /// Play sound at a specific location
+        /// </summary>
+        /// <param name="_clip"></param>
+        /// <param name="location"></param>
+        /// <param name="_loop"></param>
+        /// <returns></returns>
         public static GameObject PlaySound(AudioClip _clip, Vector3 location, bool _loop = false)
         {
             return _instance.PlaySoundInArea(_clip,location,_loop);
         }
 
+        /// <summary>
+        /// Play sound on player
+        /// </summary>
+        /// <param name="_clip"></param>
+        /// <param name="_loop"></param>
+        /// <returns></returns>
         public static GameObject PlaySound(AudioClip _clip, bool _loop = false)
         {
             return _instance.PlaySoundOnPlayer(_clip,_loop);

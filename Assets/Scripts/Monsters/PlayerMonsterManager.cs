@@ -5,10 +5,6 @@ namespace Gameplay
     public class PlayerMonsterManager : MonoBehaviour
     {
         public static PlayerMonsterManager Instance;
-        public void EnterNextRoom()
-        {
-            //td: turn off music box, make things disappear, make sure to reset sanity and freezing causes apart from lantern
-        }
 
         public bool HasFoundTicket = false;
         public bool InSideroom = false;
@@ -25,6 +21,7 @@ namespace Gameplay
 
         public static bool IsPlayerLookingAtObj(Collider lookingObject)
         {
+            //Check if object is in camera reach
             Bounds bounds = lookingObject.bounds;
             _cameraArea = GeometryUtility.CalculateFrustumPlanes(_cam);
             if (GeometryUtility.TestPlanesAABB(_cameraArea, bounds))
@@ -67,7 +64,7 @@ namespace Gameplay
         /// </summary>
         public static void MakeNoise()
         {
-            if (PlayerMonsterManager.Instance.OverridePlayerSounds) { return; }
+            if (Instance.OverridePlayerSounds) { return; }
             var allEars = FindObjectsByType<AllEars>(FindObjectsSortMode.None);
             for (int i = 0; i < allEars.Length; i++)
             {

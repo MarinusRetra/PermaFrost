@@ -8,8 +8,9 @@ namespace Gameplay
         [SerializeField] private bool _disabledAfterPlayed = false;
         [SerializeField] private bool _loop = false;
         [SerializeField] private float _cooldown = 1f;
-        private bool _hasPlayed = false;
         private bool _onCooldown;
+        private bool _hasPlayed = false;
+
         [SerializeField] private AudioClip _audioClip;
         private void OnTriggerEnter(Collider other)
         {

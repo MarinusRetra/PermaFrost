@@ -15,6 +15,7 @@ namespace Gameplay
 
         private IEnumerator AutoPlayTime()
         {
+            //play noise after a bit, so if it gets stuck it still works
             yield return new WaitForSeconds(_duration);
             if (!_isPlaying)
             {
@@ -39,6 +40,8 @@ namespace Gameplay
             _isPlaying = true;
             PlayerMonsterManager.Instance.OverridePlayerSounds = true;
             GetComponent<Rigidbody>().isKinematic = true;
+
+            //this gets called so much to prevent allears from moving away to other noises
             while(_totalTimes < _duration * 100)
             {
                 yield return new WaitForSeconds(0.01f);

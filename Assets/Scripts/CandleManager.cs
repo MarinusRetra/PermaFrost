@@ -14,6 +14,8 @@ namespace Gameplay
         private void Start()
         {
             _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+
+            //remove the parent
             _allCandles.RemoveAt(0);
             
         }
@@ -21,7 +23,6 @@ namespace Gameplay
         {
             for(int i = 0; i < _allCandles.Count; i++)
             {
-                //change when we get actual candles
                 _allCandles[i].Stop();
                 _allCandles[i].transform.GetChild(0).gameObject.SetActive(false);
             }
@@ -31,7 +32,6 @@ namespace Gameplay
         {
             for (int i = 0; i < _allCandles.Count; i++)
             {
-                //change when we get actual candles
                 _allCandles[i].Play();
                 _allCandles[i].transform.GetChild(0).gameObject.SetActive(true);
             }

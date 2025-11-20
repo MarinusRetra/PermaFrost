@@ -38,9 +38,6 @@ namespace Gameplay
             //DO NOT DESPAWN
             return true;
         }
-        public override bool Triggered(GameObject room)
-        {
-            return true;
-        }
+        public override bool Triggered(GameObject room) { return true; }
     }
 }

@@ -25,15 +25,22 @@ namespace Gameplay
         }
         private IEnumerator StartStartingCutscene()
         {
+            //turn off player
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _ui.SetActive(false);
             _player.GetComponent<PlayerController>().enabled = false;
+
             yield return new WaitForSeconds((float)_startingTimeline.duration);
+
+            //turn player back on
             _ui.SetActive(true);
             _player.GetComponent<PlayerController>().enabled = true;
         }
 
+        /// <summary>
+        /// This function exists to call the function in places you cant start coroutines
+        /// </summary>
         public void StartEndingCutscene()
         {
             StartCoroutine(StartEndingCutsceneCoroutine());

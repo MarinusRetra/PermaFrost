@@ -6,19 +6,22 @@ namespace Gameplay
     public class Shadowman : Monster
     {
         [SerializeField] private float _shadowmanSpeed = 1;
-        private Transform _exitRoom;
-        private Transform _entryRoom;
-
-        [SerializeField] private AudioClip _dashingClip;
 
         [SerializeField] private EventClass freezingEvent;
 
         private bool _hasStarted = false;
+        private Transform _exitRoom;
+        private Transform _entryRoom;
+
+        [Header("Sounds")]
+        [SerializeField] private AudioClip _dashingClip;
         private void Start()
         {
             transform.position = new Vector3(-300, -300, -300);
+
             _exitRoom = CurrentRoom.Find("Exit");
             _entryRoom = CurrentRoom.Find("Entry");
+
             //turn off candles, apart from ones in side rooms (so player can figure that out)
             StartCoroutine(StartAttack());
         }
@@ -28,7 +31,7 @@ namespace Gameplay
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
 
             //makes shadowman appear faster if the room also has freezing, so the player isnt guarenteed to take too much freezing
-            yield return new WaitForSeconds(CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 11f) : Random.Range(6f, 8.5f));
+            yield return new WaitForSeconds(CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 10f) : Random.Range(6f, 8.5f));
             
             Soundsystem.PlaySound(_dashingClip, transform.position, true).transform.parent = transform;
             _hasStarted = true;
@@ -45,6 +48,7 @@ namespace Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
+            //This covers a triggger on a child, which is about room big
             if (other.CompareTag("Player") && !PlayerMonsterManager.Instance.InSideroom && _hasStarted)
             {
                 StartCoroutine(PlayerHealth.Instance.DamagePlayer());
@@ -53,19 +57,7 @@ namespace Gameplay
 
         public override void DestroyMonster()
         {
-            print("Shadowman despawning");
             GetComponent<Collider>().enabled = false;
-            StartCoroutine(DespawnAnim());
-        }
-
-        private IEnumerator DespawnAnim()
-        {
-            Transform model = transform.GetChild(0);
-            while (model.localPosition.y > -7)
-            {
-                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.2f, model.localPosition.z);
-                yield return new WaitForSeconds(0.05f);
-            }
             Destroy(gameObject);
         }
     }

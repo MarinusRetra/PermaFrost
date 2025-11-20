@@ -14,13 +14,7 @@ namespace Gameplay
             _shadowman.transform.parent = room.transform.Find("Monsters");
             return true;
         }
-        public override bool Exited(GameObject room)
-        {
-            return true;
-        }
-        public override bool Triggered(GameObject room)
-        {
-            return true;
-        }
+        public override bool Exited(GameObject room) {return true;}
+        public override bool Triggered(GameObject room) { return true; }
     }
 }

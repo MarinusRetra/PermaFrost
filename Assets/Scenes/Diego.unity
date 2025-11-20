@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  _interactEvent:
+  InteractEvent:
     m_PersistentCalls:
       m_Calls: []
   _outlineScale: 1.1
@@ -1292,6 +1292,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506507453}
   m_CullTransparentMesh: 1
+--- !u!1001 &529314741
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.302423
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.448969
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964945584162094886, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6870309496645514611, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
+      propertyPath: m_Name
+      value: BaseWagon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84fa145588c518c49bfd443fd76b6aee, type: 3}
 --- !u!1001 &530838948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2303,10 +2360,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4209446480207758167, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 839090449}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
 --- !u!114 &839090447 stripped
 MonoBehaviour:
@@ -2319,19 +2373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d937bafe1ea3c8a438b47d76c1dac568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerInventory
---- !u!1 &839090448 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4209446480207758167, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
-  m_PrefabInstance: {fileID: 839090446}
-  m_PrefabAsset: {fileID: 0}
---- !u!124 &839090449
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 839090448}
-  m_Enabled: 1
 --- !u!1 &935760843
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,7 +2953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  _interactEvent:
+  InteractEvent:
     m_PersistentCalls:
       m_Calls: []
   _outlineScale: 1.1
@@ -3816,7 +3857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  _interactEvent:
+  InteractEvent:
     m_PersistentCalls:
       m_Calls: []
   _outlineScale: 1.01
@@ -4842,3 +4883,4 @@ SceneRoots:
   - {fileID: 368697264}
   - {fileID: 1754785032}
   - {fileID: 333373164}
+  - {fileID: 529314741}

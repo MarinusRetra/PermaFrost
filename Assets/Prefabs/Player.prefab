@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 7769375652375008609}
   - component: {fileID: 2873557629302030239}
   - component: {fileID: 1255865286293581571}
+  - component: {fileID: 8649446171822719292}
   m_Layer: 3
   m_Name: CamBrain
   m_TagString: MainCamera
@@ -359,7 +360,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -440,6 +441,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _interactDistance: 1000
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
+--- !u!124 &8649446171822719292
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167895748305581227}
+  m_Enabled: 1
 --- !u!1 &4168117785406971383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerListener
   _inventoryTimer: {fileID: 0}
+  _bar: {fileID: 0}
 --- !u!1001 &4644713824374859465
 PrefabInstance:
   m_ObjectHideFlags: 0

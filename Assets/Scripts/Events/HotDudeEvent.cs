@@ -23,9 +23,6 @@ namespace Gameplay
             room.transform.Find("Monsters").Find("HotDude(Clone)").GetComponent<Monster>().DestroyMonster();
             return true;
         }
-        public override bool Triggered(GameObject room)
-        {
-            return true;
-        }
+        public override bool Triggered(GameObject room) { return true; }
     }
 }

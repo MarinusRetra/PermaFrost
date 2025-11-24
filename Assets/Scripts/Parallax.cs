@@ -15,7 +15,7 @@ public class Parallax : MonoBehaviour
 
     void FixedUpdate()
     {
-        //move the objects
+        //Move the outside
         for(int i = 0; i < _objects.Length; i++)
         {
             _objects[i].transform.Translate(-_speed * 5);

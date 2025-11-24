@@ -13,7 +13,7 @@ namespace Gameplay
             {
                 Debug.Log("Switched lantern state through inspector");
                 FreezingLantern lant = (FreezingLantern)target;
-                lant.ChangeLanternState(!lant.LanternOn);
+                lant.ChangeLanternState();
 
             }
         }

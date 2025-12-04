@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.FilePathAttribute;
 
 namespace Gameplay
 {
@@ -35,11 +36,16 @@ namespace Gameplay
 
             _agent = GetComponent<NavMeshAgent>();
 
-            //Get the rooms corners
-            Vector3 _boundingCorner1 = CurrentRoom.transform.position - (CurrentRoom.transform.lossyScale / 2);
-            Vector3 _boundingCorner2 = CurrentRoom.transform.position + (CurrentRoom.transform.lossyScale / 2);
+            BoxCollider renderer = CurrentRoom.GetComponent<BoxCollider>();
 
-            _roomCorners = new Vector2[]{ new Vector2(_boundingCorner1.x + _wallRadius, _boundingCorner1.z + _wallRadius),new Vector2(_boundingCorner2.x - _wallRadius, _boundingCorner2.z - _wallRadius)};
+            //Get the rooms corners
+
+            _roomCorners = new Vector2[]{ new Vector2(
+                renderer.bounds.max.x,
+                renderer.bounds.max.z),
+                new Vector2(
+                    renderer.bounds.min.x,
+                    renderer.bounds.min.z)};
 
             StartCoroutine(HandleMovement());
         }
@@ -92,7 +98,7 @@ namespace Gameplay
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
             foreach (var hitCollider in hitColliders)
             {
-                if (hitCollider.CompareTag("Player"))
+                if (hitCollider.CompareTag("Player") && hitCollider.GetComponent<PlayerHealth>())
                 {
                     StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer());
                 }
@@ -154,7 +160,7 @@ namespace Gameplay
             
             //go to whatever called the aggro at a fast speed
             _currentState = earStates.Agressive;
-            _agent.destination = new Vector3(location.x, 3.08f, location.z);
+            _agent.destination = new Vector3(location.x, 1, location.z);
             _agent.speed = 8;
 
             if (_canPlaySound)

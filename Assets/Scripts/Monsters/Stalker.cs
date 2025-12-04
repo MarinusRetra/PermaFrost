@@ -31,11 +31,16 @@ namespace Gameplay
             _player = PlayerMonsterManager.Instance.transform;
             _moveRNG = Random.Range(-75, 25);
 
-            //Get the rooms corners
-            Vector3 _boundingCorner1 = CurrentRoom.transform.localPosition - (CurrentRoom.transform.localScale / 2);
-            Vector3 _boundingCorner2 = CurrentRoom.transform.localPosition + (CurrentRoom.transform.localScale / 2);
+            BoxCollider renderer = CurrentRoom.GetComponent<BoxCollider>();
 
-            _roomCorners = new Vector3[] { new Vector3(_boundingCorner1.x + _wallRadius, _boundingCorner1.y + _wallRadius, _boundingCorner1.z + _wallRadius), new Vector3(_boundingCorner2.x - _wallRadius, _boundingCorner2.y + _wallRadius, _boundingCorner2.z - _wallRadius) };
+            _roomCorners = new Vector3[]{ new Vector3(
+                renderer.bounds.max.x- _wallRadius,
+                renderer.bounds.max.y - _wallRadius,
+                renderer.bounds.max.z- _wallRadius),
+                new Vector3(
+                    renderer.bounds.min.x + _wallRadius,
+                    renderer.bounds.min.y + 2,
+                    renderer.bounds.min.z+ _wallRadius)};
 
             transform.position = GetRandomRoomPosition();
             Soundsystem.PlaySound(_appearSound, transform.position);

@@ -13,6 +13,7 @@ namespace Gameplay
         [SerializeField] private TimelineAsset _startingTimeline;
         [SerializeField] private TimelineAsset _endingTimeline;
         private GameObject _player;
+        [SerializeField] private GameObject _backgroundSound;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
@@ -36,6 +37,8 @@ namespace Gameplay
             //turn player back on
             _ui.SetActive(true);
             _player.GetComponent<PlayerController>().enabled = true;
+
+            _backgroundSound.SetActive(true);
         }
 
         /// <summary>
@@ -48,6 +51,8 @@ namespace Gameplay
 
         public IEnumerator StartEndingCutsceneCoroutine()
         {
+
+            _backgroundSound.SetActive(false);
             _ui.SetActive(false);
             yield return new WaitForSeconds((float)_endingTimeline.duration);
             Cursor.lockState = CursorLockMode.None;

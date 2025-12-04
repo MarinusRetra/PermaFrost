@@ -43,8 +43,6 @@ namespace Gameplay
 
         private IEnumerator ChargeBox()
         {
-            //let player status effects load
-            yield return new WaitForSeconds(0.1f);
             _playerEffects.ManageInsanityCauses("Music", true);
             yield return new WaitForSeconds(Random.Range(_boxRechargeTimes.x,_boxRechargeTimes.y));
             outlineVisual.enabled = true;

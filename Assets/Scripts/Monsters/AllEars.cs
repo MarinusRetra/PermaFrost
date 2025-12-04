@@ -27,6 +27,7 @@ namespace Gameplay
         private bool _spawning = true;
 
         [SerializeField] private AudioClip _aggroSound;
+        [SerializeField] private AudioClip _spawnSound;
 
         void Start()
         {
@@ -45,6 +46,9 @@ namespace Gameplay
                 new Vector2(
                     renderer.bounds.min.x,
                     renderer.bounds.min.z)};
+
+            GameObject noise = Soundsystem.PlaySound(_spawnSound, transform.position);
+            noise.GetComponent<AudioSource>().volume = 0.5f;
 
             StartCoroutine(HandleMovement());
         }

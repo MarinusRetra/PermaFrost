@@ -50,8 +50,10 @@ public class CarriageClass : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = Random.Range(0, availableEvents.Count);
-                _selectedEventClasses.Add(availableEvents[randomIndex]);
+                EventClass _chosenEvent = availableEvents[randomIndex];
+                _selectedEventClasses.Add(_chosenEvent);
                 availableEvents.RemoveAt(randomIndex);
+                _chosenEvent.Generated(gameObject);
             }
         }
     }

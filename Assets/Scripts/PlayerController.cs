@@ -10,7 +10,7 @@ namespace Gameplay
     public class PlayerController : MonoBehaviour
     {
         [Header("Movement values")]
-        [SerializeField] public InputReader _input;
+        [SerializeField] private InputReader _input;
 		public float CrouchSpeed = 3;
 		public float BaseSpeed = 4;
 
@@ -52,7 +52,6 @@ namespace Gameplay
 
         private void Start()
         {
-            
             _camera = transform.Find("PlayerCamera");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -181,7 +180,7 @@ namespace Gameplay
         /// <summary>
         /// Crouch down by changing the height of the capsule collider and lowering the camera.
         /// </summary>
-        public void CrouchDown()
+        private void CrouchDown()
         {
             if (!_isCrouching)
             {
@@ -192,7 +191,7 @@ namespace Gameplay
             }
             _isCrouching = true;
         }
-        public void StandUp()
+        private void StandUp()
         {
             _currentMoveSpeed = BaseSpeed;
             _playerCollider.height = _standHitboxHeight.x;

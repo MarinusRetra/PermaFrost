@@ -54,7 +54,7 @@ public class TimerListener : MonoBehaviour
         _bar.transform.parent.gameObject.SetActive(false);
     }
 
-    public void UpdateLockPickbar(float _progress)
+    private void UpdateLockPickbar(float _progress)
     {
         _progress = Mathf.Clamp(_progress, 0, _maxTime);
         float normalized = _progress / _maxTime;

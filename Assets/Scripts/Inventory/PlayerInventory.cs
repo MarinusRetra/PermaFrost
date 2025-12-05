@@ -129,7 +129,7 @@ namespace Gameplay
         /// <summary>
         /// Clears out all the slots with an EmptyItem inside.
         /// </summary>
-        void  RemoveSlot(int indexIn)
+        private void RemoveSlot(int indexIn)
         {
             _hotbar[indexIn].Value.localScale = _normalSlotSize;
             RemovedHotbarElements.Add(_hotbar[indexIn]);
@@ -154,7 +154,7 @@ namespace Gameplay
         /// <summary>
         /// Will set the sprite and color of the passed element at the index of hotbar and set the slot's sprite.
         /// </summary>
-        void SetSlotSprite(int indexIn)
+        private void SetSlotSprite(int indexIn)
         {
             var currentImage = _hotbar[indexIn].Value.GetChild(0).GetComponent<Image>();
             currentImage.sprite = _hotbar[indexIn].Key.sprite;

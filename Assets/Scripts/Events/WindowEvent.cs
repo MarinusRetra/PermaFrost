@@ -44,8 +44,9 @@ namespace Gameplay
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
             _freeze.transform.parent = room.transform;
-            _freeze.transform.localScale = new Vector3(3, 1, 1.75f);
-            _freeze.transform.position = room.transform.position;
+            BoxCollider _roomCol = room.GetComponent<BoxCollider>();
+            _freeze.transform.localScale = new Vector3(_roomCol.size.x,_roomCol.size.y,_roomCol.size.z - 2);
+            _freeze.transform.position = room.transform.position + room.GetComponent<BoxCollider>().center;
 
             List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
             possibleWindows.RemoveAt(0);

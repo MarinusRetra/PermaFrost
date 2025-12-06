@@ -6,7 +6,6 @@ public class CarriageClass : MonoBehaviour
     [Header("Transforms")]
     public Transform EntryPoint;
     public Transform ExitPoint;
-    public Transform MainObject;
     public Transform SpawnPoint;
 
     [SerializeField] private List<Transform> _spawnPoints;

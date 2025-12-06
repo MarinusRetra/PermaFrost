@@ -28,10 +28,12 @@ namespace Gameplay
             //spawn door
             Vector3 doorPos = room.transform.Find("Exit").position + new Vector3(0, 1.4f, 0);
             GameObject door = Instantiate(_doorPrefab, doorPos, Quaternion.identity);
+            door.transform.parent = room.transform;
 
             //spawn key
             GameObject newKey = Instantiate(_keyPrefab, randomLocation.position, Quaternion.identity);
             newKey.GetComponent<ItemImportance>().OnSpawnKill();
+            //newKey.transform.parent = room.transform;
             return true; 
         }
     }

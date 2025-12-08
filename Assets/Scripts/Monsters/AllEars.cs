@@ -103,7 +103,7 @@ namespace Gameplay
             {
                 if (hitCollider.CompareTag("Player") && hitCollider.GetComponent<PlayerHealth>())
                 {
-                    StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer());
+                    StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer("AllEars"));
                 }
             }
         }

@@ -1,5 +1,6 @@
 using Gameplay;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -18,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private GameObject _hitUI;
     [SerializeField] private InputReader _reader;
 
+    [SerializeField] private TMP_Text _deathText;
+
     private void Start()
     {
         Instance = this;
@@ -26,18 +29,18 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            StartCoroutine(DamagePlayer());
+            StartCoroutine(DamagePlayer(collision.gameObject.name));
             collision.gameObject.GetComponent<Monster>().Deaggro();
         }
     }
 
-    public IEnumerator DamagePlayer()
+    public IEnumerator DamagePlayer(string cause)
     {
         if (_damageInvincible || _healInvincible) yield break;
 
         if (_isVunerable) 
         {
-            GameOver();
+            GameOver(cause);
             yield break;
         }
         
@@ -50,15 +53,21 @@ public class PlayerHealth : MonoBehaviour
         _damageInvincible = false;
     }
 
-    public void GameOver()
+    public void GameOver(string deathCause)
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        deathCause = deathCause.Replace("(Clone)", "");
+        deathCause = deathCause.Replace("Agent", " Please");
+        deathCause = deathCause.Replace("HotDude", "FireGuy");
+        deathCause = deathCause.Replace("Bone.003", "Lookpick");
 
         //ui
         _deathUI.SetActive(true);
         transform.Find("CamBrain").parent = _deathUI.transform;
         Destroy(_deathUI.transform.parent.Find("Pause").gameObject);
+        _deathText.text = "To: " + deathCause;
 
         gameObject.SetActive(false);
     }

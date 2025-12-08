@@ -32,7 +32,7 @@ namespace Gameplay
 
         private IEnumerator WaitForDestroy()
         {
-            InteractEvent = null;
+            InteractEvent.RemoveAllListeners();
             Destroy(transform.GetChild(0).gameObject);
             Destroy(GetComponent<Collider>());
             yield return new WaitForSeconds(PlayerHealth.Instance.HealInvincibility + 1);

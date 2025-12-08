@@ -78,6 +78,7 @@ namespace Gameplay
         /// <returns></returns>
         private bool AffectObject(GameObject objec, bool turnOn)
         {
+            if(objec == null) return false;
             if (objec.CompareTag("Player"))
             {
                 return true;

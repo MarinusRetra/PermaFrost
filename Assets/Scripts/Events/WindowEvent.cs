@@ -56,6 +56,7 @@ namespace Gameplay
             {
                 window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
                 window.localScale = new Vector3(1, 1, 1);
+                Destroy(window.GetComponent<Collider>());
             }
         }
     }

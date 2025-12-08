@@ -16,7 +16,7 @@ namespace Gameplay
         }
         public override bool Exited(GameObject room)
         {
-            Destroy(room.transform.Find("BoxHolder").Find("HealingAltar(Clone)").gameObject);
+            room.transform.Find("BoxHolder").Find("HealingAltar(Clone)").GetComponent<HealingAltar>().DestroyAltar();
             return true;
         }
         public override bool Triggered(GameObject room) { return true; }

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 
     //Invincibility
     [SerializeField] private float _damageInvincibility = 0.5f;
-    [SerializeField] private float _healInvincibility = 2.0f;
+    public float HealInvincibility = 2.0f;
     private bool _damageInvincible = false;
     private bool _healInvincible = false;
 
@@ -71,7 +71,7 @@ public class PlayerHealth : MonoBehaviour
         _hitUI.SetActive(false);
 
         _healInvincible = true;
-        yield return new WaitForSeconds(_healInvincibility);
+        yield return new WaitForSeconds(HealInvincibility);
         _healInvincible = false;
     }
 }

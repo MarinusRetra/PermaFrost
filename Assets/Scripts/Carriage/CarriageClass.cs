@@ -1,3 +1,4 @@
+using Gameplay;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -58,6 +59,16 @@ public class CarriageClass : MonoBehaviour
                 _selectedEventClasses.Add(_chosenEvent);
                 availableEvents.RemoveAt(randomIndex);
                 _chosenEvent.Generated(gameObject);
+                if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+                {
+                    for(int j = 0; j < availableEvents.Count; j++)
+                    {
+                        if (availableEvents[j] is HotDudeEvent || availableEvents[j] is WindowEvent)
+                        {
+                            availableEvents.RemoveAt(j);
+                        }
+                    }
+                }
             }
         }
     }

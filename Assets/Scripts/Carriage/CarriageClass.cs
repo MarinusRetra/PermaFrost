@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CarriageClass : MonoBehaviour
@@ -6,9 +7,9 @@ public class CarriageClass : MonoBehaviour
     [Header("Transforms")]
     public Transform EntryPoint;
     public Transform ExitPoint;
-    public Transform SpawnPoint;
+    public Transform PlayerSpawnPoint;
 
-    [SerializeField] private List<Transform> _spawnPoints;
+    [SerializeField] private Transform _itemSpawnPoints;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
@@ -25,6 +26,9 @@ public class CarriageClass : MonoBehaviour
 
     public void SpawnItems()
     {
+        if (_maxAmountOfItems == 0) return;
+        List<Transform> _spawnPoints = _itemSpawnPoints.GetComponentsInChildren<Transform>().ToList();
+        _spawnPoints.RemoveAt(0);
         if (_spawnPoints.Count > 0)
         {
             for(int i = 0; i < Random.Range(0,_maxAmountOfItems + 1); i++)

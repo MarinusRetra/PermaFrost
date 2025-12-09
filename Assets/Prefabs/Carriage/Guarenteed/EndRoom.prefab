@@ -250,9 +250,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
   EntryPoint: {fileID: 4023744531036831505}
   ExitPoint: {fileID: 1655445805515378825}
-  MainObject: {fileID: 5508613836068004880}
-  SpawnPoint: {fileID: 1655445805515378825}
-  _spawnPoints: []
+  PlayerSpawnPoint: {fileID: 0}
+  _itemSpawnPoints: {fileID: 0}
   _allowedDrops: []
   _allowedEvents:
   - {fileID: 11400000, guid: d1b120f6b0414374a8e71fa1758403d2, type: 2}
@@ -262,7 +261,7 @@ MonoBehaviour:
   _triggerTriggered: 0
   _selectedEventClasses: []
   _amountOfEvents: 1
-  _maxAmountOfItems: 1
+  _maxAmountOfItems: 0
 --- !u!65 &2939184666265710574
 BoxCollider:
   m_ObjectHideFlags: 0

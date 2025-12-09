@@ -11495,11 +11495,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
   EntryPoint: {fileID: 3355377414435120471}
   ExitPoint: {fileID: 3974665779512515469}
-  SpawnPoint: {fileID: 506528972180793579}
-  _spawnPoints:
-  - {fileID: 1898555000259081958}
-  - {fileID: 2816805533880918225}
-  - {fileID: 14610050874041221}
+  PlayerSpawnPoint: {fileID: 0}
+  _itemSpawnPoints: {fileID: 506528972180793579}
   _allowedDrops:
   - {fileID: 11400000, guid: c45722bfbfe0e5346ac3a6597da584cc, type: 2}
   - {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
@@ -11747,7 +11744,7 @@ Transform:
   m_GameObject: {fileID: 5059557490986669335}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.387, y: -0.141, z: 0.3788}
+  m_LocalPosition: {x: 0.387, y: -0.141, z: 0.3906}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []

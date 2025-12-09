@@ -47,9 +47,9 @@ public class Generation : MonoBehaviour
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
 
-        if (startRoom.GetComponent<CarriageClass>().SpawnPoint)
+        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint)
         {
-            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().SpawnPoint.transform.position;
+            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
             player.SetActive(true);
         }
         yield return new WaitForSeconds(1);

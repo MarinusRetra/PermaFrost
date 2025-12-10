@@ -654,8 +654,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.FreezingLantern
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   LanternOn: 0
-  _objectsInAreaRightNow: []
-  _objectsInAreaLastCheck: []
 --- !u!1 &9114351315538011499
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +889,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9188160094882526209}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3ded1643b90f20049b4b46ab3ba821d3, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 55
@@ -1029,9 +1027,6 @@ MonoBehaviour:
   InsanityDeath: 20
   _insanityCauses: []
   FrostbiteDeath: 30
-  _currentFrostbite: 0
-  _frostbiteCauses: []
-  _playSoundNextTick: 1
   _freezeSFX: {fileID: 0}
 --- !u!114 &4605853214314879402
 MonoBehaviour:
@@ -1045,11 +1040,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bfa395b0b0d5e4dad1e531f699b9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  DamageInvincibility: 0.5
+  _damageInvincibility: 0.5
   HealInvincibility: 3
   _deathUI: {fileID: 0}
   _hitUI: {fileID: 0}
   _reader: {fileID: 0}
+  _deathText: {fileID: 0}
 --- !u!114 &2481520789753704852
 MonoBehaviour:
   m_ObjectHideFlags: 0

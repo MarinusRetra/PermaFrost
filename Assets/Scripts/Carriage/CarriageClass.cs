@@ -1,4 +1,6 @@
+using Gameplay;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CarriageClass : MonoBehaviour
@@ -6,10 +8,9 @@ public class CarriageClass : MonoBehaviour
     [Header("Transforms")]
     public Transform EntryPoint;
     public Transform ExitPoint;
-    public Transform MainObject;
-    public Transform SpawnPoint;
+    public Transform PlayerSpawnPoint;
 
-    [SerializeField] private List<Transform> _spawnPoints;
+    [SerializeField] private Transform _itemSpawnPoints;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
@@ -26,6 +27,9 @@ public class CarriageClass : MonoBehaviour
 
     public void SpawnItems()
     {
+        if (_maxAmountOfItems == 0) return;
+        List<Transform> _spawnPoints = _itemSpawnPoints.GetComponentsInChildren<Transform>().ToList();
+        _spawnPoints.RemoveAt(0);
         if (_spawnPoints.Count > 0)
         {
             for(int i = 0; i < Random.Range(0,_maxAmountOfItems + 1); i++)
@@ -33,6 +37,7 @@ public class CarriageClass : MonoBehaviour
                 Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
+                //newDroppedItem.transform.parent = transform;
 
                 //prevent 2 items in 1 spot
                 _spawnPoints.Remove(randomLocation);
@@ -50,8 +55,20 @@ public class CarriageClass : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = Random.Range(0, availableEvents.Count);
-                _selectedEventClasses.Add(availableEvents[randomIndex]);
+                EventClass _chosenEvent = availableEvents[randomIndex];
+                _selectedEventClasses.Add(_chosenEvent);
                 availableEvents.RemoveAt(randomIndex);
+                _chosenEvent.Generated(gameObject);
+                if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+                {
+                    for(int j = 0; j < availableEvents.Count; j++)
+                    {
+                        if (availableEvents[j] is HotDudeEvent || availableEvents[j] is WindowEvent)
+                        {
+                            availableEvents.RemoveAt(j);
+                        }
+                    }
+                }
             }
         }
     }

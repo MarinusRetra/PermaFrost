@@ -15,22 +15,12 @@ namespace Gameplay
         [SerializeField] private AudioClip _windowBreakingClip;
         public override bool Entered(GameObject room)
         {
-            GameObject _freeze = Instantiate(_freezingPrefab);
-            _freeze.transform.parent = room.transform;
-            _freeze.transform.localScale = new Vector3(3,1,1.75f);
-            _freeze.transform.position = room.transform.position;
-
-            List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
-            possibleWindows.RemoveAt(0);
-
-            //break windows visually
-            foreach(Transform window in possibleWindows)
+            if (!room.transform.Find("FreezingArea(Clone)"))
             {
-                window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
-                window.localScale = new Vector3(1, 1, 1);
-            }
+                BreakWindows(room);
 
-            Soundsystem.PlaySound(_windowBreakingClip,room.transform.position);
+                Soundsystem.PlaySound(_windowBreakingClip, room.transform.position);
+            }
             return true;
         }
         public override bool Exited(GameObject room)
@@ -39,5 +29,35 @@ namespace Gameplay
             return true;
         }
         public override bool Triggered(GameObject room) { return true; }
+
+        public override bool Generated(GameObject room) 
+        {
+            bool doEarly = Random.Range(0, 3) > 1;
+            if (doEarly)
+            {
+                BreakWindows(room);
+            }
+            return true; 
+        }
+
+        private void BreakWindows(GameObject room)
+        {
+            GameObject _freeze = Instantiate(_freezingPrefab);
+            _freeze.transform.parent = room.transform;
+            BoxCollider _roomCol = room.GetComponent<BoxCollider>();
+            _freeze.transform.localScale = new Vector3(_roomCol.size.x,_roomCol.size.y,_roomCol.size.z - 2);
+            _freeze.transform.position = room.transform.position + room.GetComponent<BoxCollider>().center;
+
+            List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
+            possibleWindows.RemoveAt(0);
+
+            //break windows visually
+            foreach (Transform window in possibleWindows)
+            {
+                window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
+                window.localScale = new Vector3(1, 1, 1);
+                Destroy(window.GetComponent<Collider>());
+            }
+        }
     }
 }

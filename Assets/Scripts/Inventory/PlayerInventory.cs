@@ -148,6 +148,7 @@ namespace Gameplay
             RemovedHotbarElements.Add(_selectedHotbarItem);
             _selectedHotbarItem.Value.gameObject.SetActive(false);
             _hotbar.RemoveAt(_hotbar.IndexOf(_selectedHotbarItem));
+            _selectedHotbarItem = _emptyItemSlot;
             return true;
         }
 

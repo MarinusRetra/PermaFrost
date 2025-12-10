@@ -8,6 +8,7 @@ public class EventClass : ScriptableObject
     public virtual bool Entered(GameObject room) { return false; }
     public virtual bool Exited(GameObject room) { return false; }
     public virtual bool Triggered(GameObject room) { return false; }
+    public virtual bool Generated(GameObject room) { return false; }
 }
 
 [CreateAssetMenu(menuName = "Events/TestEvent")]
@@ -28,6 +29,7 @@ public class TestEvent : EventClass
         Debug.Log("Test Triggered");
         return true;
     }
+    public override bool Generated(GameObject room) { return true; }
 }
 
 [CreateAssetMenu(menuName = "Events/GhostEvent")]
@@ -47,5 +49,10 @@ public class GhostEvent: EventClass
     {
         Debug.Log("Ghost Triggered");
         return true;
+    }
+    public override bool Generated(GameObject room) 
+    {
+        Debug.Log("Ghost Generated");
+        return true; 
     }
 }

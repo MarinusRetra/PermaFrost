@@ -48,7 +48,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
 
-            if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver(); }
+            if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver("Sanity"); }
             yield return new WaitForSeconds(0.2f);
         }
     }
@@ -99,7 +99,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
 
-            if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }
+            if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver("Frostbite"); }
 
             yield return new WaitForSeconds(0.2f);
         }

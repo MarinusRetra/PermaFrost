@@ -7,13 +7,13 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "Item/SpeedSyringe")]
     public class SpeedSyringe : InventoryItem
     {
-        PlayerController controller;
+        private PlayerController _controller;
 
         public override bool Use()
         {
             Debug.Log("SpeedSyringe");
-            controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
-            controller.StartRoutine(Run());
+            _controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
+            _controller.StartRoutine(Run());
             return true;
         }
 
@@ -21,23 +21,23 @@ namespace Gameplay
         {
             float multiplier = 1.35f;
 
-            float baseSpeed = controller.BaseSpeed;
-            float crouchSpeed = controller.CrouchSpeed;
-            float sprintSpeed = controller.SprintSpeed;
+            float baseSpeed = _controller.BaseSpeed;
+            float crouchSpeed = _controller.CrouchSpeed;
+            float sprintSpeed = _controller.SprintSpeed;
 
-            controller.BaseSpeed = baseSpeed * multiplier * 1.2f;
-            controller.CrouchSpeed = crouchSpeed * multiplier * 1.3f;
-            controller.SprintSpeed = sprintSpeed * multiplier;
+            _controller.BaseSpeed = baseSpeed * multiplier * 1.2f;
+            _controller.CrouchSpeed = crouchSpeed * multiplier * 1.3f;
+            _controller.SprintSpeed = sprintSpeed * multiplier;
 
-            controller.CurrentStamina = (int)(controller.TotalStamina * 1.75f);
+            _controller.CurrentStamina = (int)(_controller.TotalStamina * 1.75f);
 
             yield return new WaitForSeconds(10);
 
-            controller.CurrentStamina = -(int)(controller.TotalStamina * 0.75f);
+            _controller.CurrentStamina = -(int)(_controller.TotalStamina * 0.75f);
 
-            controller.BaseSpeed = baseSpeed;
-            controller.CrouchSpeed = crouchSpeed;
-            controller.SprintSpeed = sprintSpeed;
+            _controller.BaseSpeed = baseSpeed;
+            _controller.CrouchSpeed = crouchSpeed;
+            _controller.SprintSpeed = sprintSpeed;
         }
     }
 }

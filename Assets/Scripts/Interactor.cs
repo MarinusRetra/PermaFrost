@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Gameplay
@@ -8,7 +7,7 @@ namespace Gameplay
         [Header("Interact Values")]
         [SerializeField] private float _interactDistance = 5f;
         [SerializeField] private InputReader _input;
-        private Ray ray;
+        private Ray _ray;
         public RaycastHit hit;
         private Transform _cameraTransform;
 
@@ -20,8 +19,8 @@ namespace Gameplay
 
         void FixedUpdate()
         {
-            ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-            Physics.Raycast(ray, out hit, _interactDistance);
+            _ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+            Physics.Raycast(_ray, out hit, _interactDistance);
             hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
         /// <summary>

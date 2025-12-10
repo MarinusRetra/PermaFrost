@@ -61,19 +61,21 @@ public class Generation : MonoBehaviour
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;
+            _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
             yield return new WaitForSeconds(0.3f);
         }
 
         GameObject endRoom = Instantiate(_endRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
-        yield return new WaitForSeconds(10f);
+        //yield return new WaitForSeconds(10f);
         StartCoroutine(GenerateNavmesh());
     }
 
     private IEnumerator GenerateNavmesh()
     {
         yield return new WaitForEndOfFrame();
-        _meshSurface.BuildNavMesh();
+        //_meshSurface.BuildNavMesh();
+        _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
     }
 }

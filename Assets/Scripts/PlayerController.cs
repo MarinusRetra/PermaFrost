@@ -50,7 +50,7 @@ namespace Gameplay
             _input.LookEvent += HandleLook;
         }
 
-        private void Start()
+        public void Start()
         {
             _camera = transform.Find("PlayerCamera");
             Cursor.lockState = CursorLockMode.Locked;

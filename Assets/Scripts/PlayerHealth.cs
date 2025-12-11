@@ -58,6 +58,8 @@ public class PlayerHealth : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        print("Death got called");
+
         deathCause = deathCause.Replace("(Clone)", "");
         deathCause = deathCause.Replace("Agent", " Please");
         deathCause = deathCause.Replace("HotDude", "FireGuy");
@@ -66,10 +68,11 @@ public class PlayerHealth : MonoBehaviour
         //ui
         _deathUI.SetActive(true);
         transform.Find("CamBrain").parent = _deathUI.transform;
-        Destroy(_deathUI.transform.parent.Find("Pause").gameObject);
+        Destroy(_deathUI.transform.parent.Find("Pause")?.gameObject);
         _deathText.text = "To: " + deathCause;
 
         gameObject.SetActive(false);
+
     }
 
     public IEnumerator HealPlayer()
@@ -82,5 +85,10 @@ public class PlayerHealth : MonoBehaviour
         _healInvincible = true;
         yield return new WaitForSeconds(HealInvincibility);
         _healInvincible = false;
+    }
+
+    public void HealPlayer(bool usingCourotine = true) 
+    { 
+        StartCoroutine(HealPlayer());
     }
 }

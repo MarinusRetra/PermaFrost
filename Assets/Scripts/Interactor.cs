@@ -11,7 +11,7 @@ namespace Gameplay
         public RaycastHit hit;
         private Transform _cameraTransform;
 
-        void Start()
+        public void Start()
         {
             _input.InteractEvent += HandleInteract;
             _cameraTransform = Camera.main.transform;

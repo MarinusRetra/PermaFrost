@@ -19,7 +19,7 @@ public class PlayerStatusEffects : MonoBehaviour
         _playerHP = FindAnyObjectByType<PlayerHealth>();
     }
 
-    private void Start()
+    public void Start()
     {
         //Sanity and Frostbite update every second
         StartCoroutine(HandleInsanity());
@@ -29,7 +29,7 @@ public class PlayerStatusEffects : MonoBehaviour
     //Sanity related variables
     [Header("Sanity")]
     public int InsanityDeath = 20;
-    private int _currentInsanity = 0;
+    [SerializeField] private int _currentInsanity = 0;
     [SerializeField] private List<string> _insanityCauses = new();
 
     //Sanity related functions
@@ -74,14 +74,14 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    private int _currentFrostbite = 0;
+    [SerializeField] private int _currentFrostbite = 0;
     private List<string> _frostbiteCauses = new();
 
     private bool _playSoundNextTick = true;
     [SerializeField] private AudioClip _freezeSFX;
 
     //Frostbite related functions
-    private IEnumerator HandleFrostbite()
+    [SerializeField] private IEnumerator HandleFrostbite()
     {
         yield return new WaitForSeconds(1);
         _freezingSlider.maxValue = FrostbiteDeath;

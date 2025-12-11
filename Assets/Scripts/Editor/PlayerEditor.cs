@@ -12,14 +12,14 @@ namespace Gameplay
         {
             GetWindow<PlayerEditor>("Player Editor");
         }
-        int selGridInt = 0;
-        string[] selStrings = { "Player", "Game", "Misc" };
+        int selectedTab = 0;
+        string[] allTabs = { "Player", "Game", "Misc" };
         public void OnGUI()
         {
             CreateStyles();
-            selGridInt = GUILayout.SelectionGrid(selGridInt, selStrings, 3);
+            selectedTab = GUILayout.SelectionGrid(selectedTab, allTabs, 3);
             GUILayout.Space(20);
-            switch (selStrings[selGridInt])
+            switch (allTabs[selectedTab])
             {
                 case "Player":
                     PlayerPage();
@@ -38,7 +38,10 @@ namespace Gameplay
 
         GUIStyle titleStyle;
         GUIStyle headerStyle;
+        GUIStyle header2Style;
         GUIStyle importantButtonStyle;
+
+        GUIStyle notWorkingButton;
         private void CreateStyles()
         {
             titleStyle = new GUIStyle(EditorStyles.boldLabel);
@@ -47,45 +50,97 @@ namespace Gameplay
             headerStyle = new GUIStyle(EditorStyles.boldLabel);
             headerStyle.fontSize = 15;
 
-            importantButtonStyle = new GUIStyle(GUI.skin.button);
-            importantButtonStyle.padding = EditorStyles.miniButton.padding;
-            importantButtonStyle.fontSize = 15;
-            importantButtonStyle.border = new RectOffset(0, 0, 0, 0);
-            importantButtonStyle.normal.background = MakeTex(new Color32(0,0,255,255));
-            importantButtonStyle.onNormal.background = MakeTex(new Color32(0, 0, 255, 255));
-            
-        }
-        private Texture2D MakeTex(Color col)
-        {
-            Texture2D tex = new Texture2D(1,1);
-            tex.hideFlags = HideFlags.HideAndDontSave;
-            tex.SetPixel(0, 0, col);
-            tex.Apply();
-            return tex;
+            header2Style = new GUIStyle(EditorStyles.boldLabel);
+            header2Style.fontSize = 10;
+
+            importantButtonStyle = new GUIStyle(EditorStyles.miniButton);
+            importantButtonStyle.fontSize = 14;
+
+            notWorkingButton = new GUIStyle(EditorStyles.miniButton);
+            notWorkingButton.normal.textColor = Color.darkRed;
         }
 
         GameObject player;
         PlayerStatusEffects playerEffects;
+        PlayerHealth playerHealth;
+        PlayerController playerController;
+        PlayerInventory playerInventory;
+        FreezingLantern playerLantern;
         private void PlayerPage()
         {
+            if(!GameObject.Find("BaseGeneration")) { return; }
             if (player == null) { player = GameObject.Find("Player"); }
             if(playerEffects == null) { playerEffects = player.GetComponent<PlayerStatusEffects>(); }
+            if (playerHealth == null) { playerHealth = player.GetComponent<PlayerHealth>(); }
+            if( playerController == null) {playerController = player.GetComponent<PlayerController>();}
+            if( playerInventory == null) {playerInventory = player.GetComponent<PlayerInventory>();}
+            if(playerLantern == null) { playerLantern = player.transform.Find("PlayerCamera").Find("Lantern").GetComponent<FreezingLantern>();}
             
             GUILayout.Label("Player", titleStyle);
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
             GUILayout.Space(20);
             GUILayout.Label("Living", headerStyle);
-            if (GUILayout.Button("Make invulnerable",importantButtonStyle) && CheckIfRunning())
+
+            if (GUILayout.Button("Revive", importantButtonStyle) && CheckIfRunning())
             {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                playerHealth.gameObject.SetActive(true);
+                SerializedObject serEffects = new SerializedObject(playerEffects);
+
+                GameObject deathUI = (GameObject)new SerializedObject(playerHealth).FindProperty("_deathUI").objectReferenceValue;
+                deathUI.SetActive(false);
+                Transform cam = deathUI.transform.Find("CamBrain");
+                cam.parent = playerHealth.transform;
+                cam.GetComponent<Interactor>().Start();
+
+                playerHealth.HealInvincibility = 5;
+                playerHealth.HealPlayer(true);
+
+                serEffects.FindProperty("_currentInsanity").intValue = 0;
+                serEffects.FindProperty("_currentFrostbite").intValue = 0;
+                serEffects.ApplyModifiedProperties();
+                playerEffects.Start();
+                playerController.Start();
+                playerInventory.Awake();
+                playerLantern.Start();
+            }
+
+            if (GUILayout.Button("Make unkillable",importantButtonStyle) && CheckIfRunning())
+            {
+                playerHealth.HealInvincibility = 9999999;
+                playerHealth.HealPlayer(true);
                 playerEffects.InsanityDeath = 9999;
                 playerEffects.FrostbiteDeath = 9999;
             }
+
+            GUILayout.Space(5);
+            if (GUILayout.Button("Heal Player") && CheckIfRunning())
+            {
+                playerHealth.HealPlayer(true);
+            }
+
+            if (GUILayout.Button("Reset effects") && CheckIfRunning())
+            {
+                SerializedObject serEffects = new SerializedObject(playerEffects);
+                serEffects.FindProperty("_currentInsanity").intValue = 0;
+                serEffects.FindProperty("_currentFrostbite").intValue = 0;
+                serEffects.ApplyModifiedProperties();
+            }
+
             if (showDetails)
             {
                 GUILayout.Space(15);
+                GUILayout.Label("Living: Status effects", header2Style);
                 if (GUILayout.Button("Infinite Freezing") && CheckIfRunning())
                 {
                    playerEffects.FrostbiteDeath = 9999;
+                }
+                if (GUILayout.Button("Player immune to lantern") && CheckIfRunning())
+                {
+                    SerializedObject serLamp = new SerializedObject(playerLantern);
+                    serLamp.FindProperty("_playerEffects").objectReferenceValue = null;
+                    serLamp.ApplyModifiedProperties();
                 }
                 if (GUILayout.Button("Infinite Sanity") && CheckIfRunning())
                 {

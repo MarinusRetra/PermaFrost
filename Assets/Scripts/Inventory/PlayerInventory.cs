@@ -28,7 +28,7 @@ namespace Gameplay
         [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
         public List<SerializedKeyValuePair<InventoryItem, RectTransform>> RemovedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
 
-        void Awake()
+        public void Awake()
         {
             _input.HotbarSelectEvent += HandleHotbarSelect;
             _input.NextPreviousEvent += HandleHotbarNav;

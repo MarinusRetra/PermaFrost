@@ -17,5 +17,6 @@ namespace Gameplay
         public override bool Exited(GameObject room) {return true;}
         public override bool Triggered(GameObject room) { return true; }
         public override bool Generated(GameObject room) { return true; }
+        public override bool CallForDeletion(GameObject room) { return true; }
     }
 }

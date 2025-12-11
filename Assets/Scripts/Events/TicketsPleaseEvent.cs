@@ -46,7 +46,13 @@ namespace Gameplay
             _ticket.transform.parent = _chosenSpot.transform;
             _ticket.transform.position = _chosenSpot.position;
             _ticket.transform.rotation = _chosenSpot.rotation;
+            _ticket.transform.parent = room.transform;
             return true; 
+        }
+        public override bool CallForDeletion(GameObject room)
+        {
+            Destroy(room.transform.Find("Ticket(Clone)").gameObject);
+            return true;
         }
     }
 }

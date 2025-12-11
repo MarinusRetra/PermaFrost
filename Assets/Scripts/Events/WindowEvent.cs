@@ -40,6 +40,12 @@ namespace Gameplay
             return true; 
         }
 
+        public override bool CallForDeletion(GameObject room)
+        {
+            Destroy(room.transform.Find("FreezingArea(Clone)")?.gameObject);
+            return true;
+        }
+
         private void BreakWindows(GameObject room)
         {
             GameObject _freeze = Instantiate(_freezingPrefab);

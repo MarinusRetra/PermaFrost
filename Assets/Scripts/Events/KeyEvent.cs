@@ -33,8 +33,14 @@ namespace Gameplay
             //spawn key
             GameObject newKey = Instantiate(_keyPrefab, randomLocation.position, Quaternion.identity);
             newKey.GetComponent<ItemImportance>().OnSpawnKill();
-            //newKey.transform.parent = room.transform;
+            newKey.transform.parent = room.transform;
             return true; 
+        }
+        public override bool CallForDeletion(GameObject room)
+        {
+            Destroy(room.transform.Find("Key(Clone)").gameObject);
+            Destroy(room.transform.Find("LockedDoor(Clone)").gameObject);
+            return true;
         }
     }
 }

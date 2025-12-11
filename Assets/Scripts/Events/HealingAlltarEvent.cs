@@ -44,7 +44,7 @@ namespace Gameplay
         }
         public override bool CallForDeletion(GameObject room)
         {
-            Destroy(room.transform.Find("BoxHolder").Find("HealingAltar(Clone)").gameObject);
+            Destroy(room.transform.Find("BoxHolder").Find("HealingAltar(Clone)")?.gameObject);
             return true;
         }
     }

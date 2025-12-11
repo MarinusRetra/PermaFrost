@@ -8,6 +8,7 @@ namespace Gameplay
     public class PlayerEditor : EditorWindow
     {
         private bool showDetails = false;
+        private bool showFun = false;
 
         [MenuItem("Tools/PlayerEditor")]
         public static void ShowWindow()
@@ -73,6 +74,8 @@ namespace Gameplay
 
         private void UpdateVariables()
         {
+            baseGen = GameObject.Find("BaseGeneration");
+            if (!baseGen) { return; }
             switch (allTabs[selectedTab])
             {
                 case "Player":
@@ -84,9 +87,7 @@ namespace Gameplay
                     if (playerLantern == null) { playerLantern = player.transform.Find("PlayerCamera").Find("Lantern").GetComponent<FreezingLantern>(); }
                     break;
                 case "Game":
-                    baseGen = GameObject.Find("BaseGeneration");
-                    if(!baseGen) { return; }
-                    if (CheckIfRunning())
+                    if (CheckIfRunning(true))
                     {
                         allRooms = baseGen.GetComponentsInChildren<CarriageClass>().ToList();
                     }
@@ -195,6 +196,7 @@ namespace Gameplay
             if (GUILayout.Button("Make unkillable",importantButtonStyle) && CheckIfRunning())
             {
                 playerHealth.HealInvincibility = 9999999;
+                playerHealth.DamagePlayer("Skill issue");
                 playerHealth.HealPlayer(true);
                 playerEffects.InsanityDeath = 9999;
                 playerEffects.FrostbiteDeath = 9999;
@@ -211,6 +213,7 @@ namespace Gameplay
                 SerializedObject serEffects = new SerializedObject(playerEffects);
                 serEffects.FindProperty("_currentInsanity").intValue = 0;
                 serEffects.FindProperty("_currentFrostbite").intValue = 0;
+                playerController.CurrentStamina = playerController.TotalStamina;
                 serEffects.ApplyModifiedProperties();
             }
 
@@ -231,6 +234,35 @@ namespace Gameplay
                 if (GUILayout.Button("Infinite Sanity") && CheckIfRunning())
                 {
                     playerEffects.InsanityDeath = 9999;
+                }
+
+                GUILayout.Space(15);
+                GUILayout.Label("Living: Speed", header2Style);
+                if (GUILayout.Button("Infinite Stamina") && CheckIfRunning())
+                {
+                    playerController.TotalStamina = 999999999;
+                    playerController.CurrentStamina = 999999999;
+                }
+                if (GUILayout.Button("Normal speed") && CheckIfRunning())
+                {
+                    playerController.BaseSpeed = 4f;
+                    playerController.SprintSpeed = 5.5f;
+                    playerController.CrouchSpeed = 3f;
+                }
+                if (GUILayout.Button("High speed") && CheckIfRunning())
+                {
+                    playerController.BaseSpeed = 6.5f;
+                    playerController.SprintSpeed = 8;
+                    playerController.CrouchSpeed = 5.5f;
+                }
+                if (showFun)
+                {
+                    if (GUILayout.Button("Very High speed") && CheckIfRunning())
+                    {
+                        playerController.BaseSpeed = 12f;
+                        playerController.SprintSpeed = 20;
+                        playerController.CrouchSpeed = 10f;
+                    }
                 }
             }
 
@@ -311,6 +343,32 @@ namespace Gameplay
                     events[selectedEvent].Generated(allRooms[j].gameObject);
                 }
             }
+            if (showFun)
+            {
+                if (GUILayout.Button("Add event to all rooms 10 times") && CheckIfRunning())
+                {
+                    for (int j = 0; j < allRooms.Count; j++)
+                    {
+                        for(int i = 0; i < 10; i++)
+                        {
+                            allRooms[j]._selectedEventClasses.Add(events[selectedEvent]);
+                            events[selectedEvent].Generated(allRooms[j].gameObject);
+                        }
+                    }
+                }
+                if (GUILayout.Button("All in one") && CheckIfRunning())
+                {
+                    for (int j = 0; j < allRooms.Count; j++)
+                    {
+                        for (int i = 0; i < events.Count; i++)
+                        {
+                            if (eventNames[i] == "EndingEvent") {continue;}
+                            allRooms[j]._selectedEventClasses.Add(events[i]);
+                            events[i].Generated(allRooms[j].gameObject);
+                        }
+                    }
+                }
+            }
             if (GUILayout.Button("Remove event from all rooms") && CheckIfRunning())
             {
                 for (int j = 0; j < allRooms.Count; j++)
@@ -334,10 +392,17 @@ namespace Gameplay
 
         private void MiscPage()
         {
+            if (!GameObject.Find("BaseGeneration")) { return; }
 
+            GUILayout.Label("Misc", titleStyle);
+            showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
+            GUILayout.Space(20);
+            GUILayout.Label("Options", headerStyle);
+
+            showFun = EditorGUILayout.Toggle("Show fun options", showFun);
         }
 
-        private bool CheckIfRunning()
+        private bool CheckIfRunning(bool shutup = false)
         {
             if (Application.isPlaying)
             {
@@ -345,7 +410,10 @@ namespace Gameplay
             }
             else
             {
-                Debug.Log("You cannot run this command outside of play mode");
+                if (!shutup)
+                {
+                    Debug.Log("You cannot run this command outside of play mode");
+                }
                 return false;
             }
         }

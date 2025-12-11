@@ -38,8 +38,8 @@ namespace Gameplay
         }
         public override bool CallForDeletion(GameObject room)
         {
-            Destroy(room.transform.Find("Key(Clone)").gameObject);
-            Destroy(room.transform.Find("LockedDoor(Clone)").gameObject);
+            Destroy(room.transform.Find("Key(Clone)")?.gameObject);
+            Destroy(room.transform.Find("LockedDoor(Clone)")?.gameObject);
             return true;
         }
     }

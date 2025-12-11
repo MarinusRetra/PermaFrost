@@ -51,7 +51,7 @@ namespace Gameplay
         }
         public override bool CallForDeletion(GameObject room)
         {
-            Destroy(room.transform.Find("Ticket(Clone)").gameObject);
+            Destroy(room.transform.Find("Ticket(Clone)")?.gameObject);
             return true;
         }
     }

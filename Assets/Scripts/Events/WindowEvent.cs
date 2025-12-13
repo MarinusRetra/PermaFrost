@@ -13,9 +13,9 @@ namespace Gameplay
         [SerializeField] private Mesh[] _possibleWindowMeshes;
 
         [SerializeField] private AudioClip _windowBreakingClip;
-        public override bool Entered(GameObject room)
+        public override bool Entered(CarriageClass room)
         {
-            if (!room.transform.Find("FreezingArea(Clone)"))
+            if (!room.Holder.Find("FreezingArea(Clone)"))
             {
                 BreakWindows(room);
 
@@ -23,14 +23,14 @@ namespace Gameplay
             }
             return true;
         }
-        public override bool Exited(GameObject room)
+        public override bool Exited(CarriageClass room)
         {
             //DO NOT DESPAWN
             return true;
         }
-        public override bool Triggered(GameObject room) { return true; }
+        public override bool Triggered(CarriageClass room) { return true; }
 
-        public override bool Generated(GameObject room) 
+        public override bool Generated(CarriageClass room) 
         {
             bool doEarly = Random.Range(0, 3) > 1;
             if (doEarly)
@@ -40,29 +40,28 @@ namespace Gameplay
             return true; 
         }
 
-        public override bool CallForDeletion(GameObject room)
+        public override bool CallForDeletion(CarriageClass room)
         {
-            Destroy(room.transform.Find("FreezingArea(Clone)")?.gameObject);
+            Destroy(room.Holder.Find("FreezingArea(Clone)")?.gameObject);
             PlayerStatusEffects.Instance.ManageFrostbiteCauses("Windows", true);
             return true;
         }
 
-        private void BreakWindows(GameObject room)
+        private void BreakWindows(CarriageClass room)
         {
             GameObject _freeze = Instantiate(_freezingPrefab);
-            _freeze.transform.parent = room.transform;
+            _freeze.transform.parent = room.Holder;
             BoxCollider _roomCol = room.GetComponent<BoxCollider>();
             _freeze.transform.localScale = new Vector3(_roomCol.size.x,_roomCol.size.y,_roomCol.size.z - 2);
             _freeze.transform.position = room.transform.position + room.GetComponent<BoxCollider>().center;
 
-            List<Transform> possibleWindows = room.transform.Find("Windows").GetComponentsInChildren<Transform>().ToList();
+            List<Transform> possibleWindows = room.transform.Find("Gameplay").Find("Windows").GetComponentsInChildren<Transform>().ToList();
             possibleWindows.RemoveAt(0);
 
             //break windows visually
             foreach (Transform window in possibleWindows)
             {
                 window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
-                window.localScale = new Vector3(1, 1, 1);
                 Destroy(window.GetComponent<Collider>());
             }
         }

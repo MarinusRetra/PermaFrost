@@ -11,9 +11,9 @@ namespace Gameplay
         [SerializeField]
         private GameObject _musicBoxPrefab;
         private Transform _chosenSpot;
-        public override bool Entered(GameObject room)
+        public override bool Entered(CarriageClass room)
         {
-            List<Transform> _availableSpots = room.transform.Find("MusicBoxSpots").GetComponentsInChildren<Transform>().ToList();
+            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
@@ -27,23 +27,23 @@ namespace Gameplay
 
             //Spawn box
             GameObject _box = Instantiate(_musicBoxPrefab);
-            _box.transform.parent = room.transform.Find("BoxHolder");
+            _box.transform.parent = room.Holder;
             _box.transform.localScale = new Vector3(1, 1, 1);
             _box.transform.position = _chosenSpot.position;
             _box.transform.rotation = _chosenSpot.rotation;
             return true;
         }
-        public override bool Exited(GameObject room)
+        public override bool Exited(CarriageClass room)
         {
-            Transform box = room.transform.Find("BoxHolder").Find("MusicBox(Clone)");
+            Transform box = room.Holder.Find("MusicBox(Clone)");
             box.GetComponent<MusicBox>().SilenceBox(false);
             Destroy(box.gameObject);
             PlayerStatusEffects.Instance.ManageInsanityCauses("Music", true);
             return true;
         }
-        public override bool Triggered(GameObject room) { return true; }
+        public override bool Triggered(CarriageClass room) { return true; }
 
-        public override bool Generated(GameObject room) { return true; }
-        public override bool CallForDeletion(GameObject room) { return true; }
+        public override bool Generated(CarriageClass room) { return true; }
+        public override bool CallForDeletion(CarriageClass room) { return true; }
     }
 }

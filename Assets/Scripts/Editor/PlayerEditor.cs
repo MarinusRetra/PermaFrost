@@ -323,9 +323,9 @@ namespace Gameplay
                     {
                         if(serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                         {
-                            allRooms[j]._selectedEventClasses[i].Exited(allRooms[j].gameObject);
+                            allRooms[j]._selectedEventClasses[i].Exited(allRooms[j]);
                         }
-                        allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j].gameObject);
+                        allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                     }
                     allRooms[j]._selectedEventClasses = new List<EventClass>(serRoom.FindProperty("_amountOfEvents").intValue);
                     serRoom.ApplyModifiedProperties();
@@ -340,7 +340,7 @@ namespace Gameplay
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     allRooms[j]._selectedEventClasses.Add(events[selectedEvent]);
-                    events[selectedEvent].Generated(allRooms[j].gameObject);
+                    events[selectedEvent].Generated(allRooms[j]);
                 }
             }
             if (showFun)
@@ -352,7 +352,7 @@ namespace Gameplay
                         for(int i = 0; i < 10; i++)
                         {
                             allRooms[j]._selectedEventClasses.Add(events[selectedEvent]);
-                            events[selectedEvent].Generated(allRooms[j].gameObject);
+                            events[selectedEvent].Generated(allRooms[j]);
                         }
                     }
                 }
@@ -364,7 +364,7 @@ namespace Gameplay
                         {
                             if (eventNames[i] == "EndingEvent") {continue;}
                             allRooms[j]._selectedEventClasses.Add(events[i]);
-                            events[i].Generated(allRooms[j].gameObject);
+                            events[i].Generated(allRooms[j]);
                         }
                     }
                 }
@@ -380,9 +380,9 @@ namespace Gameplay
                             SerializedObject serRoom = new SerializedObject(allRooms[j]);
                             if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                             {
-                                allRooms[j]._selectedEventClasses[i].Exited(allRooms[j].gameObject);
+                                allRooms[j]._selectedEventClasses[i].Exited(allRooms[j]);
                             }
-                            allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j].gameObject);
+                            allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                             allRooms[j]._selectedEventClasses.RemoveAt(i);
                         }
                     }

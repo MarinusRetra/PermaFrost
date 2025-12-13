@@ -10,19 +10,19 @@ namespace Gameplay
         [SerializeField]
         private GameObject _altarPrefab;
         private Transform _chosenSpot;
-        public override bool Entered(GameObject room)
+        public override bool Entered(CarriageClass room)
         {
             return true;
         }
-        public override bool Exited(GameObject room)
+        public override bool Exited(CarriageClass room)
         {
-            room.transform.Find("BoxHolder").Find("HealingAltar(Clone)").GetComponent<HealingAltar>().DestroyAltar();
+            room.Holder.Find("HealingAltar(Clone)").GetComponent<HealingAltar>().DestroyAltar();
             return true;
         }
-        public override bool Triggered(GameObject room) { return true; }
-        public override bool Generated(GameObject room) 
+        public override bool Triggered(CarriageClass room) { return true; }
+        public override bool Generated(CarriageClass room) 
         {
-            List<Transform> _availableSpots = room.transform.Find("MusicBoxSpots").GetComponentsInChildren<Transform>().ToList();
+            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
@@ -36,15 +36,15 @@ namespace Gameplay
 
             //spawn altar
             GameObject _altar = Instantiate(_altarPrefab);
-            _altar.transform.parent = room.transform.Find("BoxHolder");
+            _altar.transform.parent = room.Holder;
             _altar.transform.localScale = new Vector3(1, 1, 1);
             _altar.transform.position = _chosenSpot.position;
             _altar.transform.rotation = _chosenSpot.rotation;
             return true; 
         }
-        public override bool CallForDeletion(GameObject room)
+        public override bool CallForDeletion(CarriageClass room)
         {
-            Destroy(room.transform.Find("BoxHolder").Find("HealingAltar(Clone)")?.gameObject);
+            Destroy(room.Holder.Find("HealingAltar(Clone)")?.gameObject);
             return true;
         }
     }

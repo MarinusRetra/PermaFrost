@@ -10,7 +10,8 @@ public class CarriageClass : MonoBehaviour
     public Transform ExitPoint;
     public Transform PlayerSpawnPoint;
 
-    [SerializeField] private Transform _itemSpawnPoints;
+    public Transform[] SpawnPoints;
+    public Transform Holder;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
@@ -28,7 +29,7 @@ public class CarriageClass : MonoBehaviour
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;
-        List<Transform> _spawnPoints = _itemSpawnPoints.GetComponentsInChildren<Transform>().ToList();
+        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
         _spawnPoints.RemoveAt(0);
         if (_spawnPoints.Count > 0)
         {
@@ -58,7 +59,7 @@ public class CarriageClass : MonoBehaviour
                 EventClass _chosenEvent = availableEvents[randomIndex];
                 _selectedEventClasses.Add(_chosenEvent);
                 availableEvents.RemoveAt(randomIndex);
-                _chosenEvent.Generated(gameObject);
+                _chosenEvent.Generated(this);
                 if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
                 {
                     for(int j = 0; j < availableEvents.Count; j++)
@@ -85,7 +86,7 @@ public class CarriageClass : MonoBehaviour
                 _enterTriggered = true;
 
                 foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Entered(gameObject);
+                    selectedEventClass.Entered(this);
             }
         }
     }
@@ -101,7 +102,7 @@ public class CarriageClass : MonoBehaviour
                 _exitTriggered = true;
 
                 foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Exited(gameObject);
+                    selectedEventClass.Exited(this);
             }
         }
     }
@@ -114,7 +115,7 @@ public class CarriageClass : MonoBehaviour
 
             // Add your logic here
             foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Triggered(gameObject);
+                selectedEventClass.Triggered(this);
         }
     }
 }

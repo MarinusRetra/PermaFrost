@@ -7,20 +7,20 @@ namespace Gameplay
     {
         [SerializeField]
         private GameObject _stalkerPrefab;
-        public override bool Entered(GameObject room)
+        public override bool Entered(CarriageClass room)
         {
             GameObject _stalker = Instantiate(_stalkerPrefab);
             _stalker.GetComponent<Monster>().CurrentRoom = room.transform;
-            _stalker.transform.parent = room.transform.Find("Monsters");
+            _stalker.transform.parent = room.Holder;
             return true;
         }
-        public override bool Exited(GameObject room)
+        public override bool Exited(CarriageClass room)
         {
-            room.transform.Find("Monsters").Find("Stalker(Clone)").GetComponent<Monster>().DestroyMonster();
+            room.Holder.Find("Stalker(Clone)").GetComponent<Monster>().DestroyMonster();
             return true;
         }
-        public override bool Triggered(GameObject room) { return true; }
-        public override bool Generated(GameObject room) { return true; }
-        public override bool CallForDeletion(GameObject room) { return true; }
+        public override bool Triggered(CarriageClass room) { return true; }
+        public override bool Generated(CarriageClass room) { return true; }
+        public override bool CallForDeletion(CarriageClass room) { return true; }
     }
 }

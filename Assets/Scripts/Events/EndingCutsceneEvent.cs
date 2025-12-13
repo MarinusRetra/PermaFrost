@@ -7,7 +7,7 @@ namespace Gameplay
     {
         [SerializeField]
         private GameObject _endingCutscenePrefab;
-        public override bool Entered(GameObject room)
+        public override bool Entered(CarriageClass room)
         {
             //turn off the player and start the cutscene
             GameObject cut =  Instantiate(_endingCutscenePrefab);
@@ -17,10 +17,10 @@ namespace Gameplay
             CutsceneManager.instance.StartEndingCutscene();
             return true;
         }
-        public override bool Exited(GameObject room) { return true; }
-        public override bool Triggered(GameObject room) { return true; }
+        public override bool Exited(CarriageClass room) { return true; }
+        public override bool Triggered(CarriageClass room) { return true; }
 
-        public override bool Generated(GameObject room) { return true; }
-        public override bool CallForDeletion(GameObject room) { return true; }
+        public override bool Generated(CarriageClass room) { return true; }
+        public override bool CallForDeletion(CarriageClass room) { return true; }
     }
 }

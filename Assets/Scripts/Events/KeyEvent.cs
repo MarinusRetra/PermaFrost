@@ -27,7 +27,7 @@ namespace Gameplay
 
             //spawn door
             Vector3 doorPos = room.transform.Find("Exit").position + new Vector3(0, 1.4f, 0);
-            GameObject door = Instantiate(_doorPrefab, doorPos, Quaternion.identity);
+            GameObject door = Instantiate(_doorPrefab, doorPos, _doorPrefab.transform.rotation);
             door.transform.parent = room.Holder;
 
             //spawn key

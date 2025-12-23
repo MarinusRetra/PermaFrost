@@ -58,8 +58,6 @@ public class PlayerHealth : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        print("Death got called");
-
         deathCause = deathCause.Replace("(Clone)", "");
         deathCause = deathCause.Replace("Agent", " Please");
         deathCause = deathCause.Replace("HotDude", "FireGuy");
@@ -70,6 +68,8 @@ public class PlayerHealth : MonoBehaviour
         transform.Find("CamBrain").parent = _deathUI.transform;
         Destroy(_deathUI.transform.parent.Find("Pause")?.gameObject);
         _deathText.text = "To: " + deathCause;
+
+        _deathText.transform.GetChild(0).GetComponent<TMP_Text>().text = FileReader.GetDeathMessage(deathCause, "FirstDeath");
 
         gameObject.SetActive(false);
 

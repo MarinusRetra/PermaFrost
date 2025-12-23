@@ -23,7 +23,7 @@ namespace Gameplay
             UpdateVariables();
         }
 
-        private void OnFocus()
+        private void OnInspectorUpdate()
         {
             switch (allTabs[selectedTab])
             {
@@ -38,8 +38,8 @@ namespace Gameplay
 
                     for (int i = 0; i < items.Count; i++)
                     {
-                        if (items[i].HoldObject == null) 
-                        { 
+                        if (items[i].HoldObject == null)
+                        {
                             items.RemoveAt(i);
                             i = -1;
                             itemNames = new string[items.Count];
@@ -61,7 +61,7 @@ namespace Gameplay
 
                     for (int i = 0; i < events.Count; i++)
                     {
-                       eventNames[i] = events[i].name;
+                        eventNames[i] = events[i].name;
                     }
                     break;
                 case "Misc":
@@ -71,7 +71,6 @@ namespace Gameplay
                     break;
             }
         }
-
         private void UpdateVariables()
         {
             baseGen = GameObject.Find("BaseGeneration");
@@ -311,6 +310,14 @@ namespace Gameplay
 
             GUILayout.Label("Game", titleStyle);
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
+            if (GUILayout.Button("Force Skip Cutscene (Experimental)", importantButtonStyle) && CheckIfRunning())
+            {
+                GameObject.Find("StartingCutscene").SetActive(false);
+                FindAnyObjectByType<CutsceneManager>().ForceStopStartingCutscene();
+                SerializedObject serGen = new SerializedObject(FindAnyObjectByType<Generation>());
+                serGen.FindProperty("fastLoading").boolValue = true;
+                serGen.ApplyModifiedProperties();
+            }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);
 

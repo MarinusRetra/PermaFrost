@@ -34,6 +34,10 @@ namespace Gameplay
 
             yield return new WaitForSeconds((float)_startingTimeline.duration);
 
+            ForceStopStartingCutscene();
+        }
+        public void ForceStopStartingCutscene()
+        {
             //turn player back on
             _ui.SetActive(true);
             _player.GetComponent<PlayerController>().enabled = true;

@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7089690104712851913}
+  - {fileID: 4462337297807495815}
   m_Father: {fileID: 4042492171328890615}
   m_LocalEulerAnglesHint: {x: -13.221, y: -4.969, z: -1.418}
 --- !u!33 &321461508481050241
@@ -271,8 +272,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2167895748305581227}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.44599998, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -126.981995, y: 1.0999501, z: 272.88998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -439,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f34bb4dbfbe394186c5496cc5bb731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _interactDistance: 1000
+  _interactDistance: 10
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
 --- !u!124 &8649446171822719292
 Behaviour:
@@ -654,6 +655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.FreezingLantern
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   LanternOn: 0
+  _playerEffects: {fileID: 0}
 --- !u!1 &9114351315538011499
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +917,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -977,7 +979,7 @@ MonoBehaviour:
     Value: {fileID: 0}
   - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
+  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 0}
   - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
     Value: {fileID: 0}
@@ -1003,8 +1005,8 @@ MonoBehaviour:
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   CrouchSpeed: 3
   BaseSpeed: 4
-  SprintSpeed: 7
-  TotalStamina: 10
+  SprintSpeed: 5.5
+  TotalStamina: 140
   CurrentStamina: 10
   _sensitivity: 0.4
   _crouchCameraHeight: 0
@@ -1024,10 +1026,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusEffects
   _insanitySlider: {fileID: 0}
   _freezingSlider: {fileID: 0}
-  InsanityDeath: 20
+  InsanityDeath: 40
+  _currentInsanity: 0
   _insanityCauses: []
-  FrostbiteDeath: 30
-  _freezeSFX: {fileID: 0}
+  FrostbiteDeath: 200
+  _currentFrostbite: 0
+  _freezeSFX: {fileID: 8300000, guid: 7f7eb577c6ef1fc4180b83ff989055f8, type: 3}
 --- !u!114 &4605853214314879402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,7 +1048,7 @@ MonoBehaviour:
   HealInvincibility: 3
   _deathUI: {fileID: 0}
   _hitUI: {fileID: 0}
-  _reader: {fileID: 0}
+  _reader: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   _deathText: {fileID: 0}
 --- !u!114 &2481520789753704852
 MonoBehaviour:
@@ -1074,8 +1078,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c09f44bd45616e48b2bf8a221a3d660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerListener
-  _inventoryTimer: {fileID: 0}
+  _inventoryTimer: {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
   _bar: {fileID: 0}
+--- !u!1001 &4208562570966578540
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2481995046477459865}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.72898
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.140108
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.03
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.142
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.5294853
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.52937436
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.494041
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.44196337
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 78.622
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 421.135
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 59.62
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_Name
+      value: PlayerArm
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+--- !u!4 &4462337297807495815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+  m_PrefabInstance: {fileID: 4208562570966578540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4644713824374859465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1224,6 +1306,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8d1e737cc75939943b8d80c1791edd7b, type: 3}
       propertyPath: m_Name
       value: AllEarsBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8d1e737cc75939943b8d80c1791edd7b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8d1e737cc75939943b8d80c1791edd7b, type: 3}
       propertyPath: m_TagString

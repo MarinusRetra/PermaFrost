@@ -312,11 +312,7 @@ namespace Gameplay
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
             if (GUILayout.Button("Force Skip Cutscene (Experimental)", importantButtonStyle) && CheckIfRunning())
             {
-                GameObject.Find("StartingCutscene").SetActive(false);
                 FindAnyObjectByType<CutsceneManager>().ForceStopStartingCutscene();
-                SerializedObject serGen = new SerializedObject(FindAnyObjectByType<Generation>());
-                serGen.FindProperty("fastLoading").boolValue = true;
-                serGen.ApplyModifiedProperties();
             }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);

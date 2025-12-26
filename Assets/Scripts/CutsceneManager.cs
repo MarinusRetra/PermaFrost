@@ -36,17 +36,17 @@ namespace Gameplay
             _ui.SetActive(false);
             _player.GetComponent<PlayerController>().enabled = false;
 
-            yield return new WaitForSeconds((float)_startingTimeline.duration);
+            yield return new WaitForSeconds((float)_startingTimeline.duration - 0.1f);
 
-            ForceStopStartingCutscene();
+            ForceStopStartingCutscene(false);
         }
-        public void ForceStopStartingCutscene()
+        public void ForceStopStartingCutscene(bool fade = true)
         {
             if (!_startingCutscene.activeSelf) return;
-            //turn player back on
             _ui.SetActive(true);
 
-            StartCoroutine(FadeScreen(0.3f, 1, () => {
+            StartCoroutine(FadeScreen(0.3f * (fade ? 1 : 0), 1 * (fade ? 1 : 0), () => {
+                //turn player back on
                 _startingCutscene.SetActive(false);
                 _player.GetComponent<PlayerController>().enabled = true;
 
@@ -58,10 +58,15 @@ namespace Gameplay
 
         public IEnumerator FadeScreen(float fadeTime, float darkTime, Action betweenSceneCode = null)
         {
+            //if fade is set to 0 then just do the action
+            if(fadeTime == 0 && darkTime == 0)
+            {
+                betweenSceneCode?.Invoke();
+                yield break;
+            }
             _fadeImage.gameObject.SetActive(true);
 
-            // 1 = 0.1f
-            // 2 = 0.05f
+            //fade to black
             for(int i = 0; i < fadeTime * 20;  i++)
             {
                 float amountToGo = (0.05f / fadeTime) * (i + 1);
@@ -69,8 +74,12 @@ namespace Gameplay
                 _fadeImage.color = new Color(0, 0, 0, amountToGo);
                 yield return new WaitForSeconds(0.05f);
             }
+
+            //do code that was given
             betweenSceneCode?.Invoke();
             yield return new WaitForSeconds(darkTime);
+
+            //fade back
             for (int i = 0; i < fadeTime * 20; i++)
             {
                 float amountToGo = (0.05f / fadeTime) * (i + 1);

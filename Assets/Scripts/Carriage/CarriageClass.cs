@@ -25,6 +25,8 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private int _amountOfEvents;
     [SerializeField] private int _maxAmountOfItems = 1;
 
+    public CarriageClass previousCarriage;
+
 
     public void SpawnItems()
     {
@@ -52,6 +54,17 @@ public class CarriageClass : MonoBehaviour
         {
             int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
             List<EventClass> availableEvents = new List<EventClass>(_allowedEvents);
+
+            if (previousCarriage)
+            {
+                for (int i = 0; i < previousCarriage._selectedEventClasses.Count; i++)
+                {
+                    if (availableEvents.Contains(previousCarriage._selectedEventClasses[i]))
+                    {
+                        availableEvents.Remove(previousCarriage._selectedEventClasses[i]);
+                    }
+                }
+            }
 
             for (int i = 0; i < count; i++)
             {

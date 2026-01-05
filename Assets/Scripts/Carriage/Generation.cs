@@ -50,6 +50,7 @@ public class Generation : MonoBehaviour
         GameObject startRoom = Instantiate(_startRoom);
         _initializedRooms.Add(startRoom);
 
+        
         if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint)
         {
             player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
@@ -61,6 +62,9 @@ public class Generation : MonoBehaviour
             GameObject randomRoom = Instantiate(_rooms[Random.Range(0, _rooms.Count)]);
             GameObject previousRoom = _initializedRooms[i];
             PositionGeneratedRoom(randomRoom, previousRoom);
+
+            CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
+            randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;

@@ -91,7 +91,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             //play sound
             if(_frostbiteCauses.Count == 0) { _playSoundNextTick = true; }
-            if(_playSoundNextTick && _frostbiteCauses.Count > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position).transform.parent = transform.parent; _playSoundNextTick = false; }
+            if(_playSoundNextTick && _frostbiteCauses.Count > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position,false,true,0.2f).transform.parent = transform.parent; _playSoundNextTick = false; }
 
             //gain or lose frostbite. Unlike insanity you gain more frostbite the more causes you have.
             if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }

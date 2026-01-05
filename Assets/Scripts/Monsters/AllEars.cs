@@ -168,7 +168,7 @@ namespace Gameplay
 
             if (_canPlaySound)
             {
-                Soundsystem.PlaySound(_aggroSound, transform.position);
+                Soundsystem.PlaySound(_aggroSound, transform.position, false, true, 0.1f);
                 StartCoroutine(SoundCooldown());
             }
         }

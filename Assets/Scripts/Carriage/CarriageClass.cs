@@ -68,6 +68,10 @@ public class CarriageClass : MonoBehaviour
 
             for (int i = 0; i < count; i++)
             {
+                if(availableEvents.Count == 0)
+                {
+                    break;
+                }
                 int randomIndex = Random.Range(0, availableEvents.Count);
                 EventClass _chosenEvent = availableEvents[randomIndex];
                 _selectedEventClasses.Add(_chosenEvent);

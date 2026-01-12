@@ -28,7 +28,11 @@ namespace Gameplay
         /// </summary>
         private void HandleInteract()
         {
-            hit.collider.GetComponent<InteractObject>()?.Interact();
+            if (hit.collider.GetComponent<InteractObject>() && hit.collider.GetComponent<InteractObject>().enabled)
+            {
+                hit.collider.GetComponent<InteractObject>()?.Interact();
+            }
+
         }
 
         void OnDestroy()

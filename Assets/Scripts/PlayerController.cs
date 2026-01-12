@@ -40,6 +40,8 @@ namespace Gameplay
 
         public SprintBehaviour SprintBehav;
 
+        public GameObject CurrentRoom;
+
         private void OnEnable()
         {
             _input.MoveEvent += HandleMove;

@@ -27,6 +27,7 @@ public class CarriageClass : MonoBehaviour
 
     public CarriageClass previousCarriage;
 
+    private PlayerController _player;
 
     public void SpawnItems()
     {
@@ -50,6 +51,7 @@ public class CarriageClass : MonoBehaviour
 
     void Start()
     {
+        _player = FindAnyObjectByType<PlayerController>();
         if (_allowedEvents.Count > 0 && _amountOfEvents > 0)
         {
             int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
@@ -94,16 +96,21 @@ public class CarriageClass : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && _selectedEventClasses.Count > 0 && !_enterTriggered)
+        if (other.gameObject.layer == 3 && !playerInside)
         {
-            // Check if player is in front (higher Z position than the carriage)
-            if (generationClass.player.transform.position.z < transform.position.z)
-            {
-                playerInside = true;
-                _enterTriggered = true;
+            _player.CurrentRoom = gameObject;
 
-                foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Entered(this);
+            if(_selectedEventClasses.Count > 0 && !_enterTriggered)
+            {
+                // Check if player is in front (higher Z position than the carriage)
+                if (generationClass.player.transform.position.z < transform.position.z)
+                {
+                    playerInside = true;
+                    _enterTriggered = true;
+
+                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                        selectedEventClass.Entered(this);
+                }
             }
         }
     }

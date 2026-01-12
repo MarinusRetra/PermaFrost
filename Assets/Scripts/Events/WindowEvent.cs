@@ -62,7 +62,7 @@ namespace Gameplay
             foreach (Transform window in possibleWindows)
             {
                 window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
-                Destroy(window.GetComponent<Collider>());
+                window.gameObject.layer = 11;
             }
         }
     }

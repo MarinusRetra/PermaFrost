@@ -108,5 +108,50 @@ namespace Gameplay
             Cursor.visible = true;
             SceneManager.LoadScene(0);
         }
+
+        public static void StartCutsceneStatic(string name)
+        {
+            instance.StartCutscene(name);
+        }
+
+        public void StartCutscene(string name)
+        {
+            switch (name)
+            {
+                case "PaintingSecret":
+                    StartCoroutine(StartSecretCutscene());
+                    break;
+            }
+        }
+
+
+        [SerializeField] private GameObject _paintingCutscenePrefab;
+        [SerializeField] private TimelineAsset _paintingTimeline;
+        public IEnumerator StartSecretCutscene()
+        {
+            GameObject spawnedScene = null;
+            GameObject fakeRoom = _player.GetComponent<PlayerController>().CurrentRoom;
+            Vector3 originalRoomPos = fakeRoom.transform.position;
+            StartCoroutine(FadeScreen(0.3f, 1, () =>
+            {
+                spawnedScene = Instantiate(_paintingCutscenePrefab, new Vector3(100, 100, 100), new Quaternion(0, 0, 0, 0));
+                _player.GetComponent<PlayerController>().enabled = false;
+                _player.GetComponent<Rigidbody>().isKinematic = true;
+                spawnedScene.transform.Find("RoomTemplate").gameObject.SetActive(false);
+                fakeRoom.transform.position = spawnedScene.transform.position;
+
+            }));
+
+            yield return new WaitForSeconds((float)(_paintingTimeline.duration) - 0.3f);
+
+            StartCoroutine(FadeScreen(0.3f, 1, () =>
+            {
+                fakeRoom.transform.position = originalRoomPos;
+                _player.GetComponent<PlayerController>().enabled = true;
+                _player.GetComponent<Rigidbody>().isKinematic = false;
+                Destroy(spawnedScene);
+
+            }));
+        }
     }
 }

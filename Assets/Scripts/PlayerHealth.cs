@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        StartCoroutine(PlayerOutOfBoundsCheck());
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -90,5 +91,21 @@ public class PlayerHealth : MonoBehaviour
     public void HealPlayer(bool usingCourotine = true) 
     { 
         StartCoroutine(HealPlayer());
+    }
+
+    private IEnumerator PlayerOutOfBoundsCheck()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            if (transform.position.y < 0)
+            {
+                print("Player below the map");
+                StartCoroutine(CutsceneManager.instance.FadeScreen(0.3f, 1, () =>
+                {
+                    transform.position = GetComponent<PlayerController>().CurrentRoom.GetComponent<CarriageClass>().EntryPoint.transform.position + new Vector3(1,1,0);
+                }));
+            }
+        }
     }
 }

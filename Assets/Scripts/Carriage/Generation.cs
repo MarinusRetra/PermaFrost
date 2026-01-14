@@ -7,14 +7,14 @@ using Gameplay;
 public class Generation : MonoBehaviour
 {
     [Header("Rooms")]
-    [SerializeField] private List<GameObject> _rooms;
+    public RoomTypeScriptable Rooms;
     [SerializeField] private GameObject _startRoom;
     [SerializeField] private GameObject _endRoom;
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
     [SerializeField] private List<GameObject> _initializedRooms = new List<GameObject>();
-    private int _amountOfRooms = 15;
+    public int AmountOfRooms = 15;
     public GameObject player;
 
     public bool FastLoading = false;
@@ -47,7 +47,7 @@ public class Generation : MonoBehaviour
     {
         //I forgot how to turn bool to int dont bully me
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
-        GameObject startRoom = Instantiate(_startRoom);
+        GameObject startRoom = Instantiate(_startRoom, transform.position,transform.rotation);
         _initializedRooms.Add(startRoom);
 
         
@@ -57,9 +57,9 @@ public class Generation : MonoBehaviour
             player.SetActive(true);
         }
         yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
-        for (int i = 0; i < _amountOfRooms; i++)
+        for (int i = 0; i < AmountOfRooms; i++)
         {
-            GameObject randomRoom = Instantiate(_rooms[Random.Range(0, _rooms.Count)]);
+            GameObject randomRoom = Instantiate(Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)]);
             GameObject previousRoom = _initializedRooms[i];
             PositionGeneratedRoom(randomRoom, previousRoom);
 

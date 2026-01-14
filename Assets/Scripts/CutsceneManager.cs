@@ -127,6 +127,8 @@ namespace Gameplay
 
         [SerializeField] private GameObject _paintingCutscenePrefab;
         [SerializeField] private TimelineAsset _paintingTimeline;
+        [SerializeField] private RoomTypeScriptable _paintingRooms;
+        [SerializeField] private GameObject _baseGen;
         public IEnumerator StartSecretCutscene()
         {
             GameObject spawnedScene = null;
@@ -151,6 +153,14 @@ namespace Gameplay
                 _player.GetComponent<Rigidbody>().isKinematic = false;
                 Destroy(spawnedScene);
 
+                GameObject newGen = Instantiate(_baseGen, new Vector3(200, 200, 200), new Quaternion(0, 0, 0, 0));
+
+                Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
+                paintingRoomsGenerator.player = _player;
+                paintingRoomsGenerator.AmountOfRooms = 5;
+                paintingRoomsGenerator.Rooms = _paintingRooms;
+                paintingRoomsGenerator.FastLoading = true;
+                //_player.transform.position = new Vector3(200, 200, 200);
             }));
         }
     }

@@ -8,6 +8,12 @@ namespace Gameplay
     public class RoomTypeScriptable : ScriptableObject
     {
         public string RoomtypeName;
+
+        public GameObject RoomTypeStartRoom;
+        public GameObject RoomTypeEndRoom;
+
         public GameObject[] AllRoomsInType;
+
+        public bool AllowDupes = false;
     }
 }

@@ -153,7 +153,7 @@ namespace Gameplay
                 _player.GetComponent<Rigidbody>().isKinematic = false;
                 Destroy(spawnedScene);
 
-                GameObject newGen = Instantiate(_baseGen, new Vector3(200, 200, 200), new Quaternion(0, 0, 0, 0));
+                GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), new Quaternion(0, 0, 0, 0));
 
                 Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
                 paintingRoomsGenerator.player = _player;

@@ -8,8 +8,6 @@ public class Generation : MonoBehaviour
 {
     [Header("Rooms")]
     public RoomTypeScriptable Rooms;
-    [SerializeField] private GameObject _startRoom;
-    [SerializeField] private GameObject _endRoom;
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
@@ -45,9 +43,8 @@ public class Generation : MonoBehaviour
 
     IEnumerator GenerateRooms()
     {
-        //I forgot how to turn bool to int dont bully me
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
-        GameObject startRoom = Instantiate(_startRoom, transform.position,transform.rotation);
+        GameObject startRoom = Instantiate(Rooms.RoomTypeStartRoom, transform.position,transform.rotation);
         _initializedRooms.Add(startRoom);
 
         
@@ -57,9 +54,22 @@ public class Generation : MonoBehaviour
             player.SetActive(true);
         }
         yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
+        GameObject previousRandomRoom = null;
         for (int i = 0; i < AmountOfRooms; i++)
         {
-            GameObject randomRoom = Instantiate(Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)]);
+            GameObject selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
+
+            //prevent dupe rooms
+            if (selectedRoom == previousRandomRoom && !Rooms.AllowDupes)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
+                    if (selectedRoom != previousRandomRoom) { j = 100; }
+                }
+            }
+            previousRandomRoom = selectedRoom;
+            GameObject randomRoom = Instantiate(selectedRoom);
             GameObject previousRoom = _initializedRooms[i];
             PositionGeneratedRoom(randomRoom, previousRoom);
 
@@ -72,7 +82,7 @@ public class Generation : MonoBehaviour
             yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
         }
 
-        GameObject endRoom = Instantiate(_endRoom);
+        GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
         StartCoroutine(GenerateNavmesh());

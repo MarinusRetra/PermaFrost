@@ -160,7 +160,6 @@ namespace Gameplay
                 paintingRoomsGenerator.AmountOfRooms = 5;
                 paintingRoomsGenerator.Rooms = _paintingRooms;
                 paintingRoomsGenerator.FastLoading = true;
-                //_player.transform.position = new Vector3(200, 200, 200);
             }));
         }
     }

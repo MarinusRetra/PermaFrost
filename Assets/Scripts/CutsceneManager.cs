@@ -141,7 +141,6 @@ namespace Gameplay
                 _player.GetComponent<Rigidbody>().isKinematic = true;
                 spawnedScene.transform.Find("RoomTemplate").gameObject.SetActive(false);
                 fakeRoom.transform.position = spawnedScene.transform.position;
-
             }));
 
             yield return new WaitForSeconds((float)(_paintingTimeline.duration) - 0.3f);

@@ -39,7 +39,7 @@ namespace Gameplay
                 {
                     case LookStates.Moving:
                         yield return new WaitForSeconds(0.05f);
-                        if (PlayerMonsterManager.IsPlayerLookingAtObj(_collider))
+                        if (PlayerMonsterManager.IsPlayerLookingAtObj(_collider,true))
                         {
                             _animator.SetFloat("direction", _returnSpeed);
                         }

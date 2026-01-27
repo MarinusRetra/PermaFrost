@@ -40,6 +40,10 @@ namespace Gameplay
 
         public SprintBehaviour SprintBehav;
 
+        [Header("SpeedSyringeStuff")]
+        public int _timeRemaining = 0;
+        public bool _isRunning = false;
+
         public GameObject CurrentRoom;
 
         private void OnEnable()
@@ -128,7 +132,7 @@ namespace Gameplay
             }
         }
 
-        private void HandleSprintCancel()
+        public void HandleSprintCancel()
         {
             _currentMoveSpeed = _isCrouching ? CrouchSpeed : BaseSpeed;
             isSprinting = false;
@@ -141,7 +145,7 @@ namespace Gameplay
             while (true)
             {
                 //stamina goes down when running
-                if (isSprinting)
+                if (isSprinting && _moveDirection != Vector3.zero)
                 {
                     CurrentStamina -= 2;
                     if (CurrentStamina < 0)
@@ -235,5 +239,12 @@ namespace Gameplay
         }
 
         public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);
+
+        public void UpdateSpeed()
+        {
+            if (_isCrouching){ _currentMoveSpeed = CrouchSpeed; return; }
+            if ( isSprinting ){ _currentMoveSpeed = SprintSpeed; return; }
+            _currentMoveSpeed = BaseSpeed;
+        }
     }
 }

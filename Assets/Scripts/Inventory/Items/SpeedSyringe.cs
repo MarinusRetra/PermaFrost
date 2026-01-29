@@ -44,7 +44,6 @@ namespace Gameplay
             {
                 yield return new WaitForSeconds(1);
                 _controller._timeRemaining -= 1;
-                Debug.Log(_controller._timeRemaining);
             }
 
             _controller.CurrentStamina = -(int)(_controller.TotalStamina * endNegativeStaminaMultiplier);

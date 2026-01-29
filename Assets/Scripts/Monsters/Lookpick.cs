@@ -17,6 +17,8 @@ namespace Gameplay
         private Vignette vignette;
         private enum LookStates { Moving, Idle }
         private LookStates _currentState = LookStates.Idle;
+
+        [SerializeField] private bool _tpToPlayer = true;
         private void Start()
         {
             _postProcessing.TryGet(out vignette);
@@ -25,7 +27,7 @@ namespace Gameplay
             _animator = GetComponentInParent<Animator>();
             _pmm = PlayerMonsterManager.Instance;
             _animator.enabled = false;
-            Aggro();
+            if (_tpToPlayer) { Aggro(); }
             _animator.enabled = true;
             StartCoroutine(HandleMovement());
         }

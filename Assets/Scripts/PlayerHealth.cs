@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] private TMP_Text _deathText;
 
+    public bool CheckPlayerUnderMap = true;
+
     private void Start()
     {
         Instance = this;
@@ -95,7 +97,7 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator PlayerOutOfBoundsCheck()
     {
-        while (true)
+        while (CheckPlayerUnderMap)
         {
             yield return new WaitForSeconds(1);
             if (transform.position.y < 0)

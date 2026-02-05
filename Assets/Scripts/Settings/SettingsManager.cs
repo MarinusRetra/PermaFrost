@@ -27,6 +27,10 @@ namespace Gameplay
         public void SetSensitivity(float number)
         {
             cameraSensitivity = number;
+            if (FindAnyObjectByType<PlayerController>())
+            {
+                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity;
+            }
         }
 
         public void DefaultSensitivity()
@@ -58,6 +62,23 @@ namespace Gameplay
         {
             _mainVolumeSlider.value = defaultVolume;
             _audioMixer.SetFloat("Master", Mathf.Log10(defaultVolume) * 20);
+        }
+
+        public void SwitchWindowMode(int windowType)
+        {
+            //Self explanatory
+            switch (windowType)
+            {
+                case 0:
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    break;
+                case 1:
+                    Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
+                    break;
+                case 2:
+                    Screen.fullScreenMode = FullScreenMode.Windowed;
+                    break;
+            }
         }
     }
 }

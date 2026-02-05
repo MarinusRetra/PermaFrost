@@ -108,7 +108,7 @@ namespace Gameplay
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, 0, 0);
             // TODO: Make it work properly with the joystick as well.
         }
-        private void HandleCrouch()
+        public void HandleCrouch()
         {
             _isHoldingCrouch = true;
             CrouchDown();

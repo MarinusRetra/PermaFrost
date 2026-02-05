@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -20,15 +21,21 @@ namespace Gameplay
         private Vector3 _moveDirection;
         private float _moveInputX, _moveInputY;
 
+        private float _cameraRotationY;
+        private float _cameraRotationX;
+        [SerializeField] private float _sensitivity = 0.4f;
+        private Transform _camera;
 
         private void OnEnable()
         {
             _input.MoveEvent += HandleMove;
+            _input.LookEvent += HandleLook;
         }
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             player = GameObject.Find("Player");
+            _camera = player.transform.GetChild(0);
             playerHealth = player.GetComponent<PlayerHealth>();
             playerEffects = player.GetComponent<PlayerStatusEffects>();
             rb = player.GetComponent<Rigidbody>();
@@ -50,18 +57,8 @@ namespace Gameplay
                 playerEffects.FrostbiteDeath = 9999;
                 inFreeCam = true;
                 playerHealth.CheckPlayerUnderMap = false;
-            }
-
-            if (inFreeCam)
-            {
-                if (keyboard.numpad8Key.isPressed)
-                {
-                    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.1f, player.transform.position.z);
-                }
-                if (keyboard.numpad2Key.isPressed)
-                {
-                    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.1f, player.transform.position.z);
-                }
+                _input.CrouchEvent -= player.GetComponent<PlayerController>().HandleCrouch;
+                GameObject.Find("UI").GetComponent<Canvas>().enabled = false;
             }
 
             if (keyboard.mKey.wasPressedThisFrame && inFreeCam)
@@ -74,29 +71,41 @@ namespace Gameplay
                 else
                 {
                     player.GetComponent<PlayerController>().enabled = true;
+                    _input.CrouchEvent -= player.GetComponent<PlayerController>().HandleCrouch;
                     seperatedCam = false;
                 }
-
-                if (inFreeCam)
+            }
+            if (inFreeCam)
+            {
+                if (keyboard.numpadPlusKey.wasPressedThisFrame)
                 {
-                    if (keyboard.numpadPlusKey.wasPressedThisFrame)
-                    {
-                        _currentMoveSpeed++;
-                        print("Speed up");
-                    }
-                    if (keyboard.numpadMinusKey.wasPressedThisFrame)
-                    {
-                        _currentMoveSpeed--;
-                    }
+                    _currentMoveSpeed++;
+                }
+                if (keyboard.numpadMinusKey.wasPressedThisFrame)
+                {
+                    _currentMoveSpeed--;
                 }
             }
         }
 
         private void FixedUpdate()
         {
+            var keyboard = Keyboard.current;
+            if (keyboard == null) return;
             if (seperatedCam)
             {
                 Move();
+            }
+            if (inFreeCam)
+            {
+                if (keyboard.spaceKey.isPressed)
+                {
+                    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.1f, player.transform.position.z);
+                }
+                if (keyboard.ctrlKey.isPressed)
+                {
+                    player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.1f, player.transform.position.z);
+                }
             }
         }
 
@@ -111,9 +120,28 @@ namespace Gameplay
 
         private void Move()
         {
-            _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
+            if (seperatedCam)
+            {
+                _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
 
-            rb.linearVelocity = _currentMoveSpeed * _moveDirection + new Vector3(0, rb.linearVelocity.y, 0);
+                rb.linearVelocity = _currentMoveSpeed * _moveDirection + new Vector3(0, rb.linearVelocity.y, 0);
+            }
+        }
+
+        /// <summary>
+        /// Uses mouse position to or joystick delta to rotate the first person camera.
+        /// </summary>
+        void HandleLook(Vector2 obj)
+        {
+            if (seperatedCam)
+            {
+                _cameraRotationX = Math.Clamp(_cameraRotationX -= obj.y * _sensitivity, -90, 90);
+                _cameraRotationY = _cameraRotationY += obj.x * _sensitivity;
+
+                _camera.localRotation = Quaternion.Euler(_cameraRotationX, _cameraRotationY, 0);
+            }
+
+            // TODO: Make it work properly with the joystick as well.
         }
     }
     #endif

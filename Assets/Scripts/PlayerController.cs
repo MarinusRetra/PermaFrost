@@ -22,7 +22,7 @@ namespace Gameplay
 
         [Header("Camera values")]
         private Transform _camera;
-        [SerializeField] private float _sensitivity = 0.4f;
+        public float _sensitivity = 0.4f;
         [SerializeField] private float _crouchCameraHeight = 0f;
         [SerializeField] private float _standCameraHeight = 0.5f;
         private Rigidbody _rb;

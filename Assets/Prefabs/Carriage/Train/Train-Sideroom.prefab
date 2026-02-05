@@ -291,13 +291,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455082744932450368}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -3.614, y: -0.938, z: -7.129}
+  m_LocalRotation: {x: -0.36274117, y: -0.3285422, z: 0.61539006, w: 0.6178786}
+  m_LocalPosition: {x: -3.6189382, y: -0.93799996, z: -7.1030607}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7722160533237527902}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -2.516, y: -58.57, z: 91.18}
 --- !u!33 &5805736736457996639
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11492,7 +11492,7 @@ Transform:
   m_GameObject: {fileID: 8385296707907821282}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.543, y: -0.99, z: -2.603}
+  m_LocalPosition: {x: 2.543, y: -1.163, z: -2.603}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -14365,6 +14365,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0e2eacd2ecd03d43a1580468619d8c0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3056746925234178005}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d0e2eacd2ecd03d43a1580468619d8c0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7930274639755964136}
   m_SourcePrefab: {fileID: 100100000, guid: d0e2eacd2ecd03d43a1580468619d8c0, type: 3}
 --- !u!4 &4919810479605198108 stripped
 Transform:
@@ -14414,6 +14417,27 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.149, y: 0.23900001, z: -0.040000003}
   m_TimeToStationary: 0.5
+--- !u!65 &7930274639755964136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696346800440276902}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5882702, y: 0.08177698, z: 0.99269193}
+  m_Center: {x: -0.0058650225, y: -0.08546823, z: -0.039833874}
 --- !u!1001 &5104575036071018721
 PrefabInstance:
   m_ObjectHideFlags: 0

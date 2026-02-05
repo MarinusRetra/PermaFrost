@@ -304,6 +304,7 @@ namespace Gameplay
         List<CarriageClass> allRooms;
         int selectedEvent = 0;
         public string[] eventNames;
+        bool allItemSpots;
         private void GamePage()
         {
             if (!GameObject.Find("BaseGeneration")) { return; }
@@ -389,6 +390,48 @@ namespace Gameplay
                             allRooms[j]._selectedEventClasses.RemoveAt(i);
                         }
                     }
+                }
+            }
+            GUILayout.Space(20);
+            GUILayout.Label("Items", headerStyle);
+            allItemSpots = EditorGUILayout.Toggle("AllSpots", allItemSpots);
+
+            if (GUILayout.Button("RespawnRoomItems") && CheckIfRunning())
+            {
+                for (int j = 0; j < allRooms.Count; j++)
+                {
+                    if (allItemSpots)
+                    {
+                        allRooms[j].DespawnItems();
+                        allRooms[j].SpawnItemsAllSlots();
+                    }
+                    else
+                    {
+                        allRooms[j].DespawnItems();
+                        allRooms[j].SpawnItems();
+                    }
+                }
+
+            }
+            if (GUILayout.Button("SpawnRoomItems") && CheckIfRunning())
+            {
+                for (int j = 0; j < allRooms.Count; j++)
+                {
+                    if (allItemSpots)
+                    {
+                        allRooms[j].SpawnItemsAllSlots();
+                    }
+                    else
+                    {
+                        allRooms[j].SpawnItems();
+                    }
+                }
+            }
+            if (GUILayout.Button("DespawnRoomItems") && CheckIfRunning())
+            {
+                for (int j = 0; j < allRooms.Count; j++)
+                { 
+                    allRooms[j].DespawnItems();
                 }
             }
         }

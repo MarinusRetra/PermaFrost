@@ -1,4 +1,5 @@
 using Gameplay;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,6 +30,8 @@ public class CarriageClass : MonoBehaviour
 
     private PlayerController _player;
 
+    private List<GameObject> spawnedItems = new List<GameObject>();
+
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;
@@ -41,13 +44,47 @@ public class CarriageClass : MonoBehaviour
                 Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
-                //newDroppedItem.transform.parent = transform;
+                //newDroppedItem.transform.parent = transform; 
 
                 //prevent 2 items in 1 spot
                 _spawnPoints.Remove(randomLocation);
+                spawnedItems.Add(newDroppedItem);
             }
         }
     }
+#if UNITY_EDITOR
+    //these functions are only used for the player editor tab, do not worry about them too much
+    public void DespawnItems()
+    {
+        for(int i = 0; i <  spawnedItems.Count; i++)
+        {
+            if (spawnedItems[i] == null) { continue; }
+            Destroy(spawnedItems[i]);
+        }
+    }
+
+    public void SpawnItemsAllSlots()
+    {
+        StartCoroutine(LilbroNeedsToWaitCauseHitboxes());
+    }
+
+    private IEnumerator LilbroNeedsToWaitCauseHitboxes()
+    {
+        yield return new WaitForSeconds(0.1f);
+        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
+        _spawnPoints.RemoveAt(0);
+        if (_spawnPoints.Count > 0)
+        {
+            for (int i = 0; i < _spawnPoints.Count; i++)
+            {
+                Transform setLocation = _spawnPoints[i];
+                InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, setLocation.position, Quaternion.identity);
+                spawnedItems.Add(newDroppedItem);
+            }
+        }
+    }
+#endif
 
     void Start()
     {

@@ -8,15 +8,15 @@ namespace Gameplay
     public class SettingsManager : MonoBehaviour
     {
 
-        public static float cameraSensitivity;
+        public static float cameraSensitivity = 1;
         [SerializeField] private Slider camSensitivitySlider;
-        public float defaultSensitivity = 0.4f;
+        public float defaultSensitivity = 1;
 
         private void Start()
         {
             if (FindAnyObjectByType<PlayerController>())
             {
-                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity;
+                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity * 0.4f;
             }
             if (camSensitivitySlider)
             {
@@ -29,7 +29,7 @@ namespace Gameplay
             cameraSensitivity = number;
             if (FindAnyObjectByType<PlayerController>())
             {
-                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity;
+                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity * 0.4f;
             }
         }
 

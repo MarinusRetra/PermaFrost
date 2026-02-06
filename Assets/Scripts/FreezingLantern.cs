@@ -10,7 +10,7 @@ namespace Gameplay
         public bool LanternOn;
 
         //needs to be static for FireGuy
-        public static float Range = 10;
+        public static float Range = 3;
 
         [SerializeField] private PlayerStatusEffects _playerEffects;
         public void Start()

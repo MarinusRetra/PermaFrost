@@ -73,9 +73,6 @@ namespace Gameplay
                     Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                     break;
                 case 1:
-                    Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
-                    break;
-                case 2:
                     Screen.fullScreenMode = FullScreenMode.Windowed;
                     break;
             }

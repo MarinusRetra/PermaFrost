@@ -311,9 +311,9 @@ namespace Gameplay
 
             GUILayout.Label("Game", titleStyle);
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
-            if (GUILayout.Button("Force Skip Cutscene (Experimental)", importantButtonStyle) && CheckIfRunning())
+            if (GUILayout.Button("Skip Cutscene but button", importantButtonStyle) && CheckIfRunning())
             {
-                FindAnyObjectByType<CutsceneManager>().ForceStopStartingCutscene();
+                FindAnyObjectByType<CutsceneManager>().StopStartingCutscene();
             }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);

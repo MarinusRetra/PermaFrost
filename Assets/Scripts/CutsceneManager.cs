@@ -48,14 +48,14 @@ namespace Gameplay
 
             yield return new WaitForSeconds((float)_startingTimeline.duration - 0.1f);
 
-            ForceStopStartingCutscene(false);
+            StopStartingCutscene(false);
         }
 
         public void HandleSkip()
         {
-            ForceStopStartingCutscene();
+            StopStartingCutscene();
         }
-        public void ForceStopStartingCutscene(bool fade = true)
+        public void StopStartingCutscene(bool fade = true)
         {
             if (!_startingCutscene.activeSelf) return;
             _cutsceneUi.SetActive(false);

@@ -17,7 +17,6 @@ namespace Gameplay
 
         public override bool Use()
         {
-            Debug.Log("SpeedSyringe");
             _controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
             _controller.StartRoutine(Run());
             return true;
@@ -25,6 +24,7 @@ namespace Gameplay
 
         IEnumerator Run()
         {
+            //if not running, 10 seconds, if is running, add 5. values may be different.
             _controller._timeRemaining = _controller._isRunning ? _controller._timeRemaining + stackDuration : duration;
             _controller.CurrentStamina = (int)(_controller.TotalStamina * staminaMultiplier);
             if (_controller._isRunning) { yield break;  }
@@ -51,6 +51,7 @@ namespace Gameplay
             _controller.BaseSpeed = baseSpeed;
             _controller.CrouchSpeed = crouchSpeed;
             _controller.SprintSpeed = sprintSpeed;
+
             _controller.UpdateSpeed();
             _controller._isRunning = false;
         }

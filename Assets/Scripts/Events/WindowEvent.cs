@@ -32,8 +32,8 @@ namespace Gameplay
 
         public override bool Generated(CarriageClass room) 
         {
-            bool doEarly = Random.Range(0, 3) > 1;
-            if (doEarly)
+            bool breakEarly = Random.Range(0, 3) > 1;
+            if (breakEarly)
             {
                 BreakWindows(room);
             }

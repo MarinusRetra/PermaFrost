@@ -15,7 +15,6 @@ namespace Gameplay
                 if (hitColliders[i].gameObject != gameObject && !hitColliders[i].name.Contains("Key"))
                 {
                     Destroy(hitColliders[i].gameObject);
-                    Debug.Log("Hit : " + hitColliders[i].name + i);
                 }
             }
         }

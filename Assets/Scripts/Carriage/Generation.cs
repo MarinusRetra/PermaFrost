@@ -91,7 +91,6 @@ public class Generation : MonoBehaviour
     private IEnumerator GenerateNavmesh()
     {
         yield return new WaitForEndOfFrame();
-        //_meshSurface.BuildNavMesh();
         _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
     }
 }

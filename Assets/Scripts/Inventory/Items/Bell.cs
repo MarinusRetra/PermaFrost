@@ -9,7 +9,6 @@ namespace Gameplay
         public override bool Use()
         {
             PlayerStatusEffects.Instance.AddInstantInsanity(_value);
-            Debug.Log("Bell");
             return true;
         }
     }

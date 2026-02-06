@@ -102,7 +102,6 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(1);
             if (transform.position.y < 0)
             {
-                print("Player below the map");
                 StartCoroutine(CutsceneManager.instance.FadeScreen(0.3f, 1, () =>
                 {
                     transform.position = GetComponent<PlayerController>().CurrentRoom.GetComponent<CarriageClass>().EntryPoint.transform.position + new Vector3(1,1,0);

@@ -20,6 +20,7 @@ namespace Gameplay
         {
             if (objec.GetComponent<HotDude>())
             {
+                //HD would block the door is stunned.
                 objec.GetComponent<HotDude>().DestroyMonster();
             }
             if (objec.CompareTag("Player"))

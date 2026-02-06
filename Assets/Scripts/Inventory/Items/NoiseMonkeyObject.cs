@@ -37,7 +37,6 @@ namespace Gameplay
         private IEnumerator PlaySound()
         {
             if (_isPlaying) { yield return 0; }
-            print("Playin");
             _isPlaying = true;
             PlayerMonsterManager.Instance.OverridePlayerSounds = true;
             _body.isKinematic = true;

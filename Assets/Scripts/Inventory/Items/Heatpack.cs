@@ -9,7 +9,6 @@ namespace Gameplay
         public override bool Use()
         {
             PlayerStatusEffects.Instance.AddInstantFrostbite(_value);
-            Debug.Log("Heatpack");
             return true;
         }
     }

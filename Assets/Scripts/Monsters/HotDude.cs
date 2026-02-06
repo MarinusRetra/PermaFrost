@@ -113,6 +113,7 @@ namespace Gameplay
 
         private bool CheckIfFreezing()
         {
+            //checks for a freezing lantern nearby
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern.Range);
             foreach (var hitCollider in hitColliders)
             {

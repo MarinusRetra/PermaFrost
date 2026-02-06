@@ -6,7 +6,7 @@ using System;
 namespace Gameplay
 {
     [CreateAssetMenu(menuName = "inputReader")]
-    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions
+    public class InputReader : ScriptableObject, GameInput.IGameplayActions, GameInput.IUIActions,GameInput.ICutscenesActions
     {
         private GameInput _gameInput;
         public bool CanModifyHotbar = true;
@@ -21,6 +21,7 @@ namespace Gameplay
 
                 _gameInput.Gameplay.SetCallbacks(this);
                 _gameInput.UI.SetCallbacks(this);
+                _gameInput.Cutscenes.SetCallbacks(this);
 
                 SetGameplayActions();
             }
@@ -32,6 +33,7 @@ namespace Gameplay
         {
             _gameInput.Gameplay.Enable();
             _gameInput.UI.Disable();
+            _gameInput.Cutscenes.Disable();
         }
         /// <summary>
         /// Set Gameplay controls uit en UI controls aan.
@@ -39,6 +41,17 @@ namespace Gameplay
         public void SetUIActions()
         {
             _gameInput.UI.Enable();
+            _gameInput.Gameplay.Disable();
+            _gameInput.Cutscenes.Disable();
+        }
+
+        /// <summary>
+        /// Set Gameplay and UI controls off and turns on cutscene controls
+        /// </summary>
+        public void SetCutsceneActions()
+        {
+            _gameInput.Cutscenes.Enable();
+            _gameInput.UI.Disable();
             _gameInput.Gameplay.Disable();
         }
         // Gameplay Action Events
@@ -65,6 +78,8 @@ namespace Gameplay
         public event Action ClickEvent;
         public event Action SubmitEvent;
 
+        // Cutscene action events
+        public event Action SkipEvent;
 
         // Gameplay Actions
         public void OnUse(InputAction.CallbackContext context)
@@ -203,15 +218,26 @@ namespace Gameplay
                 SubmitEvent?.Invoke();
             }
         }
+
+        //Cutscene events
+        public void OnSkip(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                SkipEvent?.Invoke();
+            }
+        }
         void OnDisable()
         {
             _gameInput.UI.Disable();
             _gameInput.Gameplay.Disable();
+            _gameInput.Cutscenes.Disable();
         }
         void OnDestroy()
         {
             _gameInput.UI.Disable();
             _gameInput.Gameplay.Disable();
+            _gameInput.Cutscenes.Disable();
         }
 
         public void OnLantern(InputAction.CallbackContext context)

@@ -11,6 +11,7 @@ namespace Gameplay
     public class CutsceneManager : MonoBehaviour
     {
         public static CutsceneManager instance;
+        [SerializeField] private InputReader _input;
         [SerializeField] private GameObject _ui;
         [SerializeField] private Image _fadeImage;
         [SerializeField] private GameObject _startingCutscene;
@@ -19,6 +20,12 @@ namespace Gameplay
         private GameObject _player;
         [SerializeField] private GameObject _backgroundSound;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+        private void OnEnable()
+        {
+            _input.SkipEvent += HandleSkip;
+        }
+
         void Start()
         {
             instance = this;
@@ -30,6 +37,7 @@ namespace Gameplay
         }
         private IEnumerator StartStartingCutscene()
         {
+            _input.SetCutsceneActions();
             //turn off player
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -40,10 +48,14 @@ namespace Gameplay
 
             ForceStopStartingCutscene(false);
         }
+
+        public void HandleSkip()
+        {
+            ForceStopStartingCutscene();
+        }
         public void ForceStopStartingCutscene(bool fade = true)
         {
             if (!_startingCutscene.activeSelf) return;
-            _ui.SetActive(true);
 
             StartCoroutine(FadeScreen(0.3f * (fade ? 1 : 0), 1 * (fade ? 1 : 0), () => {
                 //turn player back on
@@ -53,7 +65,8 @@ namespace Gameplay
                 _backgroundSound.SetActive(true);
                 FindAnyObjectByType<Generation>().FastLoading = true;
             }));
-
+            _ui.SetActive(true);
+            _input.SetGameplayActions();
         }
 
         public IEnumerator FadeScreen(float fadeTime, float darkTime, Action betweenSceneCode = null)
@@ -160,6 +173,10 @@ namespace Gameplay
                 paintingRoomsGenerator.Rooms = _paintingRooms;
                 paintingRoomsGenerator.FastLoading = true;
             }));
+        }
+        private void OnDisable()
+        {
+            _input.SkipEvent -= HandleSkip;
         }
     }
 }

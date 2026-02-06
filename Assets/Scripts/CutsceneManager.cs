@@ -13,6 +13,7 @@ namespace Gameplay
         public static CutsceneManager instance;
         [SerializeField] private InputReader _input;
         [SerializeField] private GameObject _ui;
+        [SerializeField] private GameObject _cutsceneUi;
         [SerializeField] private Image _fadeImage;
         [SerializeField] private GameObject _startingCutscene;
         [SerializeField] private TimelineAsset _startingTimeline;
@@ -37,6 +38,7 @@ namespace Gameplay
         }
         private IEnumerator StartStartingCutscene()
         {
+            _cutsceneUi.SetActive(true);
             _input.SetCutsceneActions();
             //turn off player
             Cursor.lockState = CursorLockMode.Locked;
@@ -56,8 +58,10 @@ namespace Gameplay
         public void ForceStopStartingCutscene(bool fade = true)
         {
             if (!_startingCutscene.activeSelf) return;
+            _cutsceneUi.SetActive(false);
 
             StartCoroutine(FadeScreen(0.3f * (fade ? 1 : 0), 1 * (fade ? 1 : 0), () => {
+                _ui.SetActive(true);
                 //turn player back on
                 _startingCutscene.SetActive(false);
                 _player.GetComponent<PlayerController>().enabled = true;
@@ -65,7 +69,6 @@ namespace Gameplay
                 _backgroundSound.SetActive(true);
                 FindAnyObjectByType<Generation>().FastLoading = true;
             }));
-            _ui.SetActive(true);
             _input.SetGameplayActions();
         }
 
@@ -87,10 +90,10 @@ namespace Gameplay
                 _fadeImage.color = new Color(0, 0, 0, amountToGo);
                 yield return new WaitForSeconds(0.05f);
             }
-
+            yield return new WaitForSeconds(darkTime/2);
             //do code that was given
             betweenSceneCode?.Invoke();
-            yield return new WaitForSeconds(darkTime);
+            yield return new WaitForSeconds(darkTime/2);
 
             //fade back
             for (int i = 0; i < fadeTime * 20; i++)

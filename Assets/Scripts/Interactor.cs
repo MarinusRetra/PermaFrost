@@ -10,6 +10,7 @@ namespace Gameplay
         private Ray _ray;
         public RaycastHit hit;
         private Transform _cameraTransform;
+        public LayerMask playerLayer;
 
         public void Start()
         {
@@ -20,7 +21,7 @@ namespace Gameplay
         void FixedUpdate()
         {
             _ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-            Physics.Raycast(_ray, out hit, _interactDistance);
+            Physics.Raycast(_ray, out hit, _interactDistance,~playerLayer);
             hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
         /// <summary>

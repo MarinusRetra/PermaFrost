@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 2068816746323865798}
   - component: {fileID: 7253298827311136358}
   - component: {fileID: 2336188246437076830}
+  - component: {fileID: 3753252517344322150}
   m_Layer: 0
   m_Name: LockedDoor
   m_TagString: Door
@@ -218,6 +219,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.TestInteract
   InteractEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3753252517344322150}
+        m_TargetAssemblyTypeName: Gameplay.Door, Assembly-CSharp
+        m_MethodName: CheckAndUseKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _outlineScale: 1.1
   _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}
+--- !u!114 &3753252517344322150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144190194560952587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47d26f8954c6cc49b9096c41aa318c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Door
+  key: {fileID: 11400000, guid: cb70f15f94ffddd4b8b812432ae1730a, type: 2}

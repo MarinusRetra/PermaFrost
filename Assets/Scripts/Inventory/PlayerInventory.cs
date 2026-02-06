@@ -25,7 +25,7 @@ namespace Gameplay
         [SerializeField] private InputReader _input;
 
         [Header("Debug variables do not assign anything")]
-        [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
+        public SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
         public List<SerializedKeyValuePair<InventoryItem, RectTransform>> RemovedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
 
         public void Awake()
@@ -83,7 +83,7 @@ namespace Gameplay
         /// <summary>
         /// Use item in selected hotbar slot by triggering the item's logic.
         /// </summary>
-        private void HandleUse()
+        public void HandleUse()
         {
             if (_selectedHotbarItem.Key != _emptyItemSlot.Key && _hotbar.Count > 0)
             {

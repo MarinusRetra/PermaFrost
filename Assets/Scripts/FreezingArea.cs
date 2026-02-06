@@ -8,17 +8,23 @@ namespace Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses(_freezingName,false);
-            }
+            AffectObject(other.gameObject, false);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
+            AffectObject(other.gameObject, true);
+        }
+
+        public void AffectObject(GameObject objec,bool state)
+        {
+            if (objec.GetComponent<HotDude>())
             {
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses(_freezingName, true);
+                objec.GetComponent<HotDude>().DestroyMonster();
+            }
+            if (objec.CompareTag("Player"))
+            {
+                PlayerStatusEffects.Instance.ManageFrostbiteCauses(_freezingName, state);
             }
         }
     }

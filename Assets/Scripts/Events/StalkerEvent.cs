@@ -16,6 +16,7 @@ namespace Gameplay
         }
         public override bool Exited(CarriageClass room)
         {
+            if (!room.Holder.Find("Stalker(Clone)")) { return true; }
             room.Holder.Find("Stalker(Clone)").GetComponent<Monster>().DestroyMonster();
             return true;
         }

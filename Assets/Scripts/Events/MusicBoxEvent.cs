@@ -36,6 +36,7 @@ namespace Gameplay
         public override bool Exited(CarriageClass room)
         {
             Transform box = room.Holder.Find("MusicBox(Clone)");
+            if (box == null) { return false; }
             box.GetComponent<MusicBox>().SilenceBox(false);
             Destroy(box.gameObject);
             PlayerStatusEffects.Instance.ManageInsanityCauses("Music", true);

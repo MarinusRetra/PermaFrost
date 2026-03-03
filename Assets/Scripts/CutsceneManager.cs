@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -149,6 +150,12 @@ namespace Gameplay
         {
             GameObject spawnedScene = null;
             GameObject fakeRoom = _player.GetComponent<PlayerController>().CurrentRoom;
+            List<EventClass> even = _player.GetComponent<PlayerController>().CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses;
+            for (int i = 0; i < even.Count; i++)
+            {
+                even[i].Exited(fakeRoom.GetComponent<CarriageClass>());
+                even[i].CallForDeletion(fakeRoom.GetComponent<CarriageClass>());
+            }
             Vector3 originalRoomPos = fakeRoom.transform.position;
             StartCoroutine(FadeScreen(0.3f, 1, () =>
             {

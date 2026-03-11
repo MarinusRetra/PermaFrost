@@ -33,7 +33,7 @@ namespace Gameplay
         {
             Destroy(lookinAt);
             Destroy(_currentLookPickInstance);
-            Camera.main.GetComponentInParent<PlayerInventory>().RemoveSelectedSlot();
+            Camera.main.GetComponentInParent<PlayerInventory>().CurrentSelectedSlot.ClearSlot();
             _input.CanModifyHotbar = true;
         }
     }

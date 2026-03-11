@@ -58,30 +58,30 @@ public class Generation : MonoBehaviour
         for (int i = 0; i < AmountOfRooms; i++)
         {
 
-            //SpawnWeightedRoom(i);
-            GameObject selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
+            SpawnWeightedRoom(i);
+            //GameObject selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
 
-            //prevent dupe rooms
-            if (selectedRoom == previousRandomRoom && !Rooms.AllowDupes)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
-                    if (selectedRoom != previousRandomRoom) { j = 100; }
-                }
-            }
-            previousRandomRoom = selectedRoom;
-            GameObject randomRoom = Instantiate(selectedRoom);
-            GameObject previousRoom = _initializedRooms[i];
-            PositionGeneratedRoom(randomRoom, previousRoom);
+            ////prevent dupe rooms
+            //if (selectedRoom == previousRandomRoom && !Rooms.AllowDupes)
+            //{
+            //    for (int j = 0; j < 5; j++)
+            //    {
+            //        selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
+            //        if (selectedRoom != previousRandomRoom) { j = 100; }
+            //    }
+            //}
+            //previousRandomRoom = selectedRoom;
+            //GameObject randomRoom = Instantiate(selectedRoom);
+            //GameObject previousRoom = _initializedRooms[i];
+            //PositionGeneratedRoom(randomRoom, previousRoom);
 
-            CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
-            randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
+            //CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
+            //randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
 
-            _initializedRooms.Add(randomRoom);
-            randomRoom.transform.parent = transform;
-            _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
-            yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
+            //_initializedRooms.Add(randomRoom);
+            //randomRoom.transform.parent = transform;
+            //_meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
+            //yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
         }
 
         GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
@@ -92,26 +92,8 @@ public class Generation : MonoBehaviour
 
     private void SpawnWeightedRoom(int index)
     {
-        RoomClass selectedroom = new RoomClass();
-        int totalWeight = 0;
-        for(int i = 0;i < Rooms.AllRoomsSquaredInType.Length; i++)
-        {
-            totalWeight += Rooms.AllRoomsSquaredInType[i].Weight;
-            print("Current weight: " + totalWeight + ". Weight added this go: " + Rooms.AllRoomsSquaredInType[i].Weight);
-        }
-        int randomChosenWeight = Random.Range(1, totalWeight + 1);
-        int roomCheckers = 0;
-        for (int i = 0; i < Rooms.AllRoomsSquaredInType.Length; i++)
-        {
-            roomCheckers += Rooms.AllRoomsSquaredInType[i].Weight;
-            print("Current weight: " + roomCheckers + ". Weight added this go: " + Rooms.AllRoomsSquaredInType[i].Weight + ". We are looking for: " + randomChosenWeight);
-            if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
-            {
-                selectedroom = Rooms.AllRoomsSquaredInType[i];
-                print("Chosen room!" + Rooms.AllRoomsSquaredInType[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + Rooms.AllRoomsSquaredInType[i].Weight);
-                break;
-            }
-        }
+        RoomClass selectedroom = CalculateRoomWeight(Rooms.AllRoomsSquaredInType);
+        
         if (selectedroom.Room == null)
         {
             Debug.LogError("Room doesnt have a room");
@@ -131,6 +113,29 @@ public class Generation : MonoBehaviour
             _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
         }
 
+    }
+
+    private RoomClass CalculateRoomWeight(RoomClass[] rooms)
+    {
+        int totalWeight = 0;
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            totalWeight += rooms[i].Weight;
+            print("Current weight: " + totalWeight + ". Weight added this go: " + rooms[i].Weight);
+        }
+        int randomChosenWeight = Random.Range(1, totalWeight + 1);
+        int roomCheckers = 0;
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            roomCheckers += rooms[i].Weight;
+            print("Current weight: " + roomCheckers + ". Weight added this go: " + rooms[i].Weight + ". We are looking for: " + randomChosenWeight);
+            if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
+            {
+                print("Chosen room!" + rooms[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + rooms[i].Weight);
+                return rooms[i];
+            }
+        }
+        return new RoomClass();
     }
 
     private IEnumerator GenerateNavmesh()

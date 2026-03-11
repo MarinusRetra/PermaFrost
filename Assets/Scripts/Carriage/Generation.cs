@@ -41,6 +41,7 @@ public class Generation : MonoBehaviour
         currentCarriage.SpawnItems();
     }
 
+    private string prevRoomClassName;
     IEnumerator GenerateRooms()
     {
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
@@ -92,7 +93,20 @@ public class Generation : MonoBehaviour
 
     private void SpawnWeightedRoom(int index)
     {
-        RoomClass selectedroom = CalculateRoomWeight(Rooms.AllRoomsSquaredInType);
+        List<RoomClass> allPossibleRooms = new List<RoomClass>(Rooms.AllRoomsSquaredInType);
+        if(index > 0 && !Rooms.AllowDupes)
+        {
+            print(_initializedRooms[index - 1]);
+            for (int i = 0; i < allPossibleRooms.Count; i++)
+            {
+                if (allPossibleRooms[i].RoomName == prevRoomClassName)
+                {
+                    allPossibleRooms.Remove(allPossibleRooms[i]);
+                    break;
+                }
+            }
+        }
+        RoomClass selectedroom = CalculateRoomWeight(allPossibleRooms);
         
         if (selectedroom.Room == null)
         {
@@ -110,28 +124,29 @@ public class Generation : MonoBehaviour
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;
+            prevRoomClassName = selectedroom.RoomName;
             _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
         }
 
     }
 
-    private RoomClass CalculateRoomWeight(RoomClass[] rooms)
+    private RoomClass CalculateRoomWeight(List<RoomClass> rooms)
     {
         int totalWeight = 0;
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
             totalWeight += rooms[i].Weight;
-            print("Current weight: " + totalWeight + ". Weight added this go: " + rooms[i].Weight);
+            //print("Current weight: " + totalWeight + ". Weight added this go: " + rooms[i].Weight);
         }
         int randomChosenWeight = Random.Range(1, totalWeight + 1);
         int roomCheckers = 0;
-        for (int i = 0; i < rooms.Length; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
             roomCheckers += rooms[i].Weight;
-            print("Current weight: " + roomCheckers + ". Weight added this go: " + rooms[i].Weight + ". We are looking for: " + randomChosenWeight);
+            //print("Current weight: " + roomCheckers + ". Weight added this go: " + rooms[i].Weight + ". We are looking for: " + randomChosenWeight);
             if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
             {
-                print("Chosen room!" + rooms[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + rooms[i].Weight);
+                //print("Chosen room!" + rooms[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + rooms[i].Weight);
                 return rooms[i];
             }
         }

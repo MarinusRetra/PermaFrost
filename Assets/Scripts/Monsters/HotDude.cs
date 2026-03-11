@@ -70,17 +70,7 @@ namespace Gameplay
             for(int i = 0; i < 10; i++)
             {
                 yield return new WaitForSeconds(0.2f);
-
-                //double check that there is still a lantern in the area
-                Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern.Range);
-                bool _stillOn = false;
-                foreach (var hitCollider in hitColliders)
-                {
-                    if (hitCollider.GetComponent<FreezingLantern>())
-                    {
-                        _stillOn = true;
-                    }
-                }
+                bool _stillOn = CheckIfFreezing();
                 if (!_stillOn)
                 {
                     yield return null;
@@ -101,19 +91,12 @@ namespace Gameplay
                     yield return new WaitForSeconds(0.2f);
 
                     //while the lantern is still on, stay stunned
-                    Collider[] hitColliders = Physics.OverlapSphere(transform.position, 2);
-                    bool _continueFreeze = false;
-                    foreach (var hitCollider in hitColliders)
-                    {
-                        if (hitCollider.GetComponent<FreezingLantern>() && hitCollider.GetComponent<FreezingLantern>().LanternOn)
-                        {
-                            _continueFreeze = true;
-                        }
-                    }
+                    bool _continueFreeze = CheckIfFreezing();
+                    
                     if (!_continueFreeze)
                     {
                         yield return new WaitForSeconds(9);
-                        doneFreezing = true;
+                        doneFreezing = !CheckIfFreezing();
                     }
                 }
             }
@@ -126,6 +109,20 @@ namespace Gameplay
             _particles.Play();
             Soundsystem.PlaySound(_unstunSound, transform.position);
 
+        }
+
+        private bool CheckIfFreezing()
+        {
+            //checks for a freezing lantern nearby
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, FreezingLantern.Range);
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.GetComponent<FreezingLantern>() && hitCollider.GetComponent<FreezingLantern>().LanternOn)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         //on hit, stun for 5 seconds

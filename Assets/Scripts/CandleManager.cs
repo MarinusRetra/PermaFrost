@@ -14,9 +14,6 @@ namespace Gameplay
         private void Start()
         {
             _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
-
-            //remove the parent
-            _allCandles.RemoveAt(0);
             
         }
         public void TurnOffCandles()

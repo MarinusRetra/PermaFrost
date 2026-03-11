@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Gameplay
@@ -8,11 +7,12 @@ namespace Gameplay
         [Header("Interact Values")]
         [SerializeField] private float _interactDistance = 5f;
         [SerializeField] private InputReader _input;
-        private Ray ray;
+        private Ray _ray;
         public RaycastHit hit;
         private Transform _cameraTransform;
+        public LayerMask playerLayer;
 
-        void Start()
+        public void Start()
         {
             _input.InteractEvent += HandleInteract;
             _cameraTransform = Camera.main.transform;
@@ -20,8 +20,8 @@ namespace Gameplay
 
         void FixedUpdate()
         {
-            ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-            Physics.Raycast(ray, out hit, _interactDistance);
+            _ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+            Physics.Raycast(_ray, out hit, _interactDistance,~playerLayer);
             hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
         /// <summary>
@@ -29,7 +29,11 @@ namespace Gameplay
         /// </summary>
         private void HandleInteract()
         {
-            hit.collider.GetComponent<InteractObject>()?.Interact();
+            if (hit.collider.GetComponent<InteractObject>() && hit.collider.GetComponent<InteractObject>().enabled)
+            {
+                hit.collider.GetComponent<InteractObject>()?.Interact();
+            }
+
         }
 
         void OnDestroy()

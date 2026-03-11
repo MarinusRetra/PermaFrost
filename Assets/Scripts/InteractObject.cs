@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,7 +37,7 @@ namespace Gameplay
             _isHovered = true;
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             _materials[^1].SetFloat("_Scale", _isHovered ? _outlineScale : 0f);
             _isHovered = false;

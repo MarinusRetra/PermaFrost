@@ -5,11 +5,10 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "Item/HeatPack")]
     public class HeatPack : InventoryItem
     {
-        [SerializeField] private int value = -70;
+        [SerializeField] private int _value = -70;
         public override bool Use()
         {
-            PlayerStatusEffects.Instance.AddInstantFrostbite(value);
-            Debug.Log("Heatpack");
+            PlayerStatusEffects.Instance.AddInstantFrostbite(_value);
             return true;
         }
     }

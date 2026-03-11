@@ -25,10 +25,10 @@ namespace Gameplay
         [SerializeField] private InputReader _input;
 
         [Header("Debug variables do not assign anything")]
-        [SerializeField] private SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
+        public SerializedKeyValuePair<InventoryItem, RectTransform> _selectedHotbarItem;
         public List<SerializedKeyValuePair<InventoryItem, RectTransform>> RemovedHotbarElements = new(); // This is used to remember the removed hotbar slots to re-enable them later.
 
-        void Awake()
+        public void Awake()
         {
             _input.HotbarSelectEvent += HandleHotbarSelect;
             _input.NextPreviousEvent += HandleHotbarNav;
@@ -83,7 +83,7 @@ namespace Gameplay
         /// <summary>
         /// Use item in selected hotbar slot by triggering the item's logic.
         /// </summary>
-        private void HandleUse()
+        public void HandleUse()
         {
             if (_selectedHotbarItem.Key != _emptyItemSlot.Key && _hotbar.Count > 0)
             {
@@ -129,7 +129,7 @@ namespace Gameplay
         /// <summary>
         /// Clears out all the slots with an EmptyItem inside.
         /// </summary>
-        void  RemoveSlot(int indexIn)
+        private void RemoveSlot(int indexIn)
         {
             _hotbar[indexIn].Value.localScale = _normalSlotSize;
             RemovedHotbarElements.Add(_hotbar[indexIn]);
@@ -148,13 +148,14 @@ namespace Gameplay
             RemovedHotbarElements.Add(_selectedHotbarItem);
             _selectedHotbarItem.Value.gameObject.SetActive(false);
             _hotbar.RemoveAt(_hotbar.IndexOf(_selectedHotbarItem));
+            _selectedHotbarItem = _emptyItemSlot;
             return true;
         }
 
         /// <summary>
         /// Will set the sprite and color of the passed element at the index of hotbar and set the slot's sprite.
         /// </summary>
-        void SetSlotSprite(int indexIn)
+        private void SetSlotSprite(int indexIn)
         {
             var currentImage = _hotbar[indexIn].Value.GetChild(0).GetComponent<Image>();
             currentImage.sprite = _hotbar[indexIn].Key.sprite;

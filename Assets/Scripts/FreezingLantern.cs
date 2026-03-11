@@ -10,9 +10,12 @@ namespace Gameplay
         public bool LanternOn;
 
         //needs to be static for FireGuy
-        public static float Range = 10;
-        void Start()
+        public static float Range = 3;
+
+        [SerializeField] private PlayerStatusEffects _playerEffects;
+        public void Start()
         {
+            _playerEffects = PlayerStatusEffects.Instance;
             _input.LanternEvent += ChangeLanternState;
             StartCoroutine(HandleLantern());
         }
@@ -24,7 +27,7 @@ namespace Gameplay
             {
                 transform.GetChild(i).gameObject.SetActive(LanternOn);
             }
-            PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", !LanternOn);
+            _playerEffects.ManageFrostbiteCauses("Lantern", !LanternOn);
         }
 
         private List<GameObject> _objectsInAreaRightNow = new List<GameObject>();
@@ -78,6 +81,7 @@ namespace Gameplay
         /// <returns></returns>
         private bool AffectObject(GameObject objec, bool turnOn)
         {
+            if(objec == null) return false;
             if (objec.CompareTag("Player"))
             {
                 return true;

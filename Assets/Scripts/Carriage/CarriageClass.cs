@@ -1,4 +1,7 @@
+using Gameplay;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CarriageClass : MonoBehaviour
@@ -6,10 +9,10 @@ public class CarriageClass : MonoBehaviour
     [Header("Transforms")]
     public Transform EntryPoint;
     public Transform ExitPoint;
-    public Transform MainObject;
-    public Transform SpawnPoint;
+    public Transform PlayerSpawnPoint;
 
-    [SerializeField] private List<Transform> _spawnPoints;
+    public Transform[] SpawnPoints;
+    public Transform Holder;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     [SerializeField] private List<EventClass> _allowedEvents;
     public Generation generationClass;
@@ -23,9 +26,17 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private int _amountOfEvents;
     [SerializeField] private int _maxAmountOfItems = 1;
 
+    public CarriageClass previousCarriage;
+
+    private PlayerController _player;
+
+    private List<GameObject> spawnedItems = new List<GameObject>();
 
     public void SpawnItems()
     {
+        if (_maxAmountOfItems == 0) return;
+        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
+        _spawnPoints.RemoveAt(0);
         if (_spawnPoints.Count > 0)
         {
             for(int i = 0; i < Random.Range(0,_maxAmountOfItems + 1); i++)
@@ -33,25 +44,88 @@ public class CarriageClass : MonoBehaviour
                 Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
+                //newDroppedItem.transform.parent = transform; 
 
                 //prevent 2 items in 1 spot
                 _spawnPoints.Remove(randomLocation);
+                spawnedItems.Add(newDroppedItem);
             }
         }
     }
+#if UNITY_EDITOR
+    //these functions are only used for the player editor tab, do not worry about them too much
+    public void DespawnItems()
+    {
+        for(int i = 0; i <  spawnedItems.Count; i++)
+        {
+            if (spawnedItems[i] == null) { continue; }
+            Destroy(spawnedItems[i]);
+        }
+    }
+
+    public void SpawnItemsAllSlots()
+    {
+        StartCoroutine(LilbroNeedsToWaitCauseHitboxes());
+    }
+
+    private IEnumerator LilbroNeedsToWaitCauseHitboxes()
+    {
+        yield return new WaitForSeconds(0.1f);
+        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
+        _spawnPoints.RemoveAt(0);
+        if (_spawnPoints.Count > 0)
+        {
+            for (int i = 0; i < _spawnPoints.Count; i++)
+            {
+                Transform setLocation = _spawnPoints[i];
+                InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, setLocation.position, Quaternion.identity);
+                spawnedItems.Add(newDroppedItem);
+            }
+        }
+    }
+#endif
 
     void Start()
     {
+        _player = FindAnyObjectByType<PlayerController>();
         if (_allowedEvents.Count > 0 && _amountOfEvents > 0)
         {
             int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
             List<EventClass> availableEvents = new List<EventClass>(_allowedEvents);
 
+            if (previousCarriage)
+            {
+                for (int i = 0; i < previousCarriage._selectedEventClasses.Count; i++)
+                {
+                    if (availableEvents.Contains(previousCarriage._selectedEventClasses[i]))
+                    {
+                        availableEvents.Remove(previousCarriage._selectedEventClasses[i]);
+                    }
+                }
+            }
+
             for (int i = 0; i < count; i++)
             {
+                if(availableEvents.Count == 0)
+                {
+                    break;
+                }
                 int randomIndex = Random.Range(0, availableEvents.Count);
-                _selectedEventClasses.Add(availableEvents[randomIndex]);
+                EventClass _chosenEvent = availableEvents[randomIndex];
+                _selectedEventClasses.Add(_chosenEvent);
                 availableEvents.RemoveAt(randomIndex);
+                _chosenEvent.Generated(this);
+                if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+                {
+                    for(int j = 0; j < availableEvents.Count; j++)
+                    {
+                        if (availableEvents[j] is HotDudeEvent || availableEvents[j] is WindowEvent)
+                        {
+                            availableEvents.RemoveAt(j);
+                        }
+                    }
+                }
             }
         }
     }
@@ -59,16 +133,21 @@ public class CarriageClass : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 3 && !playerInside && _selectedEventClasses.Count > 0 && !_enterTriggered)
+        if (other.gameObject.layer == 3 && !playerInside)
         {
-            // Check if player is in front (higher Z position than the carriage)
-            if (generationClass.player.transform.position.z < transform.position.z)
-            {
-                playerInside = true;
-                _enterTriggered = true;
+            _player.CurrentRoom = gameObject;
 
-                foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Entered(gameObject);
+            if(_selectedEventClasses.Count > 0 && !_enterTriggered)
+            {
+                // Check if player is in front (higher Z position than the carriage)
+                if (generationClass.player.transform.position.z < transform.position.z)
+                {
+                    playerInside = true;
+                    _enterTriggered = true;
+
+                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                        selectedEventClass.Entered(this);
+                }
             }
         }
     }
@@ -84,7 +163,7 @@ public class CarriageClass : MonoBehaviour
                 _exitTriggered = true;
 
                 foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Exited(gameObject);
+                    selectedEventClass.Exited(this);
             }
         }
     }
@@ -97,7 +176,7 @@ public class CarriageClass : MonoBehaviour
 
             // Add your logic here
             foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Triggered(gameObject);
+                selectedEventClass.Triggered(this);
         }
     }
 }

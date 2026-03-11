@@ -12,7 +12,6 @@ namespace Gameplay
             GameObject spawnedMonkey = Instantiate(_noiseMonkeyPrefab, Camera.main.gameObject.transform.position, Camera.main.gameObject.transform.rotation);
             Vector3 direction =  spawnedMonkey.transform.forward;
             spawnedMonkey.GetComponent<Rigidbody>().AddForce(direction * 1000);
-            Debug.Log("NoiseMonkey");
             return true;
         }
     }

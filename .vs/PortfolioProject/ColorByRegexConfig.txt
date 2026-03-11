@@ -1,0 +1,28 @@
+// https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expressions
+
+//Just any event has event in the same
+.*Event
+
+//Items
+.*NoiseMonkey|SpeedSyringe|Key|Lockpick|Heatpack|Bell
+
+//Monsters
+.*Lookpick|TicketsPlease|Shadowman|Monster|Stalker|Hotdude
+
+//Interactables
+.*MusicBox|Ticket|HealingAltar|interactobject|Door
+
+//Player
+.*PlayerInventory|PlayerHealth|PlayerStatusEffects|PlayerController|FreezingLantern
+
+//UI
+.*UIManager|SprintBehaviour
+
+//Editors
+.*Editor
+
+//DebugScripts
+.*Debug
+
+//for unity scripts
+^.*\.cp?p?$

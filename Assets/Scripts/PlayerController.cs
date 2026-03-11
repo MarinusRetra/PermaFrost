@@ -10,7 +10,7 @@ namespace Gameplay
     public class PlayerController : MonoBehaviour
     {
         [Header("Movement values")]
-        [SerializeField] public InputReader _input;
+        [SerializeField] private InputReader _input;
 		public float CrouchSpeed = 3;
 		public float BaseSpeed = 4;
 
@@ -22,7 +22,7 @@ namespace Gameplay
 
         [Header("Camera values")]
         private Transform _camera;
-        [SerializeField] private float _sensitivity = 0.4f;
+        public float _sensitivity = 0.4f;
         [SerializeField] private float _crouchCameraHeight = 0f;
         [SerializeField] private float _standCameraHeight = 0.5f;
         private Rigidbody _rb;
@@ -40,6 +40,12 @@ namespace Gameplay
 
         public SprintBehaviour SprintBehav;
 
+        [Header("SpeedSyringeStuff")]
+        public int _timeRemaining = 0;
+        public bool _isRunning = false;
+
+        public GameObject CurrentRoom;
+
         private void OnEnable()
         {
             _input.MoveEvent += HandleMove;
@@ -50,9 +56,8 @@ namespace Gameplay
             _input.LookEvent += HandleLook;
         }
 
-        private void Start()
+        public void Start()
         {
-            
             _camera = transform.Find("PlayerCamera");
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -103,7 +108,7 @@ namespace Gameplay
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, 0, 0);
             // TODO: Make it work properly with the joystick as well.
         }
-        private void HandleCrouch()
+        public void HandleCrouch()
         {
             _isHoldingCrouch = true;
             CrouchDown();
@@ -127,7 +132,7 @@ namespace Gameplay
             }
         }
 
-        private void HandleSprintCancel()
+        public void HandleSprintCancel()
         {
             _currentMoveSpeed = _isCrouching ? CrouchSpeed : BaseSpeed;
             isSprinting = false;
@@ -140,7 +145,7 @@ namespace Gameplay
             while (true)
             {
                 //stamina goes down when running
-                if (isSprinting)
+                if (isSprinting && _moveDirection != Vector3.zero)
                 {
                     CurrentStamina -= 2;
                     if (CurrentStamina < 0)
@@ -181,7 +186,7 @@ namespace Gameplay
         /// <summary>
         /// Crouch down by changing the height of the capsule collider and lowering the camera.
         /// </summary>
-        public void CrouchDown()
+        private void CrouchDown()
         {
             if (!_isCrouching)
             {
@@ -192,7 +197,7 @@ namespace Gameplay
             }
             _isCrouching = true;
         }
-        public void StandUp()
+        private void StandUp()
         {
             _currentMoveSpeed = BaseSpeed;
             _playerCollider.height = _standHitboxHeight.x;
@@ -234,5 +239,12 @@ namespace Gameplay
         }
 
         public void StartRoutine(IEnumerator routine) => StartCoroutine(routine);
+
+        public void UpdateSpeed()
+        {
+            if (_isCrouching){ _currentMoveSpeed = CrouchSpeed; return; }
+            if ( isSprinting ){ _currentMoveSpeed = SprintSpeed; return; }
+            _currentMoveSpeed = BaseSpeed;
+        }
     }
 }

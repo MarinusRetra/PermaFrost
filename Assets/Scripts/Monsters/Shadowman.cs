@@ -51,7 +51,7 @@ namespace Gameplay
             //This covers a triggger on a child, which is about room big
             if (other.CompareTag("Player") && !PlayerMonsterManager.Instance.InSideroom && _hasStarted)
             {
-                StartCoroutine(PlayerHealth.Instance.DamagePlayer());
+                StartCoroutine(PlayerHealth.Instance.DamagePlayer("Shadowman"));
             }
         }
 

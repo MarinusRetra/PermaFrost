@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321419700557624565}
-  m_Mesh: {fileID: 2619086233303812490, guid: 4c63a30dd89ce3c46aa401a3df6b1f14, type: 3}
+  m_Mesh: {fileID: 2619086233303812490, guid: bc725e496efeed4438ae9def158269bb, type: 3}
 --- !u!23 &1910814395529522336
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -66,8 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 7498461928983958705, guid: 92be1bb6ca918af4288dfe75aa70e69d, type: 3}
-  - {fileID: 5837904863687007511, guid: 5030494d26c6cc743be93f6d64f3164a, type: 3}
+  - {fileID: 8885877213304338126, guid: bc725e496efeed4438ae9def158269bb, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,6 +102,7 @@ GameObject:
   - component: {fileID: 2068816746323865798}
   - component: {fileID: 7253298827311136358}
   - component: {fileID: 2336188246437076830}
+  - component: {fileID: 3753252517344322150}
   m_Layer: 0
   m_Name: LockedDoor
   m_TagString: Door
@@ -118,14 +118,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3144190194560952587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5.177919, y: -5.9270535, z: 8.995182}
-  m_LocalScale: {x: 0.85040146, y: 1.3538135, z: 0.19078}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7927486819970308771}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &4638779314604356099
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3144190194560952587}
-  m_Mesh: {fileID: 2619086233303812490, guid: 4c63a30dd89ce3c46aa401a3df6b1f14, type: 3}
+  m_Mesh: {fileID: 2619086233303812490, guid: bc725e496efeed4438ae9def158269bb, type: 3}
 --- !u!23 &2068816746323865798
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -219,6 +219,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.TestInteract
   InteractEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3753252517344322150}
+        m_TargetAssemblyTypeName: Gameplay.Door, Assembly-CSharp
+        m_MethodName: CheckAndUseKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _outlineScale: 1.1
   _outlineMat: {fileID: 2100000, guid: 4d9857703f5614b4db822f7dd9913602, type: 2}
+--- !u!114 &3753252517344322150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144190194560952587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47d26f8954c6cc49b9096c41aa318c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Door
+  key: {fileID: 11400000, guid: cb70f15f94ffddd4b8b812432ae1730a, type: 2}

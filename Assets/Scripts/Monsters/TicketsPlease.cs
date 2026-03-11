@@ -12,12 +12,15 @@ namespace Gameplay
 
         private bool _isChasing = false;
         private bool _reachedEnd = false;
+
+        private Vector3 _currentDestination;
         private void Start()
         {
             _entryRoom = CurrentRoom.Find("Entry");
 
             _agent = GetComponent<NavMeshAgent>();
             _agent.destination = new Vector3(_entryRoom.position.x,transform.position.y,_entryRoom.position.z);
+            _currentDestination = _agent.destination;
         }
 
         private void Update()
@@ -25,7 +28,6 @@ namespace Gameplay
             //Check if it has reached the end
             if (_agent.isOnNavMesh && _agent?.remainingDistance < 0.1f && !_isChasing)
             {
-                _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z - 20);
                 if (!_reachedEnd)
                 {
                     StartCoroutine(ReachedEnd());
@@ -50,7 +52,7 @@ namespace Gameplay
             //force it to stop chasing
             _isChasing = false;
             _agent.speed = 0.75f;
-            _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z);
+            _agent.destination = _currentDestination;
         }
 
         private IEnumerator ChasePlayer()
@@ -69,8 +71,10 @@ namespace Gameplay
         private IEnumerator ReachedEnd()
         {
             //Make ticketsplease explode 10 seconds after it gets to the exit. During this time its destination is set 20 away, so it should continue walking if there is enough space
+            _agent.destination = new Vector3(_entryRoom.position.x, transform.position.y, _entryRoom.position.z - 20);
+            _currentDestination = _agent.destination;
             _reachedEnd = true;
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(20f);
             DestroyMonster();
         }
 

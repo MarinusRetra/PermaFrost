@@ -19,7 +19,7 @@ public class PlayerStatusEffects : MonoBehaviour
         _playerHP = FindAnyObjectByType<PlayerHealth>();
     }
 
-    private void Start()
+    public void Start()
     {
         //Sanity and Frostbite update every second
         StartCoroutine(HandleInsanity());
@@ -29,7 +29,7 @@ public class PlayerStatusEffects : MonoBehaviour
     //Sanity related variables
     [Header("Sanity")]
     public int InsanityDeath = 20;
-    private int _currentInsanity = 0;
+    [SerializeField] private int _currentInsanity = 0;
     [SerializeField] private List<string> _insanityCauses = new();
 
     //Sanity related functions
@@ -48,7 +48,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
 
-            if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver(); }
+            if (_currentInsanity >= InsanityDeath) { _playerHP.GameOver($"Sanity: {_insanityCauses[0]}"); }
             yield return new WaitForSeconds(0.2f);
         }
     }
@@ -74,14 +74,14 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    private int _currentFrostbite = 0;
+    [SerializeField] private int _currentFrostbite = 0;
     private List<string> _frostbiteCauses = new();
 
     private bool _playSoundNextTick = true;
     [SerializeField] private AudioClip _freezeSFX;
 
     //Frostbite related functions
-    private IEnumerator HandleFrostbite()
+    [SerializeField] private IEnumerator HandleFrostbite()
     {
         yield return new WaitForSeconds(1);
         _freezingSlider.maxValue = FrostbiteDeath;
@@ -91,7 +91,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             //play sound
             if(_frostbiteCauses.Count == 0) { _playSoundNextTick = true; }
-            if(_playSoundNextTick && _frostbiteCauses.Count > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position).transform.parent = transform.parent; _playSoundNextTick = false; }
+            if(_playSoundNextTick && _frostbiteCauses.Count > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position,false,true,0.2f).transform.parent = transform.parent; _playSoundNextTick = false; }
 
             //gain or lose frostbite. Unlike insanity you gain more frostbite the more causes you have.
             if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
@@ -99,7 +99,7 @@ public class PlayerStatusEffects : MonoBehaviour
 
             _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
 
-            if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver(); }
+            if (_currentFrostbite >= FrostbiteDeath) { _playerHP.GameOver($"Frostbite: {_frostbiteCauses[0]}"); }
 
             yield return new WaitForSeconds(0.2f);
         }

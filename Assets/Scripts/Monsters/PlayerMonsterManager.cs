@@ -19,7 +19,7 @@ namespace Gameplay
             _cam = SelectedCamera;
         }
 
-        public static bool IsPlayerLookingAtObj(Collider lookingObject)
+        public static bool IsPlayerLookingAtObj(Collider lookingObject, bool lookThroughWalls = false)
         {
             //Check if object is in camera reach
             Bounds bounds = lookingObject.bounds;
@@ -27,6 +27,10 @@ namespace Gameplay
             if (GeometryUtility.TestPlanesAABB(_cameraArea, bounds))
             {
                 //check for walls
+                if (lookThroughWalls)
+                {
+                    return true;
+                }
                 Ray ray = new Ray(lookingObject.transform.position, (_cam.transform.position - lookingObject.transform.position));
                 if (Physics.Raycast(ray, out RaycastHit hit, 20))
                 {

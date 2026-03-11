@@ -12,8 +12,7 @@ namespace Gameplay
         public GameObject RoomTypeStartRoom;
         public GameObject RoomTypeEndRoom;
 
-        public GameObject[] AllRoomsInType;
-        public RoomClass[] AllRoomsSquaredInType;
+        public RoomClass[] AllRoomsInType;
 
         public bool AllowDupes = false;
     }

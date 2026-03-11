@@ -55,12 +55,15 @@ public class Generation : MonoBehaviour
             player.SetActive(true);
         }
         yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
+
+        allTotalPossibleRooms = new List<RoomClass>(Rooms.AllRoomsInType);
+
         GameObject previousRandomRoom = null;
         for (int i = 0; i < AmountOfRooms; i++)
         {
 
             SpawnWeightedRoom(i);
-            yield return new WaitForSeconds(0.3f * (FastLoading ? 0*1 : 1));
+            yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
         }
 
         GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
@@ -68,6 +71,21 @@ public class Generation : MonoBehaviour
         _initializedRooms.Add(endRoom);
         StartCoroutine(GenerateNavmesh());
     }
+
+#if UNITY_EDITOR
+
+    public void RegenerateRooms()
+    {
+        for(int i = 0;i < _initializedRooms.Count;i++)
+        {
+            Destroy(_initializedRooms[i]);
+        }
+        _initializedRooms = new List<GameObject>();
+        prevRoomCarriage = null;
+        prevRoomClassName = null;
+        StartCoroutine(GenerateRooms());
+    }
+#endif
 
     private CarriageClass prevRoomCarriage;
     private void GiveRoomEvents(CarriageClass room, RoomClass roomClass)
@@ -114,22 +132,22 @@ public class Generation : MonoBehaviour
         prevRoomCarriage = room;
 
     }
-
+    List<RoomClass> allTotalPossibleRooms = new List<RoomClass>();
     private void SpawnWeightedRoom(int index)
     {
-        List<RoomClass> allPossibleRooms = new List<RoomClass>(Rooms.AllRoomsSquaredInType);
+        List<RoomClass> allCurrentPossibleRooms = new List<RoomClass>(allTotalPossibleRooms);
         if(index > 0 && !Rooms.AllowDupes)
         {
-            for (int i = 0; i < allPossibleRooms.Count; i++)
+            for (int i = 0; i < allCurrentPossibleRooms.Count; i++)
             {
-                if (allPossibleRooms[i].RoomName == prevRoomClassName)
+                if (allCurrentPossibleRooms[i].RoomName == prevRoomClassName)
                 {
-                    allPossibleRooms.Remove(allPossibleRooms[i]);
+                    allCurrentPossibleRooms.Remove(allCurrentPossibleRooms[i]);
                     break;
                 }
             }
         }
-        RoomClass selectedroom = CalculateRoomWeight(allPossibleRooms);
+        RoomClass selectedroom = CalculateRoomWeight(allCurrentPossibleRooms);
         
         if (selectedroom.Room == null)
         {
@@ -142,6 +160,8 @@ public class Generation : MonoBehaviour
             GameObject previousRoom = _initializedRooms[index];
             PositionGeneratedRoom(randomRoom, previousRoom);
 
+            randomRoom.name = "Room" + index + selectedroom.RoomName;
+
             CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
             randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
 
@@ -149,6 +169,11 @@ public class Generation : MonoBehaviour
             randomRoom.transform.parent = transform;
             prevRoomClassName = selectedroom.RoomName;
             _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
+
+            if (selectedroom.onlySpawnOnce == true)
+            {
+                allTotalPossibleRooms.Remove(selectedroom);
+            }
         }
 
     }

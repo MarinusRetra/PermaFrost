@@ -311,9 +311,9 @@ namespace Gameplay
 
             GUILayout.Label("Game", titleStyle);
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
-            if (GUILayout.Button("Skip Cutscene but button", importantButtonStyle) && CheckIfRunning())
+            if (GUILayout.Button("Regen Rooms", importantButtonStyle) && CheckIfRunning())
             {
-                FindAnyObjectByType<CutsceneManager>().StopStartingCutscene();
+                FindAnyObjectByType<Generation>().RegenerateRooms();
             }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);

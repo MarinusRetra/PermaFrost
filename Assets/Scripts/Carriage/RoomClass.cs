@@ -11,5 +11,6 @@ namespace Gameplay
         public int AmountOfEventsMax;
         public EventClass[] AllowedEvents;
         public string RoomName;
+        public bool onlySpawnOnce;
     }
 }

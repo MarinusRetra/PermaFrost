@@ -57,6 +57,8 @@ public class Generation : MonoBehaviour
         GameObject previousRandomRoom = null;
         for (int i = 0; i < AmountOfRooms; i++)
         {
+
+            //SpawnWeightedRoom(i);
             GameObject selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
 
             //prevent dupe rooms
@@ -86,6 +88,49 @@ public class Generation : MonoBehaviour
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
         StartCoroutine(GenerateNavmesh());
+    }
+
+    private void SpawnWeightedRoom(int index)
+    {
+        RoomClass selectedroom = new RoomClass();
+        int totalWeight = 0;
+        for(int i = 0;i < Rooms.AllRoomsSquaredInType.Length; i++)
+        {
+            totalWeight += Rooms.AllRoomsSquaredInType[i].Weight;
+            print("Current weight: " + totalWeight + ". Weight added this go: " + Rooms.AllRoomsSquaredInType[i].Weight);
+        }
+        int randomChosenWeight = Random.Range(1, totalWeight + 1);
+        int roomCheckers = 0;
+        for (int i = 0; i < Rooms.AllRoomsSquaredInType.Length; i++)
+        {
+            roomCheckers += Rooms.AllRoomsSquaredInType[i].Weight;
+            print("Current weight: " + roomCheckers + ". Weight added this go: " + Rooms.AllRoomsSquaredInType[i].Weight + ". We are looking for: " + randomChosenWeight);
+            if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
+            {
+                selectedroom = Rooms.AllRoomsSquaredInType[i];
+                print("Chosen room!" + Rooms.AllRoomsSquaredInType[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + Rooms.AllRoomsSquaredInType[i].Weight);
+                break;
+            }
+        }
+        if (selectedroom.Room == null)
+        {
+            Debug.LogError("Room doesnt have a room");
+        }
+        else
+        {
+
+            GameObject randomRoom = Instantiate(selectedroom.Room);
+            GameObject previousRoom = _initializedRooms[index];
+            PositionGeneratedRoom(randomRoom, previousRoom);
+
+            CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
+            randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
+
+            _initializedRooms.Add(randomRoom);
+            randomRoom.transform.parent = transform;
+            _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
+        }
+
     }
 
     private IEnumerator GenerateNavmesh()

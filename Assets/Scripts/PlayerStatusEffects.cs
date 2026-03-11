@@ -81,7 +81,7 @@ public class PlayerStatusEffects : MonoBehaviour
     [SerializeField] private AudioClip _freezeSFX;
 
     //Frostbite related functions
-    [SerializeField] private IEnumerator HandleFrostbite()
+    private IEnumerator HandleFrostbite()
     {
         yield return new WaitForSeconds(1);
         _freezingSlider.maxValue = FrostbiteDeath;

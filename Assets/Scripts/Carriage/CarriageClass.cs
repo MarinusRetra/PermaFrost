@@ -89,45 +89,45 @@ public class CarriageClass : MonoBehaviour
     void Start()
     {
         _player = FindAnyObjectByType<PlayerController>();
-        if (_allowedEvents.Count > 0 && _amountOfEvents > 0)
-        {
-            int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
-            List<EventClass> availableEvents = new List<EventClass>(_allowedEvents);
+        //if (_allowedEvents.Count > 0 && _amountOfEvents > 0)
+        //{
+        //    int count = Mathf.Min(_amountOfEvents, _allowedEvents.Count);
+        //    List<EventClass> availableEvents = new List<EventClass>(_allowedEvents);
 
-            if (previousCarriage)
-            {
-                for (int i = 0; i < previousCarriage._selectedEventClasses.Count; i++)
-                {
-                    if (availableEvents.Contains(previousCarriage._selectedEventClasses[i]))
-                    {
-                        availableEvents.Remove(previousCarriage._selectedEventClasses[i]);
-                    }
-                }
-            }
+        //    if (previousCarriage)
+        //    {
+        //        for (int i = 0; i < previousCarriage._selectedEventClasses.Count; i++)
+        //        {
+        //            if (availableEvents.Contains(previousCarriage._selectedEventClasses[i]))
+        //            {
+        //                availableEvents.Remove(previousCarriage._selectedEventClasses[i]);
+        //            }
+        //        }
+        //    }
 
-            for (int i = 0; i < count; i++)
-            {
-                if(availableEvents.Count == 0)
-                {
-                    break;
-                }
-                int randomIndex = Random.Range(0, availableEvents.Count);
-                EventClass _chosenEvent = availableEvents[randomIndex];
-                _selectedEventClasses.Add(_chosenEvent);
-                availableEvents.RemoveAt(randomIndex);
-                _chosenEvent.Generated(this);
-                if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
-                {
-                    for(int j = 0; j < availableEvents.Count; j++)
-                    {
-                        if (availableEvents[j] is HotDudeEvent || availableEvents[j] is WindowEvent)
-                        {
-                            availableEvents.RemoveAt(j);
-                        }
-                    }
-                }
-            }
-        }
+        //    for (int i = 0; i < count; i++)
+        //    {
+        //        if(availableEvents.Count == 0)
+        //        {
+        //            break;
+        //        }
+        //        int randomIndex = Random.Range(0, availableEvents.Count);
+        //        EventClass _chosenEvent = availableEvents[randomIndex];
+        //        _selectedEventClasses.Add(_chosenEvent);
+        //        availableEvents.RemoveAt(randomIndex);
+        //        _chosenEvent.Generated(this);
+        //        if(_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+        //        {
+        //            for(int j = 0; j < availableEvents.Count; j++)
+        //            {
+        //                if (availableEvents[j] is HotDudeEvent || availableEvents[j] is WindowEvent)
+        //                {
+        //                    availableEvents.RemoveAt(j);
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     

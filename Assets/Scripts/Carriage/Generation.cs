@@ -60,29 +60,7 @@ public class Generation : MonoBehaviour
         {
 
             SpawnWeightedRoom(i);
-            //GameObject selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
-
-            ////prevent dupe rooms
-            //if (selectedRoom == previousRandomRoom && !Rooms.AllowDupes)
-            //{
-            //    for (int j = 0; j < 5; j++)
-            //    {
-            //        selectedRoom = Rooms.AllRoomsInType[Random.Range(0, Rooms.AllRoomsInType.Length)];
-            //        if (selectedRoom != previousRandomRoom) { j = 100; }
-            //    }
-            //}
-            //previousRandomRoom = selectedRoom;
-            //GameObject randomRoom = Instantiate(selectedRoom);
-            //GameObject previousRoom = _initializedRooms[i];
-            //PositionGeneratedRoom(randomRoom, previousRoom);
-
-            //CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
-            //randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
-
-            //_initializedRooms.Add(randomRoom);
-            //randomRoom.transform.parent = transform;
-            //_meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
-            //yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
+            yield return new WaitForSeconds(0.3f * (FastLoading ? 0*1 : 1));
         }
 
         GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
@@ -91,12 +69,57 @@ public class Generation : MonoBehaviour
         StartCoroutine(GenerateNavmesh());
     }
 
+    private CarriageClass prevRoomCarriage;
+    private void GiveRoomEvents(CarriageClass room, RoomClass roomClass)
+    {
+        List<EventClass> allowedEvents = new List<EventClass>(roomClass.AllowedEvents);
+
+        if (prevRoomCarriage != null)
+        {
+            List<EventClass> prevRoomEvents = prevRoomCarriage._selectedEventClasses;
+            for (int i = 0; i <  prevRoomEvents.Count; i++)
+            {
+                if (allowedEvents.Contains(prevRoomEvents[i]))
+                {
+                    allowedEvents.Remove(prevRoomEvents[i]);
+                }
+            }
+        }
+
+        if (allowedEvents.Count > 0 && roomClass.AmountOfEventsMax > 0)
+        {
+            int count = Mathf.Min(roomClass.AmountOfEventsMax, allowedEvents.Count);
+            for (int i = 0; i < count; i++)
+            {
+                int randomIndex = Random.Range(0, allowedEvents.Count);
+                print(randomIndex);
+                print(allowedEvents.Count);
+                EventClass _chosenEvent = allowedEvents[randomIndex];
+                room._selectedEventClasses.Add(_chosenEvent);
+                allowedEvents.RemoveAt(randomIndex);
+                _chosenEvent.Generated(room);
+                if (_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+                {
+                    for (int j = 0; j < allowedEvents.Count; j++)
+                    {
+                        if (allowedEvents[j] is HotDudeEvent || allowedEvents[j] is WindowEvent)
+                        {
+                            allowedEvents.RemoveAt(j);
+                        }
+                    }
+                }
+            }
+        }
+
+        prevRoomCarriage = room;
+
+    }
+
     private void SpawnWeightedRoom(int index)
     {
         List<RoomClass> allPossibleRooms = new List<RoomClass>(Rooms.AllRoomsSquaredInType);
         if(index > 0 && !Rooms.AllowDupes)
         {
-            print(_initializedRooms[index - 1]);
             for (int i = 0; i < allPossibleRooms.Count; i++)
             {
                 if (allPossibleRooms[i].RoomName == prevRoomClassName)
@@ -114,8 +137,8 @@ public class Generation : MonoBehaviour
         }
         else
         {
-
             GameObject randomRoom = Instantiate(selectedroom.Room);
+            GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
             GameObject previousRoom = _initializedRooms[index];
             PositionGeneratedRoom(randomRoom, previousRoom);
 

@@ -77,12 +77,12 @@ namespace Gameplay
         /// </summary>
         public void HandleUse()
         {
-            currentSelectedSlot.Item.Use();
+            currentSelectedSlot.Item?.Use();
         }
 
         private void HandleCancelUse()
         {
-            currentSelectedSlot.Item.UseCancelled();
+            currentSelectedSlot.Item?.UseCancelled();
         }
 
         /// <summary>

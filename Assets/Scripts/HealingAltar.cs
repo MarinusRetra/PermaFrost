@@ -10,7 +10,7 @@ namespace Gameplay
         {
             InteractEvent.AddListener(() =>
             {
-                if (PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedItem.ClearSlot())
+                if (PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedSlot.Item)
                 {
                     _currentTine = StartCoroutine(PlayerHealth.Instance.HealPlayer());
                 }

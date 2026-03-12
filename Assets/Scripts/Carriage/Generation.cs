@@ -17,6 +17,8 @@ public class Generation : MonoBehaviour
 
     public bool FastLoading = false;
 
+    private int currentHeightValue = 0;
+
     void Start()
     {
         StartCoroutine(GenerateRooms());
@@ -44,6 +46,7 @@ public class Generation : MonoBehaviour
     private string prevRoomClassName;
     IEnumerator GenerateRooms()
     {
+        currentHeightValue = 0;
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
         GameObject startRoom = Instantiate(Rooms.RoomTypeStartRoom, transform.position,transform.rotation);
         _initializedRooms.Add(startRoom);
@@ -64,6 +67,13 @@ public class Generation : MonoBehaviour
 
             SpawnWeightedRoom(i);
             yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
+            for (int j = 0; j < 10; j++)
+            {
+                if (generatingRoom)
+                {
+                    yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
+                }
+            }
         }
 
         GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
@@ -112,9 +122,11 @@ public class Generation : MonoBehaviour
                 int randomIndex = Random.Range(0, allowedEvents.Count);
                 print(randomIndex);
                 print(allowedEvents.Count);
-                EventClass _chosenEvent = allowedEvents[randomIndex];
+                int index = Mathf.Min(randomIndex, allowedEvents.Count);
+                if(allowedEvents.Count == 0) { prevRoomCarriage = room; return; }
+                EventClass _chosenEvent = allowedEvents[index];
                 room._selectedEventClasses.Add(_chosenEvent);
-                allowedEvents.RemoveAt(randomIndex);
+                allowedEvents.RemoveAt(index);
                 _chosenEvent.Generated(room);
                 if (_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
                 {
@@ -132,9 +144,12 @@ public class Generation : MonoBehaviour
         prevRoomCarriage = room;
 
     }
+    bool generatingRoom = false;
     List<RoomClass> allTotalPossibleRooms = new List<RoomClass>();
     private void SpawnWeightedRoom(int index)
     {
+        print(generatingRoom);
+        generatingRoom = true;
         List<RoomClass> allCurrentPossibleRooms = new List<RoomClass>(allTotalPossibleRooms);
         if(index > 0 && !Rooms.AllowDupes)
         {
@@ -147,7 +162,32 @@ public class Generation : MonoBehaviour
                 }
             }
         }
-        RoomClass selectedroom = CalculateRoomWeight(allCurrentPossibleRooms);
+        RoomClass selectedroom = new RoomClass();
+
+        for (int i = 0; i < Rooms.GuarenteedRooms.Length; i++)
+        {
+            if (Rooms.GuarenteedRooms[i].guarenteedIndex - 1 == index)
+            {
+                selectedroom = Rooms.GuarenteedRooms[i];
+            }
+        }
+        if (!selectedroom.Room)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                selectedroom = CalculateRoomWeight(allCurrentPossibleRooms);
+
+                if (selectedroom.HeightValue < 0 && currentHeightValue == 0)
+                {
+                    allCurrentPossibleRooms.Remove(selectedroom);
+                    selectedroom = CalculateRoomWeight(allCurrentPossibleRooms);
+                    continue;
+                }
+                i = 5;
+                currentHeightValue += selectedroom.HeightValue;
+            }
+        }
+
         
         if (selectedroom.Room == null)
         {
@@ -175,7 +215,7 @@ public class Generation : MonoBehaviour
                 allTotalPossibleRooms.Remove(selectedroom);
             }
         }
-
+        generatingRoom = false;
     }
 
     private RoomClass CalculateRoomWeight(List<RoomClass> rooms)
@@ -184,17 +224,14 @@ public class Generation : MonoBehaviour
         for (int i = 0; i < rooms.Count; i++)
         {
             totalWeight += rooms[i].Weight;
-            //print("Current weight: " + totalWeight + ". Weight added this go: " + rooms[i].Weight);
         }
         int randomChosenWeight = Random.Range(1, totalWeight + 1);
         int roomCheckers = 0;
         for (int i = 0; i < rooms.Count; i++)
         {
             roomCheckers += rooms[i].Weight;
-            //print("Current weight: " + roomCheckers + ". Weight added this go: " + rooms[i].Weight + ". We are looking for: " + randomChosenWeight);
             if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
             {
-                //print("Chosen room!" + rooms[i].RoomName + " At a value of " + randomChosenWeight + " Who has a weight of " + rooms[i].Weight);
                 return rooms[i];
             }
         }

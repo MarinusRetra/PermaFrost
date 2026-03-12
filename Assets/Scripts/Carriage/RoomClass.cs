@@ -12,5 +12,9 @@ namespace Gameplay
         public EventClass[] AllowedEvents;
         public string RoomName;
         public bool onlySpawnOnce;
+        public int HeightValue;
+
+        [Header("GuarenteedRoomSpot")]
+        public int guarenteedIndex;
     }
 }

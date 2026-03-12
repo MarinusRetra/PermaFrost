@@ -14,6 +14,8 @@ namespace Gameplay
 
         public RoomClass[] AllRoomsInType;
 
+        public RoomClass[] GuarenteedRooms;
+
         public bool AllowDupes = false;
     }
 }

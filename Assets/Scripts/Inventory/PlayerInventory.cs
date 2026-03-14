@@ -89,10 +89,7 @@ namespace Gameplay
 
         private void HandleCancelUse()
         {
-            if (CurrentSelectedSlot.Item == null)
-            { 
-                CurrentSelectedSlot.Item.UseCancelled();
-            }
+            CurrentSelectedSlot.Item?.UseCancelled();
         }
 
         /// <summary>

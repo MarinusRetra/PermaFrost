@@ -91,6 +91,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!95 &6506228536308270695
 Animator:
@@ -155,14 +156,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967023992126524556}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 2
   m_Color: {r: 0.58679235, g: 0.994363, b: 1, a: 1}
   m_Intensity: 0.5
   m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 0
     m_Resolution: -1
@@ -622,6 +623,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &7262961952452325962
 SphereCollider:
@@ -886,6 +888,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &907561936082780174
 CapsuleCollider:
@@ -972,27 +975,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerInventory
   _normalSlotSize: {x: 0.5, y: 0.5, z: 1}
   _selectedSlotSize: {x: 0.6, y: 0.6, z: 1.2}
-  _emptyItemSlot:
-    Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 1841889813569152925, guid: 3f53f3b2abc432246b296db83145967f, type: 3}
   _unkillableItems:
   - {fileID: 11400000, guid: cb70f15f94ffddd4b8b812432ae1730a, type: 2}
-  _hotbar:
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 0}
-  - Key: {fileID: 11400000, guid: c8ccc21bc8854704b94b3e5aa8d11814, type: 2}
-    Value: {fileID: 0}
+  hotbarSlots:
+  - Slot_ID: 0
+    SlotGameObject: {fileID: 0}
+    Slot_Image: {fileID: 0}
+    Item: {fileID: 0}
+  - Slot_ID: 1
+    SlotGameObject: {fileID: 0}
+    Slot_Image: {fileID: 0}
+    Item: {fileID: 0}
+  - Slot_ID: 2
+    SlotGameObject: {fileID: 0}
+    Slot_Image: {fileID: 0}
+    Item: {fileID: 0}
+  - Slot_ID: 3
+    SlotGameObject: {fileID: 0}
+    Slot_Image: {fileID: 0}
+    Item: {fileID: 0}
+  - Slot_ID: 4
+    SlotGameObject: {fileID: 0}
+    Slot_Image: {fileID: 0}
+    Item: {fileID: 0}
+  currentSelectedSlot_ID: 0
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
-  _selectedHotbarItem:
-    Key: {fileID: 0}
-    Value: {fileID: 0}
-  RemovedHotbarElements: []
 --- !u!114 &5083458478355850614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1050,7 +1057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13bfa395b0b0d5e4dad1e531f699b9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  _damageInvincibility: 0.5
+  _damageInvincibility: 1.5
   HealInvincibility: 3
   _deathUI: {fileID: 0}
   _hitUI: {fileID: 0}

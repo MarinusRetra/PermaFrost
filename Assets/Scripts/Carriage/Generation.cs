@@ -120,8 +120,6 @@ public class Generation : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = Random.Range(0, allowedEvents.Count);
-                print(randomIndex);
-                print(allowedEvents.Count);
                 int index = Mathf.Min(randomIndex, allowedEvents.Count);
                 if(allowedEvents.Count == 0) { prevRoomCarriage = room; return; }
                 EventClass _chosenEvent = allowedEvents[index];
@@ -148,7 +146,6 @@ public class Generation : MonoBehaviour
     List<RoomClass> allTotalPossibleRooms = new List<RoomClass>();
     private void SpawnWeightedRoom(int index)
     {
-        print(generatingRoom);
         generatingRoom = true;
         List<RoomClass> allCurrentPossibleRooms = new List<RoomClass>(allTotalPossibleRooms);
         if(index > 0 && !Rooms.AllowDupes)

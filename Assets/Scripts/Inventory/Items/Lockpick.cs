@@ -10,6 +10,7 @@ namespace Gameplay
         [SerializeField] private GameObject _lookPickPrefab;
         private GameObject _currentLookPickInstance;
         private GameObject lookinAt;
+        private PlayerInventory _playerInventory = null;
 
         public override bool Use()
         {
@@ -33,7 +34,13 @@ namespace Gameplay
         {
             Destroy(lookinAt);
             Destroy(_currentLookPickInstance);
-            Camera.main.GetComponentInParent<PlayerInventory>().CurrentSelectedSlot.ClearSlot();
+
+            if (_playerInventory == null)
+            {
+                _playerInventory = PlayerHealth.Instance.GetComponent<PlayerInventory>();
+            }
+
+            _playerInventory.RemoveItemFromSlot(_playerInventory.CurrentSelectedSlot.Slot_ID);
             _input.CanModifyHotbar = true;
         }
     }

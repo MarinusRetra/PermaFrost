@@ -17,14 +17,12 @@ namespace Gameplay
         [Header("Inventory item and Hotbarslots")]
         [SerializeField] private InventorySlot[] hotbarSlots;
 
-        [SerializeField] private InventorySlot currentSelectedSlot;
-
-        public InventorySlot CurrentSelectedSlot { get => currentSelectedSlot; }
+        [SerializeField] private int currentSelectedSlot_ID = 0;
+        public InventorySlot CurrentSelectedSlot { get => hotbarSlots[currentSelectedSlot_ID]; }
         public InventorySlot[] HotbarSlots { get => hotbarSlots; }
 
         [Header("Reference to input sytem")]
         [SerializeField] private InputReader _input;
-
 
         public void Awake()
         {
@@ -35,18 +33,11 @@ namespace Gameplay
             _input.UseEventCancelled += HandleCancelUse;
         }
 
-        void Start()
-        {
-            currentSelectedSlot.Item = null;
-        }
-
-
         private void SelectSlot(int numberIn)
         {
-            int _numberIn = (int)numberIn;
-            currentSelectedSlot.SlotGameObject.transform.localScale = _normalSlotSize;
-            currentSelectedSlot = hotbarSlots[_numberIn];
-            currentSelectedSlot.SlotGameObject.transform.localScale = _selectedSlotSize;
+            CurrentSelectedSlot.SlotGameObject.transform.localScale = _normalSlotSize;
+            currentSelectedSlot_ID = numberIn;
+            CurrentSelectedSlot.SlotGameObject.transform.localScale = _selectedSlotSize;
         }
 
         /// <summary>
@@ -55,7 +46,7 @@ namespace Gameplay
         /// (Yes its 0 to 9 even though we only have 5 slots it might get used for other stuff dont worry.)
         private void HandleHotbarSelect(float numberIn)
         {
-            if (numberIn < hotbarSlots.Length - 1)
+            if (numberIn < HotbarSlots.Length)
             {
                 SelectSlot((int)numberIn);
             }
@@ -66,23 +57,42 @@ namespace Gameplay
         /// </summary>
         private void HandleHotbarNav(float numberIn)
         {
-            if (currentSelectedSlot.Slot_ID-1 > -1 && currentSelectedSlot.Slot_ID+1 < hotbarSlots.Length - 1)
+            if (CurrentSelectedSlot.Slot_ID-1 > -1 && CurrentSelectedSlot.Slot_ID+1 < hotbarSlots.Length)
             {
-                SelectSlot(currentSelectedSlot.Slot_ID + (int)numberIn);
+                SelectSlot(currentSelectedSlot_ID + (int)numberIn);
             }
         }
 
         /// <summary>
-        /// Use item in selected hotbar slot by triggering the item's logic.
+        /// Use item in selected hotbar slot by triggering the item's logic. Then removes it.
         /// </summary>
         public void HandleUse()
         {
-            currentSelectedSlot.Item?.Use();
+            try
+            {
+                if (CurrentSelectedSlot.Item.Use())
+                {
+                    RemoveItemFromSlot(CurrentSelectedSlot.Slot_ID);
+                }
+            }
+            catch (Exception) { }
+        }
+
+        public void HandleDrop()
+        {
+            if (CurrentSelectedSlot.Item != null)
+            {
+                Instantiate(CurrentSelectedSlot.Item.HoldObject, transform.position, transform.rotation);
+                RemoveItemFromSlot(CurrentSelectedSlot.Slot_ID);
+            }
         }
 
         private void HandleCancelUse()
         {
-            currentSelectedSlot.Item?.UseCancelled();
+            if (CurrentSelectedSlot.Item == null)
+            { 
+                CurrentSelectedSlot.Item.UseCancelled();
+            }
         }
 
         /// <summary>
@@ -90,19 +100,32 @@ namespace Gameplay
         /// </summary>
         public void PickupItem(InventoryItem incomingItem)
         {
-            currentSelectedSlot.AddItem(ref incomingItem);
-        }
-
-        public void HandleDrop()
-        {
-            try
+            foreach (InventorySlot slot in hotbarSlots)
             {
-                Instantiate(currentSelectedSlot.Item.HoldObject, transform.position, transform.rotation);
-                currentSelectedSlot.ClearSlot();
+                if (slot.Item == null)
+                { 
+                    slot.AddItem(incomingItem);
+                    return;
+                }
             }
-            catch { new NullReferenceException(); }
         }
 
+        /// <summary>
+        /// Removes the item and makes all the items next to it shift one to the left to prevent gaps in the inventory.
+        /// </summary>
+        /// <param name="currentSlotIn"></param>
+        public void RemoveItemFromSlot(int currentSlotIn)
+        {
+            CurrentSelectedSlot.ClearSlot();
+            for (int i = CurrentSelectedSlot.Slot_ID; i < hotbarSlots.Length - 1; i++)
+            {
+                if (hotbarSlots[i + 1].Item != null)
+                {
+                    hotbarSlots[i].AddItem(hotbarSlots[i + 1].Item);
+                    hotbarSlots[i + 1].ClearSlot();
+                }
+            }
+        }
 
         void OnDestroy()
         {
@@ -123,7 +146,7 @@ namespace Gameplay
 	}
 
     [Serializable]
-    public struct InventorySlot
+    public class InventorySlot
     {
         [SerializeField] public int Slot_ID;
         [SerializeField] public GameObject SlotGameObject;
@@ -132,20 +155,21 @@ namespace Gameplay
 
         public void ClearSlot()
         {
+            UpdateSprite();
             SlotGameObject.SetActive(false);
             Item = null;
         }
 
-        public void SetSprite()
+        public void UpdateSprite()
         {
             Slot_Image.sprite = Item.sprite;
             Slot_Image.color = Item.color;
         }
 
-        public void AddItem(ref InventoryItem itemIn)
+        public void AddItem(InventoryItem itemIn)
         {
             Item = itemIn;
-            SetSprite();
+            UpdateSprite();
             SlotGameObject.SetActive(true);
         }
 

@@ -158,7 +158,7 @@ namespace Gameplay
             }
             else if (context.phase == InputActionPhase.Canceled)
             {
-                SprintCancelEvent.Invoke();
+                SprintCancelEvent?.Invoke();
             }
         }
         public void OnNextPrevious(InputAction.CallbackContext context)

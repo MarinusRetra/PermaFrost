@@ -5,13 +5,17 @@ namespace Gameplay
     public class Door : MonoBehaviour
     {
         public InventoryItem key;
-        
+        PlayerInventory _playerInventory;
+        private void Start()
+        {
+            _playerInventory = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerInventory>();
+        }
 
         public void CheckAndUseKey()
         {
-            if(FindAnyObjectByType<PlayerInventory>()._selectedHotbarItem.Key == key)
+            if(_playerInventory.CurrentSelectedSlot.Item == key)
             {
-                FindAnyObjectByType<PlayerInventory>().HandleUse();
+                _playerInventory.HandleUse();
             }
         }
     }

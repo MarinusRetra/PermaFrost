@@ -4,20 +4,20 @@ namespace Gameplay
     public class ItemInteractable : InteractObject
     {
         [SerializeField] private InventoryItem _item;
-        private GameObject _player;
+        private PlayerInventory _playerInventory;
         public override void Start()
         {
             base.Start();
+            _playerInventory = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerInventory>();
         }
 
         public void DoThing()
         {
-            _player = PlayerStatusEffects.Instance.gameObject;
-            if (_player.GetComponent<PlayerInventory>().RemovedHotbarElements.Count == 0)
+            if (_playerInventory.CurrentSelectedSlot.Slot_ID > _playerInventory.HotbarSlots.Length-1)
             {
                 return;
             }
-            _player.GetComponent<PlayerInventory>().PickupItem(_item);
+            _playerInventory.PickupItem(_item);
             Destroy(gameObject);
         }
     }

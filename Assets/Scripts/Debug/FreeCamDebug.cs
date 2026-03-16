@@ -34,10 +34,10 @@ namespace Gameplay
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            player = GameObject.Find("Player");
+            player = PlrRefs.inst.gameObject;
             _camera = player.transform.GetChild(0);
-            playerHealth = player.GetComponent<PlayerHealth>();
-            playerEffects = player.GetComponent<PlayerStatusEffects>();
+            playerHealth = PlrRefs.inst.PlayerHealth;
+            playerEffects = PlrRefs.inst.PlayerStatusEffects;
             rb = player.GetComponent<Rigidbody>();
         }
 
@@ -57,7 +57,7 @@ namespace Gameplay
                 playerEffects.FrostbiteDeath = 9999;
                 inFreeCam = true;
                 playerHealth.CheckPlayerUnderMap = false;
-                _input.CrouchEvent -= player.GetComponent<PlayerController>().HandleCrouch;
+                _input.CrouchEvent -= PlrRefs.inst.PlayerController.HandleCrouch;
                 GameObject.Find("UI").GetComponent<Canvas>().enabled = false;
             }
 
@@ -65,13 +65,13 @@ namespace Gameplay
             {
                 if (!seperatedCam)
                 {
-                    player.GetComponent<PlayerController>().enabled = false;
+                    PlrRefs.inst.PlayerController.enabled = false;
                     seperatedCam = true;
                 }
                 else
                 {
-                    player.GetComponent<PlayerController>().enabled = true;
-                    _input.CrouchEvent -= player.GetComponent<PlayerController>().HandleCrouch;
+                    PlrRefs.inst.PlayerController.enabled = true;
+                    _input.CrouchEvent -= PlrRefs.inst.PlayerController.HandleCrouch;
                     seperatedCam = false;
                 }
             }
@@ -140,8 +140,6 @@ namespace Gameplay
 
                 _camera.localRotation = Quaternion.Euler(_cameraRotationX, _cameraRotationY, 0);
             }
-
-            // TODO: Make it work properly with the joystick as well.
         }
     }
     #endif

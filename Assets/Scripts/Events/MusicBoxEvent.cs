@@ -39,7 +39,7 @@ namespace Gameplay
             if (box == null) { return false; }
             box.GetComponent<MusicBox>().SilenceBox(false);
             Destroy(box.gameObject);
-            PlayerStatusEffects.Instance.ManageInsanityCauses("Music", true);
+            PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Music", true);
             return true;
         }
         public override bool Triggered(CarriageClass room) { return true; }

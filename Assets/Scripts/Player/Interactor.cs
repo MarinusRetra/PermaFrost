@@ -15,7 +15,7 @@ namespace Gameplay
         public void Start()
         {
             _input.InteractEvent += HandleInteract;
-            _cameraTransform = Camera.main.transform;
+            _cameraTransform = PlrRefs.inst.Camera.transform;
         }
 
         void FixedUpdate()

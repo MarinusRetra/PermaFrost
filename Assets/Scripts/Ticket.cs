@@ -6,7 +6,7 @@ namespace Gameplay
     {
         public void GrabTicket()
         {
-            PlayerMonsterManager.Instance.GrabTicket();
+            PlrRefs.inst.PlayerMonsterManager.GrabTicket();
         }
     }
 }

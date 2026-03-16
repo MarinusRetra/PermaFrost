@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
 public class CarriageClass : MonoBehaviour
 {
     [Header("Transforms")]
@@ -42,7 +43,6 @@ public class CarriageClass : MonoBehaviour
                 Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
-                //newDroppedItem.transform.parent = transform; 
 
                 //prevent 2 items in 1 spot
                 _spawnPoints.Remove(randomLocation);
@@ -86,7 +86,7 @@ public class CarriageClass : MonoBehaviour
 
     void Start()
     {
-        _player = FindAnyObjectByType<PlayerController>();
+        _player = PlrRefs.inst.PlayerController;
     }
 
     

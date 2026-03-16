@@ -14,7 +14,7 @@ namespace Gameplay
 
         public override bool Use()
         {
-            lookinAt = Camera.main.GetComponent<Interactor>().hit.collider?.gameObject;
+            lookinAt = PlrRefs.inst.Interactor.hit.collider?.gameObject;
             if (lookinAt && lookinAt.CompareTag("Door"))
             {
                 StartTimer(_lockPickFinishTime);
@@ -37,7 +37,7 @@ namespace Gameplay
 
             if (_playerInventory == null)
             {
-                _playerInventory = PlayerHealth.Instance.GetComponent<PlayerInventory>();
+                _playerInventory = PlrRefs.inst.PlayerInventory;
             }
 
             _playerInventory.RemoveItemFromSlot(_playerInventory.CurrentSelectedSlot.Slot_ID);

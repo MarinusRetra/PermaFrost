@@ -32,7 +32,7 @@ namespace Gameplay
         void Start()
         {
             //Fetch the player
-            _player = FindAnyObjectByType<PlayerHealth>().transform;
+            _player = PlrRefs.inst.transform;
 
             _agent = GetComponent<NavMeshAgent>();
 

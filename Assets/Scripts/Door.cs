@@ -8,7 +8,7 @@ namespace Gameplay
         PlayerInventory _playerInventory;
         private void Start()
         {
-            _playerInventory = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerInventory>();
+            _playerInventory = PlrRefs.inst.PlayerInventory;
         }
 
         public void CheckAndUseKey()

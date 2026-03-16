@@ -14,9 +14,9 @@ namespace Gameplay
 
         private void Start()
         {
-            if (FindAnyObjectByType<PlayerController>())
+            if (PlrRefs.inst.PlayerController)
             {
-                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity * 0.4f;
+                PlrRefs.inst.PlayerController._sensitivity = cameraSensitivity * 0.4f;
             }
             if (camSensitivitySlider)
             {
@@ -27,9 +27,9 @@ namespace Gameplay
         public void SetSensitivity(float number)
         {
             cameraSensitivity = number;
-            if (FindAnyObjectByType<PlayerController>())
+            if (PlrRefs.inst.PlayerController)
             {
-                FindAnyObjectByType<PlayerController>()._sensitivity = cameraSensitivity * 0.4f;
+                PlrRefs.inst.PlayerController._sensitivity = cameraSensitivity * 0.4f;
             }
         }
 

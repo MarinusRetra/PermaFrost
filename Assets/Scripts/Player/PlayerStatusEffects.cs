@@ -6,21 +6,14 @@ using UnityEngine.UI;
 
 public class PlayerStatusEffects : MonoBehaviour
 {
-    public static PlayerStatusEffects Instance;
-
     private PlayerHealth _playerHP;
 
     [SerializeField] private Slider _insanitySlider;
     [SerializeField] private Slider _freezingSlider;
 
-    void Awake()
-    {
-        Instance = this;
-        _playerHP = FindAnyObjectByType<PlayerHealth>();
-    }
-
     public void Start()
     {
+        _playerHP = PlrRefs.inst.PlayerHealth;
         //Sanity and Frostbite update every second
         StartCoroutine(HandleInsanity());
         StartCoroutine(HandleFrostbite());

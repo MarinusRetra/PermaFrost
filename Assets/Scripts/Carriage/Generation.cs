@@ -6,6 +6,7 @@ using Gameplay;
 
 public class Generation : MonoBehaviour
 {
+    public static Generation mainInstance;
     [Header("Rooms")]
     public RoomTypeScriptable Rooms;
 
@@ -19,8 +20,11 @@ public class Generation : MonoBehaviour
 
     private int currentHeightValue = 0;
 
+    public bool IsGenerating = false;
+
     void Start()
     {
+        mainInstance = this;
         StartCoroutine(GenerateRooms());
     }
 
@@ -46,6 +50,7 @@ public class Generation : MonoBehaviour
     private string prevRoomClassName;
     IEnumerator GenerateRooms()
     {
+        IsGenerating = true;
         currentHeightValue = 0;
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
         GameObject startRoom = Instantiate(Rooms.RoomTypeStartRoom, transform.position,transform.rotation);
@@ -54,7 +59,7 @@ public class Generation : MonoBehaviour
         
         if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint)
         {
-            player.GetComponent<Transform>().position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
+            player.transform.position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
             player.SetActive(true);
         }
         yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
@@ -80,14 +85,17 @@ public class Generation : MonoBehaviour
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
         StartCoroutine(GenerateNavmesh());
+        IsGenerating = false;
     }
 
 #if UNITY_EDITOR
 
     public void RegenerateRooms()
     {
+        if (IsGenerating) return;
         for(int i = 0;i < _initializedRooms.Count;i++)
         {
+            _initializedRooms[i].GetComponent<CarriageClass>().DespawnItems();
             Destroy(_initializedRooms[i]);
         }
         _initializedRooms = new List<GameObject>();

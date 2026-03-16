@@ -10,7 +10,6 @@ namespace Gameplay
 		[SerializeField] private InputReader _input;
 
 		[SerializeField] private GameObject _settingsPanel;
-
 		bool _settingsToggle = false;
 
 		private void Start()
@@ -33,7 +32,6 @@ namespace Gameplay
 		}
 
 		public void LoadScene(int id) => SceneManager.LoadScene(id);
-
 		public void QuitGame() => Application.Quit();
 
         private void OnDisable()

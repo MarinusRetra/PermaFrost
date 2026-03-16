@@ -25,7 +25,7 @@ namespace Gameplay
             vignette.intensity.overrideState = true;
             _collider = GetComponent<Collider>();
             _animator = GetComponentInParent<Animator>();
-            _pmm = PlayerMonsterManager.Instance;
+            _pmm = PlrRefs.inst.PlayerMonsterManager;
             _animator.enabled = false;
             if (_tpToPlayer) { Aggro(); }
             _animator.enabled = true;

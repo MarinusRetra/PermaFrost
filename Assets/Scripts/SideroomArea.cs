@@ -8,7 +8,7 @@ namespace Gameplay
         {
             if (other.CompareTag("Player"))
             {
-                PlayerMonsterManager.Instance.InSideroom = true;
+                PlrRefs.inst.PlayerMonsterManager.InSideroom = true;
             }
         }
 
@@ -16,7 +16,7 @@ namespace Gameplay
         {
             if (other.CompareTag("Player"))
             {
-                PlayerMonsterManager.Instance.InSideroom = false;
+                PlrRefs.inst.PlayerMonsterManager.InSideroom = false;
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Gameplay
         public override void Start()
         {
             base.Start();
-            _playerInventory = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerInventory>();
+            _playerInventory = PlrRefs.inst.PlayerInventory;
         }
 
         public void DoThing()

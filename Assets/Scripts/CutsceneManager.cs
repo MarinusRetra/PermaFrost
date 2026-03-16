@@ -31,7 +31,7 @@ namespace Gameplay
         void Start()
         {
             instance = this;
-            _player = PlayerStatusEffects.Instance.gameObject;
+            _player = PlrRefs.inst.gameObject;
             if (FindAnyObjectByType<PlayableDirector>())
             {
                 StartCoroutine(StartStartingCutscene());
@@ -45,7 +45,7 @@ namespace Gameplay
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             _ui.SetActive(false);
-            _player.GetComponent<PlayerController>().enabled = false;
+            PlrRefs.inst.PlayerController.enabled = false;
 
             yield return new WaitForSeconds((float)_startingTimeline.duration - 0.1f);
 
@@ -65,10 +65,10 @@ namespace Gameplay
                 _ui.SetActive(true);
                 //turn player back on
                 _startingCutscene.SetActive(false);
-                _player.GetComponent<PlayerController>().enabled = true;
+                PlrRefs.inst.PlayerController.enabled = true;
 
                 _backgroundSound.SetActive(true);
-                FindAnyObjectByType<Generation>().FastLoading = true;
+                Generation.mainInstance.FastLoading = true;
             }));
             _input.SetGameplayActions();
         }
@@ -149,20 +149,22 @@ namespace Gameplay
         public IEnumerator StartSecretCutscene()
         {
             GameObject spawnedScene = null;
-            GameObject fakeRoom = _player.GetComponent<PlayerController>().CurrentRoom;
-            List<EventClass> even = _player.GetComponent<PlayerController>().CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses;
+            GameObject fakeRoom = PlrRefs.inst.PlayerController.CurrentRoom;
+
+            //delete all current events
+            List<EventClass> even = fakeRoom.GetComponent<CarriageClass>()._selectedEventClasses;
             for (int i = 0; i < even.Count; i++)
             {
                 even[i].Exited(fakeRoom.GetComponent<CarriageClass>());
                 even[i].CallForDeletion(fakeRoom.GetComponent<CarriageClass>());
             }
+
             Vector3 originalRoomPos = fakeRoom.transform.position;
             StartCoroutine(FadeScreen(0.3f, 1, () =>
             {
                 spawnedScene = Instantiate(_paintingCutscenePrefab, new Vector3(100, 100, 100), new Quaternion(0, 0, 0, 0));
-                _player.GetComponent<PlayerController>().enabled = false;
+                PlrRefs.inst.PlayerController.enabled = false;
                 _player.GetComponent<Rigidbody>().isKinematic = true;
-                spawnedScene.transform.Find("RoomTemplate").gameObject.SetActive(false);
                 fakeRoom.transform.position = spawnedScene.transform.position;
             }));
 
@@ -171,7 +173,7 @@ namespace Gameplay
             StartCoroutine(FadeScreen(0.3f, 1, () =>
             {
                 fakeRoom.transform.position = originalRoomPos;
-                _player.GetComponent<PlayerController>().enabled = true;
+                PlrRefs.inst.PlayerController.enabled = true;
                 _player.GetComponent<Rigidbody>().isKinematic = false;
                 Destroy(spawnedScene);
 

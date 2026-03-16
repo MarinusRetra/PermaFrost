@@ -17,18 +17,13 @@ namespace Gameplay
         private string changelogURL;
         void Start()
         {
-            // A correct website page.
             StartCoroutine(GetRequest("https://api.github.com/repos/SpinningSpectre/GameVersionHolder/contents/Permafrost.txt?ref=main"));
-
-            // A non-existing page.
-            StartCoroutine(GetRequest("https://error.html"));
         }
 
         IEnumerator GetRequest(string uri)
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
             {
-                // Request and wait for the desired page.
                 yield return webRequest.SendWebRequest();
 
                 string[] pages = uri.Split('/');

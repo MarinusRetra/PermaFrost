@@ -49,9 +49,9 @@ namespace Gameplay
         private void OnTriggerEnter(Collider other)
         {
             //This covers a triggger on a child, which is about room big
-            if (other.CompareTag("Player") && !PlayerMonsterManager.Instance.InSideroom && _hasStarted)
+            if (other.CompareTag("Player") && !PlrRefs.inst.PlayerMonsterManager.InSideroom && _hasStarted)
             {
-                StartCoroutine(PlayerHealth.Instance.DamagePlayer("Shadowman"));
+                StartCoroutine(PlrRefs.inst.PlayerHealth.DamagePlayer("Shadowman"));
             }
         }
 

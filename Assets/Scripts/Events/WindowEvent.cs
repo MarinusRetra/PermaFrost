@@ -43,7 +43,7 @@ namespace Gameplay
         public override bool CallForDeletion(CarriageClass room)
         {
             Destroy(room.Holder.Find("FreezingArea(Clone)")?.gameObject);
-            PlayerStatusEffects.Instance.ManageFrostbiteCauses("Windows", true);
+            PlrRefs.inst.PlayerStatusEffects.ManageFrostbiteCauses("Windows", true);
             return true;
         }
 

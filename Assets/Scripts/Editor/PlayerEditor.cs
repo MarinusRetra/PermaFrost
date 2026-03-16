@@ -313,6 +313,7 @@ namespace Gameplay
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
             if (GUILayout.Button("Regen Rooms", importantButtonStyle) && CheckIfRunning())
             {
+
                 FindAnyObjectByType<Generation>().RegenerateRooms();
             }
             GUILayout.Space(20);
@@ -320,6 +321,7 @@ namespace Gameplay
 
             if (GUILayout.Button("Remove all events", importantButtonStyle) && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     SerializedObject serRoom = new SerializedObject(allRooms[j]);
@@ -331,7 +333,7 @@ namespace Gameplay
                         }
                         allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                     }
-                    allRooms[j]._selectedEventClasses = new List<EventClass>(serRoom.FindProperty("_amountOfEvents").intValue);
+                    allRooms[j]._selectedEventClasses = new List<EventClass>(0);
                     serRoom.ApplyModifiedProperties();
                 }
             }

@@ -15,7 +15,7 @@ namespace Gameplay
         [SerializeField] private AudioClip _musicClip;
         void Start()
         {
-            _playerEffects = PlayerStatusEffects.Instance;
+            _playerEffects = PlrRefs.inst.PlayerStatusEffects;
             outlineVisual = GetComponent<MeshRenderer>();
             SilenceBox();
         }

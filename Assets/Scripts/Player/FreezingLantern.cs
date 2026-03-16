@@ -15,7 +15,7 @@ namespace Gameplay
         [SerializeField] private PlayerStatusEffects _playerEffects;
         public void Start()
         {
-            _playerEffects = PlayerStatusEffects.Instance;
+            _playerEffects = PlrRefs.inst.PlayerStatusEffects;
             _input.LanternEvent += ChangeLanternState;
             StartCoroutine(HandleLantern());
         }
@@ -67,7 +67,7 @@ namespace Gameplay
                 else
                 {
                     //Remove frostbite whenever the lantern is off
-                    PlayerStatusEffects.Instance.ManageFrostbiteCauses("Lantern", true);
+                    _playerEffects.ManageFrostbiteCauses("Lantern", true);
                 }
                 yield return new WaitForSeconds(0.1f);
             }

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static PlayerHealth Instance;
-
     //Invincibility
     [SerializeField] private float _damageInvincibility = 0.5f;
     public float HealInvincibility = 2.0f;
@@ -25,7 +23,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        Instance = this;
         StartCoroutine(PlayerOutOfBoundsCheck());
     }
     private void OnCollisionEnter(Collision collision)
@@ -104,7 +101,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 StartCoroutine(CutsceneManager.instance.FadeScreen(0.3f, 1, () =>
                 {
-                    transform.position = GetComponent<PlayerController>().CurrentRoom.GetComponent<CarriageClass>().EntryPoint.transform.position + new Vector3(1,1,0);
+                    transform.position = PlrRefs.inst.PlayerController.CurrentRoom.GetComponent<CarriageClass>().EntryPoint.transform.position + new Vector3(1,1,0);
                 }));
             }
         }

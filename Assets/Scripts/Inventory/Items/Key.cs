@@ -7,7 +7,7 @@ namespace Gameplay
     {
         public override bool Use()
         {
-            GameObject lookinAt = Camera.main.GetComponent<Interactor>().hit.collider?.gameObject;
+            GameObject lookinAt = PlrRefs.inst.Interactor.hit.collider?.gameObject;
             if (lookinAt && lookinAt.CompareTag("Door"))
             {
                 Destroy(lookinAt);

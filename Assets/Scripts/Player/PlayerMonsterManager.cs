@@ -4,8 +4,6 @@ namespace Gameplay
 {
     public class PlayerMonsterManager : MonoBehaviour
     {
-        public static PlayerMonsterManager Instance;
-
         public bool HasFoundTicket = false;
         public bool InSideroom = false;
 
@@ -15,7 +13,6 @@ namespace Gameplay
         public Camera SelectedCamera;
         void Awake()
         {
-            Instance = this;
             _cam = SelectedCamera;
         }
 
@@ -68,11 +65,11 @@ namespace Gameplay
         /// </summary>
         public static void MakeNoise()
         {
-            if (Instance.OverridePlayerSounds) { return; }
+            if (PlrRefs.inst.PlayerMonsterManager.OverridePlayerSounds) { return; }
             var allEars = FindObjectsByType<AllEars>(FindObjectsSortMode.None);
             for (int i = 0; i < allEars.Length; i++)
             {
-                allEars[i].Aggro(Instance.transform.position);
+                allEars[i].Aggro(PlrRefs.inst.transform.position);
             }
         }
 

@@ -28,7 +28,7 @@ namespace Gameplay
 
         void Start()
         {
-            _player = PlayerMonsterManager.Instance.transform;
+            _player = PlrRefs.inst.transform;
             _moveRNG = Random.Range(-75, 25);
 
             BoxCollider renderer = CurrentRoom.GetComponent<BoxCollider>();
@@ -87,7 +87,7 @@ namespace Gameplay
                         if (!PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
                         {
                             _currentState = StalkerStates.Watching;
-                            PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
+                            PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Stalker", true);
                         }
                         yield return new WaitForSeconds(0.1f);
                         break;
@@ -152,13 +152,13 @@ namespace Gameplay
 
         private void Attack()
         {
-            PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", false);
+            PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Stalker", false);
         }
 
         public override void DestroyMonster() 
         {
             gameObject.name = "Despawning";
-            PlayerStatusEffects.Instance.ManageInsanityCauses("Stalker", true);
+            PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Stalker", true);
             _despawning = true;
             StartCoroutine(DespawnMonster());
         }

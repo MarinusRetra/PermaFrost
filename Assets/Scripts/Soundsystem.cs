@@ -11,7 +11,7 @@ namespace Gameplay
         private void Start()
         {
             _instance = this;
-            _player = PlayerStatusEffects.Instance.transform;
+            _player = PlrRefs.inst.transform;
         }
 
         /// <summary>
@@ -65,26 +65,8 @@ namespace Gameplay
 
         public GameObject PlaySoundOnPlayer(AudioClip _clip, bool _loop = false, bool _randomizePitch = false, float _randomValue = 0.1f)
         {
-            GameObject _currentSource = Instantiate(SoundSourcePrefab);
-            AudioSource _source = _currentSource.GetComponent<AudioSource>();
-            _source.clip = _clip;
+            GameObject _currentSource = PlaySoundInArea(_clip, _player.position, _loop, _randomizePitch, _randomValue);
             _currentSource.transform.parent = _player;
-            if (_randomizePitch)
-            {
-                _source.pitch = 1 + Random.Range(-_randomValue, _randomValue);
-            }
-
-            if (_loop)
-            {
-                _source.loop = true;
-            }
-            else
-            {
-                Destroy(_currentSource, _source.clip.length);
-            }
-
-            _source.Play();
-
             return _currentSource;
         }
     }

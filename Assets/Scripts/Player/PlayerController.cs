@@ -32,6 +32,8 @@ namespace Gameplay
         private CapsuleCollider _playerCollider;
         private Vector3 _moveDirection;
         private float _moveInputX, _moveInputY;
+
+        //Crouch
         private bool _isHoldingCrouch = false;
         private bool _isCrouching = false;
         private bool _canGetUp = true;
@@ -40,12 +42,14 @@ namespace Gameplay
 
         public SprintBehaviour SprintBehav;
 
-        [Header("SpeedSyringeStuff")]
+        [Header("SpeedSyringe")]
         public int _timeRemaining = 0;
         public bool _isRunning = false;
 
+        [Header("Room")]
         public GameObject CurrentRoom;
 
+        //Add all events to input
         private void OnEnable()
         {
             _input.MoveEvent += HandleMove;
@@ -58,7 +62,9 @@ namespace Gameplay
 
         public void Start()
         {
-            _camera = transform.Find("PlayerCamera");
+            _camera = PlrRefs.inst.PlayerCamera.transform;
+
+            //auto lock mouse
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
@@ -138,6 +144,7 @@ namespace Gameplay
             isSprinting = false;
         }
 
+        // TODO: Make values like 0.05 and stuff variables for balancing.
         private IEnumerator Sprint()
         {
             SprintBehav.MaxSprint(TotalStamina);

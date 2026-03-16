@@ -12,8 +12,8 @@ namespace Gameplay
             //turn off the player and start the cutscene
             GameObject cut =  Instantiate(_endingCutscenePrefab);
             cut.transform.position = new Vector3(300, 300, 300);
-            PlayerStatusEffects.Instance.transform.Find("CamBrain").parent = cut.transform;
-            PlayerStatusEffects.Instance.gameObject.SetActive(false);
+            PlrRefs.inst.Camera.transform.parent = cut.transform;
+            PlrRefs.inst.gameObject.SetActive(false);
             CutsceneManager.instance.StartEndingCutscene();
             return true;
         }

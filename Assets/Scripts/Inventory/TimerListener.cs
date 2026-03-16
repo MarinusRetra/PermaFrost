@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Gameplay;
 
 public class TimerListener : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class TimerListener : MonoBehaviour
     {
         for (float i = 0; i <= _timeIn;)
         {
-            _lookinAt = Camera.main.GetComponent<Gameplay.Interactor>().hit.collider?.gameObject;
+            _lookinAt = PlrRefs.inst.Interactor.hit.collider?.gameObject;
             if (_lookinAt && _lookinAt.CompareTag("Door"))
             {
               i += 0.3f;

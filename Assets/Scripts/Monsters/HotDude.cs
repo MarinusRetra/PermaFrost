@@ -12,7 +12,7 @@ namespace Gameplay
         private Transform _player;
         [SerializeField] private NavMeshAgent _agent;
 
-        private ParticleSystem _particles;
+        [SerializeField] private ParticleSystem _particles;
 
         [Header("Sounds")]
         [SerializeField] private AudioClip _stunSound;
@@ -21,10 +21,9 @@ namespace Gameplay
         void Start()
         {
             //Fetch the player
-            _player = FindAnyObjectByType<PlayerHealth>().transform;
+            _player = PlrRefs.inst.transform;
 
             _agent = GetComponent<NavMeshAgent>();
-            _particles = transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
 
             StartCoroutine(HandleMovement());
         }

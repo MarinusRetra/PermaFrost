@@ -38,7 +38,7 @@ namespace Gameplay
         {
             if (_isPlaying) { yield return 0; }
             _isPlaying = true;
-            PlayerMonsterManager.Instance.OverridePlayerSounds = true;
+            PlrRefs.inst.PlayerMonsterManager.OverridePlayerSounds = true;
             _body.isKinematic = true;
 
             //this gets called so much to prevent allears from moving away to other noises
@@ -48,7 +48,7 @@ namespace Gameplay
                 PlayerMonsterManager.MakeNoise(transform.position);
                 _totalTimes++;
             }
-            PlayerMonsterManager.Instance.OverridePlayerSounds = false;
+            PlrRefs.inst.PlayerMonsterManager.OverridePlayerSounds = false;
             Destroy(gameObject);
         }
     }

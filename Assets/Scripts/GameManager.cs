@@ -36,7 +36,5 @@ namespace Gameplay
             _input.PauseEvent -= HandlePause;
             _input.ResumeEvent -= HandleResume;
         }
-
-
     }
 }

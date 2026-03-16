@@ -25,7 +25,7 @@ namespace Gameplay
             }
             if (objec.CompareTag("Player"))
             {
-                PlayerStatusEffects.Instance.ManageFrostbiteCauses(_freezingName, state);
+                PlrRefs.inst.PlayerStatusEffects.ManageFrostbiteCauses(_freezingName, state);
             }
         }
     }

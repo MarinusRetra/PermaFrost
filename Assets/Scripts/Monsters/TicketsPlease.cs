@@ -40,7 +40,7 @@ namespace Gameplay
         {
             if (other.CompareTag("Player"))
             {
-                if (!PlayerMonsterManager.Instance.HasFoundTicket && !_isChasing)
+                if (!PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && !_isChasing)
                 {
                     StartCoroutine(ChasePlayer());
                 }
@@ -60,9 +60,9 @@ namespace Gameplay
             _isChasing = true;
             //VERY fast, so player cant just run past and despawn them by going into the next room. (they still can most of the time)
             _agent.speed = 8;
-            while (!PlayerMonsterManager.Instance.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
+            while (!PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
             {
-                _agent.destination = PlayerMonsterManager.Instance.transform.position;
+                _agent.destination = PlrRefs.inst.transform.position;
                 yield return new WaitForSeconds(0.2f);
             }
             Deaggro();

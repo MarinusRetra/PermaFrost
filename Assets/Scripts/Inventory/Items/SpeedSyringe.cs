@@ -17,7 +17,7 @@ namespace Gameplay
 
         public override bool Use()
         {
-            _controller = PlayerStatusEffects.Instance.gameObject.GetComponent<PlayerController>();
+            _controller = PlrRefs.inst.PlayerController;
             _controller.StartRoutine(Run());
             return true;
         }

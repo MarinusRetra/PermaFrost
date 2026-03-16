@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
+    //TODO: Sometimes the outside splits. fix that or smthin.
     [SerializeField] private Transform[] _objects;
     [SerializeField] private Vector3 _speed;
     [SerializeField] private int _distance;

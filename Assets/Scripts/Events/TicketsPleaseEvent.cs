@@ -28,7 +28,7 @@ namespace Gameplay
         }
         public override bool Exited(CarriageClass room)
         {
-            PlayerMonsterManager.Instance.HasFoundTicket = false;
+            PlrRefs.inst.PlayerMonsterManager.HasFoundTicket = false;
             if (room.Holder.Find("TicketsPlease(Clone)"))
             {
                 room.Holder.Find("TicketsPlease(Clone)").transform.GetChild(0).GetComponent<Monster>().DestroyMonster();

@@ -13,6 +13,7 @@ namespace Gameplay
                 if (PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedSlot?.Item.name != "Key")
                 {
                     _currentTine = StartCoroutine(PlayerHealth.Instance.HealPlayer());
+                    PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().RemoveItemFromSlot(PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedSlot.Slot_ID);
                 }
             });
             base.Start();

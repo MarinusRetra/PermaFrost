@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4902371992905793753}
   - component: {fileID: 1197776191713676055}
   - component: {fileID: 3080520781784696669}
+  - component: {fileID: 3954551017534674717}
+  - component: {fileID: 2282045520720273820}
   m_Layer: 6
   m_Name: ShadowmanVisual
   m_TagString: Untagged
@@ -89,7 +91,44 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3954551017534674717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654771971384685928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354581c7decf4cc42b7bc78181caffe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.NodeBasedMovement
+  speed: 5
+  maxTransfers: 8
+  rb: {fileID: 3888152387350078815}
+--- !u!65 &2282045520720273820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2654771971384685928}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5294650661134290325
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,9 +177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Shadowman
   CurrentRoom: {fileID: 0}
-  _shadowmanSpeed: 25
-  _dashingClip: {fileID: 8300000, guid: 127fb2c589054d34684e08fb0f6189b2, type: 3}
+  _shadowmanSpeed: 5
   freezingEvent: {fileID: 0}
+  movement: {fileID: 3954551017534674717}
+  _dashingClip: {fileID: 8300000, guid: 127fb2c589054d34684e08fb0f6189b2, type: 3}
 --- !u!65 &129384779575458121
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -184,10 +224,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 118
+  m_Constraints: 16
   m_CollisionDetection: 0
 --- !u!1 &8627526711204565712
 GameObject:
@@ -4947,7 +4987,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &5065985999050530581
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4994,6 +5034,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5025,4 +5066,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0

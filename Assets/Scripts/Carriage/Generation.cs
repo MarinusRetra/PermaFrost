@@ -57,7 +57,7 @@ public class Generation : MonoBehaviour
         _initializedRooms.Add(startRoom);
 
         
-        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint)
+        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint && player)
         {
             player.transform.position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
             player.SetActive(true);

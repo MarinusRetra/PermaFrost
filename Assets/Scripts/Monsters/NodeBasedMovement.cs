@@ -1,14 +1,15 @@
+using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
     public class NodeBasedMovement : MonoBehaviour
     {
-        public Transform TempNodeInstant;
-        public int speed = 1;
+        public float speed = 1;
+        public int maxTransfers = 10;
         [SerializeField] private Rigidbody rb;
         private GameObject affectedObject;
+        public Action onDeathAction;
         void Start()
         {
             if(rb == null)
@@ -16,26 +17,15 @@ namespace Gameplay
                 rb = GetComponent<Rigidbody>();
             }
             affectedObject = rb.gameObject;
-            StartMoving(TempNodeInstant);
-        }
-
-        private void Update()
-        {
-            var keyboard = Keyboard.current;
-            if (keyboard == null) return;
-            if (keyboard.lKey.wasPressedThisFrame)
-            {
-                rb.angularVelocity = Vector3.zero;
-                rb.linearVelocity = Vector3.zero;
-                StartMoving(TempNodeInstant);
-            }
         }
 
         private Transform nodes;
-        public Transform nextObjective;
-        public int currentIndex = 0;
+        private Transform nextObjective;
+        private int currentIndex = 0;
         public void StartMoving(Transform nodeHolder)
         {
+            startingNode = nodeHolder;
+            transfers = 0;
             currentIndex = 0;
             affectedObject.transform.position = nodeHolder.GetChild(0).position;
             nodes = nodeHolder;
@@ -48,6 +38,7 @@ namespace Gameplay
             }
         }
 
+        private int transfers = 0;
         private void OnTriggerEnter(Collider other)
         {
             if (!nextObjective || !nodes) { return; }
@@ -62,20 +53,23 @@ namespace Gameplay
                     switch (currentNode.type)
                     {
                         case Node.NodeType.Forcekill:
-                            rb.angularVelocity = Vector3.zero;
-                            rb.linearVelocity = Vector3.zero;
+                            Obliterate();
                             return;
                         case Node.NodeType.Transfer:
+                            if (currentNode.TransferCounts) { transfers++; }
+                            if (transfers >= maxTransfers)
+                            {
+                                Obliterate();
+                                return;
+                            }
                             nodes = currentNode.transferNodeHolder;
                             currentIndex = 0;
                             break;
                     }
                 }
-                print(oldNode.name);
                 Transform node = nodes.GetChild(currentIndex);
                 if (node)
                 {
-                    affectedObject.transform.position = oldNode.position;
                     MoveTowards(node);
                     Transform nextNode = nodes.GetChild(currentIndex);
                     if (nextNode)
@@ -90,14 +84,20 @@ namespace Gameplay
         public void MoveTowards(Transform node)
         {
             Vector3 lookPos = node.position - affectedObject.transform.position;
-            //lookPos.y = 0;
             affectedObject.transform.rotation = Quaternion.LookRotation(lookPos);
             rb.angularVelocity = Vector3.zero;
             rb.linearVelocity = Vector3.zero;
             rb.AddForce(lookPos.normalized * speed, ForceMode.Impulse);
 
-            print(currentIndex);
+        }
 
+        Transform startingNode;
+        private void Obliterate()
+        {
+            onDeathAction?.Invoke();
+            rb.angularVelocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
+            StartMoving(startingNode.transform);
         }
     }
 }

@@ -349,6 +349,14 @@ namespace Gameplay
                     events[selectedEvent].Generated(allRooms[j]);
                 }
             }
+            if (showDetails)
+            {
+                if (GUILayout.Button("Add event to Room 1 specifically") && CheckIfRunning())
+                {
+                    allRooms[0]._selectedEventClasses.Add(events[selectedEvent]);
+                    events[selectedEvent].Generated(allRooms[0]);
+                }
+            }
             if (showFun)
             {
                 if (GUILayout.Button("Add event to all rooms 10 times") && CheckIfRunning())

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Gameplay
@@ -29,11 +30,14 @@ namespace Gameplay
         /// </summary>
         private void HandleInteract()
         {
-            if (hit.collider.GetComponent<InteractObject>() && hit.collider.GetComponent<InteractObject>().enabled)
+            try
             {
-                hit.collider.GetComponent<InteractObject>()?.Interact();
+                if (hit.collider.GetComponent<InteractObject>() && hit.collider.GetComponent<InteractObject>().enabled)
+                {
+                    hit.collider.GetComponent<InteractObject>()?.Interact();
+                }
             }
-
+            catch (Exception) { }
         }
 
         void OnDestroy()

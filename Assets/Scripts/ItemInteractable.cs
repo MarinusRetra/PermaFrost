@@ -13,12 +13,14 @@ namespace Gameplay
 
         public void DoThing()
         {
-            if (_playerInventory.CurrentSelectedSlot.Slot_ID > _playerInventory.HotbarSlots.Length-1)
+            if (_playerInventory.IsInventoryFull())
             {
                 return;
             }
+
             _playerInventory.PickupItem(_item);
             Destroy(gameObject);
         }
+
     }
 }

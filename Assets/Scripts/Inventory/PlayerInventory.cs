@@ -121,7 +121,7 @@ namespace Gameplay
 
         public void HandleDrop()
         {
-            if (currentSelectedSlot_ID != -1 || CurrentSelectedSlot.Item != null)
+            if (currentSelectedSlot_ID != -1)
             {
                 Instantiate(CurrentSelectedSlot.Item.HoldObject, transform.position, transform.rotation);
                 RemoveItemFromSlot(CurrentSelectedSlot.Slot_ID);
@@ -159,7 +159,7 @@ namespace Gameplay
         public void RemoveItemFromSlot(int currentSlotIn)
         {
             CurrentSelectedSlot.ClearSlot();
-            for (int i = currentSelectedSlot_ID; i < hotbarSlots.Length; i++)
+            for (int i = currentSelectedSlot_ID; i < hotbarSlots.Length-1; i++)
             {
                 if (hotbarSlots[i + 1].Item != null)
                 {
@@ -167,8 +167,9 @@ namespace Gameplay
                     hotbarSlots[i + 1].ClearSlot();
                 }
             }
+            
             if (GetItemsInInventory() == 0)
-            { 
+            {
                 DeselectSlots();
             }
         }

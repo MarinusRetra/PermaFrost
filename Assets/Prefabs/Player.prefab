@@ -274,7 +274,7 @@ Transform:
   m_GameObject: {fileID: 2167895748305581227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -126.981995, y: 1.0999501, z: 272.88998}
+  m_LocalPosition: {x: -134.09012, y: 0.96095, z: 278.19162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -809,6 +809,7 @@ GameObject:
   - component: {fileID: 4605853214314879402}
   - component: {fileID: 2481520789753704852}
   - component: {fileID: 1058295031561131540}
+  - component: {fileID: 5325362770019257925}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1094,6 +1095,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimerListener
   _inventoryTimer: {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
   _bar: {fileID: 0}
+--- !u!114 &5325362770019257925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188160094882526209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4718e94dcf53734683a20a85ec29552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlrRefs
+  PlayerHealth: {fileID: 4605853214314879402}
+  PlayerStatusEffects: {fileID: 4741671994732222255}
+  PlayerMonsterManager: {fileID: 2481520789753704852}
+  FreezingLantern: {fileID: 2696411421193406093}
+  PlayerInventory: {fileID: 866593153503499546}
+  PlayerController: {fileID: 5083458478355850614}
+  Interactor: {fileID: 1255865286293581571}
+  GameManager: {fileID: 2873557629302030239}
+  Camera: {fileID: 8998036105835524406}
+  PlayerCamera: {fileID: 4168117785406971383}
+  FakeCamera: {fileID: 5990134823720351312}
 --- !u!1001 &4208562570966578540
 PrefabInstance:
   m_ObjectHideFlags: 0

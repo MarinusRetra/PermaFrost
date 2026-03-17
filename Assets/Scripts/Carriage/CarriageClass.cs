@@ -26,6 +26,9 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private int _maxAmountOfItems = 1;
 
     public CarriageClass previousCarriage;
+    public CarriageClass nextCarriage;
+
+    public Transform NodeHolder;
 
     private PlayerController _player;
 

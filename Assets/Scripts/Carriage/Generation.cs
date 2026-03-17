@@ -209,6 +209,7 @@ public class Generation : MonoBehaviour
 
             CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
             randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
+            previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage;
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;

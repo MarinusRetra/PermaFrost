@@ -78,7 +78,7 @@ namespace Gameplay
         {
             if (currentSelectedSlot_ID == -1)
             { 
-                SelectSlot(numberIn == -1 ? GetItemsInInventory() : 0);
+                SelectSlot(numberIn == -1 ? GetItemsInInventory()-1 : 0);
                 return;
             }
             if (CurrentSelectedSlot.Slot_ID + numberIn < 0 || CurrentSelectedSlot.Slot_ID + numberIn > GetItemsInInventory()-1)

@@ -10,9 +10,10 @@ namespace Gameplay
         {
             InteractEvent.AddListener(() =>
             {
-                if (PlrRefs.inst.PlayerInventory.CurrentSelectedSlot?.Item.name != "Key")
+                if (PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedSlot?.Item.name != "Key")
                 {
-                    _currentTine = StartCoroutine(PlrRefs.inst.PlayerHealth.HealPlayer());
+                    _currentTine = StartCoroutine(PlayerHealth.Instance.HealPlayer());
+                    PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().RemoveItemFromSlot(PlayerHealth.Instance.gameObject.GetComponent<PlayerInventory>().CurrentSelectedSlot.Slot_ID);
                 }
             });
             base.Start();
@@ -35,7 +36,7 @@ namespace Gameplay
             InteractEvent.RemoveAllListeners();
             Destroy(transform.GetChild(0).gameObject);
             Destroy(GetComponent<Collider>());
-            yield return new WaitForSeconds(PlrRefs.inst.PlayerHealth.HealInvincibility + 1);
+            yield return new WaitForSeconds(PlayerHealth.Instance.HealInvincibility + 1);
             Destroy(gameObject);
         }
     }

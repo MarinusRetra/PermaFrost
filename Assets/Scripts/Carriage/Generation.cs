@@ -12,7 +12,7 @@ public class Generation : MonoBehaviour
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
-    [SerializeField] private List<GameObject> _initializedRooms = new List<GameObject>();
+    public List<GameObject> _initializedRooms = new List<GameObject>();
     public int AmountOfRooms = 15;
     public GameObject player;
 
@@ -66,7 +66,6 @@ public class Generation : MonoBehaviour
 
         allTotalPossibleRooms = new List<RoomClass>(Rooms.AllRoomsInType);
 
-        GameObject previousRandomRoom = null;
         for (int i = 0; i < AmountOfRooms; i++)
         {
 
@@ -209,6 +208,7 @@ public class Generation : MonoBehaviour
 
             CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
             randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
+            randomCarriage.roomIndex = index + 1;
             previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage;
 
             _initializedRooms.Add(randomRoom);

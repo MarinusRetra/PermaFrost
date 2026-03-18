@@ -40,7 +40,19 @@ namespace Gameplay
             _hasStarted = true;
 
             movement.speed = _shadowmanSpeed;
-            movement.StartMoving(currentCarriage.NodeHolder);
+
+            CarriageClass carriageBack = null;
+            if(currentCarriage.roomIndex <= 3)
+            {
+                carriageBack = currentCarriage.generationClass._initializedRooms[1].GetComponent<CarriageClass>();
+            }
+            else
+            {
+                carriageBack = currentCarriage.generationClass._initializedRooms[currentCarriage.roomIndex - 3].GetComponent<CarriageClass>();
+            }
+
+            movement.StartMoving(carriageBack.NodeHolder);
+            movement.onDeathAction = () => { DestroyMonster(); };
         }
 
         private void OnTriggerEnter(Collider other)

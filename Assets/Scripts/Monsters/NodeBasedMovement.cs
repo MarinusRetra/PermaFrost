@@ -24,7 +24,6 @@ namespace Gameplay
         private int currentIndex = 0;
         public void StartMoving(Transform nodeHolder)
         {
-            startingNode = nodeHolder;
             transfers = 0;
             currentIndex = 0;
             affectedObject.transform.position = nodeHolder.GetChild(0).position;
@@ -90,14 +89,9 @@ namespace Gameplay
             rb.AddForce(lookPos.normalized * speed, ForceMode.Impulse);
 
         }
-
-        Transform startingNode;
         private void Obliterate()
         {
             onDeathAction?.Invoke();
-            rb.angularVelocity = Vector3.zero;
-            rb.linearVelocity = Vector3.zero;
-            StartMoving(startingNode.transform);
         }
     }
 }

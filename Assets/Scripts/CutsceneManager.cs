@@ -37,7 +37,8 @@ namespace Gameplay
                 StartCoroutine(StartStartingCutscene());
             }
         }
-        private IEnumerator StartStartingCutscene()
+
+        private void StartCutscene()
         {
             _cutsceneUi.SetActive(true);
             _input.SetCutsceneActions();
@@ -46,6 +47,35 @@ namespace Gameplay
             Cursor.visible = false;
             _ui.SetActive(false);
             PlrRefs.inst.PlayerController.enabled = false;
+        }
+
+        private void EndCutscene(bool freeMouse)
+        {
+            _cutsceneUi.SetActive(false);
+            _input.SetGameplayActions();
+            //turn off player
+            if (!freeMouse)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+
+            _ui.SetActive(true);
+            PlrRefs.inst.PlayerController.enabled = true;
+        }
+
+        private void SkipCutscene()
+        {
+            //implement later
+        }
+        private IEnumerator StartStartingCutscene()
+        {
+            StartCutscene();
 
             yield return new WaitForSeconds((float)_startingTimeline.duration - 0.1f);
 
@@ -59,18 +89,12 @@ namespace Gameplay
         public void StopStartingCutscene(bool fade = true)
         {
             if (!_startingCutscene.activeSelf) return;
-            _cutsceneUi.SetActive(false);
 
             StartCoroutine(FadeScreen(0.3f * (fade ? 1 : 0), 1 * (fade ? 1 : 0), () => {
-                _ui.SetActive(true);
-                //turn player back on
-                _startingCutscene.SetActive(false);
-                PlrRefs.inst.PlayerController.enabled = true;
-
+                EndCutscene(false);
                 _backgroundSound.SetActive(true);
                 Generation.mainInstance.FastLoading = true;
             }));
-            _input.SetGameplayActions();
         }
 
         public IEnumerator FadeScreen(float fadeTime, float darkTime, Action betweenSceneCode = null)
@@ -118,11 +142,9 @@ namespace Gameplay
         public IEnumerator StartEndingCutsceneCoroutine()
         {
 
-            _backgroundSound.SetActive(false);
-            _ui.SetActive(false);
+            StartCutscene();
             yield return new WaitForSeconds((float)_endingTimeline.duration);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            EndCutscene(true);
             SceneManager.LoadScene(0);
         }
 

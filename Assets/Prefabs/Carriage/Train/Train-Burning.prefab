@@ -399,6 +399,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 83cac72470165be459c69f6c34ccbe23, type: 2}
   - {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
   generationClass: {fileID: 0}
+  roomIndex: 0
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
@@ -857,7 +858,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 92e70acfa7c7d7d49ba01c6b57f0d6a5, type: 2}
+  - {fileID: 2100000, guid: 16d7a885d14361a499a6abe8e562540b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1036,7 +1037,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Node
   type: 0
+  TransferCounts: 1
+  TransferToNextRoom: 1
   transferNodeHolder: {fileID: 0}
+  RandomNodeHolders: []
   parent: {fileID: 503342536573325157}
 --- !u!1 &1169241563188123665
 GameObject:

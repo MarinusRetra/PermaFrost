@@ -19,17 +19,19 @@ namespace Gameplay
             affectedObject = rb.gameObject;
         }
 
-        private Transform nodes;
-        private Transform nextObjective;
-        private int currentIndex = 0;
+        public Transform nodes;
+        public Transform nextObjective;
+        public int currentIndex = 0;
         public void StartMoving(Transform nodeHolder)
         {
             transfers = 0;
             currentIndex = 0;
-            affectedObject.transform.position = nodeHolder.GetChild(0).position;
+            Transform nodeOne = nodeHolder.GetChild(0);
+            affectedObject.transform.position = nodeOne.position;
             nodes = nodeHolder;
             currentIndex = 1;
-            MoveTowards(nodeHolder.GetChild(currentIndex));
+            if (NodeEffect(nodeOne)) { return; }
+            MoveTowards(nodes.GetChild(currentIndex));
             Transform nextNode = nodes.GetChild(currentIndex);
             if (nextNode)
             {
@@ -47,24 +49,7 @@ namespace Gameplay
                 currentIndex++;
                 if (oldNode && oldNode.GetComponent<Node>())
                 {
-                    Node currentNode = oldNode.GetComponent<Node>();
-
-                    switch (currentNode.type)
-                    {
-                        case Node.NodeType.Forcekill:
-                            Obliterate();
-                            return;
-                        case Node.NodeType.Transfer:
-                            if (currentNode.TransferCounts) { transfers++; }
-                            if (transfers >= maxTransfers)
-                            {
-                                Obliterate();
-                                return;
-                            }
-                            nodes = currentNode.transferNodeHolder;
-                            currentIndex = 0;
-                            break;
-                    }
+                    if (NodeEffect(oldNode)) { return; }
                 }
                 Transform node = nodes.GetChild(currentIndex);
                 if (node)
@@ -78,6 +63,33 @@ namespace Gameplay
 
                 }
             }
+        }
+
+        private bool NodeEffect(Transform currentNodeObj)
+        {
+            if(!currentNodeObj.GetComponent<Node>()) { return false; }
+            Node currentNode = currentNodeObj.GetComponent<Node>();
+            switch (currentNode.type)
+            {
+                case Node.NodeType.Forcekill:
+                    Obliterate();
+                    return true;
+                case Node.NodeType.Transfer:
+                    if (currentNode.TransferCounts) { transfers++; }
+                    if (transfers >= maxTransfers)
+                    {
+                        Obliterate();
+                        return true;
+                    }
+                    nodes = currentNode.transferNodeHolder;
+                    currentIndex = 0;
+                    break;
+                case Node.NodeType.Random:
+                    nodes = currentNode.RandomNodeHolders[UnityEngine.Random.Range(0, currentNode.RandomNodeHolders.Length)];
+                    currentIndex = 0;
+                    break;
+            }
+            return false;
         }
 
         public void MoveTowards(Transform node)

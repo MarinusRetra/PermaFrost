@@ -5,17 +5,23 @@ namespace Gameplay
 {
     public class Node : MonoBehaviour
     {
-        public enum NodeType { Transfer,Forcekill }
+        public enum NodeType { Transfer,Forcekill,Random }
         public NodeType type;
         public bool TransferCounts = true;
+        public bool TransferToNextRoom = true;
 
         public Transform transferNodeHolder;
+
+        public Transform[] RandomNodeHolders;
 
         [SerializeField] private CarriageClass parent;
 
         private void Start()
         {
-            StartCoroutine(CheckCarriageJump());
+            if (TransferToNextRoom && type == NodeType.Transfer)
+            {
+                StartCoroutine(CheckCarriageJump());
+            }
         }
 
         private IEnumerator CheckCarriageJump()

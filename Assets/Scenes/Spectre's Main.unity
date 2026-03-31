@@ -2195,7 +2195,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2167895748305581227, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2081375127}
   m_SourcePrefab: {fileID: 100100000, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
 --- !u!1 &697335629
 GameObject:
@@ -5943,6 +5946,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1000, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2081375118 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2167895748305581227, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+  m_PrefabInstance: {fileID: 689862579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!166 &2081375127
+AudioChorusFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081375118}
+  m_Enabled: 1
+  m_DryMix: 1
+  m_WetMix1: 0
+  m_WetMix2: 0
+  m_WetMix3: 0
+  m_Delay: 30
+  m_Rate: 1
+  m_Depth: 1
 --- !u!1 &2094775280
 GameObject:
   m_ObjectHideFlags: 0
@@ -6256,7 +6279,7 @@ PrefabInstance:
     - target: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
       propertyPath: Rooms
       value: 
-      objectReference: {fileID: 11400000, guid: 222155e9e99eb544eb36977e26cea725, type: 2}
+      objectReference: {fileID: 11400000, guid: 61dd753b59801574280e0b8a3e96d381, type: 2}
     - target: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
       propertyPath: player
       value: 

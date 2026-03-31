@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 2873557629302030239}
   - component: {fileID: 1255865286293581571}
   - component: {fileID: 8649446171822719292}
+  - component: {fileID: 5848896125134198086}
   m_Layer: 3
   m_Name: CamBrain
   m_TagString: MainCamera
@@ -454,6 +455,21 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2167895748305581227}
   m_Enabled: 1
+--- !u!166 &5848896125134198086
+AudioChorusFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2167895748305581227}
+  m_Enabled: 1
+  m_DryMix: 1
+  m_WetMix1: 0
+  m_WetMix2: 0
+  m_WetMix3: 0
+  m_Delay: 30
+  m_Rate: 1
+  m_Depth: 1
 --- !u!1 &4168117785406971383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1059,7 @@ MonoBehaviour:
   InsanityDeath: 40
   _currentInsanity: 0
   _insanityCauses: []
+  _sanityAudioFilter: {fileID: 0}
   FrostbiteDeath: 200
   _currentFrostbite: 0
   _freezeSFX: {fileID: 8300000, guid: 7f7eb577c6ef1fc4180b83ff989055f8, type: 3}

@@ -78,12 +78,12 @@ namespace Gameplay
             switch (allTabs[selectedTab])
             {
                 case "Player":
-                    if (player == null) { player = GameObject.Find("Player"); }
-                    if (playerEffects == null) { playerEffects = player.GetComponent<PlayerStatusEffects>(); }
-                    if (playerHealth == null) { playerHealth = player.GetComponent<PlayerHealth>(); }
-                    if (playerController == null) { playerController = player.GetComponent<PlayerController>(); }
-                    if (playerInventory == null) { playerInventory = player.GetComponent<PlayerInventory>(); }
-                    if (playerLantern == null) { playerLantern = player.transform.Find("PlayerCamera").Find("Lantern").GetComponent<FreezingLantern>(); }
+                    if (player == null) { player = PlrRefs.inst.gameObject; }
+                    if (playerEffects == null) { playerEffects = PlrRefs.inst.PlayerStatusEffects; }
+                    if (playerHealth == null) { playerHealth = PlrRefs.inst.PlayerHealth; }
+                    if (playerController == null) { playerController = PlrRefs.inst.PlayerController; }
+                    if (playerInventory == null) { playerInventory = PlrRefs.inst.PlayerInventory; }
+                    if (playerLantern == null) { playerLantern = PlrRefs.inst.FreezingLantern; }
                     break;
                 case "Game":
                     if (CheckIfRunning(true))
@@ -169,6 +169,7 @@ namespace Gameplay
 
             if (GUILayout.Button("Revive", importantButtonStyle) && CheckIfRunning())
             {
+                UpdateVariables();
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 playerHealth.gameObject.SetActive(true);
@@ -194,6 +195,7 @@ namespace Gameplay
 
             if (GUILayout.Button("Make unkillable",importantButtonStyle) && CheckIfRunning())
             {
+                UpdateVariables();
                 playerHealth.HealInvincibility = 9999999;
                 playerHealth.DamagePlayer("Skill issue");
                 playerHealth.HealPlayer(true);
@@ -349,6 +351,14 @@ namespace Gameplay
                     events[selectedEvent].Generated(allRooms[j]);
                 }
             }
+            if (showDetails)
+            {
+                if (GUILayout.Button("Add event to Room 1 specifically") && CheckIfRunning())
+                {
+                    allRooms[0]._selectedEventClasses.Add(events[selectedEvent]);
+                    events[selectedEvent].Generated(allRooms[0]);
+                }
+            }
             if (showFun)
             {
                 if (GUILayout.Button("Add event to all rooms 10 times") && CheckIfRunning())
@@ -391,6 +401,21 @@ namespace Gameplay
                             allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                             allRooms[j]._selectedEventClasses.RemoveAt(i);
                         }
+                    }
+                }
+            }
+
+            if (showDetails)
+            {
+                GUILayout.Space(20);
+                GUILayout.Label("Visuals", headerStyle);
+                if (GUILayout.Button("Remove carriage visual from all rooms") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    Debug.Log("Go" + allRooms.Count);
+                    for (int j = 0; j < allRooms.Count; j++)
+                    {
+                        allRooms[j].transform.Find("Visuals").Find("Carriage").gameObject.SetActive(false);
                     }
                 }
             }

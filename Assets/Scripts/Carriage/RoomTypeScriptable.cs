@@ -9,6 +9,7 @@ namespace Gameplay
     {
         public string RoomtypeName;
 
+        public bool HasStartRoom = true;
         public GameObject RoomTypeStartRoom;
         public GameObject RoomTypeEndRoom;
 

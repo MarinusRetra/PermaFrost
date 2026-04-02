@@ -16,6 +16,7 @@ public class CarriageClass : MonoBehaviour
     public Transform Holder;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     public Generation generationClass;
+    public int roomIndex;
 
     [SerializeField] private bool _enterTriggered;
     [SerializeField] private bool _exitTriggered;

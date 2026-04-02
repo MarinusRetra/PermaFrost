@@ -13,6 +13,8 @@ namespace Gameplay
         private Transform _exitRoom;
         private Transform _entryRoom;
 
+        [SerializeField] private NodeBasedMovement movement;
+
         [Header("Sounds")]
         [SerializeField] private AudioClip _dashingClip;
         private void Start()
@@ -30,20 +32,27 @@ namespace Gameplay
         {
             StartCoroutine(CurrentRoom.GetComponent<CandleManager>().FlickerCandles());
 
+            CarriageClass currentCarriage = CurrentRoom.GetComponent<CarriageClass>();
             //makes shadowman appear faster if the room also has freezing, so the player isnt guarenteed to take too much freezing
-            yield return new WaitForSeconds(CurrentRoom.GetComponent<CarriageClass>()._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 10f) : Random.Range(6f, 8.5f));
+            yield return new WaitForSeconds(currentCarriage._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 10f) : Random.Range(6f, 8.5f));
             
             Soundsystem.PlaySound(_dashingClip, transform.position, true).transform.parent = transform;
             _hasStarted = true;
-            transform.position = _entryRoom.position;
-            GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, _shadowmanSpeed), ForceMode.Impulse);
 
-            //Check every half second if its passed
-            while (transform.position.z < _exitRoom.position.z + 50)
+            movement.speed = _shadowmanSpeed;
+
+            CarriageClass carriageBack = null;
+            if(currentCarriage.roomIndex <= 3)
             {
-                yield return new WaitForSeconds(0.5f);
+                carriageBack = currentCarriage.generationClass._initializedRooms[1].GetComponent<CarriageClass>();
             }
-            DestroyMonster();
+            else
+            {
+                carriageBack = currentCarriage.generationClass._initializedRooms[currentCarriage.roomIndex - 3].GetComponent<CarriageClass>();
+            }
+
+            movement.StartMoving(carriageBack.NodeHolder);
+            movement.onDeathAction = () => { DestroyMonster(); };
         }
 
         private void OnTriggerEnter(Collider other)

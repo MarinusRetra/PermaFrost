@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee69e3ca7b5d6a4d841721c7f38b169, type: 3}
+  m_Name: MyTypeIsKindaStartless
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
+  RoomtypeName: NoStartingTestType
+  HasStartRoom: 0
+  RoomTypeStartRoom: {fileID: 0}
+  RoomTypeEndRoom: {fileID: 359503124527034429, guid: b2fc8d7b74a74914897a717c449ec1ad, type: 3}
+  AllRoomsInType:
+  - Room: {fileID: 366001246756394530, guid: 3ff0af00c0d252e459c829ee43f30cd9, type: 3}
+    Weight: 10
+    AmountOfEventsMax: 0
+    AllowedEvents: []
+    RoomName: r
+    onlySpawnOnce: 0
+    HeightValue: -1
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: 8d7d7f40619cb7c429a81cffd7773a10, type: 3}
+    Weight: 10
+    AmountOfEventsMax: 0
+    AllowedEvents: []
+    RoomName: roo
+    onlySpawnOnce: 0
+    HeightValue: 1
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: 50ec6a79f51d57844ae4ff867ff99b15, type: 3}
+    Weight: 10
+    AmountOfEventsMax: 0
+    AllowedEvents: []
+    RoomName: room
+    onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
+  GuarenteedRooms: []
+  AllowDupes: 1

@@ -16,7 +16,7 @@ namespace Gameplay
         }
         public override bool Exited(CarriageClass room)
         {
-            room.Holder.Find("HealingAltar(Clone)").GetComponent<HealingAltar>().DestroyAltar();
+            room.Holder.Find("HealingAltar(Clone)")?.GetComponent<HealingAltar>().DestroyAltar();
             return true;
         }
         public override bool Triggered(CarriageClass room) { return true; }

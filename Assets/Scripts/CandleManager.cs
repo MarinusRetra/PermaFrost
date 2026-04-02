@@ -9,11 +9,14 @@ namespace Gameplay
     public class CandleManager : MonoBehaviour
     {
         [SerializeField] private GameObject _candleHolder;
-        private List<ParticleSystem> _allCandles;
+        private List<ParticleSystem> _allCandles = new List<ParticleSystem>();
 
         private void Start()
         {
-            _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+            if (_candleHolder)
+            {
+                _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+            }
             
         }
         public void TurnOffCandles()

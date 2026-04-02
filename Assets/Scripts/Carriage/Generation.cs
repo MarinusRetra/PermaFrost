@@ -9,10 +9,11 @@ public class Generation : MonoBehaviour
     public static Generation mainInstance;
     [Header("Rooms")]
     public RoomTypeScriptable Rooms;
+    public RoomTypeScriptable PlaceholderRooms;
 
     [SerializeField] private NavMeshSurface _meshSurface;
 
-    [SerializeField] private List<GameObject> _initializedRooms = new List<GameObject>();
+    public List<GameObject> _initializedRooms = new List<GameObject>();
     public int AmountOfRooms = 15;
     public GameObject player;
 
@@ -30,11 +31,22 @@ public class Generation : MonoBehaviour
 
     void PositionGeneratedRoom(GameObject room, GameObject previousRoom)
     {
+        Transform exit = null;
+        CarriageClass prevCarriage = null;
+        if (previousRoom)
+        {
+            prevCarriage = previousRoom.GetComponent<CarriageClass>();
+            exit = prevCarriage.ExitPoint;
+            prevCarriage.generationClass = this;
+        }
+        else
+        {
+            exit = transform;
+        }
         CarriageClass currentCarriage = room.GetComponent<CarriageClass>();
-        CarriageClass prevCarriage = previousRoom.GetComponent<CarriageClass>();
 
         Transform entry = currentCarriage.EntryPoint;
-        Transform exit = prevCarriage.ExitPoint;
+
 
         Vector3 entryOffset = room.transform.position - entry.position;
 
@@ -42,7 +54,6 @@ public class Generation : MonoBehaviour
         room.transform.rotation = exit.rotation * Quaternion.Inverse(entry.rotation);
 
         currentCarriage.generationClass = this;
-        prevCarriage.generationClass = this;
 
         currentCarriage.SpawnItems();
     }
@@ -53,11 +64,20 @@ public class Generation : MonoBehaviour
         IsGenerating = true;
         currentHeightValue = 0;
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
-        GameObject startRoom = Instantiate(Rooms.RoomTypeStartRoom, transform.position,transform.rotation);
+        GameObject startRoomPref = null;
+        if (Rooms.HasStartRoom)
+        {
+            startRoomPref = Rooms.RoomTypeStartRoom;
+        }
+        else
+        {
+            startRoomPref = PlaceholderRooms.RoomTypeStartRoom;
+        }
+        GameObject startRoom = Instantiate(startRoomPref, transform.position, transform.rotation);
         _initializedRooms.Add(startRoom);
 
-        
-        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint)
+
+        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint && player)
         {
             player.transform.position = startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint.transform.position;
             player.SetActive(true);
@@ -66,7 +86,6 @@ public class Generation : MonoBehaviour
 
         allTotalPossibleRooms = new List<RoomClass>(Rooms.AllRoomsInType);
 
-        GameObject previousRandomRoom = null;
         for (int i = 0; i < AmountOfRooms; i++)
         {
 
@@ -85,6 +104,10 @@ public class Generation : MonoBehaviour
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
         StartCoroutine(GenerateNavmesh());
+        if(Rooms.HasStartRoom == false)
+        {
+            Destroy(_initializedRooms[0].gameObject);
+        }
         IsGenerating = false;
     }
 
@@ -202,14 +225,19 @@ public class Generation : MonoBehaviour
         {
             GameObject randomRoom = Instantiate(selectedroom.Room);
             GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
-            GameObject previousRoom = _initializedRooms[index];
+            GameObject previousRoom = null;
+            if(_initializedRooms.Count != 0)
+            {
+                previousRoom = _initializedRooms[index];
+            }
             PositionGeneratedRoom(randomRoom, previousRoom);
 
             randomRoom.name = "Room" + index + selectedroom.RoomName;
 
             CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
-            randomCarriage.previousCarriage = previousRoom.GetComponent<CarriageClass>();
-            previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage;
+            randomCarriage.previousCarriage = previousRoom?.GetComponent<CarriageClass>();
+            randomCarriage.roomIndex = index + 1;
+            if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
 
             _initializedRooms.Add(randomRoom);
             randomRoom.transform.parent = transform;

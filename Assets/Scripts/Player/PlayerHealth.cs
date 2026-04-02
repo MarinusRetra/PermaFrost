@@ -79,11 +79,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_healInvincible) yield break;
 
+        _hitUI.GetComponent<Animator>().SetBool("Healing", true);
         _isVunerable = false;
-        _hitUI.SetActive(false);
 
         _healInvincible = true;
         yield return new WaitForSeconds(HealInvincibility);
+        _hitUI.SetActive(false);
         _healInvincible = false;
     }
 

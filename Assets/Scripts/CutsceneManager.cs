@@ -186,13 +186,14 @@ namespace Gameplay
                     StartCutscene(_paintingCutscenePrefab, _paintingTimeline, () =>
                     {
                         GameObject fakeRoom = PlrRefs.inst.PlayerController.CurrentRoom;
+                        CarriageClass fakeCarriage = fakeRoom.GetComponent<CarriageClass>();
 
                         //delete all current events
-                        List<EventClass> even = fakeRoom.GetComponent<CarriageClass>()._selectedEventClasses;
+                        List<EventClass> even = fakeCarriage._selectedEventClasses;
                         for (int i = 0; i < even.Count; i++)
                         {
-                            even[i].Exited(fakeRoom.GetComponent<CarriageClass>());
-                            even[i].CallForDeletion(fakeRoom.GetComponent<CarriageClass>());
+                            even[i].Exited(fakeCarriage);
+                            even[i].CallForDeletion(fakeCarriage);
                         }
                         _player.GetComponent<Rigidbody>().isKinematic = true;
 
@@ -203,14 +204,14 @@ namespace Gameplay
                         PlrRefs.inst.PlayerController.CurrentRoom.transform.position = originalRoomLocal;
                         _player.GetComponent<Rigidbody>().isKinematic = false;
 
-                        GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), new Quaternion(0, 0, 0, 0));
+                        GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), Quaternion.identity);
 
                         Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
                         paintingRoomsGenerator.player = _player;
                         paintingRoomsGenerator.AmountOfRooms = 5;
                         paintingRoomsGenerator.Rooms = _paintingRooms;
                         paintingRoomsGenerator.FastLoading = true;
-                    }, out GameObject scene, true, true, false, new Vector3(100, 100, 100), new Quaternion(0, 0, 0, 0));
+                    }, out GameObject scene, true, true, false, new Vector3(100, 100, 100), Quaternion.identity);
                     break;
             }
         }

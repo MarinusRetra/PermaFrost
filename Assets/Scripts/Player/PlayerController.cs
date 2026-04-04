@@ -39,6 +39,7 @@ namespace Gameplay
         private bool _canGetUp = true;
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
+        private Coroutine _currentCrouchRoutine;
 
         public SprintBehaviour SprintBehav;
 
@@ -81,7 +82,7 @@ namespace Gameplay
             {
                 if (!_isHoldingCrouch && _canGetUp)
                 {
-                    StandUp();
+                    _currentCrouchRoutine = StartCoroutine(StandUp());
                 }
             }
             else
@@ -117,7 +118,7 @@ namespace Gameplay
         public void HandleCrouch()
         {
             _isHoldingCrouch = true;
-            CrouchDown();
+            _currentCrouchRoutine = StartCoroutine(CrouchDown());
         }
 
         private void HandleCrouchCancel()
@@ -125,7 +126,7 @@ namespace Gameplay
             _isHoldingCrouch = false;
             if (_canGetUp)
             {
-                StandUp();
+                _currentCrouchRoutine = StartCoroutine(StandUp());
             }
         }
 
@@ -190,30 +191,77 @@ namespace Gameplay
 
             _rb.linearVelocity = _currentMoveSpeed * _moveDirection + new Vector3(0, _rb.linearVelocity.y, 0);
         }
+
         /// <summary>
         /// Crouch down by changing the height of the capsule collider and lowering the camera.
-        /// </summary>
-        private void CrouchDown()
+         /// </summary>
+        private IEnumerator CrouchDown()
         {
-            if (!_isCrouching)
-            {
-                _currentMoveSpeed = CrouchSpeed;
-                _playerCollider.height = _crouchHitboxHeight.x;
-                _playerCollider.center = new(0, _crouchHitboxHeight.y, 0);
-                _camera.localPosition = new Vector3(0, _crouchCameraHeight, 0);
-            }
+            if (_isCrouching) yield break;
+
+            _currentMoveSpeed = CrouchSpeed;
             _isCrouching = true;
-        }
-        private void StandUp()
+
+            float time = 0f;
+            float duration = 0.25f;
+
+            float startHeight = _playerCollider.height;
+            Vector3 startCenter = _playerCollider.center;
+            Vector3 startCamPos = _camera.localPosition;
+
+            while (time < duration)
+            {
+                float t = time / duration;
+                t = Mathf.SmoothStep(0f, 1f, t);
+
+                _playerCollider.height = Mathf.Lerp(startHeight, _crouchHitboxHeight.x, t);
+                _playerCollider.center = Vector3.Lerp(startCenter, new Vector3(0f, _crouchHitboxHeight.y, 0f), t);
+                _camera.localPosition  = Vector3.Lerp(startCamPos, new Vector3(0f, _crouchCameraHeight, 0f), t);
+
+                time += Time.deltaTime;
+                yield return null; // Makes it wait until next frame to continue the loop.
+
+                if(!_isHoldingCrouch)
+                {
+                    _currentCrouchRoutine = StartCoroutine(StandUp());
+                    yield break;
+                }
+            }
+}
+
+        private IEnumerator StandUp()
         {
+            if (!_isCrouching) yield break;
+
             _currentMoveSpeed = BaseSpeed;
-            _playerCollider.height = _standHitboxHeight.x;
-            _playerCollider.center = new(0, _standHitboxHeight.y, 0);
-            _camera.localPosition = new Vector3(0, _standCameraHeight, 0);
             _isCrouching = false;
+
+            float time = 0f;
+            float duration = 0.25f;
+
+            float startHeight = _playerCollider.height;
+            Vector3 startCenter = _playerCollider.center;
+            Vector3 startCamPos = _camera.localPosition;
+
+            while (time < duration)
+            {
+                float t = time / duration;
+                t = Mathf.SmoothStep(0f, 1f, t);
+                
+                _playerCollider.height = Mathf.Lerp(startHeight, _standHitboxHeight.x, t);
+                _playerCollider.center = Vector3.Lerp(startCenter, new Vector3(0f, _standHitboxHeight.y, 0f), t);
+                _camera.localPosition  = Vector3.Lerp(startCamPos, new Vector3(0f, _standCameraHeight, 0f), t);
+
+                time += Time.deltaTime;
+                yield return null; 
+
+                if(_isHoldingCrouch)
+                {
+                    _currentCrouchRoutine = StartCoroutine(CrouchDown());
+                    yield break;
+                }
+            }
         }
-
-
 
         void OnTriggerEnter(Collider other)
         {

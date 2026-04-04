@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StraightOnly
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
   RoomtypeName: StraightOnly
+  HasStartRoom: 1
   RoomTypeStartRoom: {fileID: 3465943475687528960, guid: c685a48eb1b9b9f469bd53fac99daaa7, type: 3}
   RoomTypeEndRoom: {fileID: 359503124527034429, guid: b2fc8d7b74a74914897a717c449ec1ad, type: 3}
   AllRoomsInType:
@@ -23,4 +24,6 @@ MonoBehaviour:
     RoomName: Straight
     onlySpawnOnce: 0
     HeightValue: 0
+    guarenteedIndex: 0
+  GuarenteedRooms: []
   AllowDupes: 1

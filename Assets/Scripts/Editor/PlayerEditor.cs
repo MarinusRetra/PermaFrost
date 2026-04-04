@@ -78,12 +78,15 @@ namespace Gameplay
             switch (allTabs[selectedTab])
             {
                 case "Player":
-                    if (player == null) { player = PlrRefs.inst.gameObject; }
-                    if (playerEffects == null) { playerEffects = PlrRefs.inst.PlayerStatusEffects; }
-                    if (playerHealth == null) { playerHealth = PlrRefs.inst.PlayerHealth; }
-                    if (playerController == null) { playerController = PlrRefs.inst.PlayerController; }
-                    if (playerInventory == null) { playerInventory = PlrRefs.inst.PlayerInventory; }
-                    if (playerLantern == null) { playerLantern = PlrRefs.inst.FreezingLantern; }
+                    if (CheckIfRunning(true))
+                    {
+                        if (player == null) { player = PlrRefs.inst.gameObject; }
+                        if (playerEffects == null) { playerEffects = PlrRefs.inst.PlayerStatusEffects; }
+                        if (playerHealth == null) { playerHealth = PlrRefs.inst.PlayerHealth; }
+                        if (playerController == null) { playerController = PlrRefs.inst.PlayerController; }
+                        if (playerInventory == null) { playerInventory = PlrRefs.inst.PlayerInventory; }
+                        if (playerLantern == null) { playerLantern = PlrRefs.inst.FreezingLantern; }
+                    }
                     break;
                 case "Game":
                     if (CheckIfRunning(true))
@@ -307,6 +310,11 @@ namespace Gameplay
         int selectedEvent = 0;
         public string[] eventNames;
         bool allItemSpots;
+        static bool allSpotsOn = false;
+        static bool itemsOn = false;
+        static bool boxOn = false;
+        static bool nodesOn = false;
+        static bool ticketOn = false;
         private void GamePage()
         {
             if (!GameObject.Find("BaseGeneration")) { return; }
@@ -417,6 +425,19 @@ namespace Gameplay
                     {
                         allRooms[j].transform.Find("Visuals").Find("Carriage").gameObject.SetActive(false);
                     }
+                }
+                if (!itemsOn && !ticketOn && !boxOn && !nodesOn)
+                {
+                    allSpotsOn = PrefabVisible.ChangeObjStates(EditorGUILayout.Toggle("Show Everything in Prefab", allSpotsOn));
+                    if (allSpotsOn) { GUILayout.Space(80); }
+                }
+                if (!allSpotsOn)
+                {
+                    if (itemsOn || ticketOn || boxOn || nodesOn) { GUILayout.Space(20); }
+                    itemsOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Item Spots in Prefab", itemsOn), "Items");
+                    ticketOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Ticket Spots in Prefab", ticketOn), "Tickets");
+                    boxOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Box Spots in Prefab", boxOn), "Box");
+                    nodesOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Nodes in Prefab", nodesOn), "Nodes");
                 }
             }
             GUILayout.Space(20);

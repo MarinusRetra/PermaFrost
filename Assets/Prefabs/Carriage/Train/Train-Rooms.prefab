@@ -326,7 +326,7 @@ MonoBehaviour:
   SpawnPoints:
   - {fileID: 7722160533237527902}
   - {fileID: 2631326282669486543}
-  - {fileID: 8145557099079422399}
+  - {fileID: 0}
   Holder: {fileID: 1990920783939644867}
   _allowedDrops:
   - {fileID: 11400000, guid: c45722bfbfe0e5346ac3a6597da584cc, type: 2}
@@ -566,7 +566,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1455082744932450368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -769,7 +769,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641177031842917314}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -887,7 +887,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811048371767330654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1202,7 +1202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7722160533237527902}
-  - component: {fileID: 6522285402106704939}
+  - component: {fileID: 8470593566785098317}
   m_Layer: 9
   m_Name: ItemSpots
   m_TagString: Untagged
@@ -1228,7 +1228,7 @@ Transform:
   - {fileID: 4099038137044228150}
   m_Father: {fileID: 664009636207071251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6522285402106704939
+--- !u!114 &8470593566785098317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1237,9 +1237,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2726237689986088717}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c19a10b194536e41885e4aa8b1d65ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 72f8d2037e00a794e899e6816f35f8c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EmptyChildrenMesh
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PrefabObjVisible
+  typeName: Items
+  IsOn: 0
 --- !u!1 &2940912740338076146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1546,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2974052368488823151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1880,7 +1882,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2631326282669486543}
-  - component: {fileID: 6371115281999323703}
+  - component: {fileID: 384108372171127174}
   m_Layer: 0
   m_Name: MusicBoxSpots
   m_TagString: Untagged
@@ -1907,7 +1909,7 @@ Transform:
   - {fileID: 1850785279651045320}
   m_Father: {fileID: 664009636207071251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6371115281999323703
+--- !u!114 &384108372171127174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1916,9 +1918,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4522958094311711464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c19a10b194536e41885e4aa8b1d65ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 72f8d2037e00a794e899e6816f35f8c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EmptyChildrenMesh
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PrefabObjVisible
+  typeName: Box
+  IsOn: 0
 --- !u!1 &4812149343470991160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,7 +2399,6 @@ Transform:
   m_Children:
   - {fileID: 2631326282669486543}
   - {fileID: 7722160533237527902}
-  - {fileID: 8145557099079422399}
   - {fileID: 266658259772711271}
   m_Father: {fileID: 3887238552142909086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2447,7 +2450,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635377759388818749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2499,7 +2502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4951820143336191086}
-  - component: {fileID: 6703737361694169739}
+  - component: {fileID: 2607522523083657649}
   m_Layer: 9
   m_Name: NodeHolder
   m_TagString: Untagged
@@ -2524,7 +2527,7 @@ Transform:
   - {fileID: 5580264965710077950}
   m_Father: {fileID: 3887238552142909086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6703737361694169739
+--- !u!114 &2607522523083657649
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2533,9 +2536,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5679527747489159051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c19a10b194536e41885e4aa8b1d65ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 72f8d2037e00a794e899e6816f35f8c8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EmptyChildrenMesh
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PrefabObjVisible
+  typeName: Nodes
+  IsOn: 0
 --- !u!1 &6497999897781832747
 GameObject:
   m_ObjectHideFlags: 0
@@ -2749,50 +2754,6 @@ Transform:
   - {fileID: 6171030174983483119}
   m_Father: {fileID: 2298644570410986909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7208237082428500675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8145557099079422399}
-  - component: {fileID: 5283475743656599157}
-  m_Layer: 0
-  m_Name: TicketSpots
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8145557099079422399
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7208237082428500675}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.82983, y: 2.3, z: -8.66126}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 664009636207071251}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5283475743656599157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7208237082428500675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c19a10b194536e41885e4aa8b1d65ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EmptyChildrenMesh
 --- !u!1 &7313162861466992146
 GameObject:
   m_ObjectHideFlags: 0
@@ -12873,7 +12834,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8385296707907821282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -12964,7 +12925,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8568706978767622177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13050,7 +13011,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8709071050890013157}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13200,7 +13161,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8826655219951017714}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

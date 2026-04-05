@@ -77,6 +77,8 @@ public class PlayerStatusEffects : MonoBehaviour
 
         //This is to prevent players from stacking soothing bells and never having to deal with sanity again
         if(_currentInsanity < -InsanityDeath) { _currentInsanity = -InsanityDeath; }
+        _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
+        _insanitySlider.gameObject.SetActive(_currentInsanity <= 0 ? false : true);
     }
 
     //Frostbite related variables
@@ -127,6 +129,8 @@ public class PlayerStatusEffects : MonoBehaviour
     public void AddInstantFrostbite(int instantAmount)
     {
         _currentFrostbite += instantAmount;
-        if( _currentFrostbite < 0 ) { _currentFrostbite = 0; }
+        if( _currentFrostbite < 0 ) { _currentFrostbite = 0;}
+        _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
+        _freezingSlider.gameObject.SetActive(_currentFrostbite <= 0 ? false : true);
     }
 }

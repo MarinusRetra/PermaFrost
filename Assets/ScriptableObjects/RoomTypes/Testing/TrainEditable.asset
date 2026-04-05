@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TrainEditable
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
   RoomtypeName: DefaultTrain
+  HasStartRoom: 1
   RoomTypeStartRoom: {fileID: 3465943475687528960, guid: c685a48eb1b9b9f469bd53fac99daaa7, type: 3}
   RoomTypeEndRoom: {fileID: 359503124527034429, guid: b2fc8d7b74a74914897a717c449ec1ad, type: 3}
   AllRoomsInType:
@@ -102,6 +103,18 @@ MonoBehaviour:
     AllowedEvents: []
     RoomName: Corner
     onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: b7b86889dd26c524684b691880679941, type: 3}
+    Weight: 25
+    AmountOfEventsMax: 3
+    AllowedEvents:
+    - {fileID: 11400000, guid: 9a0e9d83474745b47895121632c6e8c2, type: 2}
+    - {fileID: 11400000, guid: afefc83a80e37dc49b939abb97890edc, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
+    RoomName: IOC
+    onlySpawnOnce: 1
     HeightValue: 0
     guarenteedIndex: 0
   GuarenteedRooms: []

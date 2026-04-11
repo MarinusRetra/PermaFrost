@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class CarriageClass : MonoBehaviour
@@ -22,6 +23,10 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private bool _exitTriggered;
     [SerializeField] private bool _triggerTriggered;
 
+    [SerializeField] private UnityEvent OnRecedeEvent;
+    [SerializeField] private UnityEvent OnApproachEvent;
+    [SerializeField] private UnityEvent OnFirstApproachEvent;
+
     private bool playerInside = false;
     public List<EventClass> _selectedEventClasses;
     [SerializeField] private int _maxAmountOfItems = 1;
@@ -34,6 +39,9 @@ public class CarriageClass : MonoBehaviour
     private PlayerController _player;
 
     private List<GameObject> spawnedItems = new List<GameObject>();
+
+    private bool hasBeenLoaded = false;
+    private bool isLoaded = true;
 
     public void SpawnItems()
     {
@@ -99,6 +107,7 @@ public class CarriageClass : MonoBehaviour
         if (other.gameObject.layer == 3 && !playerInside)
         {
             _player.CurrentRoom = gameObject;
+            generationClass.EnterRoom(roomIndex);
 
             if(_selectedEventClasses.Count > 0 && !_enterTriggered)
             {
@@ -140,6 +149,32 @@ public class CarriageClass : MonoBehaviour
             // Add your logic here
             foreach (EventClass selectedEventClass in _selectedEventClasses)
                 selectedEventClass.Triggered(this);
+        }
+    }
+
+    public void OnApproach(bool overrideState = false)
+    {
+        if (isLoaded && !overrideState) { return; }
+        isLoaded = true;
+        if (!hasBeenLoaded)
+        {
+            //first time loaded stuff
+            OnFirstApproachEvent.Invoke();
+        }
+        OnApproachEvent.Invoke();
+        for (int i = 0; i < spawnedItems.Count; i++)
+        {
+            spawnedItems[i].GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+    public void OnRecede(bool overrideState = false)
+    {
+        if (!isLoaded && !overrideState) { return; }
+        isLoaded = false;
+        OnRecedeEvent.Invoke();
+        for(int i = 0; i < spawnedItems.Count; i++)
+        {
+            spawnedItems[i].GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 }

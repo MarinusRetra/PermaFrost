@@ -339,6 +339,63 @@ MonoBehaviour:
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
+  OnRecedeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3502666164960062413}
+        m_TargetAssemblyTypeName: Gameplay.CandleManager, Assembly-CSharp
+        m_MethodName: TurnOffCandles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5366827127588219301}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnApproachEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3502666164960062413}
+        m_TargetAssemblyTypeName: Gameplay.CandleManager, Assembly-CSharp
+        m_MethodName: TurnOnCandles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5366827127588219301}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  OnFirstApproachEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _selectedEventClasses: []
   _maxAmountOfItems: 2
   previousCarriage: {fileID: 0}
@@ -376,7 +433,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.46074, y: 4.9474916, z: 18.275856}
+  m_Size: {x: 8.46074, y: 4.9474916, z: 18.08965}
   m_Center: {x: 0.14542055, y: -0.024747849, z: 0.07036972}
 --- !u!1 &768616427916885101
 GameObject:
@@ -1079,7 +1136,7 @@ Transform:
   - {fileID: 7022774024639953091}
   - {fileID: 6300519595084359254}
   - {fileID: 2634157437460120095}
-  m_Father: {fileID: 3276946663136114605}
+  m_Father: {fileID: 4263576319465325080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2409146829868965671
 GameObject:
@@ -1729,8 +1786,7 @@ Transform:
   m_Children:
   - {fileID: 1308913467562491482}
   - {fileID: 9049359303647537383}
-  - {fileID: 6283635557205618878}
-  - {fileID: 9198332129084587552}
+  - {fileID: 4263576319465325080}
   m_Father: {fileID: 3887238552142909086}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4202724493009476079
@@ -1947,7 +2003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4812149343470991160}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2401,6 +2457,39 @@ Transform:
   - {fileID: 7722160533237527902}
   - {fileID: 266658259772711271}
   m_Father: {fileID: 3887238552142909086}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5366827127588219301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4263576319465325080}
+  m_Layer: 0
+  m_Name: Unloadable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4263576319465325080
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5366827127588219301}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6283635557205618878}
+  - {fileID: 9198332129084587552}
+  m_Father: {fileID: 3276946663136114605}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5635377759388818749
 GameObject:
@@ -7805,7 +7894,7 @@ Transform:
   m_Children:
   - {fileID: 8593264977216369249}
   - {fileID: 5099681745833863335}
-  m_Father: {fileID: 3276946663136114605}
+  m_Father: {fileID: 4263576319465325080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8076805493725939545
 GameObject:

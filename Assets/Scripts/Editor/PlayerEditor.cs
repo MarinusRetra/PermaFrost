@@ -227,16 +227,19 @@ namespace Gameplay
                 GUILayout.Label("Living: Status effects", header2Style);
                 if (GUILayout.Button("Infinite Freezing") && CheckIfRunning())
                 {
-                   playerEffects.FrostbiteDeath = 9999;
+                    UpdateVariables();
+                    playerEffects.FrostbiteDeath = 9999;
                 }
                 if (GUILayout.Button("Player immune to lantern") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     SerializedObject serLamp = new SerializedObject(playerLantern);
                     serLamp.FindProperty("_playerEffects").objectReferenceValue = null;
                     serLamp.ApplyModifiedProperties();
                 }
                 if (GUILayout.Button("Infinite Sanity") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     playerEffects.InsanityDeath = 9999;
                 }
 
@@ -244,17 +247,20 @@ namespace Gameplay
                 GUILayout.Label("Living: Speed", header2Style);
                 if (GUILayout.Button("Infinite Stamina") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     playerController.TotalStamina = 999999999;
                     playerController.CurrentStamina = 999999999;
                 }
                 if (GUILayout.Button("Normal speed") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     playerController.BaseSpeed = 4f;
                     playerController.SprintSpeed = 5.5f;
                     playerController.CrouchSpeed = 3f;
                 }
                 if (GUILayout.Button("High speed") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     playerController.BaseSpeed = 6.5f;
                     playerController.SprintSpeed = 8;
                     playerController.CrouchSpeed = 5.5f;

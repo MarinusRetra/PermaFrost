@@ -302,11 +302,9 @@ public class Generation : MonoBehaviour
     public void EnterRoom(int index)
     {
         if(currentRoomIndex == index) { return; }
-        print("Called ENTER from " + index);
         int acceptableI = -RoomApproachSize;
         if (index >= RoomApproachSize + 1)
         {
-            print("Unloaded: " + (index - RoomApproachSize - 1));
             _initializedRooms[index - RoomApproachSize - 1].GetComponent<CarriageClass>().OnRecede();
             if(index - currentRoomIndex > 1 && index >= RoomApproachSize + 2)
             {
@@ -319,13 +317,14 @@ public class Generation : MonoBehaviour
         }
         for (int i = acceptableI; i < RoomApproachSize + 1; i++)
         {
-            print("Loaded:" + (index + i));
-            _initializedRooms[index + i].GetComponent<CarriageClass>().OnApproach();
+            if(i + index > AmountOfRooms) { continue; }
+            _initializedRooms[index + i]?.GetComponent<CarriageClass>().OnApproach();
         }
 
         currentRoomIndex = index;
-        print("Unloaded: " + (index + RoomApproachSize + 1));
-        _initializedRooms[index + RoomApproachSize + 1].GetComponent<CarriageClass>().OnRecede();
-        print("---------");
+        if(index + RoomApproachSize + 1 <= AmountOfRooms)
+        {
+            _initializedRooms[index + RoomApproachSize + 1]?.GetComponent<CarriageClass>().OnRecede();
+        }
     }
 }

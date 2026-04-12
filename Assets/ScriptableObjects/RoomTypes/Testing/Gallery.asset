@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee69e3ca7b5d6a4d841721c7f38b169, type: 3}
+  m_Name: Gallery
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
+  RoomtypeName: PaintingRooms
+  HasStartRoom: 1
+  RoomTypeStartRoom: {fileID: 3465943475687528960, guid: 7113ecefd508bd74ab269feb30c06dc8, type: 3}
+  RoomTypeEndRoom: {fileID: 359503124527034429, guid: b2fc8d7b74a74914897a717c449ec1ad, type: 3}
+  AllRoomsInType:
+  - Room: {fileID: 366001246756394530, guid: cfbcef2f9a0780349b286c493228f2a5, type: 3}
+    Weight: 100
+    AmountOfEventsMax: 3
+    AllowedEvents:
+    - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
+    - {fileID: 11400000, guid: b45e2399dc2bea74c8320445244c1fe1, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: 9a0e9d83474745b47895121632c6e8c2, type: 2}
+    - {fileID: 11400000, guid: afefc83a80e37dc49b939abb97890edc, type: 2}
+    RoomName: GalleryBasic
+    onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
+  GuarenteedRooms: []
+  AllowDupes: 1

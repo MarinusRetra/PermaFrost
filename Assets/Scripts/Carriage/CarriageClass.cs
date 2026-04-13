@@ -43,6 +43,8 @@ public class CarriageClass : MonoBehaviour
     private bool hasBeenLoaded = false;
     private bool isLoaded = true;
 
+    public CarriageRefs Refs;
+
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;
@@ -170,7 +172,10 @@ public class CarriageClass : MonoBehaviour
         OnApproachEvent.Invoke();
         for (int i = 0; i < spawnedItems.Count; i++)
         {
-            spawnedItems[i].GetComponent<Rigidbody>().isKinematic = false;
+            if(spawnedItems[i] != null)
+            {
+                spawnedItems[i].GetComponent<Rigidbody>().isKinematic = false;
+            }
         }
         foreach(EventClass @event in _selectedEventClasses)
         {
@@ -184,7 +189,10 @@ public class CarriageClass : MonoBehaviour
         OnRecedeEvent.Invoke();
         for(int i = 0; i < spawnedItems.Count; i++)
         {
-            spawnedItems[i].GetComponent<Rigidbody>().isKinematic = true;
+            if (spawnedItems[i] != null)
+            {
+                spawnedItems[i].GetComponent<Rigidbody>().isKinematic = true;
+            }
         }
         foreach (EventClass @event in _selectedEventClasses)
         {

@@ -7,8 +7,8 @@ namespace Gameplay
 {
     public class AllEars : Monster
     {
-        private enum earStates {Wandering,Agressive,Idle}
-        private earStates _currentState = earStates.Wandering;
+        public enum earStates {Wandering,Agressive,Idle}
+        public earStates _currentState = earStates.Wandering;
 
         private Transform _player;
 
@@ -29,7 +29,9 @@ namespace Gameplay
         [SerializeField] private AudioClip _aggroSound;
         [SerializeField] private AudioClip _spawnSound;
 
-        void Start()
+        private Coroutine _movementCor;
+
+        public void Start()
         {
             //Fetch the player
             _player = PlrRefs.inst.transform;
@@ -51,10 +53,12 @@ namespace Gameplay
             GameObject noise = Soundsystem.PlaySound(_spawnSound, transform.position);
             noise.GetComponent<AudioSource>().volume = 0.5f;
 
-            StartCoroutine(HandleMovement());
+            if(_movementCor == null)
+            {
+                _movementCor = StartCoroutine(HandleMovement());
+            }
         }
 
-        int waitTime = 0;
         private IEnumerator HandleMovement()
         {
             GetComponent<Collider>().enabled = true;
@@ -90,7 +94,8 @@ namespace Gameplay
                         _agent.destination = idleGoal;
                         for(int i = 0; i < 15; i++)
                         {
-                            yield return new WaitForSeconds(_currentState == earStates.Wandering ? 0 :1);
+                            yield return new WaitForSeconds(1);
+                            if(_currentState != earStates.Idle) { i = 100; }
                         }
                         continue;
                 }
@@ -154,7 +159,7 @@ namespace Gameplay
         public override void Deaggro()
         {
             _currentState = earStates.Wandering;
-            _agent.speed = 1;
+            _agent.speed = agentSpeed;
         }
 
         private bool _canPlaySound = true;
@@ -205,6 +210,14 @@ namespace Gameplay
         private float agentSpeed;
         public void SetIdleState(bool state)
         {
+            if (_agent) { 
+                _agent.speed = agentSpeed;
+                _agent.isStopped = false;
+            }
+            if (_movementCor == null && gameObject.activeInHierarchy)
+            {
+                _movementCor = StartCoroutine(HandleMovement());
+            }
             if (state)
             {
                 _currentState = earStates.Idle;

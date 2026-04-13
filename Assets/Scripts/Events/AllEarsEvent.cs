@@ -19,13 +19,17 @@ namespace Gameplay
             _spawnedAllEars.GetComponent<Monster>().CurrentRoom = room.transform;
             _spawnedAllEars.transform.localPosition = new Vector3(0, 0, 0);
             _spawnedAllEars.GetComponent<NavMeshAgent>().enabled = true;
+            _spawnedAllEars.GetComponent<AllEars>().Start();
             _spawnedAllEars.GetComponent<AllEars>().SetIdleState(true);
             return true;
         }
         //Any other time approaching room
         public override bool RepeatApproach(CarriageClass room)
         {
-            room.Holder.Find("AllEars(Clone)").gameObject.SetActive(true);
+            _spawnedAllEars = room.Holder.Find("AllEars(Clone)").gameObject;
+            _spawnedAllEars.SetActive(true);
+            _spawnedAllEars.GetComponent<AllEars>().Start();
+            _spawnedAllEars.GetComponent<AllEars>().SetIdleState(true);
             return true;
         }
         //First time room entered

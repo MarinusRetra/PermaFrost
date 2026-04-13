@@ -7,6 +7,7 @@ namespace Gameplay
         public void GrabTicket()
         {
             PlrRefs.inst.PlayerMonsterManager.GrabTicket();
+            Destroy(gameObject);
         }
     }
 }

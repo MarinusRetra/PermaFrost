@@ -5,62 +5,80 @@ using UnityEngine;
 [Serializable]
 public class EventClass : ScriptableObject
 {
-    public virtual bool Entered(CarriageClass room) { return false; }
-    public virtual bool Exited(CarriageClass room) { return false; }
-    public virtual bool Triggered(CarriageClass room) { return false; }
-    public virtual bool Generated(CarriageClass room) { return false; }
-    //practically the opposite of generated, removes things that dont get removed on exit
+    //On generating the room
+    public virtual bool Generate(CarriageClass room) { return false; }
+    //On getting near the room for the first time
+    public virtual bool FirstApproach(CarriageClass room) { return false; }
+    //On getting near the room after the first time
+    public virtual bool RepeatApproach(CarriageClass room) { return false; }
+    //On first time entering the room
+    public virtual bool FirstEnter(CarriageClass room) { return false; }
+    //On reentering the room
+    public virtual bool RepeatEnter(CarriageClass room) { return false; }
+    //On first time leaving the room through the back
+    public virtual bool FirstExit(CarriageClass room) { return false; }
+    //On leaving the room after having triggered first exit
+    public virtual bool RepeatExit(CarriageClass room) { return false; }
+    //On leaving the room without having triggered the first exit
+    public virtual bool EarlyExit(CarriageClass room) { return false; }
+    //On getting far away from the room
+    public virtual bool Recede(CarriageClass room) { return false; }
+    //Called in various places that makes an event completely destroy everything it made
     public virtual bool CallForDeletion(CarriageClass room) { return false; }
 }
 
-[CreateAssetMenu(menuName = "Events/TestEvent")]
-public class TestEvent : EventClass
+public class EventTemplate : EventClass
 {
-    public override bool Entered(CarriageClass room)
-    {
-        Debug.Log("Test Entered");
-        return true;
-    }
-    public override bool Exited(CarriageClass room)
-    {
-        Debug.Log("Test Exited");
-        return true;
-    }
-    public override bool Triggered(CarriageClass room)
-    {
-        Debug.Log("Test Triggered");
-        return true;
-    }
-    public override bool Generated(CarriageClass room) { return true; }
-    public override bool CallForDeletion(CarriageClass room) { return true; }
-}
+    //Variables
 
-[CreateAssetMenu(menuName = "Events/GhostEvent")]
-public class GhostEvent: EventClass
-{
-    public override bool Entered(CarriageClass room)
+    //When room spawns in
+    public override bool Generate(CarriageClass room)
     {
-        Debug.Log("Ghost Entered");
         return true;
     }
-    public override bool Exited(CarriageClass room)
+    //First time approaching room
+    public override bool FirstApproach(CarriageClass room)
     {
-        Debug.Log("Ghost Exited");
         return true;
     }
-    public override bool Triggered(CarriageClass room)
+    //Any other time approaching room
+    public override bool RepeatApproach(CarriageClass room)
     {
-        Debug.Log("Ghost Triggered");
         return true;
     }
-    public override bool Generated(CarriageClass room) 
-    {
-        Debug.Log("Ghost Generated");
+    //First time room entered
+    public override bool FirstEnter(CarriageClass room) 
+    { 
         return true; 
     }
+    //Any other time room entered
+    public override bool RepeatEnter(CarriageClass room) 
+    { 
+        return true; 
+    }
+    //First time completing room
+    public override bool FirstExit(CarriageClass room) 
+    { 
+        return true; 
+    }
+    //Leaving room through the way the player came
+    public override bool EarlyExit(CarriageClass room) 
+    { 
+        return true; 
+    }
+    //Any other time leaving room
+    public override bool RepeatExit(CarriageClass room) 
+    { 
+        return true; 
+    }
+    //Getting far away from the room
+    public override bool Recede(CarriageClass room) 
+    { 
+        return true; 
+    }
+    //Removes any evidence of events existance in room
     public override bool CallForDeletion(CarriageClass room) 
-    {
-        Debug.Log("Ghost Deleted");
+    { 
         return true; 
     }
 }

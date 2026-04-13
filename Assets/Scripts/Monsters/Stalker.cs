@@ -26,8 +26,10 @@ namespace Gameplay
 
         private int _moveRNG = 0;
 
+        private Collider stalkerCol;
         void Start()
         {
+            stalkerCol = GetComponent<Collider>();
             _player = PlrRefs.inst.transform;
             _moveRNG = Random.Range(-75, 25);
 
@@ -58,7 +60,7 @@ namespace Gameplay
                 model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.45f, model.localPosition.z);
                 yield return new WaitForSeconds(0.05f);
             }
-            GetComponent<Collider>().enabled = true;
+           stalkerCol.enabled = true;
 
             while (!_despawning)
             {
@@ -67,7 +69,7 @@ namespace Gameplay
                     //Practically idle, doesnt move but checks for player looking at it
                     case StalkerStates.Watching:
                         yield return new WaitForSeconds(0.1f);
-                        if (PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
+                        if (PlayerMonsterManager.IsPlayerLookingAtObj(stalkerCol))
                         {
                             _currentState = StalkerStates.Watched;
                             Attack();
@@ -84,7 +86,7 @@ namespace Gameplay
                         break;
                     //Prevent it from moving when the player is looking at it
                     case StalkerStates.Watched:
-                        if (!PlayerMonsterManager.IsPlayerLookingAtObj(GetComponent<Collider>()))
+                        if (!PlayerMonsterManager.IsPlayerLookingAtObj(stalkerCol))
                         {
                             _currentState = StalkerStates.Watching;
                             PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Stalker", true);
@@ -166,7 +168,7 @@ namespace Gameplay
         public IEnumerator DespawnMonster()
         {
             //fly back up before destroying
-            GetComponent<Collider>().enabled = false;
+            stalkerCol.enabled = false;
             Transform model = transform.GetChild(0);
             while (model.localPosition.y < 10)
             {

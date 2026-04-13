@@ -192,7 +192,7 @@ namespace Gameplay
                         List<EventClass> even = fakeCarriage._selectedEventClasses;
                         for (int i = 0; i < even.Count; i++)
                         {
-                            even[i].Exited(fakeCarriage);
+                            even[i].FirstExit(fakeCarriage);
                             even[i].CallForDeletion(fakeCarriage);
                         }
                         _player.GetComponent<Rigidbody>().isKinematic = true;

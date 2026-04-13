@@ -19,11 +19,13 @@ MonoBehaviour:
   AllRoomsInType:
   - Room: {fileID: 366001246756394530, guid: d082ec5bf2b27d7499b0c5e7a2e672a0, type: 3}
     Weight: 100
-    AmountOfEventsMax: 0
-    AllowedEvents: []
+    AmountOfEventsMax: 1
+    AllowedEvents:
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
     RoomName: Straight
     onlySpawnOnce: 0
     HeightValue: 0
     guarenteedIndex: 0
   GuarenteedRooms: []
   AllowDupes: 1
+  AllowEventDupes: 1

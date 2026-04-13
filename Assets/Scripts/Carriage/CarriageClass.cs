@@ -108,47 +108,48 @@ public class CarriageClass : MonoBehaviour
         {
             _player.CurrentRoom = gameObject;
             generationClass.EnterRoom(roomIndex);
+            playerInside = true;
 
-            if(_selectedEventClasses.Count > 0 && !_enterTriggered)
+            if (!_enterTriggered)
             {
-                // Check if player is in front (higher Z position than the carriage)
-                if (generationClass.player.transform.position.z < transform.position.z)
-                {
-                    playerInside = true;
-                    _enterTriggered = true;
-
-                    foreach (EventClass selectedEventClass in _selectedEventClasses)
-                        selectedEventClass.Entered(this);
-                }
+                _enterTriggered = true;
+                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    selectedEventClass.FirstEnter(this);
+            }
+            else
+            {
+                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    selectedEventClass.RepeatEnter(this);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 3 && playerInside && _selectedEventClasses.Count > 0 && !_exitTriggered)
+        if (other.gameObject.layer == 3 && playerInside)
         {
+            playerInside = false;
             // Check if player left through the back (lower Z position than the carriage)
-            if (generationClass.player.transform.position.z > transform.position.z)
+            if (!_exitTriggered && generationClass.player.transform.position.z > transform.position.z)
             {
-                playerInside = false;
                 _exitTriggered = true;
 
                 foreach (EventClass selectedEventClass in _selectedEventClasses)
-                    selectedEventClass.Exited(this);
+                    selectedEventClass.FirstExit(this);
             }
-        }
-    }
-    
-    private void OnTriggerCalled()
-    {
-        if (_triggerTriggered != true)
-        {
-            _triggerTriggered = true;
-
-            // Add your logic here
-            foreach (EventClass selectedEventClass in _selectedEventClasses)
-                selectedEventClass.Triggered(this);
+            else
+            {
+                if (!_exitTriggered)
+                {
+                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                        selectedEventClass.EarlyExit(this);
+                }
+                else
+                {
+                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                        selectedEventClass.RepeatExit(this);
+                }
+            }
         }
     }
 
@@ -160,11 +161,20 @@ public class CarriageClass : MonoBehaviour
         {
             //first time loaded stuff
             OnFirstApproachEvent.Invoke();
+            foreach (EventClass @event in _selectedEventClasses)
+            {
+                @event.FirstApproach(this);
+            }
+            hasBeenLoaded = true;
         }
         OnApproachEvent.Invoke();
         for (int i = 0; i < spawnedItems.Count; i++)
         {
             spawnedItems[i].GetComponent<Rigidbody>().isKinematic = false;
+        }
+        foreach(EventClass @event in _selectedEventClasses)
+        {
+            @event.RepeatApproach(this);
         }
     }
     public void OnRecede(bool overrideState = false)
@@ -175,6 +185,10 @@ public class CarriageClass : MonoBehaviour
         for(int i = 0; i < spawnedItems.Count; i++)
         {
             spawnedItems[i].GetComponent<Rigidbody>().isKinematic = true;
+        }
+        foreach (EventClass @event in _selectedEventClasses)
+        {
+            @event.Recede(this);
         }
     }
 }

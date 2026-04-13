@@ -152,7 +152,7 @@ public class Generation : MonoBehaviour
     {
         List<EventClass> allowedEvents = new List<EventClass>(roomClass.AllowedEvents);
 
-        if (prevRoomCarriage != null)
+        if (prevRoomCarriage != null && !Rooms.AllowEventDupes)
         {
             List<EventClass> prevRoomEvents = prevRoomCarriage._selectedEventClasses;
             for (int i = 0; i <  prevRoomEvents.Count; i++)
@@ -175,7 +175,7 @@ public class Generation : MonoBehaviour
                 EventClass _chosenEvent = allowedEvents[index];
                 room._selectedEventClasses.Add(_chosenEvent);
                 allowedEvents.RemoveAt(index);
-                _chosenEvent.Generated(room);
+                _chosenEvent.Generate(room);
                 if (_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
                 {
                     for (int j = 0; j < allowedEvents.Count; j++)

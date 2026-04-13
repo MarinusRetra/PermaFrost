@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 namespace Gameplay
 {
@@ -11,7 +12,9 @@ namespace Gameplay
         [SerializeField]
         private GameObject _musicBoxPrefab;
         private Transform _chosenSpot;
-        public override bool Entered(CarriageClass room)
+
+        //When room spawns in
+        public override bool Generate(CarriageClass room)
         {
             List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
@@ -33,18 +36,66 @@ namespace Gameplay
             _box.transform.rotation = _chosenSpot.rotation;
             return true;
         }
-        public override bool Exited(CarriageClass room)
+        //First time approaching room
+        public override bool FirstApproach(CarriageClass room)
+        {
+            return RepeatApproach(room);
+        }
+        //Any other time approaching room
+        public override bool RepeatApproach(CarriageClass room)
         {
             Transform box = room.Holder.Find("MusicBox(Clone)");
             if (box == null) { return false; }
-            box.GetComponent<MusicBox>().SilenceBox(false);
-            Destroy(box.gameObject);
+            box.gameObject.SetActive(true);
+            return true;
+        }
+        //First time room entered
+        public override bool FirstEnter(CarriageClass room)
+        {
+            return RepeatEnter(room);
+        }
+        //Any other time room entered
+        public override bool RepeatEnter(CarriageClass room)
+        {
+            Transform box = room.Holder.Find("MusicBox(Clone)");
+            if (box == null) { return false; }
+            box.GetComponent<MusicBox>().SetBoxIdleState(false);
+            return true;
+        }
+        //First time completing room
+        public override bool FirstExit(CarriageClass room)
+        {
+            return RepeatExit(room);
+        }
+        //Leaving room through the way the player came
+        public override bool EarlyExit(CarriageClass room)
+        {
+            return RepeatExit(room);
+        }
+        //Any other time leaving room
+        public override bool RepeatExit(CarriageClass room)
+        {
+            Transform box = room.Holder.Find("MusicBox(Clone)");
+            if (box == null) { return false; }
+            box.GetComponent<MusicBox>().SetBoxIdleState(true);
             PlrRefs.inst.PlayerStatusEffects.ManageInsanityCauses("Music", true);
             return true;
         }
-        public override bool Triggered(CarriageClass room) { return true; }
-
-        public override bool Generated(CarriageClass room) { return true; }
-        public override bool CallForDeletion(CarriageClass room) { return true; }
+        //Getting far away from the room
+        public override bool Recede(CarriageClass room)
+        {
+            Transform box = room.Holder.Find("MusicBox(Clone)");
+            if (box == null) { return false; }
+            box.gameObject.SetActive(false);
+            return true;
+        }
+        //Removes any evidence of events existance in room
+        public override bool CallForDeletion(CarriageClass room)
+        {
+            Transform box = room.Holder.Find("MusicBox(Clone)");
+            if (box == null) { return false; }
+            Destroy(box.gameObject);
+            return true;
+        }
     }
 }

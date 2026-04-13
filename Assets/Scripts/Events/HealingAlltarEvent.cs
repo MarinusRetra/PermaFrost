@@ -7,20 +7,13 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "Events/HealingAltarEvent")]
     public class HealingAlltarEvent : EventClass
     {
+        //Variables
         [SerializeField]
         private GameObject _altarPrefab;
         private Transform _chosenSpot;
-        public override bool Entered(CarriageClass room)
-        {
-            return true;
-        }
-        public override bool Exited(CarriageClass room)
-        {
-            room.Holder.Find("HealingAltar(Clone)")?.GetComponent<HealingAltar>().DestroyAltar();
-            return true;
-        }
-        public override bool Triggered(CarriageClass room) { return true; }
-        public override bool Generated(CarriageClass room) 
+
+        //When room spawns in
+        public override bool Generate(CarriageClass room)
         {
             List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
@@ -40,8 +33,41 @@ namespace Gameplay
             _altar.transform.localScale = new Vector3(1, 1, 1);
             _altar.transform.position = _chosenSpot.position;
             _altar.transform.rotation = _chosenSpot.rotation;
-            return true; 
+            return true;
         }
+        //First time approaching room
+        public override bool FirstApproach(CarriageClass room)
+        {
+            return RepeatApproach(room);
+        }
+        //Any other time approaching room
+        public override bool RepeatApproach(CarriageClass room)
+        {
+            room.Holder.Find("HealingAltar(Clone)")?.gameObject.SetActive(true);
+            return true;
+        }
+        //First time room entered
+        public override bool FirstEnter(CarriageClass room){return true;}
+        //Any other time room entered
+        public override bool RepeatEnter(CarriageClass room) { return true; }
+        //First time completing room
+        public override bool FirstExit(CarriageClass room)
+        {
+            //REPLACE WITH BREAK ALTAR
+            room.Holder.Find("HealingAltar(Clone)")?.GetComponent<HealingAltar>().DestroyAltar();
+            return true;
+        }
+        //Leaving room through the way the player came
+        public override bool EarlyExit(CarriageClass room) { return true; }
+        //Any other time leaving room
+        public override bool RepeatExit(CarriageClass room) { return true; }
+        //Getting far away from the room
+        public override bool Recede(CarriageClass room)
+        {
+            room.Holder.Find("HealingAltar(Clone)")?.gameObject.SetActive(false);
+            return true;
+        }
+        //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room)
         {
             Destroy(room.Holder.Find("HealingAltar(Clone)")?.gameObject);

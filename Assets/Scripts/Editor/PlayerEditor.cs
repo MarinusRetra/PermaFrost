@@ -20,7 +20,7 @@ namespace Gameplay
 
         private void OnHierarchyChange()
         {
-            UpdateVariables();
+            //UpdateVariables();
         }
 
         private void OnInspectorUpdate()
@@ -162,9 +162,7 @@ namespace Gameplay
         public string[] itemNames;
         List<EventClass> events;
         private void PlayerPage()
-        {
-            if(!GameObject.Find("BaseGeneration")) { return; }
-            
+        {   
             GUILayout.Label("Player", titleStyle);
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
             GUILayout.Space(20);
@@ -209,11 +207,13 @@ namespace Gameplay
             GUILayout.Space(5);
             if (GUILayout.Button("Heal Player") && CheckIfRunning())
             {
+                UpdateVariables();
                 playerHealth.HealPlayer(true);
             }
 
             if (GUILayout.Button("Reset effects") && CheckIfRunning())
             {
+                UpdateVariables();
                 SerializedObject serEffects = new SerializedObject(playerEffects);
                 serEffects.FindProperty("_currentInsanity").intValue = 0;
                 serEffects.FindProperty("_currentFrostbite").intValue = 0;
@@ -269,6 +269,7 @@ namespace Gameplay
                 {
                     if (GUILayout.Button("Very High speed") && CheckIfRunning())
                     {
+                        UpdateVariables();
                         playerController.BaseSpeed = 12f;
                         playerController.SprintSpeed = 20;
                         playerController.CrouchSpeed = 10f;
@@ -280,6 +281,7 @@ namespace Gameplay
             GUILayout.Label("Inventory", headerStyle);
             if (GUILayout.Button("Clear Inventory",notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
             GUILayout.Space(15);
@@ -287,10 +289,12 @@ namespace Gameplay
             selectedItem = EditorGUILayout.Popup(selectedItem, itemNames);
             if (GUILayout.Button("Give item", notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
             if (GUILayout.Button("Remove item", notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
 
@@ -299,14 +303,17 @@ namespace Gameplay
 
             if (GUILayout.Button("TP to start of current room", notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
             if (GUILayout.Button("TP to start", notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
             if (GUILayout.Button("TP to last room", notWorkingButton) && CheckIfRunning())
             {
+                UpdateVariables();
                 //Add later
             }
         }
@@ -329,7 +336,7 @@ namespace Gameplay
             showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
             if (GUILayout.Button("Regen Rooms", importantButtonStyle) && CheckIfRunning())
             {
-
+                UpdateVariables();
                 FindAnyObjectByType<Generation>().RegenerateRooms();
             }
             GUILayout.Space(20);
@@ -345,7 +352,7 @@ namespace Gameplay
                     {
                         if(serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                         {
-                            allRooms[j]._selectedEventClasses[i].Exited(allRooms[j]);
+                            allRooms[j]._selectedEventClasses[i].FirstExit(allRooms[j]);
                         }
                         allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                     }
@@ -359,48 +366,53 @@ namespace Gameplay
             selectedEvent = EditorGUILayout.Popup(selectedEvent, eventNames);
             if (GUILayout.Button("Add event to all rooms") && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     allRooms[j]._selectedEventClasses.Add(events[selectedEvent]);
-                    events[selectedEvent].Generated(allRooms[j]);
+                    events[selectedEvent].Generate(allRooms[j]);
                 }
             }
             if (showDetails)
             {
                 if (GUILayout.Button("Add event to Room 1 specifically") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     allRooms[0]._selectedEventClasses.Add(events[selectedEvent]);
-                    events[selectedEvent].Generated(allRooms[0]);
+                    events[selectedEvent].Generate(allRooms[0]);
                 }
             }
             if (showFun)
             {
                 if (GUILayout.Button("Add event to all rooms 10 times") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     for (int j = 0; j < allRooms.Count; j++)
                     {
                         for(int i = 0; i < 10; i++)
                         {
                             allRooms[j]._selectedEventClasses.Add(events[selectedEvent]);
-                            events[selectedEvent].Generated(allRooms[j]);
+                            events[selectedEvent].Generate(allRooms[j]);
                         }
                     }
                 }
                 if (GUILayout.Button("All in one") && CheckIfRunning())
                 {
+                    UpdateVariables();
                     for (int j = 0; j < allRooms.Count; j++)
                     {
                         for (int i = 0; i < events.Count; i++)
                         {
                             if (eventNames[i] == "EndingEvent") {continue;}
                             allRooms[j]._selectedEventClasses.Add(events[i]);
-                            events[i].Generated(allRooms[j]);
+                            events[i].Generate(allRooms[j]);
                         }
                     }
                 }
             }
             if (GUILayout.Button("Remove event from all rooms") && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     for (int i = 0; i < allRooms[j]._selectedEventClasses.Count; i++)
@@ -410,7 +422,7 @@ namespace Gameplay
                             SerializedObject serRoom = new SerializedObject(allRooms[j]);
                             if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                             {
-                                allRooms[j]._selectedEventClasses[i].Exited(allRooms[j]);
+                                allRooms[j]._selectedEventClasses[i].FirstExit(allRooms[j]);
                             }
                             allRooms[j]._selectedEventClasses[i].CallForDeletion(allRooms[j]);
                             allRooms[j]._selectedEventClasses.RemoveAt(i);
@@ -452,6 +464,7 @@ namespace Gameplay
 
             if (GUILayout.Button("RespawnRoomItems") && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     if (allItemSpots)
@@ -469,6 +482,7 @@ namespace Gameplay
             }
             if (GUILayout.Button("SpawnRoomItems") && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
                     if (allItemSpots)
@@ -483,6 +497,7 @@ namespace Gameplay
             }
             if (GUILayout.Button("DespawnRoomItems") && CheckIfRunning())
             {
+                UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 { 
                     allRooms[j].DespawnItems();

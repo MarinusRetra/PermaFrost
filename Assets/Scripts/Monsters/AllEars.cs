@@ -35,6 +35,7 @@ namespace Gameplay
             _player = PlrRefs.inst.transform;
 
             _agent = GetComponent<NavMeshAgent>();
+            agentSpeed = _agent.speed;
 
             BoxCollider renderer = CurrentRoom.GetComponent<BoxCollider>();
 
@@ -53,16 +54,9 @@ namespace Gameplay
             StartCoroutine(HandleMovement());
         }
 
+        int waitTime = 0;
         private IEnumerator HandleMovement()
         {
-            //Spawning "animation"
-            Transform model = transform.GetChild(0);
-            while(model.localPosition.y < -2 && !_despawning)
-            {
-                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y + 0.2f, model.localPosition.z);
-                yield return new WaitForSeconds(0.05f);
-            }
-
             GetComponent<Collider>().enabled = true;
             _spawning = false;
 
@@ -90,6 +84,14 @@ namespace Gameplay
                             }
                         }
                         yield return new WaitForSeconds(0.1f);
+                        continue;
+                    case earStates.Idle:
+                        Vector3 idleGoal = GetRandomRoomPosition();
+                        _agent.destination = idleGoal;
+                        for(int i = 0; i < 15; i++)
+                        {
+                            yield return new WaitForSeconds(_currentState == earStates.Wandering ? 0 :1);
+                        }
                         continue;
                 }
             }
@@ -198,6 +200,19 @@ namespace Gameplay
                 yield return new WaitForSeconds(0.05f);
             }
             Destroy(gameObject);
+        }
+
+        private float agentSpeed;
+        public void SetIdleState(bool state)
+        {
+            if (state)
+            {
+                _currentState = earStates.Idle;
+            }
+            else
+            {
+                _currentState = earStates.Wandering;
+            }
         }
     }
 }

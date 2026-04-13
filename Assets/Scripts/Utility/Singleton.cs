@@ -24,16 +24,17 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
+            if(_instance == null)
             {
                 _instance = FindFirstObjectByType<T>();
-
-                #if UNITY_EDITOR
-                if (_instance == null)
+                if(_instance != null)
                 {
-                    Debug.LogError($"No instance of {typeof(T)} found in scene.");
+                    return _instance;
                 }
-                #endif
+            
+                T newInstance = new GameObject(typeof(T).Name).AddComponent<T>();
+                Debug.LogError($"No instance of {typeof(T)} found in scene. Created a new instance: {newInstance.name}");
+                return newInstance;
             }
             return _instance;
         }
@@ -41,22 +42,18 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if (_instance == null)
+        if(_instance != this)
         {
-            _instance = this as T;
-            if(PersistThroughSceneLoad)
-            {
-                DontDestroyOnLoad(gameObject);
-            }
-            Debug.Log($"Singleton {typeof(T)} initialized as {gameObject.name}");
+            Debug.LogError($"Multiple instances found of {typeof(T)} in scene. Killing {gameObject.name}");
+            Destroy(gameObject);
         }
 
-        #if UNITY_EDITOR
-        if (_instance != this)
+        _instance = this as T;
+        if(PersistThroughSceneLoad)
         {
-            Debug.LogError($"Multiple instances found of {typeof(T)} in scene.");
+            DontDestroyOnLoad(gameObject);
         }
-        #endif
+        Debug.Log($"{typeof(T).Name} initialized as {gameObject.name}");
     }
 }
 }

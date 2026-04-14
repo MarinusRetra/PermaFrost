@@ -4,20 +4,16 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/BrokenWindowEvent")]
     public class WindowEvent : EventClass
     {
-        [SerializeField]
-        private GameObject _freezingPrefab;
-
-        [SerializeField] private Mesh[] _possibleWindowMeshes;
-
-        [SerializeField] private AudioClip _windowBreakingClip;
         //Variables
+        private GameObject spawnedFreezingArea;
+        private EventWindowScriptable windEvent;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
+            windEvent = scriptable as EventWindowScriptable;
             bool breakEarly = Random.Range(0, 3) > 1;
             if (breakEarly)
             {
@@ -41,8 +37,7 @@ namespace Gameplay
             if (!room.Holder.Find("FreezingArea(Clone)"))
             {
                 BreakWindows(room);
-
-                Soundsystem.PlaySound(_windowBreakingClip, room.transform.position);
+                Soundsystem.PlaySound(windEvent.windowBreakingClip, room.transform.position);
             }
             return true;
         }
@@ -74,26 +69,26 @@ namespace Gameplay
         //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room)
         {
-            Destroy(room.Holder.Find("FreezingArea(Clone)")?.gameObject);
+            if (spawnedFreezingArea) { Destroy(spawnedFreezingArea); }
             PlrRefs.inst.PlayerStatusEffects.ManageFrostbiteCauses("Windows", true);
+            Destroy(this);
             return true;
         }
 
         private void BreakWindows(CarriageClass room)
         {
-            GameObject _freeze = Instantiate(_freezingPrefab);
-            _freeze.transform.parent = room.Holder;
+            spawnedFreezingArea = Instantiate(scriptable.SpawnablePrefab);
+            spawnedFreezingArea.transform.parent = room.Holder;
             BoxCollider _roomCol = room.GetComponent<BoxCollider>();
-            _freeze.transform.localScale = new Vector3(_roomCol.size.x, _roomCol.size.y, _roomCol.size.z - 2);
-            _freeze.transform.position = room.transform.position + room.GetComponent<BoxCollider>().center;
+            spawnedFreezingArea.transform.localScale = new Vector3(_roomCol.size.x, _roomCol.size.y, _roomCol.size.z - 2);
+            spawnedFreezingArea.transform.position = room.transform.position + _roomCol.center;
 
-            List<Transform> possibleWindows = room.transform.Find("Gameplay").Find("Windows").GetComponentsInChildren<Transform>().ToList();
-            possibleWindows.RemoveAt(0);
+            List<MeshFilter> possibleWindows = room.transform.Find("Gameplay").Find("Windows").GetComponentsInChildren<MeshFilter>().ToList();
 
             //break windows visually
-            foreach (Transform window in possibleWindows)
+            foreach (MeshFilter window in possibleWindows)
             {
-                window.GetComponent<MeshFilter>().mesh = _possibleWindowMeshes[Random.Range(0, _possibleWindowMeshes.Length)];
+                window.mesh = windEvent.possibleWindowMeshes[Random.Range(0, windEvent.possibleWindowMeshes.Length)];
                 window.gameObject.layer = 11;
             }
         }

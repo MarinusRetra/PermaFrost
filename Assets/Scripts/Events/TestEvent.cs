@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/TestEvent")]
     public class TestEvent : EventClass
     {
         //When room spawns in

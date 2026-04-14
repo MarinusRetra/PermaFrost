@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e895bba4fff8ff4b88a090a48cf65fd, type: 3}
+  m_Name: HotDudeEvent
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EventClassScriptable
+  eventClass: {fileID: 11500000, guid: 5e7dfb42085bb9443ba0bf4a05e8da71, type: 3}
+  SpawnablePrefab: {fileID: 5231567514796447616, guid: faef25231c49a8e41b6544a30d10c063, type: 3}
+  removeEvents:
+  - {fileID: 11400000}
+  - {fileID: 11400000, guid: 34a371bd94e9256478af48a8b215693a, type: 2}
+  IncludeInAllInOne: 1

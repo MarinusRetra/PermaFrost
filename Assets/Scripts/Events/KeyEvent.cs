@@ -4,13 +4,11 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/KeyEvent")]
     public class KeyEvent : EventClass
     {
-        [SerializeField]
-        private GameObject _keyPrefab;
-        [SerializeField]
-        private GameObject _doorPrefab;
+        private GameObject spawnedKey;
+        private GameObject spawnedDoor;
+        private Rigidbody keyRigidb;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
@@ -21,20 +19,30 @@ namespace Gameplay
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
             //spawn door
-            Vector3 doorPos = room.transform.Find("Exit").position + new Vector3(0, 1.4f, 0);
-            GameObject door = Instantiate(_doorPrefab, doorPos, _doorPrefab.transform.rotation);
-            door.transform.parent = room.Holder;
+            Vector3 doorPos = room.ExitPoint.position + new Vector3(0, 1.4f, 0);
+            spawnedDoor = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
+            spawnedDoor.transform.parent = room.Holder;
 
             //spawn key
-            GameObject newKey = Instantiate(_keyPrefab, randomLocation.position, Quaternion.identity);
-            newKey.GetComponent<ItemImportance>().OnSpawnKill();
-            newKey.transform.parent = room.Holder;
+            EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
+            spawnedKey = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, Quaternion.identity);
+            spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
+            spawnedKey.transform.parent = room.Holder;
             return true;
         }
         //First time approaching room
-        public override bool FirstApproach(CarriageClass room) { return true; }
+        public override bool FirstApproach(CarriageClass room) { return RepeatApproach(room); }
         //Any other time approaching room
-        public override bool RepeatApproach(CarriageClass room) { return true; }
+        public override bool RepeatApproach(CarriageClass room) 
+        {
+            if (!spawnedKey) { return true; }
+            if (!keyRigidb)
+            {
+                keyRigidb = spawnedKey.GetComponent<Rigidbody>();
+            }
+            keyRigidb.isKinematic = false;
+            return true; 
+        }
         //First time room entered
         public override bool FirstEnter(CarriageClass room) { return true; }
         //Any other time room entered
@@ -46,12 +54,22 @@ namespace Gameplay
         //Any other time leaving room
         public override bool RepeatExit(CarriageClass room) { return true; }
         //Getting far away from the room
-        public override bool Recede(CarriageClass room) { return true; }
+        public override bool Recede(CarriageClass room) 
+        {
+            if (!spawnedKey) { return true; }
+            if (!keyRigidb)
+            {
+                keyRigidb = spawnedKey.GetComponent<Rigidbody>();
+            }
+            keyRigidb.isKinematic = true;
+            return true; 
+        }
         //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room)
         {
-            Destroy(room.Holder.Find("Key(Clone)")?.gameObject);
-            Destroy(room.Holder.Find("LockedDoor(Clone)")?.gameObject);
+            if (spawnedDoor) { Destroy(spawnedDoor); }
+            if (spawnedKey) {  Destroy(spawnedKey); }
+            Destroy(this);
             return true;
         }
     }

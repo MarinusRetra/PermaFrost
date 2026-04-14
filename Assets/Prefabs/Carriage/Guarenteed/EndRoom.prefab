@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8694488782162478075}
   - component: {fileID: 669010045306275419}
   - component: {fileID: 5009204877991620635}
+  - component: {fileID: 9064166150242238954}
   m_Layer: 0
   m_Name: EndRoom
   m_TagString: Untagged
@@ -64,13 +65,26 @@ MonoBehaviour:
   Holder: {fileID: 0}
   _allowedDrops: []
   generationClass: {fileID: 0}
+  roomIndex: 0
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
-  _selectedEventClasses:
-  - {fileID: 11400000, guid: d1b120f6b0414374a8e71fa1758403d2, type: 2}
+  OnRecedeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApproachEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFirstApproachEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  spawnedEventClasses:
+  - {fileID: 9064166150242238954}
+  _selectedEventClasses: []
   _maxAmountOfItems: 0
   previousCarriage: {fileID: 0}
+  nextCarriage: {fileID: 0}
+  NodeHolder: {fileID: 0}
 --- !u!65 &5009204877991620635
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,6 +106,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.4, y: 4, z: 7.4}
   m_Center: {x: 0, y: 2, z: 0.09079722}
+--- !u!114 &9064166150242238954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359503124527034429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aeb2a7bd4e25284c88333683a94569c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EndingCutsceneEvent
+  scriptable: {fileID: 11400000, guid: 6760f82b76a207c48b83be8ad9e70ad7, type: 2}
 --- !u!1 &1511550012089566546
 GameObject:
   m_ObjectHideFlags: 0

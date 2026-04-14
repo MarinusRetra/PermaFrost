@@ -2,11 +2,10 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/StalkerEvent")]
     public class StalkerEvent : EventClass
     {
-        [SerializeField]
-        private GameObject _stalkerPrefab;
+        private GameObject spawnedStalker;
+        private Stalker spawnedStalkerClass;
 
         //When room spawns in
         public override bool Generate(CarriageClass room) { return true; }
@@ -17,9 +16,10 @@ namespace Gameplay
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
-            GameObject _stalker = Instantiate(_stalkerPrefab);
-            _stalker.GetComponent<Monster>().CurrentRoom = room.transform;
-            _stalker.transform.parent = room.Holder;
+            spawnedStalker = Instantiate(scriptable.SpawnablePrefab);
+            spawnedStalkerClass = spawnedStalker.GetComponent<Stalker>();
+            spawnedStalkerClass.CurrentRoom = room.transform;
+            spawnedStalker.transform.parent = room.Holder;
             return true;
         }
         //Any other time room entered
@@ -27,8 +27,7 @@ namespace Gameplay
         //First time completing room
         public override bool FirstExit(CarriageClass room)
         {
-            if (!room.Holder.Find("Stalker(Clone)")) { return true; }
-            room.Holder.Find("Stalker(Clone)").GetComponent<Monster>().DestroyMonster();
+            spawnedStalkerClass.DestroyMonster();
             return true;
         }
         //Leaving room through the way the player came
@@ -38,6 +37,10 @@ namespace Gameplay
         //Getting far away from the room
         public override bool Recede(CarriageClass room) { return true; }
         //Removes any evidence of events existance in room
-        public override bool CallForDeletion(CarriageClass room) { return true; }
+        public override bool CallForDeletion(CarriageClass room) 
+        {
+            Destroy(this);
+            return true; 
+        }
     }
 }

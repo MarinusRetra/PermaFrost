@@ -2,18 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/TicketsPleaseEvent")]
     public class TicketsPleaseEvent : EventClass
     {
-        [SerializeField]
-        private GameObject _ticketsPleasePrefab;
-        [SerializeField]
-        private GameObject _ticketPrefab;
         //Variables
+        private GameObject spawnedTicketsPlease;
+        private GameObject spawnedTicket;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
@@ -22,10 +18,12 @@ namespace Gameplay
             List<Transform> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             Transform _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
-            GameObject _ticket = Instantiate(_ticketPrefab);
+            EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
+            GameObject _ticket = Instantiate(objEvent.otherPrefabs[0]);
             _ticket.transform.position = _chosenSpot.position;
             _ticket.transform.rotation = _chosenSpot.rotation;
             _ticket.transform.parent = room.Holder;
+            spawnedTicket = _ticket;
             return true;
         }
         //First time approaching room
@@ -36,21 +34,23 @@ namespace Gameplay
         //Any other time approaching room
         public override bool RepeatApproach(CarriageClass room)
         {
-            room.Holder.Find("Ticket(Clone)")?.gameObject.SetActive(true);
+            if (spawnedTicket) { spawnedTicket.SetActive(true); }
             return true;
         }
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
             //Spawn tickets please
-            GameObject _spawnedTicketsPlease = Instantiate(_ticketsPleasePrefab);
+            GameObject _spawnedTicketsPlease = Instantiate(scriptable.SpawnablePrefab);
+            GameObject mainTPObj = _spawnedTicketsPlease.transform.GetChild(0).gameObject;
             _spawnedTicketsPlease.transform.parent = room.Holder;
-            _spawnedTicketsPlease.transform.GetChild(0).GetComponent<Monster>().CurrentRoom = room.transform;
+            mainTPObj.GetComponent<Monster>().CurrentRoom = room.transform;
 
             //tp it to the start of the room
             Transform _entry = room.transform.Find("Exit");
-            _spawnedTicketsPlease.transform.GetChild(0).position = new Vector3(_entry.position.x, _entry.position.y + 0.1f, _entry.position.z - 0.5f);
-            _spawnedTicketsPlease.transform.GetChild(0).GetComponent<NavMeshAgent>().enabled = true;
+            mainTPObj.transform.position = new Vector3(_entry.position.x, _entry.position.y + 0.1f, _entry.position.z - 0.5f);
+            mainTPObj.GetComponent<NavMeshAgent>().enabled = true;
+            spawnedTicketsPlease = _spawnedTicketsPlease;
             return true;
         }
         //Any other time room entered
@@ -77,13 +77,15 @@ namespace Gameplay
         //Getting far away from the room
         public override bool Recede(CarriageClass room)
         {
-            room.Holder.Find("Ticket(Clone)")?.gameObject.SetActive(false);
+            if (spawnedTicket) { spawnedTicket.SetActive(false); }
             return true;
         }
         //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room)
         {
-            Destroy(room.Holder.Find("Ticket(Clone)")?.gameObject);
+            if (spawnedTicket) { Destroy(spawnedTicket); }
+            if (spawnedTicketsPlease) {  Destroy(spawnedTicketsPlease); }
+            Destroy(this);
             return true;
         }
     }

@@ -7,7 +7,7 @@ namespace Gameplay
     {
         [SerializeField] private float _shadowmanSpeed = 1;
 
-        [SerializeField] private EventClass freezingEvent;
+        [SerializeField] private EventClassScriptable freezingEvent;
 
         private bool _hasStarted = false;
         private Transform _exitRoom;

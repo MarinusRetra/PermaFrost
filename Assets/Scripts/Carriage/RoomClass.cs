@@ -9,7 +9,7 @@ namespace Gameplay
         public GameObject Room;
         public int Weight;
         public int AmountOfEventsMax;
-        public EventClass[] AllowedEvents;
+        public EventClassScriptable[] AllowedEvents;
         public string RoomName;
         public bool onlySpawnOnce;
         public int HeightValue;

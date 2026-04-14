@@ -2,6 +2,7 @@ using Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using UnityEditor;
 using UnityEngine;
 
 public class Generation : MonoBehaviour
@@ -150,11 +151,11 @@ public class Generation : MonoBehaviour
     private CarriageClass prevRoomCarriage;
     private void GiveRoomEvents(CarriageClass room, RoomClass roomClass)
     {
-        List<EventClass> allowedEvents = new List<EventClass>(roomClass.AllowedEvents);
+        List<EventClassScriptable> allowedEvents = new List<EventClassScriptable>(roomClass.AllowedEvents);
 
         if (prevRoomCarriage != null && !Rooms.AllowEventDupes)
         {
-            List<EventClass> prevRoomEvents = prevRoomCarriage._selectedEventClasses;
+            List<EventClassScriptable> prevRoomEvents = prevRoomCarriage._selectedEventClasses;
             for (int i = 0; i <  prevRoomEvents.Count; i++)
             {
                 if (allowedEvents.Contains(prevRoomEvents[i]))
@@ -171,19 +172,20 @@ public class Generation : MonoBehaviour
             {
                 int randomIndex = Random.Range(0, allowedEvents.Count);
                 int index = Mathf.Min(randomIndex, allowedEvents.Count);
+
                 if(allowedEvents.Count == 0) { prevRoomCarriage = room; return; }
-                EventClass _chosenEvent = allowedEvents[index];
-                room._selectedEventClasses.Add(_chosenEvent);
+
+                EventClassScriptable _chosenEvent = allowedEvents[index];
+
+                AddEventToRoom(room, _chosenEvent);
+
                 allowedEvents.RemoveAt(index);
-                _chosenEvent.Generate(room);
-                if (_chosenEvent is WindowEvent || _chosenEvent is HotDudeEvent)
+
+                foreach (EventClassScriptable removeEvent in _chosenEvent.removeEvents)
                 {
-                    for (int j = 0; j < allowedEvents.Count; j++)
+                    if (allowedEvents.Contains(removeEvent))
                     {
-                        if (allowedEvents[j] is HotDudeEvent || allowedEvents[j] is WindowEvent)
-                        {
-                            allowedEvents.RemoveAt(j);
-                        }
+                        allowedEvents.Remove(removeEvent);
                     }
                 }
             }
@@ -191,6 +193,17 @@ public class Generation : MonoBehaviour
 
         prevRoomCarriage = room;
 
+    }
+
+    public static void AddEventToRoom(CarriageClass room, EventClassScriptable eventClass)
+    {
+        System.Type eventType = eventClass.eventClass.GetClass();
+        EventClass even = (EventClass)room.gameObject.AddComponent(eventType);
+        even.scriptable = eventClass;
+        even.Generate(room);
+
+        room.spawnedEventClasses.Add(even);
+        room._selectedEventClasses.Add(eventClass);
     }
     bool generatingRoom = false;
     List<RoomClass> allTotalPossibleRooms = new List<RoomClass>();

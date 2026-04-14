@@ -2,11 +2,8 @@ using UnityEngine;
 
 namespace Gameplay
 {
-    [CreateAssetMenu(menuName = "Events/ShadowmanEvent")]
     public class ShadowmanEvent : EventClass
     {
-        [SerializeField]
-        private GameObject _shadowmanPrefab;
 
         //When room spawns in
         public override bool Generate(CarriageClass room) { return true; }
@@ -17,7 +14,7 @@ namespace Gameplay
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
-            GameObject _shadowman = Instantiate(_shadowmanPrefab, new Vector3(-300, -300, -300), new Quaternion(0, 0, 0, 0));
+            GameObject _shadowman = Instantiate(scriptable.SpawnablePrefab, new Vector3(-300, -300, -300), new Quaternion(0, 0, 0, 0));
             _shadowman.GetComponent<Monster>().CurrentRoom = room.transform;
             _shadowman.transform.parent = room.Holder;
             return true;
@@ -33,6 +30,10 @@ namespace Gameplay
         //Getting far away from the room
         public override bool Recede(CarriageClass room) { return true; }
         //Removes any evidence of events existance in room
-        public override bool CallForDeletion(CarriageClass room) { return true; }
+        public override bool CallForDeletion(CarriageClass room) 
+        {
+            Destroy(this);
+            return true; 
+        }
     }
 }

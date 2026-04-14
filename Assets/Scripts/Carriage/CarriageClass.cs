@@ -28,7 +28,8 @@ public class CarriageClass : MonoBehaviour
     [SerializeField] private UnityEvent OnFirstApproachEvent;
 
     private bool playerInside = false;
-    public List<EventClass> _selectedEventClasses;
+    public List<EventClass> spawnedEventClasses;
+    public List<EventClassScriptable> _selectedEventClasses;
     [SerializeField] private int _maxAmountOfItems = 1;
 
     public CarriageClass previousCarriage;
@@ -42,8 +43,6 @@ public class CarriageClass : MonoBehaviour
 
     private bool hasBeenLoaded = false;
     private bool isLoaded = true;
-
-    public CarriageRefs Refs;
 
     public void SpawnItems()
     {
@@ -115,12 +114,12 @@ public class CarriageClass : MonoBehaviour
             if (!_enterTriggered)
             {
                 _enterTriggered = true;
-                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                foreach (EventClass selectedEventClass in spawnedEventClasses)
                     selectedEventClass.FirstEnter(this);
             }
             else
             {
-                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                foreach (EventClass selectedEventClass in spawnedEventClasses)
                     selectedEventClass.RepeatEnter(this);
             }
         }
@@ -136,19 +135,19 @@ public class CarriageClass : MonoBehaviour
             {
                 _exitTriggered = true;
 
-                foreach (EventClass selectedEventClass in _selectedEventClasses)
+                foreach (EventClass selectedEventClass in spawnedEventClasses)
                     selectedEventClass.FirstExit(this);
             }
             else
             {
                 if (!_exitTriggered)
                 {
-                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    foreach (EventClass selectedEventClass in spawnedEventClasses)
                         selectedEventClass.EarlyExit(this);
                 }
                 else
                 {
-                    foreach (EventClass selectedEventClass in _selectedEventClasses)
+                    foreach (EventClass selectedEventClass in spawnedEventClasses)
                         selectedEventClass.RepeatExit(this);
                 }
             }
@@ -163,7 +162,7 @@ public class CarriageClass : MonoBehaviour
         {
             //first time loaded stuff
             OnFirstApproachEvent.Invoke();
-            foreach (EventClass @event in _selectedEventClasses)
+            foreach (EventClass @event in spawnedEventClasses)
             {
                 @event.FirstApproach(this);
             }
@@ -177,7 +176,7 @@ public class CarriageClass : MonoBehaviour
                 spawnedItems[i].GetComponent<Rigidbody>().isKinematic = false;
             }
         }
-        foreach(EventClass @event in _selectedEventClasses)
+        foreach (EventClass @event in spawnedEventClasses)
         {
             @event.RepeatApproach(this);
         }
@@ -194,7 +193,7 @@ public class CarriageClass : MonoBehaviour
                 spawnedItems[i].GetComponent<Rigidbody>().isKinematic = true;
             }
         }
-        foreach (EventClass @event in _selectedEventClasses)
+        foreach (EventClass @event in spawnedEventClasses)
         {
             @event.Recede(this);
         }

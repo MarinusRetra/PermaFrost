@@ -1,10 +1,11 @@
+using Gameplay;
 using System;
 using UnityEngine;
 
-// [CreateAssetMenu(menuName = "Event/Blank")]
 [Serializable]
-public class EventClass : ScriptableObject
+public class EventClass : MonoBehaviour
 {
+    public EventClassScriptable scriptable;
     //On generating the room
     public virtual bool Generate(CarriageClass room) { return false; }
     //On getting near the room for the first time
@@ -78,7 +79,8 @@ public class EventTemplate : EventClass
     }
     //Removes any evidence of events existance in room
     public override bool CallForDeletion(CarriageClass room) 
-    { 
+    {
+        Destroy(this);
         return true; 
     }
 }

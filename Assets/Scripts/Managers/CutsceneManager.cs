@@ -189,7 +189,7 @@ namespace Gameplay
                         CarriageClass fakeCarriage = fakeRoom.GetComponent<CarriageClass>();
 
                         //delete all current events
-                        List<EventClass> even = fakeCarriage._selectedEventClasses;
+                        List<EventClass> even = fakeCarriage.spawnedEventClasses;
                         for (int i = 0; i < even.Count; i++)
                         {
                             even[i].FirstExit(fakeCarriage);

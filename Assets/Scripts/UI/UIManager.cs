@@ -8,8 +8,10 @@ namespace Gameplay
     public class UIManager : MonoBehaviour
     {
 		[SerializeField] private InputReader _input;
-
+		[SerializeField] private StatTracker _statTrack;
 		[SerializeField] private GameObject _settingsPanel;
+		[SerializeField] private GameObject[] _StatNamesUI;
+		[SerializeField] private GameObject[] _StatValuesUI;
 		bool _settingsToggle = false;
 
 		private void Start()
@@ -31,8 +33,12 @@ namespace Gameplay
 			_settingsPanel.SetActive(_settingsToggle);
 		}
 
-		public void LoadScene(int id) => SceneManager.LoadScene(id);
-		public void QuitGame() => Application.Quit();
+		public void LoadScene(int id) => SceneManager.LoadScene(id); 
+		public void QuitGame()
+		{
+			_statTrack.SaveStats();
+			Application.Quit();
+		} 
 
         private void OnDisable()
         {

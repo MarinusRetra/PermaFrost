@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 2167895748305581227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -134.09012, y: 0.96095, z: 278.19162}
+  m_LocalPosition: {x: -126.981995, y: 1.0999501, z: 272.88998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -430,6 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.GameManager
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   _pauseMenu: {fileID: 0}
+  _statTrack: {fileID: 11400000, guid: 61c6b71821a9d3143bf35e09c363020d, type: 2}
 --- !u!114 &1255865286293581571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,6 +1082,7 @@ MonoBehaviour:
   _hitUI: {fileID: 0}
   _reader: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   _deathText: {fileID: 0}
+  _statTrack: {fileID: 11400000, guid: 61c6b71821a9d3143bf35e09c363020d, type: 2}
   CheckPlayerUnderMap: 1
 --- !u!114 &2481520789753704852
 MonoBehaviour:

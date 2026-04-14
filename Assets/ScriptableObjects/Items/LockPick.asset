@@ -7,14 +7,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94b7b82c058b45d4eaf75562b7009828, type: 3}
   m_Name: LockPick
   m_EditorClassIdentifier: Assembly-CSharp::Lockpick
+  Item_ID: 3
   sprite: {fileID: 21300000, guid: 13214d0dc1eba5946a472d8d01921fcf, type: 3}
   color: {r: 1, g: 1, b: 1, a: 255}
   HoldObject: {fileID: 2114871514724702473, guid: 60ed137dc7a9c3f4eaab24864275afa1, type: 3}
+  _statTrack: {fileID: 11400000, guid: 61c6b71821a9d3143bf35e09c363020d, type: 2}
   _lockPickFinishTime: 4
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
   _lookPickPrefab: {fileID: 4707716273396523584, guid: eb63f7aec119de74589bb156e2455e5e, type: 3}

@@ -7,6 +7,7 @@ namespace Gameplay
 {
     public class PlayerInventory : MonoBehaviour
     {
+
         [Header("Hotbar slot sizes")]
         [SerializeField] private Vector3 _normalSlotSize = new(0.5f, 0.5f, 1f);
         [SerializeField] private Vector3 _selectedSlotSize = new(0.6f, 0.6f, 1.2f);
@@ -16,7 +17,6 @@ namespace Gameplay
 
         [Header("Inventory item and Hotbarslots")]
         [SerializeField] private InventorySlot[] hotbarSlots;
-
         [SerializeField] private int currentSelectedSlot_ID = -1;
         public InventorySlot CurrentSelectedSlot { get => hotbarSlots[currentSelectedSlot_ID]; }
         public InventorySlot[] HotbarSlots { get => hotbarSlots; }
@@ -111,7 +111,8 @@ namespace Gameplay
                 if (currentSelectedSlot_ID != -1 || CurrentSelectedSlot.Item != null)
                 { 
                     if (CurrentSelectedSlot.Item.Use())
-                    {
+                    {   
+                        CurrentSelectedSlot.Item.TimesUsed += 1;
                         RemoveItemFromSlot(currentSelectedSlot_ID);
                     }
                 }

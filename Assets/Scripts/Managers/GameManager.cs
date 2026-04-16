@@ -6,6 +6,7 @@ namespace Gameplay
     {
         [SerializeField] private InputReader _input;
         [SerializeField] private GameObject _pauseMenu;
+        [SerializeField] private StatTracker _statTrack;
 
         private void Start()
         {
@@ -16,6 +17,7 @@ namespace Gameplay
         private void HandlePause()
         {
             _pauseMenu.SetActive(true);
+            _statTrack.LoadStats();
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }

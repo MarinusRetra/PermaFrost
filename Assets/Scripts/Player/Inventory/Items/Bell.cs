@@ -11,5 +11,6 @@ namespace Gameplay
             PlrRefs.inst.PlayerStatusEffects.AddInstantInsanity(_value);
             return true;
         }
+
     }
 }

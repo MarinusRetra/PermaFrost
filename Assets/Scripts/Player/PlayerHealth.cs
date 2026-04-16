@@ -10,14 +10,13 @@ public class PlayerHealth : MonoBehaviour
     public float HealInvincibility = 2.0f;
     private bool _damageInvincible = false;
     private bool _healInvincible = false;
-
     private bool _isVunerable = false;
 
     [SerializeField]private GameObject _deathUI;
     [SerializeField] private GameObject _hitUI;
     [SerializeField] private InputReader _reader;
-
     [SerializeField] private TMP_Text _deathText;
+    [SerializeField] private StatTracker _statTrack;
 
     public bool CheckPlayerUnderMap = true;
 
@@ -57,6 +56,9 @@ public class PlayerHealth : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        _statTrack.SaveStats();
+        _statTrack.PrintItems();
 
         deathCause = deathCause.Replace("(Clone)", "");
         deathCause = deathCause.Replace("Agent", " Please");

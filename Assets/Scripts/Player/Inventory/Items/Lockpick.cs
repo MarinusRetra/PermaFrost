@@ -39,7 +39,8 @@ namespace Gameplay
             {
                 _playerInventory = PlrRefs.inst.PlayerInventory;
             }
-
+            
+            TimesUsed += 1;
             _playerInventory.RemoveItemFromSlot(_playerInventory.CurrentSelectedSlot.Slot_ID);
             _input.CanModifyHotbar = true;
         }

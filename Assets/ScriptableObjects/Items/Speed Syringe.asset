@@ -7,11 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa6a2f473c86cbc4398c04bfb2d5800e, type: 3}
   m_Name: Speed Syringe
   m_EditorClassIdentifier: Assembly-CSharp::SpeedSyringe
+  Item_ID: 5
   sprite: {fileID: 21300000, guid: f5bb2ea780ddf7f40a8dca833549bea3, type: 3}
   color: {r: 1, g: 1, b: 1, a: 255}
   HoldObject: {fileID: 6580180848101388467, guid: 6d3c489f341307149aff828d8508051e, type: 3}
+  _statTrack: {fileID: 11400000, guid: 61c6b71821a9d3143bf35e09c363020d, type: 2}
+  duration: 10
+  stackDuration: 5
+  speedMultiplier: 1.3
+  staminaMultiplier: 1.75
+  endNegativeStaminaMultiplier: 0.75

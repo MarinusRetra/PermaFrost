@@ -35,9 +35,6 @@ namespace Gameplay
             _box.transform.rotation = _chosenSpot.rotation;
             spawnedBox = _box;
             spawnedBoxClass = _box.GetComponent<MusicBox>();
-
-            //EventAnimScriptable animEvent = scriptable as EventAnimScriptable;
-            //print(animEvent.printThisMan);
             return true;
         }
         //First time approaching room

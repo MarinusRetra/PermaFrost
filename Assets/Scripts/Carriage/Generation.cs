@@ -19,6 +19,8 @@ public class Generation : MonoBehaviour
     public int AmountOfRooms = 15;
     public GameObject player;
 
+    public EventClass[] eventClasses;
+
     public bool FastLoading = false;
 
     private int currentHeightValue = 0;
@@ -197,7 +199,7 @@ public class Generation : MonoBehaviour
 
     public static void AddEventToRoom(CarriageClass room, EventClassScriptable eventClass)
     {
-        System.Type eventType = eventClass.eventClass.GetClass();
+        System.Type eventType = EventRefs.Instance.GetClassFromScriptable(eventClass).GetType();
         EventClass even = (EventClass)room.gameObject.AddComponent(eventType);
         even.scriptable = eventClass;
         even.Generate(room);

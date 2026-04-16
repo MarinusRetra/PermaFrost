@@ -7,7 +7,7 @@ namespace Gameplay
     [CreateAssetMenu(menuName = "Events/Generic")]
     public class EventClassScriptable : ScriptableObject
     {
-        public MonoScript eventClass;
+        public sbyte id;
         public GameObject SpawnablePrefab;
         public EventClassScriptable[] removeEvents;
 #if UNITY_EDITOR

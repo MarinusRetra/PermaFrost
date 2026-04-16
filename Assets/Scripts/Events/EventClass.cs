@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class EventClass : MonoBehaviour
 {
+    public sbyte id;
     public EventClassScriptable scriptable;
     //On generating the room
     public virtual bool Generate(CarriageClass room) { return false; }

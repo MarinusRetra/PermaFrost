@@ -241,6 +241,5 @@ namespace Gameplay
             UpdateSprite();
             SlotGameObject.SetActive(true);
         }
-
     }
 }

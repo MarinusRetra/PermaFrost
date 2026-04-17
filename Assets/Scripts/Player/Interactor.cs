@@ -13,41 +13,57 @@ namespace Gameplay
         private Transform _cameraTransform;
         public LayerMask playerLayer;
 
+        private InteractObject _cachedCollision;
+        private InteractObject _lastCachedCollision;
+
         public void Start()
         {
+            
+            _input.LookEvent += HandleMouseMovement;
             _input.InteractEvent += HandleInteract;
             _cameraTransform = PlrRefs.inst.Camera.transform;
-        }
-
-        void FixedUpdate()
-        {
-            _ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
-            Physics.Raycast(_ray, out hit, _interactDistance,~playerLayer);
-            hit.collider?.GetComponent<InteractObject>()?.Hover();
         }
         /// <summary>
         /// Triggers the interact logic of the interacted item.
         /// </summary>
         private void HandleInteract()
         {
-            try
+            if (_cachedCollision != null && _cachedCollision.enabled)
             {
-                if (hit.collider.GetComponent<InteractObject>() && hit.collider.GetComponent<InteractObject>().enabled)
-                {
-                    hit.collider.GetComponent<InteractObject>()?.Interact();
-                }
+                _cachedCollision.Interact();
             }
-            catch (Exception) { }
+        }
+
+        /// <summary>
+        /// Triggers the hover logic of interactObject you are looking at.
+        /// </summary>
+        private void HandleMouseMovement(Vector2 _numIn)
+        {
+            _ray = new Ray(_cameraTransform.position, _cameraTransform.forward);
+            Physics.Raycast(_ray, out hit, _interactDistance, ~playerLayer);
+            _cachedCollision = hit.collider ? hit.collider.GetComponent<InteractObject>() : null;
+            if(_cachedCollision != null)
+            {
+                _lastCachedCollision = _cachedCollision;
+                _cachedCollision.IsHovered = true;
+                _cachedCollision.Hover();
+            }
+            else if(_lastCachedCollision != null)
+            {
+                _lastCachedCollision.IsHovered = false;
+                _lastCachedCollision.Hover();
+            }
         }
 
         void OnDestroy()
         {
             _input.InteractEvent -= HandleInteract;
-
+            _input.LookEvent -= HandleMouseMovement;
         }
         void OnDisable()
         {
             _input.InteractEvent -= HandleInteract;
+            _input.LookEvent -= HandleMouseMovement;
         }
     }
 }

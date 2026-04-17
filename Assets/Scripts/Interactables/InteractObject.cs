@@ -10,7 +10,7 @@ namespace Gameplay
     public class InteractObject : MonoBehaviour
     {
         private Material[] _materials;
-        private bool _isHovered = false;
+        public bool IsHovered = false;
         public UnityEvent InteractEvent;
         [SerializeField] float _outlineScale;
         [SerializeField] Material _outlineMat;
@@ -32,15 +32,19 @@ namespace Gameplay
                 mesh.SetSubMeshes(_descriptors);
             }
         }
+
+        //void FixedUpdate()
+        //{
+        //    if(IsHovered)
+        //    {
+        //      IsHovered = false;
+        //      Hover();
+        //    }
+        //}
+
         public void Hover()
         {
-            _isHovered = true;
-        }
-
-        private void FixedUpdate()
-        {
-            _materials[^1].SetFloat("_Scale", _isHovered ? _outlineScale : 0f);
-            _isHovered = false;
+            _materials[^1].SetFloat("_Scale", IsHovered ? _outlineScale : 0f);
         }
 
         public virtual void Interact()

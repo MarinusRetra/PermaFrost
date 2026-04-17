@@ -27,7 +27,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             if(_instance == null)
             {
                 _instance = FindFirstObjectByType<T>();
-                if(_instance != null)
+                print(_instance);
+                if (_instance != null)
                 {
                     return _instance;
                 }
@@ -42,9 +43,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        if(_instance != this)
+        if(_instance != this && _instance != null)
         {
-            Debug.LogError($"Multiple instances found of {typeof(T)} in scene. Killing {gameObject.name}");
+            Debug.LogError($"Multiple instances found of {typeof(T)} in scene. Killing {gameObject.name}, because of {_instance.name}");
             Destroy(gameObject);
         }
 

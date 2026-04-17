@@ -8,6 +8,8 @@ namespace Gameplay
         private Coroutine _currentTine;
         public override void Start()
         {
+            base.Start();
+
             InteractEvent.AddListener(() =>
             {
                 if (PlrRefs.inst.PlayerInventory.CurrentSelectedSlot?.Item.name != "Key")
@@ -16,7 +18,6 @@ namespace Gameplay
                     PlrRefs.inst.PlayerInventory.RemoveItemFromSlot(PlrRefs.inst.PlayerInventory.CurrentSelectedSlot.Slot_ID);
                 }
             });
-            base.Start();
         }
 
         public void DestroyAltar()

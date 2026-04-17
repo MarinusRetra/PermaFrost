@@ -8,18 +8,19 @@ namespace Gameplay
         public override void Start()
         {
             base.Start();
-            _playerInventory = PlrRefs.inst.PlayerInventory;
         }
 
         public void DoThing()
         {
-            if (_playerInventory.IsInventoryFull())
-            {
-                return;
-            }
+                _playerInventory = PlrRefs.inst.PlayerInventory;
 
-            _playerInventory.PickupItem(_item);
-            Destroy(gameObject);
+                if (_playerInventory.IsInventoryFull())
+                {
+                    return;
+                }
+
+                _playerInventory.PickupItem(_item);
+                Destroy(gameObject);
         }
 
     }

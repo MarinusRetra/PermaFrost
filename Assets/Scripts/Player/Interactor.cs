@@ -47,6 +47,7 @@ namespace Gameplay
                 _lastCachedCollision = _cachedCollision;
                 _cachedCollision.IsHovered = true;
                 _cachedCollision.Hover();
+                
             }
             else if(_lastCachedCollision != null)
             {

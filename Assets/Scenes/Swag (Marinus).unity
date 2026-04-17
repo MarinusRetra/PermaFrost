@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 20374968}
   - component: {fileID: 20374970}
   - component: {fileID: 20374969}
+  - component: {fileID: 20374971}
   m_Layer: 5
   m_Name: HitVignette
   m_TagString: Untagged
@@ -194,6 +195,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20374967}
   m_CullTransparentMesh: 1
+--- !u!95 &20374971
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20374967}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1d6cb03d5cb941a408e57ca097b2fabf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &26416560 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4768139342764817626, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}

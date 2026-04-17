@@ -41,6 +41,9 @@ namespace Gameplay
         private Vector2 _standHitboxHeight = new(2, 0);
         private Coroutine _currentCrouchRoutine;
 
+        [Header("Sprinting")]
+        private float _staminaTimer;
+        [SerializeField] private float _staminaTickRate = 0.05f;
         public SprintBehaviour SprintBehav;
 
         [Header("SpeedSyringe")]
@@ -49,6 +52,8 @@ namespace Gameplay
 
         [Header("Room")]
         public GameObject CurrentRoom;
+        //To prevent spamming the make noise function.
+        private float _noiseTimer;
 
         //Add all events to input
         private void OnEnable()
@@ -64,15 +69,14 @@ namespace Gameplay
         public void Start()
         {
             _camera = PlrRefs.inst.PlayerCamera.transform;
-
+            SprintBehav.MaxSprint(TotalStamina);
+            
             //auto lock mouse
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
             _rb = GetComponent<Rigidbody>();
             _playerCollider = GetComponent<CapsuleCollider>();
-
-            StartCoroutine(Sprint());
         }
 
         private void FixedUpdate()
@@ -82,16 +86,28 @@ namespace Gameplay
             {
                 if (!_isHoldingCrouch && _canGetUp)
                 {
-                    _currentCrouchRoutine = StartCoroutine(StandUp());
+                    StartCrouchRoutine(StandUp());
                 }
             }
             else
             {
-                if(_moveDirection != Vector3.zero)
+                if (_moveInputX != 0f || _moveInputY != 0f)
                 {
-                    PlayerMonsterManager.MakeNoise();
+                    _noiseTimer -= Time.fixedDeltaTime;
+                    
+                    if (_noiseTimer <= 0f)
+                    {
+                        PlayerMonsterManager.MakeNoise();
+                        _noiseTimer = 0.2f;
+                    }
                 }
             }
+        }
+
+        private void Update()
+        {
+            HandleStamina();
+            _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
         }
 
         /// <summary>
@@ -108,7 +124,7 @@ namespace Gameplay
         /// </summary>
         void HandleLook(Vector2 obj)
         {
-            _cameraRotationX = Math.Clamp(_cameraRotationX -= obj.y * _sensitivity, -90, 90);
+            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * _sensitivity, -90f, 90f);
             _rotationY += obj.x * _sensitivity;
 
             transform.rotation = Quaternion.Euler(0, _rotationY, 0);
@@ -117,16 +133,18 @@ namespace Gameplay
         }
         public void HandleCrouch()
         {
+            if (_isCrouching) return;
             _isHoldingCrouch = true;
-            _currentCrouchRoutine = StartCoroutine(CrouchDown());
+            StartCrouchRoutine(CrouchDown());
         }
 
         private void HandleCrouchCancel()
         {
+            if (!_isCrouching) return;
             _isHoldingCrouch = false;
             if (_canGetUp)
             {
-                _currentCrouchRoutine = StartCoroutine(StandUp());
+                StartCrouchRoutine(StandUp());
             }
         }
 
@@ -145,40 +163,30 @@ namespace Gameplay
             isSprinting = false;
         }
 
-        // TODO: Make values like 0.05 and stuff variables for balancing.
-        private IEnumerator Sprint()
+        private void HandleStamina()
         {
-            SprintBehav.MaxSprint(TotalStamina);
-            CurrentStamina = TotalStamina;
-            while (true)
+            _staminaTimer += Time.deltaTime;
+
+            if (_staminaTimer < _staminaTickRate) return;
+            _staminaTimer = 0f;
+
+            bool isMoving = _moveInputX != 0f || _moveInputY != 0f;
+
+            if (isSprinting && isMoving)
             {
-                //stamina goes down when running
-                if (isSprinting && _moveDirection != Vector3.zero)
+                CurrentStamina = Mathf.Max(0, CurrentStamina - 2);
+
+                if (CurrentStamina == 0)
                 {
-                    CurrentStamina -= 2;
-                    if (CurrentStamina < 0)
-                    {
-                        HandleSprintCancel();
-                    }
-                    yield return new WaitForSeconds(0.05f);
+                    HandleSprintCancel();
                 }
-                else if (CurrentStamina < TotalStamina)
-                {
-                    //goes up when not running
-                    yield return new WaitForSeconds(0.05f);
-                    CurrentStamina++;
-                }
-                else
-                {
-                    if (CurrentStamina < 0)
-                    {
-                        HandleSprintCancel();
-                    }
-                    //wait when at max stamina
-                    yield return new WaitForSeconds(0.05f);
-                }
-                SprintBehav.UpdateSprintBar(CurrentStamina);
             }
+            else if (CurrentStamina < TotalStamina)
+            {
+                CurrentStamina++;
+            }
+
+            SprintBehav.UpdateSprintBar(CurrentStamina);
         }
 
 
@@ -187,9 +195,12 @@ namespace Gameplay
         /// </summary>
         private void Move()
         {
-            _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
 
-            _rb.linearVelocity = _currentMoveSpeed * _moveDirection + new Vector3(0, _rb.linearVelocity.y, 0);
+            Vector3 velocity = _rb.linearVelocity;
+            velocity.x = _currentMoveSpeed * _moveDirection.x;
+            velocity.z = _currentMoveSpeed * _moveDirection.z;
+
+            _rb.linearVelocity = velocity;
         }
 
         /// <summary>
@@ -227,7 +238,8 @@ namespace Gameplay
                     yield break;
                 }
             }
-}
+            _currentCrouchRoutine = null;
+        }
 
         private IEnumerator StandUp()
         {
@@ -261,6 +273,7 @@ namespace Gameplay
                     yield break;
                 }
             }
+            _currentCrouchRoutine = null;
         }
 
         void OnTriggerEnter(Collider other)
@@ -300,6 +313,16 @@ namespace Gameplay
             if (_isCrouching){ _currentMoveSpeed = CrouchSpeed; return; }
             if ( isSprinting ){ _currentMoveSpeed = SprintSpeed; return; }
             _currentMoveSpeed = BaseSpeed;
+        }
+
+        private void StartCrouchRoutine(IEnumerator routine)
+        {
+            if (_currentCrouchRoutine != null)
+            {
+                StopCoroutine(_currentCrouchRoutine);
+            }
+        
+            _currentCrouchRoutine = StartCoroutine(routine);
         }
     }
 }

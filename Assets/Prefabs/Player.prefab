@@ -1000,22 +1000,27 @@ MonoBehaviour:
     SlotGameObject: {fileID: 0}
     Slot_Image: {fileID: 0}
     Item: {fileID: 0}
+    slotAnimator: {fileID: 0}
   - Slot_ID: 1
     SlotGameObject: {fileID: 0}
     Slot_Image: {fileID: 0}
     Item: {fileID: 0}
+    slotAnimator: {fileID: 0}
   - Slot_ID: 2
     SlotGameObject: {fileID: 0}
     Slot_Image: {fileID: 0}
     Item: {fileID: 0}
+    slotAnimator: {fileID: 0}
   - Slot_ID: 3
     SlotGameObject: {fileID: 0}
     Slot_Image: {fileID: 0}
     Item: {fileID: 0}
+    slotAnimator: {fileID: 0}
   - Slot_ID: 4
     SlotGameObject: {fileID: 0}
     Slot_Image: {fileID: 0}
     Item: {fileID: 0}
+    slotAnimator: {fileID: 0}
   currentSelectedSlot_ID: -1
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
 --- !u!114 &5083458478355850614
@@ -1039,6 +1044,7 @@ MonoBehaviour:
   _sensitivity: 0.4
   _crouchCameraHeight: 0
   _standCameraHeight: 0.5
+  _staminaTickRate: 0.05
   SprintBehav: {fileID: 0}
   _timeRemaining: 0
   _isRunning: 0

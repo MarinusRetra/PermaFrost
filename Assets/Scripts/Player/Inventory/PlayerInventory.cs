@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,11 @@ namespace Gameplay
 {
     public class PlayerInventory : MonoBehaviour
     {
-
+        //These get used for setting the animations in the current selected slot when selecting to and from it.
+        private static readonly int SelectingHash = Animator.StringToHash("Selecting");
+        private static readonly int DeselectingHash = Animator.StringToHash("Deselecting");
+        private static readonly int SelectedHash = Animator.StringToHash("Selected");
+        
         [Header("Hotbar slot sizes")]
         [SerializeField] private Vector3 _normalSlotSize = new(0.5f, 0.5f, 1f);
         [SerializeField] private Vector3 _selectedSlotSize = new(0.6f, 0.6f, 1.2f);
@@ -19,7 +24,6 @@ namespace Gameplay
         [SerializeField] private InventorySlot[] hotbarSlots;
         [SerializeField] private int currentSelectedSlot_ID = -1;
         public InventorySlot CurrentSelectedSlot { get => hotbarSlots[currentSelectedSlot_ID]; }
-        public InventorySlot[] HotbarSlots { get => hotbarSlots; }
 
         [Header("Reference to input sytem")]
         [SerializeField] private InputReader _input;
@@ -40,32 +44,35 @@ namespace Gameplay
                 DeselectSlots();
                 return;
             }
-            else if (currentSelectedSlot_ID == -1)
+            else if (currentSelectedSlot_ID == -1 && numberIn < hotbarSlots.Length)
             {
                 currentSelectedSlot_ID = numberIn;
-                CurrentSelectedSlot.SlotGameObject.transform.localScale = _selectedSlotSize;
+                CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                SlotAnimSelect(CurrentSelectedSlot);
                 return;
             }
 
             if (numberIn < hotbarSlots.Length)
             { 
-                Debug.Log("Normal select");
-                CurrentSelectedSlot.SlotGameObject.transform.localScale = _normalSlotSize;
+                SlotAnimDeselect(CurrentSelectedSlot);
                 currentSelectedSlot_ID = numberIn;
-                CurrentSelectedSlot.SlotGameObject.transform.localScale = _selectedSlotSize;
+
+                CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                SlotAnimSelect(CurrentSelectedSlot);
             }
         }
 
+
         private void DeselectSlots()
         {
-            CurrentSelectedSlot.SlotGameObject.transform.localScale = _normalSlotSize;
+            SlotAnimDeselect(CurrentSelectedSlot);
             currentSelectedSlot_ID = -1;
         }
 
         /// <summary>
         /// Uses a float from 0 to 9 and sets the selected inventory slot to that float.
         /// </summary>
-        /// (Yes its 0 to 9 even though we only have 5 slots it might get used for other stuff dont worry.)
+        /// (Yes its 0 to 9 even though we only have 5 slots it might get used for other stuff don't worry.)
         private void HandleHotbarSelect(float numberIn)
         {
             SelectSlot((int)numberIn);
@@ -212,6 +219,38 @@ namespace Gameplay
             _input.UseEvent -= HandleUse;
             _input.UseEventCancelled -= HandleCancelUse;
         }
+
+        IEnumerator WaitForAnimations(float _timeIn, InventorySlot _slotIn)
+        {
+            yield return new WaitForSeconds(_timeIn);
+            _slotIn.slotAnimator.SetBool(SelectingHash, false);
+            _slotIn.slotAnimator.SetBool(DeselectingHash, false);
+            _slotIn._selectRoutine = null;
+            _slotIn._deselectRoutine = null;
+        }
+
+        public void SlotAnimSelect(InventorySlot _slotIn)
+        {
+            if(_slotIn._selectRoutine != null)
+            {
+                return;
+            }
+
+            _slotIn.slotAnimator.SetBool(SelectingHash, true);
+            _slotIn._selectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[1].length, _slotIn));
+        }
+
+        public void SlotAnimDeselect(InventorySlot _slotIn)
+        {
+            if(_slotIn._deselectRoutine != null)
+            {
+                return;
+            }
+
+            CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, false);
+            _slotIn.slotAnimator.SetBool(DeselectingHash, true);
+            _slotIn._deselectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[0].length, _slotIn));
+        }
 	}
 
     [Serializable]
@@ -221,7 +260,9 @@ namespace Gameplay
         [SerializeField] public GameObject SlotGameObject;
         [SerializeField] public Image Slot_Image;
         [SerializeField] public InventoryItem Item;
-
+        [SerializeField] public Animator slotAnimator;
+        [HideInInspector] public Coroutine _selectRoutine;
+        [HideInInspector] public Coroutine _deselectRoutine;
         public void ClearSlot()
         {
             UpdateSprite();

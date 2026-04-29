@@ -1,13 +1,14 @@
 <!-- UNITY CODE ASSIST INSTRUCTIONS START -->
 - Project name: PortfolioProject
-- Unity version: Unity 6000.2.7f2
+- Unity version: Unity 6000.3.5f2
 - Active scene:
+  - Name: Spectre's Main
   - Tags:
     - Untagged, Respawn, Finish, EditorOnly, MainCamera, Player, GameController, Enemy, HUD, Door
   - Layers:
-    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand
+    - Default, TransparentFX, Ignore Raycast, Player, Water, UI, Enemy, IgnorePlayer, Dialog, PlayerCanStand, Navmesh, PlayerOnlyBlock, VisibleBehindWalls
 - Active game object:
-  - Name: Lookpick
-  - Tag: Enemy
-  - Layer: Enemy
+  - Name: Player
+  - Tag: Player
+  - Layer: Player
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

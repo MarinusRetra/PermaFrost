@@ -14,6 +14,9 @@ namespace Gameplay
         [SerializeField] private AudioClip _chargeClip;
         [SerializeField] private AudioClip _musicClip;
 
+        [Header("Animation")]
+        [SerializeField] private Animator animator;
+
         public bool CanPlay = false;
         public bool isCharging = false;
         void Start()
@@ -28,9 +31,11 @@ namespace Gameplay
             if (!outlineVisual.enabled) return;
             Destroy(_currentAudioSource);
             outlineVisual.enabled = false;
-
+            animator.SetBool("StartBox", false);
+            isCharging = false;
             if (_startANew)
             {
+                print("Starting new!");
                 StartCoroutine(ChargeBox());
             }
         }
@@ -39,6 +44,7 @@ namespace Gameplay
         {
             if (idle)
             {
+                Destroy(_currentAudioSource);
                 SilenceBox(false);
                 CanPlay = false;
                 _playerEffects.ManageInsanityCauses("Music", true);
@@ -61,12 +67,13 @@ namespace Gameplay
 
         private IEnumerator ChargeBox()
         {
-            if (isCharging) { yield return null; }
+            if (isCharging) { yield break; }
             isCharging = true;
             _playerEffects.ManageInsanityCauses("Music", true);
             yield return new WaitForSeconds(Random.Range(_boxRechargeTimes.x,_boxRechargeTimes.y));
 
-            if (!CanPlay) { isCharging = false; yield return null; }
+            if (!CanPlay) { isCharging = false; yield break;}
+            animator.SetBool("StartBox", true);
             outlineVisual.enabled = true;
             _currentAudioSource = Soundsystem.PlaySound(_chargeClip, transform.position);
             //Charge sfx

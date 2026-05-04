@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public float HealInvincibility = 2.0f;
     private bool _damageInvincible = false;
     private bool _healInvincible = false;
+    public bool IsVulnerable { get { return _isVunerable; } }
     private bool _isVunerable = false;
 
     [SerializeField]private GameObject _deathUI;
@@ -45,6 +46,12 @@ public class PlayerHealth : MonoBehaviour
         
         _isVunerable = true;
         _hitUI.SetActive(true);
+
+        EventClass roomAltar = PlrRefs.inst.PlayerController.CurrentCarriage.CheckAndGetEvent(1);
+        if (roomAltar != null)
+        {
+            roomAltar.RepeatEnter(PlrRefs.inst.PlayerController.CurrentCarriage);
+        }
 
         //Make sure the player doesnt get multihit by the enemies
         _damageInvincible = true;
@@ -85,9 +92,15 @@ public class PlayerHealth : MonoBehaviour
         _isVunerable = false;
 
         _healInvincible = true;
+        EventClass roomAltar = PlrRefs.inst.PlayerController.CurrentCarriage.CheckAndGetEvent(1);
+        if (roomAltar != null)
+        {
+            roomAltar.RepeatEnter(PlrRefs.inst.PlayerController.CurrentCarriage);
+        }
         yield return new WaitForSeconds(HealInvincibility);
         _hitUI.SetActive(false);
         _healInvincible = false;
+
     }
 
     public void HealPlayer(bool usingCourotine = true) 

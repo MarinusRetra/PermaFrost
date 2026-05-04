@@ -197,12 +197,18 @@ public class Generation : MonoBehaviour
 
     }
 
-    public static void AddEventToRoom(CarriageClass room, EventClassScriptable eventClass)
+    public static void AddEventToRoom(CarriageClass room, EventClassScriptable eventClass, bool enter = false)
     {
         System.Type eventType = EventRefs.Instance.GetClassFromScriptable(eventClass).GetType();
         EventClass even = (EventClass)room.gameObject.AddComponent(eventType);
         even.scriptable = eventClass;
+        even.id = eventClass.id;
         even.Generate(room);
+
+        if (enter)
+        {
+            even.FirstEnter(room);
+        }
 
         room.spawnedEventClasses.Add(even);
         room._selectedEventClasses.Add(eventClass);

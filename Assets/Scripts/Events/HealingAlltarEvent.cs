@@ -9,6 +9,7 @@ namespace Gameplay
         //Variables
         private Transform _chosenSpot;
         private GameObject spawnedAltar;
+        private HealingAltar spawnedAltarScript;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
@@ -32,7 +33,7 @@ namespace Gameplay
             _altar.transform.position = _chosenSpot.position;
             _altar.transform.rotation = _chosenSpot.rotation;
             spawnedAltar = _altar;
-
+            spawnedAltarScript = _altar.GetComponent<HealingAltar>();
             return true;
         }
         //First time approaching room
@@ -50,9 +51,16 @@ namespace Gameplay
             return true;
         }
         //First time room entered
-        public override bool FirstEnter(CarriageClass room){return true;}
+        public override bool FirstEnter(CarriageClass room){ return RepeatEnter(room);}
         //Any other time room entered
-        public override bool RepeatEnter(CarriageClass room) { return true; }
+        public override bool RepeatEnter(CarriageClass room) 
+        {
+            if (spawnedAltar != null)
+            {
+                spawnedAltarScript?.SetAnimator(PlrRefs.inst.PlayerHealth.IsVulnerable);
+            }
+            return true; 
+        }
         //First time completing room
         public override bool FirstExit(CarriageClass room)
         {

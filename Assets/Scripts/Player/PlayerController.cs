@@ -52,6 +52,7 @@ namespace Gameplay
 
         [Header("Room")]
         public GameObject CurrentRoom;
+        public CarriageClass CurrentCarriage;
         //To prevent spamming the make noise function.
         private float _noiseTimer;
 

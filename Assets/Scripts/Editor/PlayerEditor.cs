@@ -372,6 +372,11 @@ namespace Gameplay
                     Generation.AddEventToRoom(allRooms[j], events[selectedEvent]);
                 }
             }
+            if (GUILayout.Button("Add event to current room") && CheckIfRunning())
+            {
+                UpdateVariables();
+                Generation.AddEventToRoom(PlrRefs.inst.PlayerController.CurrentCarriage, events[selectedEvent],true);
+            }
             if (showDetails)
             {
                 if (GUILayout.Button("Add event to Room 1 specifically") && CheckIfRunning())

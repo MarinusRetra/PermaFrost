@@ -6,6 +6,9 @@ namespace Gameplay
     public class HealingAltar : InteractObject
     {
         private Coroutine _currentTine;
+        [SerializeField] private Animator anima;
+        [SerializeField] private MeshRenderer outlineRenderer;
+        bool isActive = false;
         public override void Start()
         {
             base.Start();
@@ -39,6 +42,21 @@ namespace Gameplay
             Destroy(GetComponent<Collider>());
             yield return new WaitForSeconds(PlrRefs.inst.PlayerHealth.HealInvincibility + 1);
             Destroy(gameObject);
+        }
+
+        public void SetAnimator(bool vuln)
+        {
+            anima.SetBool("PlayerVulnerable", vuln);
+            isActive = vuln;
+            outlineRenderer.enabled = vuln;
+        }
+
+        public override void Interact()
+        {
+            if (isActive)
+            {
+                InteractEvent.Invoke();
+            }
         }
     }
 }

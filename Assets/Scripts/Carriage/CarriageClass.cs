@@ -108,6 +108,7 @@ public class CarriageClass : MonoBehaviour
         if (other.gameObject.layer == 3 && !playerInside)
         {
             _player.CurrentRoom = gameObject;
+            _player.CurrentCarriage = this;
             generationClass.EnterRoom(roomIndex);
             playerInside = true;
 
@@ -197,5 +198,17 @@ public class CarriageClass : MonoBehaviour
         {
             @event.Recede(this);
         }
+    }
+
+    public EventClass CheckAndGetEvent(int id)
+    {
+        for(int i = 0;i < spawnedEventClasses.Count;i++)
+        {
+            if((spawnedEventClasses[i].id == id))
+            {
+                return spawnedEventClasses[i];
+            }
+        }
+        return null;
     }
 }

@@ -27,6 +27,10 @@ namespace Gameplay
             transfers = 0;
             currentIndex = 0;
             Transform nodeOne = nodeHolder.GetChild(0);
+            if (!affectedObject)
+            {
+                affectedObject = rb.gameObject;
+            }
             affectedObject.transform.position = nodeOne.position;
             nodes = nodeHolder;
             currentIndex = 1;

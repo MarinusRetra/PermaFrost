@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class InventoryItem : ScriptableObject
 {
+    public int ID;
     public int TimesUsed;
     public Sprite sprite = null;
     public Color color = new(1, 1, 1, 255);

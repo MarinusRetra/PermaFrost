@@ -48,6 +48,7 @@ namespace Gameplay
             {
                 currentSelectedSlot_ID = numberIn;
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
                 return;
             }
@@ -58,6 +59,7 @@ namespace Gameplay
                 currentSelectedSlot_ID = numberIn;
 
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
             }
         }
@@ -247,6 +249,7 @@ namespace Gameplay
                 return;
             }
 
+            CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.white;
             CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, false);
             _slotIn.slotAnimator.SetBool(DeselectingHash, true);
             _slotIn._deselectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[0].length, _slotIn));

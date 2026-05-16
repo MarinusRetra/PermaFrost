@@ -28,6 +28,8 @@ namespace Gameplay
         [Header("Reference to input sytem")]
         [SerializeField] private InputReader _input;
 
+        [SerializeField] private Animator playerArmAnimator;
+
         public void Awake()
         {
             _input.HotbarSelectEvent += HandleHotbarSelect;
@@ -37,9 +39,9 @@ namespace Gameplay
             _input.UseEventCancelled += HandleCancelUse;
         }
 
-        private void SelectSlot(int numberIn)
+        private void SelectSlot(int numberIn, bool bypassDeselect = false)
         {
-            if (currentSelectedSlot_ID == numberIn)
+            if (currentSelectedSlot_ID == numberIn && !bypassDeselect)
             { 
                 DeselectSlots();
                 return;
@@ -48,6 +50,7 @@ namespace Gameplay
             {
                 currentSelectedSlot_ID = numberIn;
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
                 CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
                 return;
@@ -59,6 +62,7 @@ namespace Gameplay
                 currentSelectedSlot_ID = numberIn;
 
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
+                playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
                 CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
             }
@@ -68,6 +72,7 @@ namespace Gameplay
         private void DeselectSlots()
         {
             SlotAnimDeselect(CurrentSelectedSlot);
+            playerArmAnimator.SetInteger("ItemID", 0);
             currentSelectedSlot_ID = -1;
         }
 
@@ -120,7 +125,8 @@ namespace Gameplay
                 if (currentSelectedSlot_ID != -1 || CurrentSelectedSlot.Item != null)
                 { 
                     if (CurrentSelectedSlot.Item.Use())
-                    {   
+                    {
+                        playerArmAnimator.SetTrigger("Use");
                         CurrentSelectedSlot.Item.TimesUsed += 1;
                         RemoveItemFromSlot(currentSelectedSlot_ID);
                     }
@@ -177,10 +183,14 @@ namespace Gameplay
                     hotbarSlots[i + 1].ClearSlot();
                 }
             }
-            
+
             if (GetItemsInInventory() == 0)
             {
                 DeselectSlots();
+            }
+            else
+            {
+                SelectSlot(currentSelectedSlot_ID, true);
             }
         }
 

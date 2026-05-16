@@ -30,7 +30,7 @@ namespace Gameplay
                 case "Player":
                     //get all items
                     string[] guids = AssetDatabase.FindAssets("t:InventoryItem", new[] { "Assets/ScriptableObjects/Items" });
-                    List<InventoryItem> items = guids
+                    items = guids
                         .Select(guid => AssetDatabase.LoadAssetAtPath<InventoryItem>(AssetDatabase.GUIDToAssetPath(guid)))
                         .ToList();
 
@@ -160,6 +160,7 @@ namespace Gameplay
 
         int selectedItem = 0;
         public string[] itemNames;
+        List<InventoryItem> items;
         List<EventClassScriptable> events;
         private void PlayerPage()
         {   
@@ -287,10 +288,10 @@ namespace Gameplay
             GUILayout.Space(15);
             GUILayout.Label("Inventory: Item specific", header2Style);
             selectedItem = EditorGUILayout.Popup(selectedItem, itemNames);
-            if (GUILayout.Button("Give item", notWorkingButton) && CheckIfRunning())
+            if (GUILayout.Button("Give item") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
             }
             if (GUILayout.Button("Remove item", notWorkingButton) && CheckIfRunning())
             {

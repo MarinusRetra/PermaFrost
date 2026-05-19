@@ -8,6 +8,7 @@ namespace Gameplay
         [SerializeField] private int _value = -100;
         public override bool Use()
         {
+            PlrRefs.inst.PlayerInventory.HandleUseAnimation();
             PlrRefs.inst.PlayerStatusEffects.AddInstantInsanity(_value);
             return true;
         }

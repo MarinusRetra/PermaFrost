@@ -19,8 +19,9 @@ MonoBehaviour:
   AllRoomsInType:
   - Room: {fileID: 366001246756394530, guid: cfbcef2f9a0780349b286c493228f2a5, type: 3}
     Weight: 100
-    AmountOfEventsMax: 0
-    AllowedEvents: []
+    AmountOfEventsMax: 1
+    AllowedEvents:
+    - {fileID: 11400000, guid: 2d40d22509af6334b9e8400a6884b24b, type: 2}
     RoomName: GalleryBasic
     onlySpawnOnce: 0
     HeightValue: 0
@@ -28,16 +29,18 @@ MonoBehaviour:
   - Room: {fileID: 366001246756394530, guid: 876526dfa50a18445baf6c7bdd051d27, type: 3}
     Weight: 100
     AmountOfEventsMax: 1
-    AllowedEvents: []
+    AllowedEvents:
+    - {fileID: 11400000, guid: 2d40d22509af6334b9e8400a6884b24b, type: 2}
     RoomName: GalleryOpen
     onlySpawnOnce: 0
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: f6d03f22be141114f8aab97284c0fb52, type: 3}
     Weight: 100
-    AmountOfEventsMax: 1
+    AmountOfEventsMax: 2
     AllowedEvents:
     - {fileID: 11400000, guid: 98c3bee0d31f91f4e9e7a71df47fafcb, type: 2}
+    - {fileID: 11400000, guid: 2d40d22509af6334b9e8400a6884b24b, type: 2}
     RoomName: GallerySlowWalker
     onlySpawnOnce: 0
     HeightValue: 0

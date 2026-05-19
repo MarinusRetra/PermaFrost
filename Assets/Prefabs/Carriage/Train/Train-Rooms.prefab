@@ -396,6 +396,7 @@ MonoBehaviour:
   OnFirstApproachEvent:
     m_PersistentCalls:
       m_Calls: []
+  spawnedEventClasses: []
   _selectedEventClasses: []
   _maxAmountOfItems: 2
   previousCarriage: {fileID: 0}
@@ -13461,6 +13462,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 789982338563089922}
     m_Modifications:
+    - target: {fileID: 2626067523290974302, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7674996623180667389, guid: 386211115fdc1434aac5b82749b27957, type: 3}
       propertyPath: m_Name
       value: Candle

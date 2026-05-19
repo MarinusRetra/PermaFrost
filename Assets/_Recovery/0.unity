@@ -3303,20 +3303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.WalkerTestEvent
   id: 10
   scriptable: {fileID: 0}
---- !u!114 &1166735584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1166735558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19e9ff0495492f4c91f18432d6788eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.LightsOutEvent
-  id: 11
-  scriptable: {fileID: 0}
 --- !u!1 &1196286481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6755,16 +6741,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: EventClasses.Array.size
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: 'EventClasses.Array.data[10]'
       value: 
       objectReference: {fileID: 1166735571}
-    - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
-      propertyPath: 'EventClasses.Array.data[11]'
-      value: 
-      objectReference: {fileID: 1166735584}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6772,9 +6754,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8455825840256166350, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1166735571}
-    - targetCorrespondingSourceObject: {fileID: 8455825840256166350, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1166735584}
   m_SourcePrefab: {fileID: 100100000, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

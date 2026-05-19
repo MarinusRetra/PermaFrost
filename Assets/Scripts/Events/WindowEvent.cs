@@ -10,6 +10,8 @@ namespace Gameplay
         private GameObject spawnedFreezingArea;
         private EventWindowScriptable windEvent;
 
+        bool windowsBroken = false;
+
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
@@ -34,7 +36,7 @@ namespace Gameplay
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
-            if (!room.Holder.Find("FreezingArea(Clone)"))
+            if (!windowsBroken)
             {
                 BreakWindows(room);
                 Soundsystem.PlaySound(windEvent.windowBreakingClip, room.transform.position);
@@ -91,6 +93,8 @@ namespace Gameplay
                 window.mesh = windEvent.possibleWindowMeshes[Random.Range(0, windEvent.possibleWindowMeshes.Length)];
                 window.gameObject.layer = 11;
             }
+
+            windowsBroken = true;
         }
     }
 }

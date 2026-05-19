@@ -17,6 +17,7 @@ namespace Gameplay
             lookinAt = PlrRefs.inst.Interactor.hit.collider?.gameObject;
             if (lookinAt && lookinAt.CompareTag("Door"))
             {
+                PlrRefs.inst.PlayerInventory.HandleUseAnimation();
                 StartTimer(_lockPickFinishTime);
                 _currentLookPickInstance = Instantiate(_lookPickPrefab);
                 _input.CanModifyHotbar = false;
@@ -32,6 +33,7 @@ namespace Gameplay
 
         public override void CompleteTimer()
         {
+            _playerInventory.playerArmAnimator.SetTrigger("ForceStopUse");
             Destroy(lookinAt);
             Destroy(_currentLookPickInstance);
 

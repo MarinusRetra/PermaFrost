@@ -9,13 +9,15 @@ namespace Gameplay
     public class CandleManager : MonoBehaviour
     {
         [SerializeField] private GameObject _candleHolder;
-        private List<ParticleSystem> _allCandles = new List<ParticleSystem>();
+        private List<Light> _allCandles = new List<Light>();
+        private List<ParticleSystem> _allCandleParticles = new List<ParticleSystem>();
 
         private void Start()
         {
             if (_candleHolder)
             {
-                _allCandles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+                _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToList();
+                _allCandleParticles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
             }
             
         }
@@ -23,8 +25,11 @@ namespace Gameplay
         {
             for(int i = 0; i < _allCandles.Count; i++)
             {
-                _allCandles[i].Stop();
-                _allCandles[i].transform.GetChild(0).gameObject.SetActive(false);
+                _allCandles[i].gameObject.SetActive(false);
+            }
+            for (int i = 0; i < _allCandleParticles.Count; i++)
+            {
+                _allCandleParticles[i].Stop();
             }
         }
 
@@ -32,8 +37,11 @@ namespace Gameplay
         {
             for (int i = 0; i < _allCandles.Count; i++)
             {
-                _allCandles[i].Play();
-                _allCandles[i].transform.GetChild(0).gameObject.SetActive(true);
+                _allCandles[i].gameObject.SetActive(true);
+            }
+            for (int i = 0; i < _allCandleParticles.Count; i++)
+            {
+                _allCandleParticles[i].Play();
             }
         }
 

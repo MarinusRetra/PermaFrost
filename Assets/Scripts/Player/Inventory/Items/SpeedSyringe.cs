@@ -17,6 +17,7 @@ namespace Gameplay
 
         public override bool Use()
         {
+            PlrRefs.inst.PlayerInventory.HandleUseAnimation();
             _controller = PlrRefs.inst.PlayerController;
             _controller.StartRoutine(Run());
             return true;

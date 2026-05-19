@@ -8,6 +8,7 @@ namespace Gameplay
         [SerializeField] private int _value = -70;
         public override bool Use()
         {
+            PlrRefs.inst.PlayerInventory.HandleUseAnimation();
             PlrRefs.inst.PlayerStatusEffects.AddInstantFrostbite(_value);
             return true;
         }

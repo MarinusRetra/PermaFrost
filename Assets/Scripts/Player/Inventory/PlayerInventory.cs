@@ -28,7 +28,7 @@ namespace Gameplay
         [Header("Reference to input sytem")]
         [SerializeField] private InputReader _input;
 
-        [SerializeField] private Animator playerArmAnimator;
+        public Animator playerArmAnimator;
 
         public void Awake()
         {
@@ -123,16 +123,21 @@ namespace Gameplay
             try
             {
                 if (currentSelectedSlot_ID != -1 || CurrentSelectedSlot.Item != null)
-                { 
+                {
                     if (CurrentSelectedSlot.Item.Use())
                     {
-                        playerArmAnimator.SetTrigger("Use");
                         CurrentSelectedSlot.Item.TimesUsed += 1;
                         RemoveItemFromSlot(currentSelectedSlot_ID);
                     }
                 }
             }
             catch (Exception) { }
+        }
+
+        public void HandleUseAnimation()
+        {
+            playerArmAnimator.ResetTrigger("ForceStopUse");
+            playerArmAnimator.SetTrigger("Use");
         }
 
         public void HandleDrop()
@@ -149,6 +154,7 @@ namespace Gameplay
             try
             { 
                 CurrentSelectedSlot.Item.UseCancelled();
+                playerArmAnimator.SetTrigger("ForceStopUse");
             }
             catch (Exception) { }
         }

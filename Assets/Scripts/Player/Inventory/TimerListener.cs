@@ -48,8 +48,8 @@ public class TimerListener : MonoBehaviour
             {
               i -= 0.1f;
             }
-            yield return _waitForSecondsCached;
             UpdateLockPickbar(i);
+            yield return _waitForSecondsCached;
         }
         _inventoryTimer.CompleteTimer();
         _bar.transform.parent.gameObject.SetActive(false);

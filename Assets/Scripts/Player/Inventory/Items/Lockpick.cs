@@ -33,6 +33,7 @@ namespace Gameplay
 
         public override void CompleteTimer()
         {
+            if (!_playerInventory) { _playerInventory = PlrRefs.inst.PlayerInventory; }
             _playerInventory.playerArmAnimator.SetTrigger("ForceStopUse");
             Destroy(lookinAt);
             Destroy(_currentLookPickInstance);

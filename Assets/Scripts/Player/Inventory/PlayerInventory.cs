@@ -41,11 +41,18 @@ namespace Gameplay
 
         private void SelectSlot(int numberIn, bool bypassDeselect = false)
         {
+            //dont try to select if there is no item
+            if (numberIn >= hotbarSlots.Length || hotbarSlots[numberIn].Item == null)
+            {
+                return;
+            }
+            //if the slot is equipped, unequip it (unless bypassed)
             if (currentSelectedSlot_ID == numberIn && !bypassDeselect)
             { 
                 DeselectSlots();
                 return;
             }
+            //if the slot is -1 and in the hotbar
             else if (currentSelectedSlot_ID == -1 && numberIn < hotbarSlots.Length)
             {
                 currentSelectedSlot_ID = numberIn;
@@ -56,6 +63,7 @@ namespace Gameplay
                 return;
             }
 
+            //if the slot is in the hotbar and not -1
             if (numberIn < hotbarSlots.Length)
             { 
                 SlotAnimDeselect(CurrentSelectedSlot);
@@ -190,7 +198,7 @@ namespace Gameplay
                 }
             }
 
-            if (GetItemsInInventory() == 0)
+            if (GetItemsInInventory() == 0 || !CurrentSelectedSlot.Item)
             {
                 DeselectSlots();
             }
@@ -249,7 +257,7 @@ namespace Gameplay
 
         public void SlotAnimSelect(InventorySlot _slotIn)
         {
-            if(_slotIn._selectRoutine != null)
+            if(_slotIn._selectRoutine != null || !CurrentSelectedSlot.Item)
             {
                 return;
             }

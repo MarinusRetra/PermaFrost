@@ -219,6 +219,16 @@ MonoBehaviour:
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
+  OnRecedeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnApproachEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFirstApproachEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  spawnedEventClasses: []
   _selectedEventClasses: []
   _maxAmountOfItems: 0
   previousCarriage: {fileID: 0}
@@ -578,7 +588,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7988181094606973389, guid: 12a253f736e803b4b863063af608afa7, type: 3}
+  - {fileID: 2100000, guid: 1bcc539d4bd01fe49bb29ed9328b1da4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -750,7 +760,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Node
   type: 0
   TransferCounts: 1
+  TransferToNextRoom: 1
   transferNodeHolder: {fileID: 0}
+  RandomNodeHolders: []
   parent: {fileID: 503342536573325157}
 --- !u!1 &6228899213300622970
 GameObject:
@@ -965,7 +977,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7988181094606973389, guid: 12a253f736e803b4b863063af608afa7, type: 3}
+  - {fileID: 2100000, guid: 1bcc539d4bd01fe49bb29ed9328b1da4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1123,7 +1135,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7988181094606973389, guid: 12a253f736e803b4b863063af608afa7, type: 3}
+  - {fileID: 2100000, guid: 1bcc539d4bd01fe49bb29ed9328b1da4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1235,7 +1247,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -7988181094606973389, guid: 12a253f736e803b4b863063af608afa7, type: 3}
+  - {fileID: 2100000, guid: 1bcc539d4bd01fe49bb29ed9328b1da4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

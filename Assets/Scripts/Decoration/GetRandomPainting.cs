@@ -5,12 +5,13 @@ namespace Gameplay
 {
     public class GetRandomPainting : MonoBehaviour
     {
-        [SerializeField] private Material[] _possibleMats;
         [SerializeField] private Painting[] _possiblePaintings;
+        [SerializeField] private MeshRenderer frameFilter;
         void Start()
         {
-            //GetComponent<MeshRenderer>().material = _possibleMats[Random.Range(0,_possibleMats.Length)];
-            GetComponent<MeshRenderer>().material = CalculatePaintingWeight(_possiblePaintings).Mat;
+            Painting chosenPainting = CalculatePaintingWeight(_possiblePaintings);
+            GetComponent<MeshRenderer>().material = chosenPainting.Mat;
+            if (chosenPainting.RemoveFrame) { frameFilter.enabled = false; }
         }
 
         private Painting CalculatePaintingWeight(Painting[] Paintings)

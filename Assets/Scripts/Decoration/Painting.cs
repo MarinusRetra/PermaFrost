@@ -8,5 +8,6 @@ namespace Gameplay
     {
         public Material Mat;
         public int Weight;
+        public bool RemoveFrame;
     }
 }

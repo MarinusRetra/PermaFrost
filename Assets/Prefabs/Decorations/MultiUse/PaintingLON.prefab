@@ -103,29 +103,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b611bc3466c1443b13e1884c928231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.GetRandomPainting
-  _possibleMats:
-  - {fileID: 2100000, guid: ac125dde97c3ab44f986637739f061b4, type: 2}
-  - {fileID: 2100000, guid: 7c61c09743325d1429f14d681e182a64, type: 2}
-  - {fileID: 2100000, guid: 16769ed1758b4ab4f846467ed5bca6ca, type: 2}
-  - {fileID: 2100000, guid: e8f4ba85d56504e45a8a251ff23e3706, type: 2}
-  - {fileID: 2100000, guid: 01aaadd0f795a1140b84bb41e553729c, type: 2}
-  - {fileID: 2100000, guid: 768d7914460c83d409f19a1018275f36, type: 2}
-  - {fileID: 2100000, guid: 76b152b8b2c90e141b098a96d3b577ae, type: 2}
   _possiblePaintings:
   - Mat: {fileID: 2100000, guid: ac125dde97c3ab44f986637739f061b4, type: 2}
     Weight: 40
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 7c61c09743325d1429f14d681e182a64, type: 2}
     Weight: 40
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 16769ed1758b4ab4f846467ed5bca6ca, type: 2}
     Weight: 35
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: e8f4ba85d56504e45a8a251ff23e3706, type: 2}
     Weight: 100
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 01aaadd0f795a1140b84bb41e553729c, type: 2}
     Weight: 100
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 768d7914460c83d409f19a1018275f36, type: 2}
     Weight: 25
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 76b152b8b2c90e141b098a96d3b577ae, type: 2}
     Weight: 70
+    RemoveFrame: 0
+  - Mat: {fileID: 2100000, guid: 8372506004f24e44bb8aadba74ac16fd, type: 2}
+    Weight: 5
+    RemoveFrame: 1
+  frameFilter: {fileID: 4163735415700404625}
 --- !u!1001 &3317212205831398677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,5 +216,10 @@ PrefabInstance:
 --- !u!4 &2991414418448237310 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f144e7eeaefa0b0468be22810bf61a64, type: 3}
+  m_PrefabInstance: {fileID: 3317212205831398677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4163735415700404625 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f144e7eeaefa0b0468be22810bf61a64, type: 3}
   m_PrefabInstance: {fileID: 3317212205831398677}
   m_PrefabAsset: {fileID: 0}

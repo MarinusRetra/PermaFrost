@@ -103,43 +103,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b611bc3466c1443b13e1884c928231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.GetRandomPainting
-  _possibleMats:
-  - {fileID: 2100000, guid: 0f52c33c432e310408d7ed65e70ffb8e, type: 2}
-  - {fileID: 2100000, guid: 04ea16214edb43847a72e6c35e32dd68, type: 2}
-  - {fileID: 2100000, guid: 5ee62d286612e9742b7a3a91b82957b1, type: 2}
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 2100000, guid: 2cafe4cefcbfeb349b1e94d46b896d8f, type: 2}
-  - {fileID: 2100000, guid: 77a63e7c186328f448769fc76270e06b, type: 2}
-  - {fileID: 2100000, guid: 85864ce6c28e78049bf43fc7b9453e87, type: 2}
-  - {fileID: 2100000, guid: 610e93746b1b7ac499283dd61bd5c284, type: 2}
-  - {fileID: 2100000, guid: 7f7efc7f2793ef64ba22d570fc8d8e9e, type: 2}
-  - {fileID: 2100000, guid: 4e05823d0dc2d35459cfd0690a870d30, type: 2}
-  - {fileID: 2100000, guid: 5ce16f97686a8ce489baaa32a3bd6f75, type: 2}
   _possiblePaintings:
   - Mat: {fileID: 2100000, guid: 0f52c33c432e310408d7ed65e70ffb8e, type: 2}
     Weight: 30
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 04ea16214edb43847a72e6c35e32dd68, type: 2}
     Weight: 20
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 5ee62d286612e9742b7a3a91b82957b1, type: 2}
     Weight: 20
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 9875a245ac49007498213638a307faa1, type: 2}
     Weight: 5
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 2cafe4cefcbfeb349b1e94d46b896d8f, type: 2}
     Weight: 45
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 77a63e7c186328f448769fc76270e06b, type: 2}
     Weight: 100
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 610e93746b1b7ac499283dd61bd5c284, type: 2}
     Weight: 100
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 85864ce6c28e78049bf43fc7b9453e87, type: 2}
     Weight: 100
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 7f7efc7f2793ef64ba22d570fc8d8e9e, type: 2}
     Weight: 35
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 5ce16f97686a8ce489baaa32a3bd6f75, type: 2}
     Weight: 85
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 4e05823d0dc2d35459cfd0690a870d30, type: 2}
     Weight: 40
+    RemoveFrame: 0
   - Mat: {fileID: 2100000, guid: 831671f936c2d4449b17614cedbbffb9, type: 2}
     Weight: 100
+    RemoveFrame: 0
+  frameFilter: {fileID: 4942324486992170355}
 --- !u!1001 &6005334936532324855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220,6 +221,11 @@ PrefabInstance:
       addedObject: {fileID: 7048567630345908008}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f144e7eeaefa0b0468be22810bf61a64, type: 3}
+--- !u!23 &4942324486992170355 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: f144e7eeaefa0b0468be22810bf61a64, type: 3}
+  m_PrefabInstance: {fileID: 6005334936532324855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6115190326886790684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f144e7eeaefa0b0468be22810bf61a64, type: 3}

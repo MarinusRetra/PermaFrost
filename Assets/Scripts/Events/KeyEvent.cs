@@ -44,9 +44,27 @@ namespace Gameplay
             return true; 
         }
         //First time room entered
-        public override bool FirstEnter(CarriageClass room) { return true; }
+        public override bool FirstEnter(CarriageClass room) 
+        { 
+            RepeatEnter(room);
+            return true; 
+        }
         //Any other time room entered
-        public override bool RepeatEnter(CarriageClass room) { return true; }
+        public override bool RepeatEnter(CarriageClass room) 
+        {
+            if (!spawnedKey) { return true; }
+            if (!keyRigidb)
+            {
+                keyRigidb = spawnedKey.GetComponent<Rigidbody>();
+            }
+            keyRigidb.isKinematic = false;
+            if (spawnedKey && spawnedKey.transform.position.y < -10)
+            {
+                PlrRefs.inst.PlayerInventory.PickupItem(spawnedKey.GetComponent<ItemInteractable>()._item);
+                Destroy(spawnedKey);
+            }
+            return true; 
+        }
         //First time completing room
         public override bool FirstExit(CarriageClass room) { return true; }
         //Leaving room through the way the player came

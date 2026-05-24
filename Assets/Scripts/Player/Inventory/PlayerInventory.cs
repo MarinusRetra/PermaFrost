@@ -172,6 +172,7 @@ namespace Gameplay
         /// </summary>
         public void PickupItem(InventoryItem incomingItem)
         {
+
             foreach (InventorySlot slot in hotbarSlots)
             {
                 if (slot.Item == null)
@@ -180,6 +181,7 @@ namespace Gameplay
                     return;
                 }
             }
+            Instantiate(incomingItem.HoldObject, transform.position, transform.rotation);
         }
 
         /// <summary>

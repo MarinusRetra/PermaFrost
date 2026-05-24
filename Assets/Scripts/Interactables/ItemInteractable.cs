@@ -3,7 +3,7 @@ namespace Gameplay
 {
     public class ItemInteractable : InteractObject
     {
-        [SerializeField] private InventoryItem _item;
+        public InventoryItem _item;
         private PlayerInventory _playerInventory;
         public override void Start()
         {

@@ -209,6 +209,23 @@ public class Generation : MonoBehaviour
         {
             even.FirstEnter(room);
         }
+        bool isClose = false;
+        if (PlrRefs.inst.PlayerController.CurrentCarriage)
+        {
+            int ind = PlrRefs.inst.PlayerController.CurrentCarriage.roomIndex;
+            for (int i = mainInstance.RoomApproachSize; i < mainInstance.RoomApproachSize; i++)
+            {
+                if (room.roomIndex == PlrRefs.inst.PlayerController.CurrentCarriage.roomIndex + i)
+                {
+                    even.FirstApproach(room);
+                    isClose = true;
+                }
+            }
+        }
+        if (!isClose)
+        {
+            even.Recede(room);
+        }
 
         room.spawnedEventClasses.Add(even);
         room._selectedEventClasses.Add(eventClass);

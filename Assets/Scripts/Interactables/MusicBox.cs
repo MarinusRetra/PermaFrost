@@ -35,7 +35,6 @@ namespace Gameplay
             isCharging = false;
             if (_startANew)
             {
-                print("Starting new!");
                 StartCoroutine(ChargeBox());
             }
         }

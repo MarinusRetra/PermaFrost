@@ -30,7 +30,7 @@ namespace Gameplay
             if (enemy == null)
             {
                 enemy = data.AllEnemyDeathInfo.FirstOrDefault(file => file.EnemyType == "FallBack");
-                deathType = "SpecialDeath1";
+                deathType = "Special1";
             }
 
             FieldInfo variable = typeof(EnemyDeathMessages).GetField(deathType);
@@ -60,10 +60,8 @@ namespace Gameplay
     [System.Serializable]
     public class EnemyDeathMessages
     {
-        public string[] FirstDeath;
-        public string[] SecondDeath;
-        public string[] DeathLoop;
-        public string[] SpecialDeath1;
-        public string[] SpecialDeath2;
+        public string[] Default;
+        public string[] Special1;
+        public string[] Special2;
     }
 }

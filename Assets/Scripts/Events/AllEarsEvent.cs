@@ -20,6 +20,7 @@ namespace Gameplay
 
             spawnedAllEarsScript = spawnedAllEars.GetComponent<AllEars>();
             spawnedAllEarsScript.CurrentRoom = room.transform;
+            spawnedAllEarsScript.CurrentCarriage = room;
             spawnedAllEarsScript.Start();
             spawnedAllEarsScript.SetIdleState(true);
             return true;

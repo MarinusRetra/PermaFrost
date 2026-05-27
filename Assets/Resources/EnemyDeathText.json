@@ -3,16 +3,22 @@
     {
       "EnemyType": "AllEars",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"AllEars can only hear! Be quiet!",
 		"Crouch to make no noise while walking!"
+	],
+	"Special1": [
+		"Be quick, but quiet!"
+	],
+	"Special2": [
+		"You have enough time before shadowman comes!"
 	]
       }
     },
     {
       "EnemyType": "FireGuy",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Fireguy is very weak to the cold!",
 		"You can freeze things around you with Q!"
 	]
@@ -21,8 +27,9 @@
     {
       "EnemyType": "Shadowman",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Go to the light!",
+		"Find the light!",
 		"There is a delay before they come, use it to go to safety!"
 	]
       }
@@ -30,7 +37,7 @@
     {
       "EnemyType": "Lookpick",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Look behind you every once in a while!",
 		"It doesnt like being stared at!",
 		"They wont let you skip the key that easily. Keep your eyes out for any dangers."
@@ -40,10 +47,10 @@
     {
       "EnemyType": "Tickets Please",
       "Messages": {
-        "FirstDeath": [
-		"TicketsPlease wont let you pass without a ticket!",
+        "Default": [
+		"Tickets Please wont let you pass without a ticket!",
 		"Look around the room!",
-		"They want more."
+		"They want more tickets."
 	]
       }
     },
@@ -60,18 +67,20 @@
     {
       "EnemyType": "Frostbite: Windows",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Get out of the cold rooms as fast as possible!",
-		"Freezing rooms affect other things too!"
+		"Freezing rooms affect other things too!",
+		"It's cold. Get out!"
 	]
       }
     },
     {
       "EnemyType": "Frostbite: Lantern",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Don't hold your lantern too long!",
-		"You can freeze yourself with the lantern too!"
+		"You can freeze yourself with the lantern too!",
+		"You are in the lanterns area! Turn it off!"
 	]
       }
     },
@@ -88,19 +97,39 @@
     {
       "EnemyType": "Sanity: Stalker",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"Don't look at the one who looks.",
 		"Listen: Stalker makes a noise when it moves.",
-		"You might not always notice the stalker, keep your eyes on your sanity bar."
+		"You might not always notice the stalker, keep your eyes on your sanity bar.",
+		"Always watches. Many eyes."
 	]
       }
     },
     {
       "EnemyType": "Sanity: Music",
       "Messages": {
-        "FirstDeath": [
+        "Default": [
 		"The music box winds up before it plays its music",
-		"Turn off the music box!"
+		"Turn off the music box!",
+		"Close that music box!"
+	]
+      }
+    },
+
+
+
+
+
+
+    {
+      "EnemyType": "The Button",
+      "Messages": {
+        "Default": [
+		"I warned you.",
+		"I tried all I could.",
+		"Try reading next time.",
+		"You can't resist pressing every button you see huh?",
+		"Why would you press that?"
 	]
       }
     },
@@ -117,10 +146,12 @@
     {
       "EnemyType": "FallBack",
       "Messages": {
-        "SpecialDeath1": [
+        "Special1": [
 		"Wasn't able to see your death",
 		"I think I missed your death", 
-		"ERROR"
+		"ERROR",
+		"I was grabbing a snack, what happened?",
+		"Huh?"
 	]
       }
     }

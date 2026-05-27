@@ -44,7 +44,9 @@ namespace Gameplay
             GameObject _spawnedTicketsPlease = Instantiate(scriptable.SpawnablePrefab);
             GameObject mainTPObj = _spawnedTicketsPlease.transform.GetChild(0).gameObject;
             _spawnedTicketsPlease.transform.parent = room.Holder;
-            mainTPObj.GetComponent<Monster>().CurrentRoom = room.transform;
+            Monster ticketsMonster = mainTPObj.GetComponent<Monster>();
+            ticketsMonster.CurrentRoom = room.transform;
+            ticketsMonster.CurrentCarriage = room;
 
             //tp it to the start of the room
             Transform _entry = room.transform.Find("Exit");

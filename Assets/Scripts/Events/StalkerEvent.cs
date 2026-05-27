@@ -19,6 +19,7 @@ namespace Gameplay
             spawnedStalker = Instantiate(scriptable.SpawnablePrefab);
             spawnedStalkerClass = spawnedStalker.GetComponent<Stalker>();
             spawnedStalkerClass.CurrentRoom = room.transform;
+            spawnedStalkerClass.CurrentCarriage = room;
             spawnedStalker.transform.parent = room.Holder;
             return true;
         }

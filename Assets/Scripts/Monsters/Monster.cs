@@ -6,6 +6,7 @@ namespace Gameplay
     {
         //This script can be used for any shared things between monsters
         public Transform CurrentRoom;
+        public CarriageClass CurrentCarriage;
 
         public virtual void Deaggro() { }
 

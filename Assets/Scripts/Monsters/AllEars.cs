@@ -31,6 +31,9 @@ namespace Gameplay
 
         private Coroutine _movementCor;
 
+        public EventClassScriptable WindowEvent;
+        public EventClassScriptable ShadowmanEvent;
+
         public void Start()
         {
             //Fetch the player
@@ -110,7 +113,16 @@ namespace Gameplay
             {
                 if (hitCollider.CompareTag("Player") && hitCollider.GetComponent<PlayerHealth>())
                 {
-                    StartCoroutine(hitCollider.GetComponent<PlayerHealth>().DamagePlayer("AllEars"));
+                    string damageType = "Default";
+                    if (CurrentCarriage._selectedEventClasses.Contains(WindowEvent))
+                    {
+                        damageType = "Special1";
+                    }
+                    if (CurrentCarriage._selectedEventClasses.Contains(ShadowmanEvent))
+                    {
+                        damageType = "Special2";
+                    }
+                    StartCoroutine(PlrRefs.inst.PlayerHealth.DamagePlayer("AllEars",damageType));
                 }
             }
         }

@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public IEnumerator DamagePlayer(string cause)
+    public IEnumerator DamagePlayer(string cause, string type = "Default")
     {
         if (_damageInvincible || _healInvincible) yield break;
 
@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
         _damageInvincible = false;
     }
 
-    public void GameOver(string deathCause)
+    public void GameOver(string deathCause, string deathType = "Default")
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         Destroy(_deathUI.transform.parent.Find("Pause")?.gameObject);
         _deathText.text = "To: " + deathCause;
 
-        _deathText.transform.GetChild(0).GetComponent<TMP_Text>().text = FileReader.GetDeathMessage(deathCause, "FirstDeath");
+        _deathText.transform.GetChild(0).GetComponent<TMP_Text>().text = FileReader.GetDeathMessage(deathCause, deathType);
 
         gameObject.SetActive(false);
 

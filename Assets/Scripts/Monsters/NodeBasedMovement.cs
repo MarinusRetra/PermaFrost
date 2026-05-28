@@ -41,6 +41,7 @@ namespace Gameplay
             {
                 nextObjective = nextNode;
             }
+            Destroy(transform.parent.gameObject,30);
         }
 
         private int transfers = 0;

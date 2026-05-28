@@ -8,8 +8,9 @@ namespace Gameplay
     {
         public static FileReader Instance;
 
-        private EnemyDeathMessageFile data = new EnemyDeathMessageFile();
+        public EventRefs Events;
 
+        private EnemyDeathMessageFile data = new EnemyDeathMessageFile();
         private void Start()
         {
             Instance = this;
@@ -26,6 +27,11 @@ namespace Gameplay
 
         public string[] GetMessage(string enemyType, string deathType)
         {
+            if (deathType == "Default")
+            {
+                deathType = CheckDeathSpecialty(enemyType, out enemyType);
+            }
+
             EnemyDeathInfo enemy = data.AllEnemyDeathInfo.FirstOrDefault(file => file.EnemyType == enemyType);
             if (enemy == null)
             {
@@ -41,6 +47,78 @@ namespace Gameplay
             }
 
             return (string[])variable.GetValue(enemy.Messages);
+        }
+
+        public string CheckDeathSpecialty(string enemyType, out string newEnemyType)
+        {
+            newEnemyType = enemyType;
+            if (!Events) { return "Default"; }
+            CarriageClass room = PlrRefs.inst.PlayerController.CurrentCarriage;
+            switch (enemyType)
+            {
+                case "AllEars":
+                    //Allears and Shadowman combo message
+                    if (room._selectedEventClasses.Contains(Events.EventClassScriptables[5]))
+                    {
+                        newEnemyType = "AllEars and Shadowman";
+                        return "Special1";
+                    //Allears and Broken Windows combo message
+                    }else if (room._selectedEventClasses.Contains(Events.EventClassScriptables[9]))
+                    {
+                        newEnemyType = "AllEars and Windows";
+                        return "Special1";
+                    }
+                    return "Default";
+
+
+                case "Frostbite: Windows":
+                    //Allears and Broken Windows combo message
+                    if (room._selectedEventClasses.Contains(Events.EventClassScriptables[0]))
+                    {
+                        newEnemyType = "AllEars and Windows";
+                        return "Special2";
+                    }
+                    //Broken Windows and Shadowman combo message
+                    else if (room._selectedEventClasses.Contains(Events.EventClassScriptables[5]))
+                    {
+                        newEnemyType = "Shadowman and Windows";
+                        return "Special1";
+                    }
+                    return "Default";
+
+
+                case "Shadowman":
+                    //Allears and Shadowman combo message
+                    if (room._selectedEventClasses.Contains(Events.EventClassScriptables[0]))
+                    {
+                        newEnemyType = "AllEars and Shadowman";
+                        return "Special2";
+                    }
+                    //Broken Windows and Shadowman combo message
+                    else if (room._selectedEventClasses.Contains(Events.EventClassScriptables[9]))
+                    {
+                        newEnemyType = "Shadowman and Windows";
+                        return "Special2";
+                    }
+                    return "Default";
+
+
+                case "Tickets Please":
+                    //Already grabbed ticket special message
+                    if (PlrRefs.inst.PlayerMonsterManager.HasFoundTicket)
+                    {
+                        return "Special1";
+                    }
+                    return "Default";
+                case "Frostbite: Lantern":
+                    //Froze self while freezing hot dude
+                    if (room._selectedEventClasses.Contains(Events.EventClassScriptables[2]))
+                    {
+                        return "Special1";
+                    }
+                    return "Default";
+            }
+            return "Default";
         }
     }
 

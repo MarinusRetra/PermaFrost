@@ -113,16 +113,7 @@ namespace Gameplay
             {
                 if (hitCollider.CompareTag("Player") && hitCollider.GetComponent<PlayerHealth>())
                 {
-                    string damageType = "Default";
-                    if (CurrentCarriage._selectedEventClasses.Contains(WindowEvent))
-                    {
-                        damageType = "Special1";
-                    }
-                    if (CurrentCarriage._selectedEventClasses.Contains(ShadowmanEvent))
-                    {
-                        damageType = "Special2";
-                    }
-                    StartCoroutine(PlrRefs.inst.PlayerHealth.DamagePlayer("AllEars",damageType));
+                    StartCoroutine(PlrRefs.inst.PlayerHealth.DamagePlayer("AllEars"));
                 }
             }
         }

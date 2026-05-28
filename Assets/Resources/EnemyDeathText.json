@@ -6,12 +6,6 @@
         "Default": [
 		"AllEars can only hear! Be quiet!",
 		"Crouch to make no noise while walking!"
-	],
-	"Special1": [
-		"Be quick, but quiet!"
-	],
-	"Special2": [
-		"You have enough time before shadowman comes!"
 	]
       }
     },
@@ -51,6 +45,10 @@
 		"Tickets Please wont let you pass without a ticket!",
 		"Look around the room!",
 		"They want more tickets."
+	],
+	"Special1": [
+		"Even with a ticket they still hurt!",
+		"Don't walk into them!"
 	]
       }
     },
@@ -81,6 +79,10 @@
 		"Don't hold your lantern too long!",
 		"You can freeze yourself with the lantern too!",
 		"You are in the lanterns area! Turn it off!"
+	],
+	"Special1": [
+		"Run away if you can't freeze it!",
+		"You are both affected by the lantern, Don't freeze yourself!"
 	]
       }
     },
@@ -137,7 +139,47 @@
 
 
 
+	
 
+    {
+      "EnemyType": "AllEars and Shadowman",
+      "Messages": {
+        "Special1": [
+		"Be quick, but be silent",
+		"Shadowman can take a while, stay calm."
+	],
+        "Special2": [
+		"Get to the light a little faster.",
+		"Prioritize Safety."
+	]
+      }
+    },
+    {
+      "EnemyType": "AllEars and Windows",
+      "Messages": {
+        "Special1": [
+		"Be quick, but be silent",
+		"You have enough time, stay crouched but get out fast."
+	],
+        "Special2": [
+		"Get out of the room a little faster.",
+		"If you need to you can go back a room."
+	]
+      }
+    },
+    {
+      "EnemyType": "Shadowman and Windows",
+      "Messages": {
+        "Special1": [
+		"Even on a timer you still need to find the light!",
+		"Shadowman comes faster with broken windows!"
+	],
+        "Special2": [
+		"Get out right after it is gone!",
+		"Sprint to safety after it is gone!"
+	]
+      }
+    },
 
 
 

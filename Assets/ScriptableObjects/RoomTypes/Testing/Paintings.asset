@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Paintings
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
   RoomtypeName: PaintingRooms
+  HasStartRoom: 1
   RoomTypeStartRoom: {fileID: 3465943475687528960, guid: 7113ecefd508bd74ab269feb30c06dc8, type: 3}
   RoomTypeEndRoom: {fileID: 3465943475687528960, guid: e2dff40a252c72b46b42b124d8616eb4, type: 3}
   AllRoomsInType:
@@ -22,10 +23,10 @@ MonoBehaviour:
     AllowedEvents:
     - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
     - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
-    - {fileID: 11400000, guid: b45e2399dc2bea74c8320445244c1fe1, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
     - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
-    - {fileID: 11400000, guid: 9a0e9d83474745b47895121632c6e8c2, type: 2}
-    - {fileID: 11400000, guid: afefc83a80e37dc49b939abb97890edc, type: 2}
+    - {fileID: 11400000, guid: d0f0dea57e0e3e54e9d803f5883dc6ba, type: 2}
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
     RoomName: PaintingDefault
     onlySpawnOnce: 0
     HeightValue: 0
@@ -36,10 +37,10 @@ MonoBehaviour:
     AllowedEvents:
     - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
     - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
-    - {fileID: 11400000, guid: b45e2399dc2bea74c8320445244c1fe1, type: 2}
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
     - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
-    - {fileID: 11400000, guid: 9a0e9d83474745b47895121632c6e8c2, type: 2}
-    - {fileID: 11400000, guid: afefc83a80e37dc49b939abb97890edc, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
+    - {fileID: 11400000, guid: d0f0dea57e0e3e54e9d803f5883dc6ba, type: 2}
     RoomName: PaintingRare
     onlySpawnOnce: 0
     HeightValue: 0
@@ -48,12 +49,13 @@ MonoBehaviour:
     Weight: 35
     AmountOfEventsMax: 3
     AllowedEvents:
-    - {fileID: 11400000, guid: 4aa12deddef9e9a46b26e89788114732, type: 2}
-    - {fileID: 11400000, guid: 4aa12deddef9e9a46b26e89788114732, type: 2}
-    - {fileID: 11400000, guid: 4aa12deddef9e9a46b26e89788114732, type: 2}
+    - {fileID: 11400000, guid: 92ce4df3dc08cc74584499b4e1ac7b70, type: 2}
+    - {fileID: 11400000, guid: 92ce4df3dc08cc74584499b4e1ac7b70, type: 2}
+    - {fileID: 11400000, guid: 92ce4df3dc08cc74584499b4e1ac7b70, type: 2}
     RoomName: PaintingWalless
     onlySpawnOnce: 0
     HeightValue: 0
     guarenteedIndex: 0
   GuarenteedRooms: []
   AllowDupes: 1
+  AllowEventDupes: 0

@@ -432,6 +432,28 @@ namespace Gameplay
                     }
                 }
             }
+            if (GUILayout.Button("Remove all events except selected", importantButtonStyle) && CheckIfRunning())
+            {
+                UpdateVariables();
+                for (int j = 0; j < allRooms.Count; j++)
+                {
+
+                    SerializedObject serRoom = new SerializedObject(allRooms[j]);
+                    for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
+                    {
+                        if (allRooms[j].spawnedEventClasses[i] == events[selectedEvent]) { continue; }
+                        
+                        if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
+                        {
+                            allRooms[j].spawnedEventClasses[i].FirstExit(allRooms[j]);
+                        }
+                        allRooms[j].spawnedEventClasses[i].CallForDeletion(allRooms[j]);
+                        allRooms[j].spawnedEventClasses.RemoveAt(i);
+                    }
+                    //allRooms[j].spawnedEventClasses = new List<EventClass>(0);
+                    serRoom.ApplyModifiedProperties();
+                }
+            }
 
             if (showDetails)
             {

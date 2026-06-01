@@ -35,7 +35,7 @@ namespace Gameplay
         {
             if (!_playerInventory) { _playerInventory = PlrRefs.inst.PlayerInventory; }
             _playerInventory.playerArmAnimator.SetTrigger("ForceStopUse");
-            Destroy(lookinAt);
+            lookinAt.transform.parent.gameObject.GetComponent<Door>().OpenDoor();
             Destroy(_currentLookPickInstance);
 
             if (_playerInventory == null)

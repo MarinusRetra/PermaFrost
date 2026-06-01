@@ -44,6 +44,8 @@ public class CarriageClass : MonoBehaviour
     private bool hasBeenLoaded = false;
     private bool isLoaded = true;
 
+    public RoomEventRefs RoomEventRefs;
+
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;

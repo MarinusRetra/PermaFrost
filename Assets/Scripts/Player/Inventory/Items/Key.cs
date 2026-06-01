@@ -11,7 +11,7 @@ namespace Gameplay
             if (lookinAt && lookinAt.CompareTag("Door"))
             {
                 PlrRefs.inst.PlayerInventory.HandleUseAnimation();
-                Destroy(lookinAt);
+                lookinAt.transform.parent.gameObject.GetComponent<Door>().OpenDoor();
                 return true;
             }
             return false;

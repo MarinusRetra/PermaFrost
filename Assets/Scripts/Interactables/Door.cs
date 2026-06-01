@@ -6,6 +6,8 @@ namespace Gameplay
     {
         public InventoryItem key;
         PlayerInventory _playerInventory;
+        [SerializeField] private GameObject interactable;
+        [SerializeField] private Animator doorAnimator;
         private void Start()
         {
             _playerInventory = PlrRefs.inst.PlayerInventory;
@@ -17,6 +19,12 @@ namespace Gameplay
             {
                 _playerInventory.HandleUse();
             }
+        }
+
+        public void OpenDoor()
+        {
+            interactable.SetActive(false);
+            doorAnimator.enabled = true;
         }
     }
 }

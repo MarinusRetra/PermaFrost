@@ -20,6 +20,8 @@ namespace Gameplay
         [SerializeField] private GameObject _backgroundSound;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+        private bool isSkipping = false;
+
         private void OnEnable()
         {
             _input.SkipEvent += SkipCutscene;
@@ -115,6 +117,7 @@ namespace Gameplay
                 }
 
                 _ui.SetActive(true);
+                isSkipping = false;
                 PlrRefs.inst.PlayerController.enabled = true;
 
                 //reset all cutscene stuff
@@ -130,6 +133,8 @@ namespace Gameplay
 
         private void SkipCutscene()
         {
+            if (isSkipping) { return; }
+            isSkipping = true;
             if(onAnimSkip != null) { onAnimSkip(); }
             onAnimSkip = null;
             EndCutscene(onAnimEnd,true,animEndFreeMouse);

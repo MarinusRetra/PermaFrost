@@ -37,6 +37,7 @@ namespace Gameplay
                     Debug.LogWarning("SetMeshes for the outline (Change this later)");
                 }
             }
+            Hover();
         }
 
         public void Hover()

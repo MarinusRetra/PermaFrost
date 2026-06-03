@@ -56,6 +56,8 @@ namespace Gameplay
         //To prevent spamming the make noise function.
         private float _noiseTimer;
 
+        public bool CanMove = true;
+
         //Add all events to input
         private void OnEnable()
         {
@@ -92,6 +94,7 @@ namespace Gameplay
             }
             else
             {
+                if (!CanMove) { return; }
                 if (_moveInputX != 0f || _moveInputY != 0f)
                 {
                     _noiseTimer -= Time.fixedDeltaTime;
@@ -108,6 +111,7 @@ namespace Gameplay
         private void Update()
         {
             HandleStamina();
+            if (!CanMove) { return; }
             _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
         }
 
@@ -196,7 +200,7 @@ namespace Gameplay
         /// </summary>
         private void Move()
         {
-
+            if (!CanMove) { return; }
             Vector3 velocity = _rb.linearVelocity;
             velocity.x = _currentMoveSpeed * _moveDirection.x;
             velocity.z = _currentMoveSpeed * _moveDirection.z;
@@ -209,7 +213,7 @@ namespace Gameplay
          /// </summary>
         private IEnumerator CrouchDown()
         {
-            if (_isCrouching) yield break;
+            if (_isCrouching || !CanMove) yield break;
 
             _currentMoveSpeed = CrouchSpeed;
             _isCrouching = true;

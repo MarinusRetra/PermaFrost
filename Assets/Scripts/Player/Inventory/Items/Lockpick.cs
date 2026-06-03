@@ -21,6 +21,7 @@ namespace Gameplay
                 StartTimer(_lockPickFinishTime);
                 _currentLookPickInstance = Instantiate(_lookPickPrefab);
                 _input.CanModifyHotbar = false;
+                PlrRefs.inst.PlayerController.CanMove = false;
             }
             return false;
         }
@@ -29,6 +30,7 @@ namespace Gameplay
             base.UseCancelled();
             Destroy(_currentLookPickInstance);
             _input.CanModifyHotbar = true;
+            PlrRefs.inst.PlayerController.CanMove = true;
         }
 
         public override void CompleteTimer()
@@ -46,6 +48,7 @@ namespace Gameplay
             TimesUsed += 1;
             _playerInventory.RemoveItemFromSlot(_playerInventory.CurrentSelectedSlot.Slot_ID);
             _input.CanModifyHotbar = true;
+            PlrRefs.inst.PlayerController.CanMove = true;
         }
     }
 }

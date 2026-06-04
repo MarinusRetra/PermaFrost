@@ -29,6 +29,7 @@ namespace Gameplay
         [SerializeField] private InputReader _input;
 
         public Animator playerArmAnimator;
+        public AudioSource playerArmSound;
 
         public void Awake()
         {
@@ -58,6 +59,7 @@ namespace Gameplay
                 currentSelectedSlot_ID = numberIn;
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
                 playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
+                playerArmSound.generator = CurrentSelectedSlot.Item.EquipSound;
                 CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
                 return;
@@ -71,6 +73,7 @@ namespace Gameplay
 
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
                 playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
+                playerArmSound.generator = CurrentSelectedSlot.Item.EquipSound;
                 CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
                 SlotAnimSelect(CurrentSelectedSlot);
             }
@@ -146,6 +149,7 @@ namespace Gameplay
         {
             playerArmAnimator.ResetTrigger("ForceStopUse");
             playerArmAnimator.SetTrigger("Use");
+            playerArmSound.generator = CurrentSelectedSlot.Item.UseSound;
         }
 
         public void HandleDrop()

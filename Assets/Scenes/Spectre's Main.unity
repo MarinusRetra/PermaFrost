@@ -2015,6 +2015,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: playerArmSound
+      value: 
+      objectReference: {fileID: 1689065916}
+    - target: {fileID: 866593153503499546, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: playerArmAnimator
       value: 
       objectReference: {fileID: 1689065915}
@@ -5107,6 +5111,11 @@ PrefabInstance:
 --- !u!95 &1689065915 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3084047138272316810, guid: 15b12bc99343cd14a91a605f16d5cb37, type: 3}
+  m_PrefabInstance: {fileID: 1689065914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1689065916 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3578264963833041115, guid: 15b12bc99343cd14a91a605f16d5cb37, type: 3}
   m_PrefabInstance: {fileID: 1689065914}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1761039496

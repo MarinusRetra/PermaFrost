@@ -91,6 +91,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &5989669208783998232
 SphereCollider:
@@ -126,8 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Stalker
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
   _playerRadius: 0.5
-  _wallRadius: 1
+  _wallRadius: 0.3
   _lastPosRadius: 0.3
   _lastPosition: {x: 0, y: 0, z: 0}
   _roomCorners: []

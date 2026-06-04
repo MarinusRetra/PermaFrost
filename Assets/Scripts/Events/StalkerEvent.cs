@@ -4,8 +4,8 @@ namespace Gameplay
 {
     public class StalkerEvent : EventClass
     {
-        private GameObject spawnedStalker;
-        private Stalker spawnedStalkerClass;
+        private GameObject[] spawnedStalkers = new GameObject[3];
+        private Stalker[] spawnedStalkerClass = new Stalker[3];
 
         //When room spawns in
         public override bool Generate(CarriageClass room) { return true; }
@@ -16,11 +16,15 @@ namespace Gameplay
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
-            spawnedStalker = Instantiate(scriptable.SpawnablePrefab);
-            spawnedStalkerClass = spawnedStalker.GetComponent<Stalker>();
-            spawnedStalkerClass.CurrentRoom = room.transform;
-            spawnedStalkerClass.CurrentCarriage = room;
-            spawnedStalker.transform.parent = room.Holder;
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject spawnedStalker = Instantiate(scriptable.SpawnablePrefab);
+                spawnedStalkerClass[i] = spawnedStalker.GetComponent<Stalker>();
+                spawnedStalkerClass[i].CurrentRoom = room.transform;
+                spawnedStalkerClass[i].CurrentCarriage = room;
+                spawnedStalker.transform.parent = room.Holder;
+                spawnedStalkers[i] = spawnedStalker;
+            }
             return true;
         }
         //Any other time room entered
@@ -28,7 +32,8 @@ namespace Gameplay
         //First time completing room
         public override bool FirstExit(CarriageClass room)
         {
-            spawnedStalkerClass.DestroyMonster();
+            for (int i = 0; i < 3; i++)
+            spawnedStalkerClass[i].DestroyMonster();
             return true;
         }
         //Leaving room through the way the player came

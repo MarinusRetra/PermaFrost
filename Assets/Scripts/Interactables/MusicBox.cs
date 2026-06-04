@@ -6,6 +6,7 @@ namespace Gameplay
     public class MusicBox : MonoBehaviour
     {
         private MeshRenderer outlineVisual;
+        [SerializeField] private Vector2 _firstRechargeTimes;
         [SerializeField] private Vector2 _boxRechargeTimes;
         private PlayerStatusEffects _playerEffects;
 
@@ -19,8 +20,11 @@ namespace Gameplay
 
         public bool CanPlay = false;
         public bool isCharging = false;
+
+        private bool firstTime = true;
         void Start()
         {
+            firstTime = true;
             _playerEffects = PlrRefs.inst.PlayerStatusEffects;
             outlineVisual = GetComponent<MeshRenderer>();
         }
@@ -69,7 +73,16 @@ namespace Gameplay
             if (isCharging) { yield break; }
             isCharging = true;
             _playerEffects.ManageInsanityCauses("Music", true);
-            yield return new WaitForSeconds(Random.Range(_boxRechargeTimes.x,_boxRechargeTimes.y));
+
+            if (firstTime)
+            {
+                yield return new WaitForSeconds(Random.Range(_firstRechargeTimes.x, _firstRechargeTimes.y));
+                firstTime = false;
+            }
+            else
+            {
+                yield return new WaitForSeconds(Random.Range(_boxRechargeTimes.x, _boxRechargeTimes.y));
+            }
 
             if (!CanPlay) { isCharging = false; yield break;}
             animator.SetBool("StartBox", true);

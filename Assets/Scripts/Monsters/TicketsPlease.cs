@@ -14,6 +14,9 @@ namespace Gameplay
         private bool _reachedEnd = false;
 
         private Vector3 _currentDestination;
+
+        private float _defaultSpeed;
+        [SerializeField] private float _sprintingSpeed = 7;
         private void Start()
         {
             _entryRoom = CurrentRoom.Find("Entry");
@@ -21,6 +24,7 @@ namespace Gameplay
             _agent = GetComponent<NavMeshAgent>();
             _agent.destination = new Vector3(_entryRoom.position.x,transform.position.y,_entryRoom.position.z);
             _currentDestination = _agent.destination;
+            _defaultSpeed = _agent.speed;
         }
 
         private void Update()
@@ -51,7 +55,7 @@ namespace Gameplay
         {
             //force it to stop chasing
             _isChasing = false;
-            _agent.speed = 0.75f;
+            _agent.speed = _defaultSpeed;
             _agent.destination = _currentDestination;
         }
 
@@ -59,7 +63,7 @@ namespace Gameplay
         {
             _isChasing = true;
             //VERY fast, so player cant just run past and despawn them by going into the next room. (they still can most of the time)
-            _agent.speed = 8;
+            _agent.speed = _sprintingSpeed;
             while (!PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
             {
                 _agent.destination = PlrRefs.inst.transform.position;

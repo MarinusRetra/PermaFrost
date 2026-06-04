@@ -34,7 +34,7 @@ namespace Gameplay
 
             CarriageClass currentCarriage = CurrentRoom.GetComponent<CarriageClass>();
             //makes shadowman appear faster if the room also has freezing, so the player isnt guarenteed to take too much freezing
-            yield return new WaitForSeconds(currentCarriage._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(7f, 10f) : Random.Range(6f, 8.5f));
+            yield return new WaitForSeconds(currentCarriage._selectedEventClasses.Contains(freezingEvent) ?  Random.Range(5.5f, 8.5f) : Random.Range(4.5f, 7f));
             
             Soundsystem.PlaySound(_dashingClip, transform.position, true).transform.parent = transform;
             _hasStarted = true;

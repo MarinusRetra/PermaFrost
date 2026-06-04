@@ -34,6 +34,8 @@ namespace Gameplay
         public EventClassScriptable WindowEvent;
         public EventClassScriptable ShadowmanEvent;
 
+        public GameObject AggroTarget;
+
         public void Start()
         {
             //Fetch the player
@@ -170,7 +172,7 @@ namespace Gameplay
         {
             //It cant be aggrod to things outside its room
             if (location.z < _roomCorners[0].y && location.z < _roomCorners[1].y || location.z > _roomCorners[0].y && location.z > _roomCorners[1].y || _spawning) return;
-            
+
             //go to whatever called the aggro at a fast speed
             _currentState = earStates.Agressive;
             _agent.destination = new Vector3(location.x, 1, location.z);
@@ -196,17 +198,6 @@ namespace Gameplay
             gameObject.name = "Despawning";
             _despawning = true;
             GetComponent<Collider>().enabled = false;
-            StartCoroutine(DespawnAnim());
-        }
-
-        private IEnumerator DespawnAnim()
-        {
-            Transform model = transform.GetChild(0);
-            while (model.localPosition.y > -7)
-            {
-                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.2f, model.localPosition.z);
-                yield return new WaitForSeconds(0.05f);
-            }
             Destroy(gameObject);
         }
 

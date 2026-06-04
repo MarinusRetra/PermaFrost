@@ -95,6 +95,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &2154938730320476773
 CapsuleCollider:
@@ -156,7 +157,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 1.2
-  m_Speed: 0.75
+  m_Speed: 1.2
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 1000
@@ -181,7 +182,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.TicketsPlease
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
   _hitbox: {fileID: 5273579673748645661}
+  _sprintingSpeed: 8
 --- !u!1 &1928853206828352608
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +307,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1093542487540434579
 BoxCollider:
@@ -5162,7 +5166,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &2072743666195556244
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5208,6 +5212,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -5239,7 +5244,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1001 &5342125507245419708
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,6 +10,10 @@ public class InventoryItem : ScriptableObject
     public Sprite sprite = null;
     public Color color = new(1, 1, 1, 255);
     public GameObject HoldObject = null;
+
+    [Header("Sound")]
+    public AudioClip UseSound;
+    public AudioClip EquipSound;
     public event Action<float> StartTimerEvent;
     public event Action CancelledTimerEvent;
      /// <summary>

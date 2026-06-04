@@ -108,6 +108,9 @@ MonoBehaviour:
   speed: 5
   maxTransfers: 8
   rb: {fileID: 3888152387350078815}
+  nodes: {fileID: 0}
+  nextObjective: {fileID: 0}
+  currentIndex: 0
 --- !u!65 &2282045520720273820
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -177,6 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Shadowman
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
   _shadowmanSpeed: 25
   freezingEvent: {fileID: 0}
   movement: {fileID: 3954551017534674717}

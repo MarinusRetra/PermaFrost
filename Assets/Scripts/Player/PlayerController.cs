@@ -72,7 +72,7 @@ namespace Gameplay
         public void Start()
         {
             _camera = PlrRefs.inst.PlayerCamera.transform;
-            SprintBehav.MaxSprint(TotalStamina);
+            SprintBehav?.MaxSprint(TotalStamina);
             
             //auto lock mouse
             Cursor.lockState = CursorLockMode.Locked;
@@ -191,7 +191,7 @@ namespace Gameplay
                 CurrentStamina++;
             }
 
-            SprintBehav.UpdateSprintBar(CurrentStamina);
+            SprintBehav?.UpdateSprintBar(CurrentStamina);
         }
 
 

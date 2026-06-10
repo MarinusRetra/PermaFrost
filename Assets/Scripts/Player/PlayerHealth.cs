@@ -113,7 +113,7 @@ public class PlayerHealth : MonoBehaviour
         while (CheckPlayerUnderMap)
         {
             yield return new WaitForSeconds(1);
-            if (transform.position.y < 0)
+            if (transform.position.y < -3)
             {
                 StartCoroutine(CutsceneManager.instance.FadeScreen(0.3f, 1, () =>
                 {

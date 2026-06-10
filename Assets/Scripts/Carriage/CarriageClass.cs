@@ -17,7 +17,7 @@ public class CarriageClass : MonoBehaviour
     public Transform Holder;
     [SerializeField] private List<InventoryItem> _allowedDrops;
     public Generation generationClass;
-    public int roomIndex;
+    public int roomIndex = -999;
 
     [SerializeField] private bool _enterTriggered;
     [SerializeField] private bool _exitTriggered;
@@ -111,7 +111,10 @@ public class CarriageClass : MonoBehaviour
         {
             _player.CurrentRoom = gameObject;
             _player.CurrentCarriage = this;
-            generationClass.EnterRoom(roomIndex);
+            if(roomIndex != -999)
+            {
+                generationClass.EnterRoom(roomIndex);
+            }
             playerInside = true;
 
             if (!_enterTriggered)
@@ -134,7 +137,7 @@ public class CarriageClass : MonoBehaviour
         {
             playerInside = false;
             // Check if player left through the back (lower Z position than the carriage)
-            if (!_exitTriggered && generationClass.player.transform.position.z > transform.position.z)
+            if (!_exitTriggered && PlrRefs.inst.transform.position.z > transform.position.z)
             {
                 _exitTriggered = true;
 

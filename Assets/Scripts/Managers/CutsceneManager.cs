@@ -209,13 +209,15 @@ namespace Gameplay
                         PlrRefs.inst.PlayerController.CurrentRoom.transform.position = originalRoomLocal;
                         _player.GetComponent<Rigidbody>().isKinematic = false;
 
-                        GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), Quaternion.identity);
+                        StartCoroutine(_baseGen.GenerateRooms(_paintingRooms, new Vector3(200, 0, 200), 5));
 
-                        Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
-                        paintingRoomsGenerator.player = _player;
-                        paintingRoomsGenerator.AmountOfRooms = 5;
-                        paintingRoomsGenerator.Rooms = _paintingRooms;
-                        paintingRoomsGenerator.FastLoading = true;
+                        //GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), Quaternion.identity);
+
+                        //Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
+                        //paintingRoomsGenerator.player = _player;
+                        //paintingRoomsGenerator.AmountOfRooms = 5;
+                        //paintingRoomsGenerator.Rooms = _paintingRooms;
+                        //paintingRoomsGenerator.FastLoading = true;
                     }, out GameObject scene, true, true, false, new Vector3(100, 100, 100), Quaternion.identity);
                     break;
             }
@@ -226,7 +228,7 @@ namespace Gameplay
         [SerializeField] private GameObject _paintingCutscenePrefab;
         [SerializeField] private TimelineAsset _paintingTimeline;
         [SerializeField] private RoomTypeScriptable _paintingRooms;
-        [SerializeField] private GameObject _baseGen;
+        [SerializeField] private Generation _baseGen;
         private Vector3 originalRoomLocal;
         private void OnDisable()
         {

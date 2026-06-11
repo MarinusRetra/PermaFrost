@@ -19,18 +19,22 @@ namespace Gameplay
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
             //spawn door
-            Vector3 doorPos = room.RoomEventRefs.OpenDoor.transform.position;
-            spawnedDoor = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
-            spawnedDoor.transform.parent = room.Holder;
+            if (room.RoomEventRefs.OpenDoor)
+            {
+                Vector3 doorPos = room.RoomEventRefs.OpenDoor.transform.position;
+                spawnedDoor = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
+                spawnedDoor.transform.parent = room.Holder;
 
-            room.RoomEventRefs.OpenDoor.SetActive(false);
+                room.RoomEventRefs.OpenDoor.SetActive(false);
 
-            //spawn key
-            EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
-            spawnedKey = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, Quaternion.identity);
-            spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
-            spawnedKey.transform.parent = room.Holder;
-            return true;
+                //spawn key
+                EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
+                spawnedKey = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, Quaternion.identity);
+                spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
+                spawnedKey.transform.parent = room.Holder;
+            }
+            else { Debug.LogWarning("Coulnd spawn key event: No open door."); }
+                return true;
         }
         //First time approaching room
         public override bool FirstApproach(CarriageClass room) { return RepeatApproach(room); }

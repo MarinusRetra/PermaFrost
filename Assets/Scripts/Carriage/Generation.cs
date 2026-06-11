@@ -29,10 +29,12 @@ public class Generation : MonoBehaviour
 
     public int RoomApproachSize = 2;
 
+    public Transform DefaultSpawnLocation;
+
     void Start()
     {
-        mainInstance = this;
-        StartCoroutine(GenerateRooms());
+        mainInstance = this;    
+        StartCoroutine(GenerateRooms(Rooms,DefaultSpawnLocation.position,AmountOfRooms));
     }
 
     void PositionGeneratedRoom(GameObject room, GameObject previousRoom)
@@ -65,21 +67,21 @@ public class Generation : MonoBehaviour
     }
 
     private string prevRoomClassName;
-    IEnumerator GenerateRooms()
+    public IEnumerator GenerateRooms(RoomTypeScriptable SpawningType,Vector3 spawnLoc, int RoomAmount)
     {
         IsGenerating = true;
         currentHeightValue = 0;
         yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
         GameObject startRoomPref = null;
-        if (Rooms.HasStartRoom)
+        if (SpawningType.HasStartRoom)
         {
-            startRoomPref = Rooms.RoomTypeStartRoom;
+            startRoomPref = SpawningType.RoomTypeStartRoom;
         }
         else
         {
             startRoomPref = PlaceholderRooms.RoomTypeStartRoom;
         }
-        GameObject startRoom = Instantiate(startRoomPref, transform.position, transform.rotation);
+        GameObject startRoom = Instantiate(startRoomPref, spawnLoc, transform.rotation);
         _initializedRooms.Add(startRoom);
         _initializedCarriages.Add(startRoom.GetComponent<CarriageClass>());
 
@@ -91,9 +93,9 @@ public class Generation : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
 
-        allTotalPossibleRooms = new List<RoomClass>(Rooms.AllRoomsInType);
+        allTotalPossibleRooms = new List<RoomClass>(SpawningType.AllRoomsInType);
 
-        for (int i = 0; i < AmountOfRooms; i++)
+        for (int i = 0; i < RoomAmount; i++)
         {
 
             SpawnWeightedRoom(i);
@@ -107,7 +109,7 @@ public class Generation : MonoBehaviour
             }
         }
 
-        GameObject endRoom = Instantiate(Rooms.RoomTypeEndRoom);
+        GameObject endRoom = Instantiate(SpawningType.RoomTypeEndRoom);
         PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
         _initializedRooms.Add(endRoom);
         _initializedCarriages.Add(endRoom.GetComponent<CarriageClass>());
@@ -125,7 +127,7 @@ public class Generation : MonoBehaviour
             }
         }
 
-        if(Rooms.HasStartRoom == false)
+        if(SpawningType.HasStartRoom == false)
         {
             Destroy(_initializedRooms[0].gameObject);
         }
@@ -146,7 +148,7 @@ public class Generation : MonoBehaviour
         _initializedCarriages = new List<CarriageClass>();
         prevRoomCarriage = null;
         prevRoomClassName = null;
-        StartCoroutine(GenerateRooms());
+        StartCoroutine(GenerateRooms(Rooms,DefaultSpawnLocation.position,AmountOfRooms));
     }
 #endif
 

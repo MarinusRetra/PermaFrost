@@ -942,6 +942,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 169979987}
   m_CullTransparentMesh: 1
+--- !u!114 &182086666 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
+  m_PrefabInstance: {fileID: 2626819830997451331}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df086e14faee4d14c951e1de024deca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Generation
 --- !u!1 &220090264
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,6 +5566,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+--- !u!1 &1900808502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900808503}
+  m_Layer: 0
+  m_Name: RoomSpawningLoc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900808503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900808502}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1904044260
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,6 +6533,10 @@ PrefabInstance:
       propertyPath: RoomApproachSize
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
+      propertyPath: DefaultSpawnLocation
+      value: 
+      objectReference: {fileID: 1900808503}
     - target: {fileID: 3022794896226393135, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
       propertyPath: m_Name
       value: BaseGeneration
@@ -6596,6 +6642,10 @@ PrefabInstance:
       propertyPath: _ui
       value: 
       objectReference: {fileID: 1021404897}
+    - target: {fileID: 8438181442962533300, guid: 9184420cf9eeb69438b5c7667f951941, type: 3}
+      propertyPath: _baseGen
+      value: 
+      objectReference: {fileID: 182086666}
     - target: {fileID: 8438181442962533300, guid: 9184420cf9eeb69438b5c7667f951941, type: 3}
       propertyPath: _fadeImage
       value: 
@@ -6879,3 +6929,4 @@ SceneRoots:
   - {fileID: 565892438}
   - {fileID: 1985485855}
   - {fileID: 8536209452334113291}
+  - {fileID: 1900808503}

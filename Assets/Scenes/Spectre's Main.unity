@@ -3344,6 +3344,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d54d93291fc87a4fac9e22d571dfb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.EventRefs
+--- !u!114 &1166735596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166735558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36208d09e2fbb144c82aec798e0f07a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PaperLockEvent
+  id: 12
+  scriptable: {fileID: 0}
 --- !u!1 &1196286481
 GameObject:
   m_ObjectHideFlags: 0
@@ -6520,7 +6534,7 @@ PrefabInstance:
     - target: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
       propertyPath: Rooms
       value: 
-      objectReference: {fileID: 11400000, guid: cf28bd1a87940df44b641ed38ec94030, type: 2}
+      objectReference: {fileID: 11400000, guid: 1a3e3204d2b5d4e459dc08fa205c2481, type: 2}
     - target: {fileID: 1613786260561110410, guid: 82c39c47090b89347b318db0550c50eb, type: 3}
       propertyPath: player
       value: 
@@ -6835,7 +6849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: EventClasses.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: 'EventClasses.Array.data[10]'
@@ -6846,8 +6860,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1166735584}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
+      propertyPath: 'EventClasses.Array.data[12]'
+      value: 
+      objectReference: {fileID: 1166735596}
+    - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: EventClassScriptables.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       propertyPath: 'EventClassScriptables.Array.data[0]'
@@ -6897,6 +6915,10 @@ PrefabInstance:
       propertyPath: 'EventClassScriptables.Array.data[11]'
       value: 
       objectReference: {fileID: 11400000, guid: 2d40d22509af6334b9e8400a6884b24b, type: 2}
+    - target: {fileID: 9029982678423265498, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
+      propertyPath: 'EventClassScriptables.Array.data[12]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c94a04798187a748bdbc2160362cba7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6907,6 +6929,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8455825840256166350, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1166735584}
+    - targetCorrespondingSourceObject: {fileID: 8455825840256166350, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1166735596}
   m_SourcePrefab: {fileID: 100100000, guid: 3ef1ee24bf271534ea225d2013fd36a2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

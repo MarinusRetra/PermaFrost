@@ -25,7 +25,7 @@ namespace Gameplay
         public override bool FirstEnter(CarriageClass room)
         {
             //find Plate spot
-            List<Transform> _availableSpots = room.SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
+            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
@@ -36,8 +36,9 @@ namespace Gameplay
 
             //spawn plate
             EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
-            spawnedPlate = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, Quaternion.identity);
+            spawnedPlate = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, objEvent.otherPrefabs[0].transform.rotation);
             spawnedPlate.transform.parent = room.Holder;
+            spawnedPlate.GetComponent<StandinInPlate>().WrapBlockage = spawnedWraps.GetComponent<PaperWrapBlockage>();
             return true;
         }
         //Any other time room entered

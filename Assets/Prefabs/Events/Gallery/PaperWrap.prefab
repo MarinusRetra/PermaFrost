@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 2229793635132649170}
   - component: {fileID: 1614877404111227519}
   - component: {fileID: 8876757948183724376}
+  - component: {fileID: 7992913510417236301}
   m_Layer: 0
   m_Name: PaperWrap
   m_TagString: Untagged
@@ -168,3 +169,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6578064, y: 2.9475853, z: 0.276886}
   m_Center: {x: 0.047035217, y: 1.383964, z: 0.12620544}
+--- !u!114 &7992913510417236301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048818718479064167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a33b23315642f8f4bbfeab9df8489066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PaperWrapBlockage
+  MainCollder: {fileID: 8876757948183724376}

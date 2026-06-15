@@ -44,11 +44,11 @@ namespace Gameplay
             CarriageClass carriageBack = null;
             if(currentCarriage.roomIndex <= 3)
             {
-                carriageBack = currentCarriage.generationClass._initializedRooms[1].GetComponent<CarriageClass>();
+                carriageBack = currentCarriage.roomParent._initializedRooms[1].GetComponent<CarriageClass>();
             }
             else
             {
-                carriageBack = currentCarriage.generationClass._initializedRooms[currentCarriage.roomIndex - 3].GetComponent<CarriageClass>();
+                carriageBack = currentCarriage.roomParent._initializedRooms[currentCarriage.roomIndex - 3].GetComponent<CarriageClass>();
             }
 
             movement.StartMoving(carriageBack.NodeHolder);

@@ -46,6 +46,8 @@ public class CarriageClass : MonoBehaviour
 
     public RoomEventRefs RoomEventRefs;
 
+    public RoomGroupParent roomParent;
+
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;
@@ -113,7 +115,7 @@ public class CarriageClass : MonoBehaviour
             _player.CurrentCarriage = this;
             if(roomIndex != -999)
             {
-                generationClass.EnterRoom(roomIndex);
+                generationClass.EnterRoom(roomIndex,roomParent);
             }
             playerInside = true;
 

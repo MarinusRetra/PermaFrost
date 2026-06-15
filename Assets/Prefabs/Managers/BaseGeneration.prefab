@@ -48,11 +48,15 @@ MonoBehaviour:
   Rooms: {fileID: 11400000, guid: 61dd753b59801574280e0b8a3e96d381, type: 2}
   PlaceholderRooms: {fileID: 11400000, guid: 61dd753b59801574280e0b8a3e96d381, type: 2}
   _meshSurface: {fileID: 3059414712843289979}
-  _initializedRooms: []
+  roomGroupPrefab: {fileID: 7386970603173232006, guid: 228f5e848686fb64eb9ce1aa23a13c68, type: 3}
+  _initializedRoomGroups: []
   AmountOfRooms: 15
   player: {fileID: 0}
+  eventClasses: []
   FastLoading: 0
   IsGenerating: 0
+  RoomApproachSize: 2
+  DefaultSpawnLocation: {fileID: 0}
 --- !u!114 &3059414712843289979
 MonoBehaviour:
   m_ObjectHideFlags: 0

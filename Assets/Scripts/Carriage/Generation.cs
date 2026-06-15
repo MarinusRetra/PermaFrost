@@ -13,9 +13,11 @@ public class Generation : MonoBehaviour
     public RoomTypeScriptable PlaceholderRooms;
 
     [SerializeField] private NavMeshSurface _meshSurface;
+    [SerializeField] private GameObject roomGroupPrefab;
 
-    public List<GameObject> _initializedRooms = new List<GameObject>();
-    public List<CarriageClass> _initializedCarriages = new List<CarriageClass>();
+    //public List<GameObject> _initializedRooms = new List<GameObject>();
+    //public List<CarriageClass> _initializedCarriages = new List<CarriageClass>();
+    public List<RoomGroupParent> _initializedRoomGroups = new List<RoomGroupParent>();
     public int AmountOfRooms = 15;
     public GameObject player;
 
@@ -23,18 +25,92 @@ public class Generation : MonoBehaviour
 
     public bool FastLoading = false;
 
-    private int currentHeightValue = 0;
-
     public bool IsGenerating = false;
 
     public int RoomApproachSize = 2;
 
     public Transform DefaultSpawnLocation;
 
+    //Currently spawning stuffs
+    private RoomGroupParent currentParent;
+    private Vector3 currentSpawnLoc;
+    private RoomTypeScriptable currentType;
+    private int currentHeightValue = 0;
+
     void Start()
     {
         mainInstance = this;    
         StartCoroutine(GenerateRooms(Rooms,DefaultSpawnLocation.position,AmountOfRooms));
+    }
+
+
+    private string prevRoomClassName;
+    public IEnumerator GenerateRooms(RoomTypeScriptable SpawningType, Vector3 spawnLoc, int RoomAmount,bool tpPlayer = true)
+    {
+        IsGenerating = true;
+        currentHeightValue = 0;
+        currentSpawnLoc = spawnLoc;
+        currentType = SpawningType;
+
+        GameObject currentGroup = Instantiate(roomGroupPrefab, spawnLoc,transform.rotation);
+        currentParent = currentGroup.GetComponent<RoomGroupParent>();
+        currentParent.name = currentType.name + " Room Group";
+        currentParent.AmountOfRooms = RoomAmount;
+        yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
+        if (SpawningType.HasStartRoom)
+        {
+            GameObject startRoomPref = SpawningType.RoomTypeStartRoom;
+            GameObject startRoom = Instantiate(startRoomPref, spawnLoc, transform.rotation);
+            startRoom.transform.parent = currentParent.transform;
+            currentParent.StartingRoom = startRoom;
+            currentParent.StartingCarriage = startRoom.GetComponent<CarriageClass>();
+            //For spawning the first room
+            currentParent._initializedRooms.Add(startRoom);
+            currentParent._initializedCarriages.Add(startRoom.GetComponent<CarriageClass>());
+            if (currentParent.StartingCarriage.PlayerSpawnPoint && player && tpPlayer)
+            {
+                player.transform.position = currentParent.StartingCarriage.PlayerSpawnPoint.transform.position;
+                player.SetActive(true);
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
+
+        allTotalPossibleRooms = new List<RoomClass>(SpawningType.AllRoomsInType);
+
+        for (int i = 0; i < RoomAmount; i++)
+        {
+            SpawnWeightedRoom(i);
+            yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
+            for (int j = 0; j < 10; j++)
+            {
+                if (generatingRoom)
+                {
+                    yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
+                }
+            }
+        }
+
+        GameObject endRoom = Instantiate(SpawningType.RoomTypeEndRoom);
+        PositionGeneratedRoom(endRoom, currentParent._initializedRooms[currentParent._initializedRooms.Count - 1]);
+        currentParent.EndingRoom = endRoom;
+        endRoom.transform.parent = currentParent.transform;
+        StartCoroutine(GenerateNavmesh());
+
+        for (int i = 0; i < currentParent._initializedRooms.Count; i++)
+        {
+            if (i <= RoomApproachSize)
+            {
+                currentParent._initializedCarriages[i].OnApproach(true);
+            }
+            else
+            {
+                currentParent._initializedCarriages[i].OnRecede(true);
+            }
+        }
+
+        _initializedRoomGroups.Add(currentParent);
+        IsGenerating = false;
     }
 
     void PositionGeneratedRoom(GameObject room, GameObject previousRoom)
@@ -66,72 +142,21 @@ public class Generation : MonoBehaviour
         currentCarriage.SpawnItems();
     }
 
-    private string prevRoomClassName;
-    public IEnumerator GenerateRooms(RoomTypeScriptable SpawningType,Vector3 spawnLoc, int RoomAmount)
+    void PositionGeneratedRoom(GameObject room, Vector3 position)
     {
-        IsGenerating = true;
-        currentHeightValue = 0;
-        yield return new WaitForSeconds(0.3f * (FastLoading ? 0 : 1));
-        GameObject startRoomPref = null;
-        if (SpawningType.HasStartRoom)
-        {
-            startRoomPref = SpawningType.RoomTypeStartRoom;
-        }
-        else
-        {
-            startRoomPref = PlaceholderRooms.RoomTypeStartRoom;
-        }
-        GameObject startRoom = Instantiate(startRoomPref, spawnLoc, transform.rotation);
-        _initializedRooms.Add(startRoom);
-        _initializedCarriages.Add(startRoom.GetComponent<CarriageClass>());
+        CarriageClass currentCarriage = room.GetComponent<CarriageClass>();
+
+        Transform entry = currentCarriage.EntryPoint;
 
 
-        if (startRoom.GetComponent<CarriageClass>().PlayerSpawnPoint && player)
-        {
-            player.transform.position = _initializedCarriages[0].PlayerSpawnPoint.transform.position;
-            player.SetActive(true);
-        }
-        yield return new WaitForSeconds(0.1f * (FastLoading ? 0 : 1));
+        Vector3 entryOffset = room.transform.position - entry.position;
 
-        allTotalPossibleRooms = new List<RoomClass>(SpawningType.AllRoomsInType);
+        room.transform.position = position + entryOffset;
+        room.transform.rotation = transform.rotation * Quaternion.Inverse(entry.rotation);
 
-        for (int i = 0; i < RoomAmount; i++)
-        {
+        currentCarriage.generationClass = this;
 
-            SpawnWeightedRoom(i);
-            yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
-            for (int j = 0; j < 10; j++)
-            {
-                if (generatingRoom)
-                {
-                    yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
-                }
-            }
-        }
-
-        GameObject endRoom = Instantiate(SpawningType.RoomTypeEndRoom);
-        PositionGeneratedRoom(endRoom, _initializedRooms[_initializedRooms.Count - 1]);
-        _initializedRooms.Add(endRoom);
-        _initializedCarriages.Add(endRoom.GetComponent<CarriageClass>());
-        StartCoroutine(GenerateNavmesh());
-
-        for(int i = 0; i < _initializedRooms.Count; i++)
-        {
-            if (i <= RoomApproachSize)
-            {
-                _initializedCarriages[i].OnApproach(true);
-            }
-            else
-            {
-                _initializedCarriages[i].OnRecede(true);
-            }
-        }
-
-        if(SpawningType.HasStartRoom == false)
-        {
-            Destroy(_initializedRooms[0].gameObject);
-        }
-        IsGenerating = false;
+        currentCarriage.SpawnItems();
     }
 
 #if UNITY_EDITOR
@@ -139,13 +164,13 @@ public class Generation : MonoBehaviour
     public void RegenerateRooms()
     {
         if (IsGenerating) return;
-        for(int i = 0;i < _initializedRooms.Count;i++)
+        for(int i = 0;i < _initializedRoomGroups[0]._initializedRooms.Count;i++)
         {
-            _initializedCarriages[i].DespawnItems();
-            Destroy(_initializedRooms[i]);
+            _initializedRoomGroups[0]._initializedCarriages[i].DespawnItems();
+            Destroy(_initializedRoomGroups[0]._initializedRooms[i]);
         }
-        _initializedRooms = new List<GameObject>();
-        _initializedCarriages = new List<CarriageClass>();
+        Destroy(_initializedRoomGroups[0]);
+        _initializedRoomGroups = new List<RoomGroupParent>();
         prevRoomCarriage = null;
         prevRoomClassName = null;
         StartCoroutine(GenerateRooms(Rooms,DefaultSpawnLocation.position,AmountOfRooms));
@@ -285,22 +310,27 @@ public class Generation : MonoBehaviour
             GameObject randomRoom = Instantiate(selectedroom.Room);
             GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
             GameObject previousRoom = null;
-            if(_initializedRooms.Count != 0)
+            if(currentParent._initializedRooms.Count != 0)
             {
-                previousRoom = _initializedRooms[index];
+                previousRoom = currentParent._initializedRooms[index];
+                PositionGeneratedRoom(randomRoom, previousRoom);
             }
-            PositionGeneratedRoom(randomRoom, previousRoom);
+            else
+            {
+                PositionGeneratedRoom(randomRoom, currentSpawnLoc);
+            }
 
             randomRoom.name = "Room" + index + selectedroom.RoomName;
 
             CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
             randomCarriage.previousCarriage = previousRoom?.GetComponent<CarriageClass>();
             randomCarriage.roomIndex = index + 1;
+            randomCarriage.roomParent = currentParent;
             if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
 
-            _initializedRooms.Add(randomRoom);
-            _initializedCarriages.Add(randomCarriage);
-            randomRoom.transform.parent = transform;
+            currentParent._initializedRooms.Add(randomRoom);
+            currentParent._initializedCarriages.Add(randomCarriage);
+            randomRoom.transform.parent = currentParent.transform;
             prevRoomClassName = selectedroom.RoomName;
             _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
 
@@ -339,16 +369,16 @@ public class Generation : MonoBehaviour
     }
 
     private int currentRoomIndex = -999;
-    public void EnterRoom(int index)
+    public void EnterRoom(int index,RoomGroupParent parent)
     {
         if(currentRoomIndex == index) { return; }
         int acceptableI = -RoomApproachSize;
         if (index >= RoomApproachSize + 1)
         {
-            _initializedRooms[index - RoomApproachSize - 1].GetComponent<CarriageClass>().OnRecede();
+            parent._initializedCarriages[index - RoomApproachSize - 1].OnRecede();
             if(index - currentRoomIndex > 1 && index >= RoomApproachSize + 2)
             {
-                _initializedRooms[index - RoomApproachSize - 2].GetComponent<CarriageClass>().OnRecede();
+                parent._initializedCarriages[index - RoomApproachSize - 2].OnRecede();
             }
         }
         else
@@ -357,14 +387,14 @@ public class Generation : MonoBehaviour
         }
         for (int i = acceptableI; i < RoomApproachSize + 1; i++)
         {
-            if(i + index > AmountOfRooms) { continue; }
-            _initializedRooms[index + i]?.GetComponent<CarriageClass>().OnApproach();
+            if(i + index > parent.AmountOfRooms) { continue; }
+            parent._initializedCarriages[index + i]?.OnApproach();
         }
 
         currentRoomIndex = index;
-        if(index + RoomApproachSize + 1 <= AmountOfRooms)
+        if(index + RoomApproachSize + 1 < parent.AmountOfRooms)
         {
-            _initializedRooms[index + RoomApproachSize + 1]?.GetComponent<CarriageClass>().OnRecede();
+            parent._initializedCarriages[index + RoomApproachSize + 1]?.OnRecede();
         }
     }
 }

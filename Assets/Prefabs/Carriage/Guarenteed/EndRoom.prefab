@@ -65,7 +65,7 @@ MonoBehaviour:
   Holder: {fileID: 0}
   _allowedDrops: []
   generationClass: {fileID: 0}
-  roomIndex: 0
+  roomIndex: -999
   _enterTriggered: 0
   _exitTriggered: 0
   _triggerTriggered: 0
@@ -85,6 +85,8 @@ MonoBehaviour:
   previousCarriage: {fileID: 0}
   nextCarriage: {fileID: 0}
   NodeHolder: {fileID: 0}
+  RoomEventRefs: {fileID: 0}
+  roomParent: {fileID: 0}
 --- !u!65 &5009204877991620635
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ namespace Gameplay
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
             //spawn door
-            if (room.RoomEventRefs.OpenDoor)
+            if (room.RoomEventRefs && room.RoomEventRefs.OpenDoor)
             {
                 Vector3 doorPos = room.RoomEventRefs.OpenDoor.transform.position;
                 spawnedDoor = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
@@ -93,7 +93,10 @@ namespace Gameplay
         {
             if (spawnedDoor) { Destroy(spawnedDoor); }
             if (spawnedKey) {  Destroy(spawnedKey); }
-            room.RoomEventRefs.OpenDoor.SetActive(true);
+            if(room.RoomEventRefs && room.RoomEventRefs.OpenDoor)
+            {
+                room.RoomEventRefs.OpenDoor.SetActive(true);
+            }
             Destroy(this);
             return true;
         }

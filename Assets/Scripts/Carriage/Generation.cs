@@ -312,7 +312,14 @@ public class Generation : MonoBehaviour
             GameObject previousRoom = null;
             if(currentParent._initializedRooms.Count != 0)
             {
-                previousRoom = currentParent._initializedRooms[index];
+                if (currentParent._initializedRooms.Count == index)
+                {
+                    previousRoom = currentParent._initializedRooms[index - 1];
+                }
+                else
+                {
+                    previousRoom = currentParent._initializedRooms[index];
+                }
                 PositionGeneratedRoom(randomRoom, previousRoom);
             }
             else

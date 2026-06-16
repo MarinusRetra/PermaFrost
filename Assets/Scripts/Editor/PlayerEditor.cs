@@ -91,7 +91,7 @@ namespace Gameplay
                 case "Game":
                     if (CheckIfRunning(true))
                     {
-                        allRooms = baseGen.GetComponentsInChildren<CarriageClass>().ToList();
+                        allRooms = baseGen.GetComponent<Generation>()._initializedRoomGroups[0]._initializedCarriages;
                     }
                     break;
                 case "Misc":

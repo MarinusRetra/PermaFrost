@@ -33,7 +33,7 @@ namespace Gameplay
         public override bool FirstExit(CarriageClass room)
         {
             for (int i = 0; i < 3; i++)
-            spawnedStalkerClass[i].DestroyMonster();
+                if (spawnedStalkerClass[i]) { spawnedStalkerClass[i].DestroyMonster(); }
             return true;
         }
         //Leaving room through the way the player came

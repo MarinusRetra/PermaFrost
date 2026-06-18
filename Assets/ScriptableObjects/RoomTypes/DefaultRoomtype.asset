@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.RoomTypeScriptable
   RoomtypeName: DefaultTrain
   HasStartRoom: 1
-  RoomTypeStartRoom: {fileID: 3465943475687528960, guid: c685a48eb1b9b9f469bd53fac99daaa7, type: 3}
+  RoomTypeStartRoom: {fileID: 2178837811390293964, guid: 68dc91607a6bc514db2fa7964308397c, type: 3}
   RoomTypeEndRoom: {fileID: 359503124527034429, guid: b2fc8d7b74a74914897a717c449ec1ad, type: 3}
   AllRoomsInType:
   - Room: {fileID: 366001246756394530, guid: d082ec5bf2b27d7499b0c5e7a2e672a0, type: 3}
-    Weight: 50
+    Weight: 200
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
@@ -34,7 +34,7 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: c0817b9055b70ae429369f9be1ec46bc, type: 3}
-    Weight: 50
+    Weight: 200
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
@@ -49,7 +49,7 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: 7c97e7dcc7f6f984db667972f3024bbb, type: 3}
-    Weight: 50
+    Weight: 200
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
@@ -64,7 +64,7 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: e6852e95c8e434e4e986be6757e768c2, type: 3}
-    Weight: 50
+    Weight: 200
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
@@ -77,7 +77,7 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: d07a7d7a27054794d86ee357608a1afd, type: 3}
-    Weight: 50
+    Weight: 200
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
@@ -90,11 +90,45 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: d082ec5bf2b27d7499b0c5e7a2e672a0, type: 3}
-    Weight: 10
+    Weight: 40
     AmountOfEventsMax: 0
     AllowedEvents: []
     RoomName: StraightEventless
     onlySpawnOnce: 1
+    HeightValue: 0
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: d54714392e46f9a4a832dbcc51e68962, type: 3}
+    Weight: 80
+    AmountOfEventsMax: 2
+    AllowedEvents:
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    RoomName: ReverseAccordian
+    onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: 5295dd5ab523ac44194d56d46a80dedf, type: 3}
+    Weight: 20
+    AmountOfEventsMax: 0
+    AllowedEvents: []
+    RoomName: DeathButton
+    onlySpawnOnce: 1
+    HeightValue: 0
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: f99c3e74fa403ea46b0d7c5f97147f4c, type: 3}
+    Weight: 200
+    AmountOfEventsMax: 3
+    AllowedEvents:
+    - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
+    - {fileID: 11400000, guid: d0f0dea57e0e3e54e9d803f5883dc6ba, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
+    - {fileID: 11400000, guid: 34a371bd94e9256478af48a8b215693a, type: 2}
+    RoomName: Stripe
+    onlySpawnOnce: 0
     HeightValue: 0
     guarenteedIndex: 0
   GuarenteedRooms: []

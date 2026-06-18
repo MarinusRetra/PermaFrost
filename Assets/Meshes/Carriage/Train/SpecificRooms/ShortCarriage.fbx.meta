@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1d6c01e5ab9a3d54baaac95e01faab9b
+guid: 38cb9f17ba3ca2545b11d86805595d2e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,13 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bench-Cloth
-    second: {fileID: 2100000, guid: 3135d18b71694124fafd6e78a4a24e6a, type: 2}
+      name: Carriage-Floor
+    second: {fileID: 2100000, guid: d7f0a4ba5b2416e42a5ad53cb98edde3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bench-Wood
-    second: {fileID: 2100000, guid: d076a9cffc5d70b478da053413a1e4a1, type: 2}
+      name: Carriage-Walls
+    second: {fileID: 2100000, guid: 1bcc539d4bd01fe49bb29ed9328b1da4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carriage-Windowframe
+    second: {fileID: 2100000, guid: 7bdd5936532030b48ad7e03227b238fe, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -43,7 +48,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.3
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -101,7 +106,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.3
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

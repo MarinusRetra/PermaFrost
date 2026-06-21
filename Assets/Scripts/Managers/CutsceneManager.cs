@@ -72,6 +72,8 @@ namespace Gameplay
                 Cursor.visible = false;
                 _ui.SetActive(false);
                 PlrRefs.inst.PlayerController.enabled = false;
+                PlrRefs.inst.PlayerArm.SetActive(false);
+                PlrRefs.inst.PlayerInventory.DeselectSlots();
 
                 //These values are set for skipping
                 onAnimSkip = onSkip;
@@ -119,6 +121,7 @@ namespace Gameplay
                 _ui.SetActive(true);
                 isSkipping = false;
                 PlrRefs.inst.PlayerController.enabled = true;
+                PlrRefs.inst.PlayerArm.SetActive(true);
 
                 //reset all cutscene stuff
                 Destroy(currentAnimPlaying);
@@ -210,14 +213,6 @@ namespace Gameplay
                         _player.GetComponent<Rigidbody>().isKinematic = false;
 
                         StartCoroutine(_baseGen.GenerateRooms(_paintingRooms, new Vector3(200, 0, 200), 5));
-
-                        //GameObject newGen = Instantiate(_baseGen, new Vector3(200, 0, 200), Quaternion.identity);
-
-                        //Generation paintingRoomsGenerator = newGen.GetComponent<Generation>();
-                        //paintingRoomsGenerator.player = _player;
-                        //paintingRoomsGenerator.AmountOfRooms = 5;
-                        //paintingRoomsGenerator.Rooms = _paintingRooms;
-                        //paintingRoomsGenerator.FastLoading = true;
                     }, out GameObject scene, true, true, false, new Vector3(100, 100, 100), Quaternion.identity);
                     break;
             }

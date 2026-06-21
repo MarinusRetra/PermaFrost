@@ -80,8 +80,9 @@ namespace Gameplay
         }
 
 
-        private void DeselectSlots()
+        public void DeselectSlots()
         {
+            if(currentSelectedSlot_ID == -1 || currentSelectedSlot_ID == -999) { return; }
             SlotAnimDeselect(CurrentSelectedSlot);
             playerArmAnimator.SetInteger("ItemID", 0);
             currentSelectedSlot_ID = -1;

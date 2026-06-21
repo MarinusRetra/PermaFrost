@@ -16,6 +16,9 @@ namespace Gameplay
         public Camera Camera;
         public GameObject PlayerCamera;
         public Camera FakeCamera;
+        public Camera PlayerArmCamera;
+        public GameObject PlayerArm;
+        public Animator PlayerArmAnimator;
         void Awake()
         {
             inst = this;

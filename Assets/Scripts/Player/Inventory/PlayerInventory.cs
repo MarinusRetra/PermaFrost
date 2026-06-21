@@ -12,7 +12,7 @@ namespace Gameplay
         private static readonly int SelectingHash = Animator.StringToHash("Selecting");
         private static readonly int DeselectingHash = Animator.StringToHash("Deselecting");
         private static readonly int SelectedHash = Animator.StringToHash("Selected");
-        
+
         [Header("Hotbar slot sizes")]
         [SerializeField] private Vector3 _normalSlotSize = new(0.5f, 0.5f, 1f);
         [SerializeField] private Vector3 _selectedSlotSize = new(0.6f, 0.6f, 1.2f);
@@ -49,7 +49,7 @@ namespace Gameplay
             }
             //if the slot is equipped, unequip it (unless bypassed)
             if (currentSelectedSlot_ID == numberIn && !bypassDeselect)
-            { 
+            {
                 DeselectSlots();
                 return;
             }
@@ -67,7 +67,7 @@ namespace Gameplay
 
             //if the slot is in the hotbar and not -1
             if (numberIn < hotbarSlots.Length)
-            { 
+            {
                 SlotAnimDeselect(CurrentSelectedSlot);
                 currentSelectedSlot_ID = numberIn;
 
@@ -82,7 +82,7 @@ namespace Gameplay
 
         public void DeselectSlots()
         {
-            if(currentSelectedSlot_ID == -1 || currentSelectedSlot_ID == -999) { return; }
+            if (currentSelectedSlot_ID == -1 || currentSelectedSlot_ID == -999) { return; }
             SlotAnimDeselect(CurrentSelectedSlot);
             playerArmAnimator.SetInteger("ItemID", 0);
             currentSelectedSlot_ID = -1;
@@ -103,11 +103,11 @@ namespace Gameplay
         private void HandleHotbarNav(float numberIn)
         {
             if (currentSelectedSlot_ID == -1)
-            { 
-                SelectSlot(numberIn == -1 ? GetItemsInInventory()-1 : 0);
+            {
+                SelectSlot(numberIn == -1 ? GetItemsInInventory() - 1 : 0);
                 return;
             }
-            if (CurrentSelectedSlot.Slot_ID + numberIn < 0 || CurrentSelectedSlot.Slot_ID + numberIn > GetItemsInInventory()-1)
+            if (CurrentSelectedSlot.Slot_ID + numberIn < 0 || CurrentSelectedSlot.Slot_ID + numberIn > GetItemsInInventory() - 1)
             {
                 return;
             }
@@ -165,7 +165,7 @@ namespace Gameplay
         private void HandleCancelUse()
         {
             try
-            { 
+            {
                 CurrentSelectedSlot.Item.UseCancelled();
                 playerArmAnimator.SetTrigger("ForceStopUse");
             }
@@ -181,7 +181,7 @@ namespace Gameplay
             foreach (InventorySlot slot in hotbarSlots)
             {
                 if (slot.Item == null)
-                { 
+                {
                     slot.AddItem(incomingItem);
                     return;
                 }
@@ -195,8 +195,8 @@ namespace Gameplay
         /// <param name="currentSlotIn"></param>
         public void RemoveItemFromSlot(int currentSlotIn)
         {
-            CurrentSelectedSlot.ClearSlot();
-            for (int i = currentSelectedSlot_ID; i < hotbarSlots.Length-1; i++)
+            hotbarSlots[currentSlotIn].ClearSlot();
+            for (int i = currentSlotIn; i < hotbarSlots.Length - 1; i++)
             {
                 if (hotbarSlots[i + 1].Item != null)
                 {
@@ -205,13 +205,13 @@ namespace Gameplay
                 }
             }
 
-            if (GetItemsInInventory() == 0 || !CurrentSelectedSlot.Item)
+            if (GetItemsInInventory() == 0 || !hotbarSlots[currentSlotIn].Item)
             {
                 DeselectSlots();
             }
             else
             {
-                SelectSlot(currentSelectedSlot_ID, true);
+                SelectSlot(currentSlotIn, true);
             }
         }
 
@@ -264,7 +264,7 @@ namespace Gameplay
 
         public void SlotAnimSelect(InventorySlot _slotIn)
         {
-            if(_slotIn._selectRoutine != null || !CurrentSelectedSlot.Item)
+            if (_slotIn._selectRoutine != null || !CurrentSelectedSlot.Item)
             {
                 return;
             }
@@ -275,7 +275,7 @@ namespace Gameplay
 
         public void SlotAnimDeselect(InventorySlot _slotIn)
         {
-            if(_slotIn._deselectRoutine != null)
+            if (_slotIn._deselectRoutine != null)
             {
                 return;
             }
@@ -285,7 +285,52 @@ namespace Gameplay
             _slotIn.slotAnimator.SetBool(DeselectingHash, true);
             _slotIn._deselectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[0].length, _slotIn));
         }
-	}
+
+#if UNITY_EDITOR
+        public void ClearInventory()
+        {
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                RemoveItemFromSlot(i);
+            }
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                RemoveItemFromSlot(i);
+            }
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                RemoveItemFromSlot(i);
+            }
+            DeselectSlots();
+        }
+
+        public void RemoveSpecificItem(InventoryItem type)
+        {
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                if (hotbarSlots[i].Item == type)
+                {
+                    RemoveItemFromSlot(i);
+                }
+            }
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                if (hotbarSlots[i].Item == type)
+                {
+                    RemoveItemFromSlot(i);
+                }
+            }
+            for (int i = 0; i < hotbarSlots.Length; i++)
+            {
+                if (hotbarSlots[i].Item == type)
+                {
+                    RemoveItemFromSlot(i);
+                }
+            }
+        }
+
+#endif
+    }
 
     [Serializable]
     public class InventorySlot
@@ -306,6 +351,7 @@ namespace Gameplay
 
         public void UpdateSprite()
         {
+            if (!Item) { return; }
             Slot_Image.sprite = Item.sprite;
             Slot_Image.color = Item.color;
         }

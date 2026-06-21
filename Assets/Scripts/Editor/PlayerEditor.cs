@@ -16,12 +16,7 @@ namespace Gameplay
             GetWindow<PlayerEditor>("Player Editor");
         }
         int selectedTab = 0;
-        string[] allTabs = { "Player", "Game", "Misc" };
-
-        private void OnHierarchyChange()
-        {
-            //UpdateVariables();
-        }
+        string[] allTabs = { "Player", "Game","Editor", "Misc" };
 
         private void OnInspectorUpdate()
         {
@@ -64,6 +59,8 @@ namespace Gameplay
                         eventNames[i] = events[i].name;
                     }
                     break;
+                case "Editor":
+                    break;
                 case "Misc":
                     break;
                 default:
@@ -73,7 +70,7 @@ namespace Gameplay
         }
         private void UpdateVariables()
         {
-            baseGen = GameObject.Find("BaseGeneration");
+            baseGen = Generation.mainInstance;
             if (!baseGen) { return; }
             switch (allTabs[selectedTab])
             {
@@ -93,6 +90,8 @@ namespace Gameplay
                     {
                         allRooms = baseGen.GetComponent<Generation>()._initializedRoomGroups[0]._initializedCarriages;
                     }
+                    break;
+                case "Editor":
                     break;
                 case "Misc":
                     break;
@@ -116,6 +115,9 @@ namespace Gameplay
                     break;
                 case "Game":
                     GamePage();
+                    break;
+                case "Editor":
+                    EditorPage(); 
                     break;
                 case "Misc":
                     MiscPage();
@@ -150,6 +152,18 @@ namespace Gameplay
             notWorkingButton = new GUIStyle(EditorStyles.miniButton);
             notWorkingButton.normal.textColor = Color.darkRed;
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
         GameObject player;
         PlayerStatusEffects playerEffects;
@@ -252,6 +266,11 @@ namespace Gameplay
                     playerController.TotalStamina = 999999999;
                     playerController.CurrentStamina = 999999999;
                 }
+                if (GUILayout.Button("No Crouch Debuff") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerController.CrouchSpeed = playerController.BaseSpeed;
+                }
                 if (GUILayout.Button("Normal speed") && CheckIfRunning())
                 {
                     UpdateVariables();
@@ -266,24 +285,31 @@ namespace Gameplay
                     playerController.SprintSpeed = 8;
                     playerController.CrouchSpeed = 5.5f;
                 }
+                if (GUILayout.Button("Very High speed") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerController.BaseSpeed = 12f;
+                    playerController.SprintSpeed = 20;
+                    playerController.CrouchSpeed = 10f;
+                }
                 if (showFun)
                 {
-                    if (GUILayout.Button("Very High speed") && CheckIfRunning())
+                    if (GUILayout.Button("Insane speed") && CheckIfRunning())
                     {
                         UpdateVariables();
-                        playerController.BaseSpeed = 12f;
-                        playerController.SprintSpeed = 20;
-                        playerController.CrouchSpeed = 10f;
+                        playerController.BaseSpeed = 20f;
+                        playerController.SprintSpeed = 30;
+                        playerController.CrouchSpeed = 15f;
                     }
                 }
             }
 
             GUILayout.Space(20);
             GUILayout.Label("Inventory", headerStyle);
-            if (GUILayout.Button("Clear Inventory",notWorkingButton) && CheckIfRunning())
+            if (GUILayout.Button("Clear Inventory") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                playerInventory.ClearInventory();
             }
             GUILayout.Space(15);
             GUILayout.Label("Inventory: Item specific", header2Style);
@@ -293,42 +319,74 @@ namespace Gameplay
                 UpdateVariables();
                 PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
             }
-            if (GUILayout.Button("Remove item", notWorkingButton) && CheckIfRunning())
+            if (showDetails)
+            {
+                if (GUILayout.Button("Fill inventory with item") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
+                    PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
+                    PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
+                    PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
+                    PlrRefs.inst.PlayerInventory.PickupItem(items[selectedItem]);
+                }
+            }
+            if (GUILayout.Button("Remove item") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                playerInventory.RemoveSpecificItem(items[selectedItem]);
             }
 
             GUILayout.Space(20);
             GUILayout.Label("Player Location", headerStyle);
-
-            if (GUILayout.Button("TP to start of current room", notWorkingButton) && CheckIfRunning())
+            if (GUILayout.Button("TP to start") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                playerController.transform.position = baseGen._initializedRoomGroups[0]._initializedCarriages[0].PlayerSpawnPoint.transform.position;
             }
-            if (GUILayout.Button("TP to start", notWorkingButton) && CheckIfRunning())
+            if (GUILayout.Button("TP to next room") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                playerController.transform.position = baseGen._initializedRoomGroups[0]._initializedCarriages[playerController.CurrentCarriage.roomIndex + 1].EntryPoint.transform.position + new Vector3(0, 1.5f, 0);
             }
-            if (GUILayout.Button("TP to last room", notWorkingButton) && CheckIfRunning())
+            if (GUILayout.Button("TP to previous room") && CheckIfRunning())
             {
                 UpdateVariables();
-                //Add later
+                playerController.transform.position = baseGen._initializedRoomGroups[0]._initializedCarriages[playerController.CurrentCarriage.roomIndex - 1].EntryPoint.transform.position + new Vector3(0, 1.5f, 0);
+            }
+            if (showDetails)
+            {
+                if (GUILayout.Button("TP to start of current room") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerController.transform.position = playerController.CurrentCarriage.EntryPoint.transform.position + new Vector3(0, 1.5f, 0);
+                }
+                if (GUILayout.Button("TP to end of current room") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerController.transform.position = playerController.CurrentCarriage.ExitPoint.transform.position + new Vector3(0, 1.5f, 0);
+                }
             }
         }
 
-        GameObject baseGen;
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Generation baseGen;
         List<CarriageClass> allRooms;
         int selectedEvent = 0;
         public string[] eventNames;
         bool allItemSpots;
-        static bool allSpotsOn = false;
-        static bool itemsOn = false;
-        static bool boxOn = false;
-        static bool nodesOn = false;
-        static bool ticketOn = false;
         private void GamePage()
         {
             if (!GameObject.Find("BaseGeneration")) { return; }
@@ -338,7 +396,7 @@ namespace Gameplay
             if (GUILayout.Button("Regen Rooms", importantButtonStyle) && CheckIfRunning())
             {
                 UpdateVariables();
-                FindAnyObjectByType<Generation>().RegenerateRooms();
+                baseGen.RegenerateRooms();
             }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);
@@ -351,7 +409,7 @@ namespace Gameplay
                     SerializedObject serRoom = new SerializedObject(allRooms[j]);
                     for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
                     {
-                        if(serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
+                        if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                         {
                             allRooms[j].spawnedEventClasses[i].FirstExit(allRooms[j]);
                         }
@@ -376,7 +434,7 @@ namespace Gameplay
             if (GUILayout.Button("Add event to current room") && CheckIfRunning())
             {
                 UpdateVariables();
-                Generation.AddEventToRoom(PlrRefs.inst.PlayerController.CurrentCarriage, events[selectedEvent],true);
+                Generation.AddEventToRoom(PlrRefs.inst.PlayerController.CurrentCarriage, events[selectedEvent], true);
             }
             if (showDetails)
             {
@@ -393,7 +451,7 @@ namespace Gameplay
                     UpdateVariables();
                     for (int j = 0; j < allRooms.Count; j++)
                     {
-                        for(int i = 0; i < 10; i++)
+                        for (int i = 0; i < 10; i++)
                         {
                             Generation.AddEventToRoom(allRooms[j], events[selectedEvent]);
                         }
@@ -406,7 +464,7 @@ namespace Gameplay
                     {
                         for (int i = 0; i < events.Count; i++)
                         {
-                            if (events[i].IncludeInAllInOne == false) {continue;}
+                            if (events[i].IncludeInAllInOne == false) { continue; }
                             Generation.AddEventToRoom(allRooms[j], events[i]);
                         }
                     }
@@ -442,7 +500,7 @@ namespace Gameplay
                     for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
                     {
                         if (allRooms[j].spawnedEventClasses[i] == events[selectedEvent]) { continue; }
-                        
+
                         if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
                         {
                             allRooms[j].spawnedEventClasses[i].FirstExit(allRooms[j]);
@@ -467,19 +525,6 @@ namespace Gameplay
                     {
                         allRooms[j].transform.Find("Visuals").Find("Carriage").gameObject.SetActive(false);
                     }
-                }
-                if (!itemsOn && !ticketOn && !boxOn && !nodesOn)
-                {
-                    allSpotsOn = PrefabVisible.ChangeObjStates(EditorGUILayout.Toggle("Show Everything in Prefab", allSpotsOn));
-                    if (allSpotsOn) { GUILayout.Space(80); }
-                }
-                if (!allSpotsOn)
-                {
-                    if (itemsOn || ticketOn || boxOn || nodesOn) { GUILayout.Space(20); }
-                    itemsOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Item Spots in Prefab", itemsOn), "Items");
-                    ticketOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Ticket Spots in Prefab", ticketOn), "Tickets");
-                    boxOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Box Spots in Prefab", boxOn), "Box");
-                    nodesOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Nodes in Prefab", nodesOn), "Nodes");
                 }
             }
             GUILayout.Space(20);
@@ -523,11 +568,62 @@ namespace Gameplay
             {
                 UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
-                { 
+                {
                     allRooms[j].DespawnItems();
                 }
             }
         }
+
+
+
+
+
+
+
+
+
+        static bool allSpotsOn = false;
+        static bool itemsOn = false;
+        static bool boxOn = false;
+        static bool nodesOn = false;
+        static bool ticketOn = false;
+        private void EditorPage()
+        {
+            GUILayout.Label("Editor", titleStyle);
+            showDetails = EditorGUILayout.Toggle("Detailed options", showDetails);
+
+            GUILayout.Label("Room prefabs", headerStyle);
+            if (!itemsOn && !ticketOn && !boxOn && !nodesOn)
+            {
+                allSpotsOn = PrefabVisible.ChangeObjStates(EditorGUILayout.Toggle("Show Everything in Prefab", allSpotsOn));
+                if (allSpotsOn) { GUILayout.Space(80); }
+            }
+            if (!allSpotsOn)
+            {
+                if (itemsOn || ticketOn || boxOn || nodesOn) { GUILayout.Space(20); }
+                itemsOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Item Spots in Prefab", itemsOn), "Items");
+                ticketOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Ticket Spots in Prefab", ticketOn), "Tickets");
+                boxOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Box Spots in Prefab", boxOn), "Box");
+                nodesOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Nodes in Prefab", nodesOn), "Nodes");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void MiscPage()
         {

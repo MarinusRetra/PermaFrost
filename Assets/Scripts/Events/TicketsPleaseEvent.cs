@@ -14,6 +14,7 @@ namespace Gameplay
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
+            if(room.SpawnPoints.Length < 2) { Debug.LogWarning("No ticket spots found. Event not continuing."); return true; }
             //Spawn ticket
             List<Transform> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<Transform>().ToList();
             _availableSpots.RemoveAt(0);
@@ -40,6 +41,7 @@ namespace Gameplay
         //First time room entered
         public override bool FirstEnter(CarriageClass room)
         {
+            if (!spawnedTicket) { return false; }
             //Spawn tickets please
             GameObject _spawnedTicketsPlease = Instantiate(scriptable.SpawnablePrefab);
             GameObject mainTPObj = _spawnedTicketsPlease.transform.GetChild(0).gameObject;

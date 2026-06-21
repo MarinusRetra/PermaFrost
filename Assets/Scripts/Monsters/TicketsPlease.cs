@@ -17,6 +17,8 @@ namespace Gameplay
 
         private float _defaultSpeed;
         [SerializeField] private float _sprintingSpeed = 7;
+
+        private bool pacified = false;
         private void Start()
         {
             _entryRoom = CurrentRoom.Find("Entry");
@@ -42,11 +44,15 @@ namespace Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
+            if (pacified) { return; }
             if (other.CompareTag("Player"))
             {
                 if (!PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && !_isChasing)
                 {
                     StartCoroutine(ChasePlayer());
+                }else if (PlrRefs.inst.PlayerMonsterManager.HasFoundTicket)
+                {
+                    pacified = true;
                 }
             }
         }
@@ -64,7 +70,7 @@ namespace Gameplay
             _isChasing = true;
             //VERY fast, so player cant just run past and despawn them by going into the next room. (they still can most of the time)
             _agent.speed = _sprintingSpeed;
-            while (!PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
+            while (!pacified && !PlrRefs.inst.PlayerMonsterManager.HasFoundTicket && _isChasing && transform.position.z < _entryRoom.position.z + 30)
             {
                 _agent.destination = PlrRefs.inst.transform.position;
                 yield return new WaitForSeconds(0.2f);

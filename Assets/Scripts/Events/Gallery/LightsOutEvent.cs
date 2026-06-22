@@ -18,6 +18,7 @@ namespace Gameplay
             if (breakEarly)
             {
                 LightsOut(room);
+                lightsout = true;
             }
             return true; 
         }
@@ -29,6 +30,7 @@ namespace Gameplay
             if (!lightsout)
             {
                 LightsOut(room);
+                lightsout = true;
             }
             return true;
         }
@@ -44,7 +46,11 @@ namespace Gameplay
         //Any other time leaving room
         public override bool RepeatExit(CarriageClass room) { return true; }
         //Getting far away from the room
-        public override bool Recede(CarriageClass room) { return true; }
+        public override bool Recede(CarriageClass room) 
+        {
+            lightsout = false;
+            return true; 
+        }
         //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room)
         {
@@ -54,7 +60,6 @@ namespace Gameplay
         public void LightsOut(CarriageClass room)
         {
             room.GetComponent<CandleManager>().TurnOffCandles();
-            lightsout = true;
         }
     }
 }

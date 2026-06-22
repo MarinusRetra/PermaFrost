@@ -13,7 +13,7 @@ namespace Gameplay
         [MenuItem("Tools/PlayerEditor")]
         public static void ShowWindow()
         {
-            GetWindow<PlayerEditor>("Player Editor");
+            GetWindow<PlayerEditor>("Testing Utils");
         }
         int selectedTab = 0;
         string[] allTabs = { "Player", "Game","Editor", "Misc" };
@@ -58,6 +58,30 @@ namespace Gameplay
                     {
                         eventNames[i] = events[i].name;
                     }
+
+                    string[] roomtypeGuids = AssetDatabase.FindAssets("t:RoomTypeScriptable", new[] { "Assets/ScriptableObjects/RoomTypes" });
+                    roomtypes = roomtypeGuids
+                        .Select(guid => AssetDatabase.LoadAssetAtPath<RoomTypeScriptable>(AssetDatabase.GUIDToAssetPath(guid)))
+                        .ToList();
+
+                    roomtypeNames = new string[roomtypes.Count];
+
+                    for (int i = 0; i < roomtypes.Count; i++)
+                    {
+                        roomtypeNames[i] = roomtypes[i].name;
+                    }
+
+                    rooms = new();
+                    for (int i = 0; i < roomtypes[selectedRoomType].AllRoomsInType.Length; i++)
+                    {
+                        rooms.Add(roomtypes[selectedRoomType].AllRoomsInType[i]);
+                    }
+                    roomNames = new string[rooms.Count];
+                    for (int i = 0; i < rooms.Count; i++)
+                    {
+                        roomNames[i] = rooms[i].RoomName;
+                    }
+
                     break;
                 case "Editor":
                     break;
@@ -88,7 +112,7 @@ namespace Gameplay
                 case "Game":
                     if (CheckIfRunning(true))
                     {
-                        allRooms = baseGen.GetComponent<Generation>()._initializedRoomGroups[0]._initializedCarriages;
+                        allRooms = baseGen._initializedRoomGroups[0]._initializedCarriages;
                     }
                     break;
                 case "Editor":
@@ -106,7 +130,7 @@ namespace Gameplay
         {
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
             CreateStyles();
-            selectedTab = GUILayout.SelectionGrid(selectedTab, allTabs, 3);
+            selectedTab = GUILayout.SelectionGrid(selectedTab, allTabs, 4);
             GUILayout.Space(20);
             switch (allTabs[selectedTab])
             {
@@ -176,6 +200,8 @@ namespace Gameplay
         public string[] itemNames;
         List<InventoryItem> items;
         List<EventClassScriptable> events;
+        List<RoomTypeScriptable> roomtypes;
+        List<RoomClass> rooms;
         private void PlayerPage()
         {   
             GUILayout.Label("Player", titleStyle);
@@ -385,7 +411,11 @@ namespace Gameplay
         Generation baseGen;
         List<CarriageClass> allRooms;
         int selectedEvent = 0;
+        int selectedRoomType = 0;
+        int selectedRoom = 0;
         public string[] eventNames;
+        public string[] roomtypeNames;
+        public string[] roomNames;
         bool allItemSpots;
         private void GamePage()
         {
@@ -397,6 +427,37 @@ namespace Gameplay
             {
                 UpdateVariables();
                 baseGen.RegenerateRooms();
+            }
+
+            if (showDetails)
+            {
+                GUILayout.Space(20);
+                GUILayout.Label("DIY Rooms", headerStyle);
+                if (GUILayout.Button("SETUP") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    baseGen.SETUPManualPlacing(roomtypes[selectedRoomType].RoomTypeStartRoom);
+                }
+                GUILayout.Space(10);
+                selectedRoomType = EditorGUILayout.Popup(selectedRoomType, roomtypeNames);
+                if (GUILayout.Button("Clear Rooms") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    baseGen.ClearRooms();
+                }
+
+                GUILayout.Space(10);
+                selectedRoom = EditorGUILayout.Popup(selectedRoom, roomNames);
+                if (GUILayout.Button("Add room") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    baseGen.AddRoom(rooms[selectedRoom]);
+                }
+                if (GUILayout.Button("Remove previous room") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    baseGen.RemoveRoom();
+                }
             }
             GUILayout.Space(20);
             GUILayout.Label("Events", headerStyle);
@@ -490,12 +551,12 @@ namespace Gameplay
                     }
                 }
             }
-            if (GUILayout.Button("Remove all events except selected", importantButtonStyle) && CheckIfRunning())
+            if (GUILayout.Button("Remove all events except selected",notWorkingButton) && CheckIfRunning())
             {
                 UpdateVariables();
                 for (int j = 0; j < allRooms.Count; j++)
                 {
-
+                    //stupid workaround, list removeat makes things go down so some events woulnd get deleted.
                     SerializedObject serRoom = new SerializedObject(allRooms[j]);
                     for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
                     {
@@ -508,7 +569,28 @@ namespace Gameplay
                         allRooms[j].spawnedEventClasses[i].CallForDeletion(allRooms[j]);
                         allRooms[j].spawnedEventClasses.RemoveAt(i);
                     }
-                    //allRooms[j].spawnedEventClasses = new List<EventClass>(0);
+                    for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
+                    {
+                        if (allRooms[j].spawnedEventClasses[i] == events[selectedEvent]) { continue; }
+
+                        if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
+                        {
+                            allRooms[j].spawnedEventClasses[i].FirstExit(allRooms[j]);
+                        }
+                        allRooms[j].spawnedEventClasses[i].CallForDeletion(allRooms[j]);
+                        allRooms[j].spawnedEventClasses.RemoveAt(i);
+                    }
+                    for (int i = 0; i < allRooms[j].spawnedEventClasses.Count; i++)
+                    {
+                        if (allRooms[j].spawnedEventClasses[i] == events[selectedEvent]) { continue; }
+
+                        if (serRoom.FindProperty("_enterTriggered").boolValue && !serRoom.FindProperty("_exitTriggered").boolValue)
+                        {
+                            allRooms[j].spawnedEventClasses[i].FirstExit(allRooms[j]);
+                        }
+                        allRooms[j].spawnedEventClasses[i].CallForDeletion(allRooms[j]);
+                        allRooms[j].spawnedEventClasses.RemoveAt(i);
+                    }
                     serRoom.ApplyModifiedProperties();
                 }
             }
@@ -520,10 +602,9 @@ namespace Gameplay
                 if (GUILayout.Button("Remove carriage visual from all rooms") && CheckIfRunning())
                 {
                     UpdateVariables();
-                    Debug.Log("Go" + allRooms.Count);
                     for (int j = 0; j < allRooms.Count; j++)
                     {
-                        allRooms[j].transform.Find("Visuals").Find("Carriage").gameObject.SetActive(false);
+                        allRooms[j].transform.Find("Visuals").Find("Carriage")?.gameObject.SetActive(false);
                     }
                 }
             }

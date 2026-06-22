@@ -2,7 +2,6 @@ using Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using UnityEditor;
 using UnityEngine;
 
 public class Generation : MonoBehaviour
@@ -80,7 +79,7 @@ public class Generation : MonoBehaviour
 
         for (int i = 0; i < RoomAmount; i++)
         {
-            SpawnWeightedRoom(i);
+            SelectWeightedRoom(i);
             yield return new WaitForSeconds(0.3f * (FastLoading ? 0.1f : 1));
             for (int j = 0; j < 10; j++)
             {
@@ -164,16 +163,90 @@ public class Generation : MonoBehaviour
     public void RegenerateRooms()
     {
         if (IsGenerating) return;
-        for(int i = 0;i < _initializedRoomGroups[0]._initializedRooms.Count;i++)
+        for (int i = 0; i < _initializedRoomGroups[0]._initializedRooms.Count; i++)
         {
             _initializedRoomGroups[0]._initializedCarriages[i].DespawnItems();
             Destroy(_initializedRoomGroups[0]._initializedRooms[i]);
         }
-        Destroy(_initializedRoomGroups[0]);
+        Destroy(_initializedRoomGroups[0].EndingRoom);
+        Destroy(_initializedRoomGroups[0].gameObject);
         _initializedRoomGroups = new List<RoomGroupParent>();
         prevRoomCarriage = null;
         prevRoomClassName = null;
-        StartCoroutine(GenerateRooms(Rooms,DefaultSpawnLocation.position,AmountOfRooms));
+        StartCoroutine(GenerateRooms(Rooms, DefaultSpawnLocation.position, AmountOfRooms));
+    }
+
+    public void SETUPManualPlacing(GameObject startingRoom)
+    {
+        //destroy previous generation
+        if (IsGenerating) { return; }
+        for (int i = 0; i < _initializedRoomGroups[0]._initializedRooms.Count; i++)
+        {
+            _initializedRoomGroups[0]._initializedCarriages[i].DespawnItems();
+            Destroy(_initializedRoomGroups[0]._initializedRooms[i]);
+        }
+        Destroy(_initializedRoomGroups[0].EndingRoom);
+        Destroy(_initializedRoomGroups[0].gameObject);
+        _initializedRoomGroups = new List<RoomGroupParent>();
+        prevRoomCarriage = null;
+        prevRoomClassName = null;
+
+        //start new generating
+        IsGenerating = true;
+        currentHeightValue = 0;
+        currentSpawnLoc = DefaultSpawnLocation.position;
+
+        //spawn roomgroup
+        GameObject currentGroup = Instantiate(roomGroupPrefab, currentSpawnLoc, transform.rotation);
+        currentParent = currentGroup.GetComponent<RoomGroupParent>();
+        currentParent.name = "CUSTOM Room Group";
+
+        //spawn start room
+        GameObject startRoom = Instantiate(startingRoom, currentSpawnLoc, transform.rotation);
+        startRoom.transform.parent = currentParent.transform;
+        currentParent.StartingRoom = startRoom;
+        currentParent.StartingCarriage = startRoom.GetComponent<CarriageClass>();
+        currentParent._initializedRooms.Add(startRoom);
+        currentParent._initializedCarriages.Add(startRoom.GetComponent<CarriageClass>());
+        if (currentParent.StartingCarriage.PlayerSpawnPoint && player)
+        {
+            player.transform.position = currentParent.StartingCarriage.PlayerSpawnPoint.transform.position;
+            player.SetActive(true);
+        }
+        _initializedRoomGroups.Add(currentParent);
+    }
+    public void RemoveRoom()
+    {
+        if(currentParent._initializedCarriages.Count - 1 == 0) { return; }
+        CarriageClass lascer = currentParent._initializedCarriages[currentParent._initializedCarriages.Count - 1];
+        currentParent._initializedCarriages.Remove(lascer);
+        currentParent._initializedRooms.Remove(lascer.gameObject);
+        lascer.DespawnItems();
+        Destroy(lascer.gameObject);
+    }
+    public void ClearRooms()
+    {
+        //destroy previous generation
+        for (int i = _initializedRoomGroups[0]._initializedRooms.Count - 1; i > 0; i--)
+        {
+            _initializedRoomGroups[0]._initializedCarriages[i].DespawnItems();
+            currentParent._initializedCarriages.Remove(currentParent._initializedCarriages[i]);
+            GameObject room = currentParent._initializedRooms[i];
+            currentParent._initializedRooms.Remove(currentParent._initializedRooms[i]);
+            Destroy(room);
+        }
+        prevRoomCarriage = null;
+        prevRoomClassName = null;
+
+        //start new generating
+        currentHeightValue = 0;
+        currentSpawnLoc = DefaultSpawnLocation.position;
+        prevRoomCarriage = _initializedRoomGroups[0].StartingCarriage;
+    }
+    public void AddRoom(RoomClass room)
+    {
+        CarriageClass newThing = SpawnWeightedRoom(currentParent._initializedRooms.Count, room);
+        newThing.OnApproach();
     }
 #endif
 
@@ -236,34 +309,17 @@ public class Generation : MonoBehaviour
         {
             even.FirstEnter(room);
         }
-        bool isClose = false;
-        if (PlrRefs.inst.PlayerController.CurrentCarriage)
-        {
-            int ind = PlrRefs.inst.PlayerController.CurrentCarriage.roomIndex;
-            for (int i = mainInstance.RoomApproachSize; i < mainInstance.RoomApproachSize; i++)
-            {
-                if (room.roomIndex == PlrRefs.inst.PlayerController.CurrentCarriage.roomIndex + i)
-                {
-                    even.FirstApproach(room);
-                    isClose = true;
-                }
-            }
-        }
-        if (!isClose)
-        {
-            even.Recede(room);
-        }
 
         room.spawnedEventClasses.Add(even);
         room._selectedEventClasses.Add(eventClass);
     }
     bool generatingRoom = false;
     List<RoomClass> allTotalPossibleRooms = new List<RoomClass>();
-    private void SpawnWeightedRoom(int index)
+    private void SelectWeightedRoom(int index)
     {
         generatingRoom = true;
         List<RoomClass> allCurrentPossibleRooms = new List<RoomClass>(allTotalPossibleRooms);
-        if(index > 0 && !Rooms.AllowDupes)
+        if (index > 0 && !Rooms.AllowDupes)
         {
             for (int i = 0; i < allCurrentPossibleRooms.Count; i++)
             {
@@ -300,53 +356,59 @@ public class Generation : MonoBehaviour
             }
         }
 
-        
+
         if (selectedroom.Room == null)
         {
             Debug.LogError("Room doesnt have a room");
         }
         else
         {
-            GameObject randomRoom = Instantiate(selectedroom.Room);
-            GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
-            GameObject previousRoom = null;
-            if(currentParent._initializedRooms.Count != 0)
+            SpawnWeightedRoom(index,selectedroom);
+        }
+        generatingRoom = false;
+    }
+
+    private CarriageClass SpawnWeightedRoom(int index,RoomClass selectedroom)
+    {
+        GameObject randomRoom = Instantiate(selectedroom.Room);
+        GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
+        GameObject previousRoom = null;
+        if (currentParent._initializedRooms.Count != 0)
+        {
+            if (currentParent._initializedRooms.Count == index)
             {
-                if (currentParent._initializedRooms.Count == index)
-                {
-                    previousRoom = currentParent._initializedRooms[index - 1];
-                }
-                else
-                {
-                    previousRoom = currentParent._initializedRooms[index];
-                }
-                PositionGeneratedRoom(randomRoom, previousRoom);
+                previousRoom = currentParent._initializedRooms[index - 1];
             }
             else
             {
-                PositionGeneratedRoom(randomRoom, currentSpawnLoc);
+                previousRoom = currentParent._initializedRooms[index];
             }
-
-            randomRoom.name = "Room" + index + selectedroom.RoomName;
-
-            CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
-            randomCarriage.previousCarriage = previousRoom?.GetComponent<CarriageClass>();
-            randomCarriage.roomIndex = index + 1;
-            randomCarriage.roomParent = currentParent;
-            if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
-
-            currentParent._initializedRooms.Add(randomRoom);
-            currentParent._initializedCarriages.Add(randomCarriage);
-            randomRoom.transform.parent = currentParent.transform;
-            prevRoomClassName = selectedroom.RoomName;
-            _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
-
-            if (selectedroom.onlySpawnOnce == true)
-            {
-                allTotalPossibleRooms.Remove(selectedroom);
-            }
+            PositionGeneratedRoom(randomRoom, previousRoom);
         }
-        generatingRoom = false;
+        else
+        {
+            PositionGeneratedRoom(randomRoom, currentSpawnLoc);
+        }
+
+        randomRoom.name = "Room" + index + selectedroom.RoomName;
+
+        CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
+        randomCarriage.previousCarriage = previousRoom?.GetComponent<CarriageClass>();
+        randomCarriage.roomIndex = index + 1;
+        randomCarriage.roomParent = currentParent;
+        if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
+
+        currentParent._initializedRooms.Add(randomRoom);
+        currentParent._initializedCarriages.Add(randomCarriage);
+        randomRoom.transform.parent = currentParent.transform;
+        prevRoomClassName = selectedroom.RoomName;
+        _meshSurface.UpdateNavMesh(_meshSurface.navMeshData);
+
+        if (selectedroom.onlySpawnOnce == true)
+        {
+            allTotalPossibleRooms.Remove(selectedroom);
+        }
+        return randomCarriage;
     }
 
     private RoomClass CalculateRoomWeight(List<RoomClass> rooms)

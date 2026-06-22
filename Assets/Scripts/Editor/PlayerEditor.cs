@@ -428,6 +428,14 @@ namespace Gameplay
                 UpdateVariables();
                 baseGen.RegenerateRooms();
             }
+            if (GUILayout.Button("Approach all Rooms") && CheckIfRunning())
+            {
+                UpdateVariables();
+                for(int i = 1;  i < allRooms.Count; i++)
+                {
+                    allRooms[i].OnApproach();
+                }
+            }
 
             if (showDetails)
             {
@@ -487,7 +495,7 @@ namespace Gameplay
             if (GUILayout.Button("Add event to all rooms") && CheckIfRunning())
             {
                 UpdateVariables();
-                for (int j = 0; j < allRooms.Count; j++)
+                for (int j = 1; j < allRooms.Count; j++)
                 {
                     Generation.AddEventToRoom(allRooms[j], events[selectedEvent]);
                 }

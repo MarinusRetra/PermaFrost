@@ -31,8 +31,8 @@ namespace Gameplay
             GameObject _box = Instantiate(scriptable.SpawnablePrefab);
             _box.transform.parent = room.Holder;
             _box.transform.localScale = new Vector3(1, 1, 1);
-            _box.transform.position = _chosenSpot.position;
             _box.transform.rotation = _chosenSpot.rotation;
+            _box.transform.position = _chosenSpot.position - (_box.transform.right * 0.3f);
             spawnedBox = _box;
             spawnedBoxClass = _box.GetComponent<MusicBox>();
             return true;

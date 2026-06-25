@@ -16,7 +16,7 @@ namespace Gameplay
         {
             if(room.SpawnPoints.Length < 2) { Debug.LogWarning("No ticket spots found. Event not continuing."); return true; }
             //Spawn ticket
-            List<Transform> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<Transform>().ToList();
+            List<Transform> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<Transform>(false).ToList();
             _availableSpots.RemoveAt(0);
             Transform _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
             EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;

@@ -48,24 +48,74 @@ public class CarriageClass : MonoBehaviour
 
     public RoomGroupParent roomParent;
 
+    public List<Transform> AllItemSpawnLocations;
+    public List<Transform> SanitizedSpawnLocations;
+
+    public RoomSetupManager RoomSetup;
+
+
+    public void GetItemSpawnPoints()
+    {
+        if (_maxAmountOfItems == 0) return;
+        AllItemSpawnLocations = new List<Transform>();
+        SanitizedSpawnLocations = new List<Transform>();
+        List<MeshFilter> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<MeshFilter>(false).ToList();
+        foreach (MeshFilter spawnPoint in _spawnPoints)
+        {
+            AllItemSpawnLocations.Add(spawnPoint.transform);
+            SanitizedSpawnLocations.Add(spawnPoint.transform);
+        }
+    }
     public void SpawnItems()
     {
         if (_maxAmountOfItems == 0) return;
-        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
-        _spawnPoints.RemoveAt(0);
-        if (_spawnPoints.Count > 0)
+        if (SanitizedSpawnLocations.Count > 0)
         {
-            for(int i = 0; i < Random.Range(0,_maxAmountOfItems + 1); i++)
+            for(int i = 0; i < Random.Range(0, _maxAmountOfItems + 1); i++)
             {
-                Transform randomLocation = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randomLocation.position, Quaternion.identity);
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, GetRandomItemSpot().position, Quaternion.identity);
 
                 //prevent 2 items in 1 spot
-                _spawnPoints.Remove(randomLocation);
                 spawnedItems.Add(newDroppedItem);
             }
         }
+        else if(AllItemSpawnLocations.Count > 0)
+        {
+            Debug.LogWarning("No unspawned item spots, forced to double up ALL spots " + gameObject.name);
+            for (int i = 0; i < Random.Range(0, _maxAmountOfItems + 1); i++)
+            {
+                InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, GetRandomItemSpot().position, Quaternion.identity);
+
+                spawnedItems.Add(newDroppedItem);
+            }
+        }
+        else
+        {
+            Debug.LogError("No item spawn points found. " + gameObject.name);
+        }
+    }
+
+    public Transform GetRandomItemSpot()
+    {
+        Transform randomLocation = transform;
+        if (SanitizedSpawnLocations.Count > 0)
+        {
+            randomLocation = SanitizedSpawnLocations[Random.Range(0, SanitizedSpawnLocations.Count)];
+            SanitizedSpawnLocations.Remove(randomLocation);
+            Debug.Log("We good :D " + gameObject.name);
+        }
+        else if (AllItemSpawnLocations.Count > 0)
+        {
+            randomLocation = AllItemSpawnLocations[Random.Range(0, AllItemSpawnLocations.Count)];
+            Debug.LogWarning("No unspawned item spots, forced to double up a spot " + gameObject.name);
+        }
+        else
+        {
+            Debug.LogError("Both spots have no places " + gameObject.name);
+        }
+        return randomLocation;
     }
 #if UNITY_EDITOR
     //these functions are only used for the player editor tab, do not worry about them too much

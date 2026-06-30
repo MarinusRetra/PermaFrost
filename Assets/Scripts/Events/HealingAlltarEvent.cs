@@ -7,14 +7,14 @@ namespace Gameplay
     public class HealingAlltarEvent : EventClass
     {
         //Variables
-        private Transform _chosenSpot;
+        private MeshFilter _chosenSpot;
         private GameObject spawnedAltar;
         private HealingAltar spawnedAltarScript;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
-            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
+            List<MeshFilter> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<MeshFilter>(false).ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
@@ -30,8 +30,8 @@ namespace Gameplay
             GameObject _altar = Instantiate(scriptable.SpawnablePrefab);
             _altar.transform.parent = room.Holder;
             _altar.transform.localScale = new Vector3(1, 1, 1);
-            _altar.transform.position = _chosenSpot.position;
-            _altar.transform.rotation = _chosenSpot.rotation;
+            _altar.transform.position = _chosenSpot.transform.position;
+            _altar.transform.rotation = _chosenSpot.transform.rotation;
             spawnedAltar = _altar;
             spawnedAltarScript = _altar.GetComponent<HealingAltar>();
             return true;

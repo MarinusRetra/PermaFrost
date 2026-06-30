@@ -10,12 +10,12 @@ namespace Gameplay
     {
         private GameObject spawnedBox;
         private MusicBox spawnedBoxClass;
-        private Transform _chosenSpot;
+        private MeshFilter _chosenSpot;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
-            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
+            List<MeshFilter> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<MeshFilter>(false).ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
@@ -31,8 +31,8 @@ namespace Gameplay
             GameObject _box = Instantiate(scriptable.SpawnablePrefab);
             _box.transform.parent = room.Holder;
             _box.transform.localScale = new Vector3(1, 1, 1);
-            _box.transform.rotation = _chosenSpot.rotation;
-            _box.transform.position = _chosenSpot.position - (_box.transform.right * 0.3f);
+            _box.transform.rotation = _chosenSpot.transform.rotation;
+            _box.transform.position = _chosenSpot.transform.position - (_box.transform.right * 0.3f);
             spawnedBox = _box;
             spawnedBoxClass = _box.GetComponent<MusicBox>();
             return true;

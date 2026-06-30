@@ -2,14 +2,12 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using static Unity.Cinemachine.CinemachineCore;
 
 namespace Gameplay
 {
     [InitializeOnLoad]
     public class PrefabVisible : MonoBehaviour
     {
-
         public static bool ChangeObjStates(bool value)
         {
             var stage = PrefabStageUtility.GetCurrentPrefabStage();

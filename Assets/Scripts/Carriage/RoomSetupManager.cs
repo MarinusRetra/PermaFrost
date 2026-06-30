@@ -5,9 +5,11 @@ namespace Gameplay
 {
     public class RoomSetupManager : MonoBehaviour
     {
-        [SerializeField] private RoomVariation[] variations;
-        void Start()
+        public RoomVariation[] variations;
+
+        public void ApplyVariant()
         {
+            if (variations == null) { return; }
             RoomVariation chosenVariant = new RoomVariation();
             if (variations.Length > 1)
             {
@@ -16,6 +18,11 @@ namespace Gameplay
             else { return; }
 
             if (chosenVariant == variations[0]) { return; }
+            ActuallyApplyVariant(chosenVariant);
+        }
+
+        public void ActuallyApplyVariant(RoomVariation chosenVariant)
+        {
 
             for (int i = 0; i < variations[0].ObjectsToTurnOn.Length; i++)
             {

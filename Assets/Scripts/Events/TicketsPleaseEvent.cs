@@ -16,13 +16,13 @@ namespace Gameplay
         {
             if(room.SpawnPoints.Length < 2) { Debug.LogWarning("No ticket spots found. Event not continuing."); return true; }
             //Spawn ticket
-            List<Transform> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<Transform>(false).ToList();
+            List<MeshFilter> _availableSpots = room.SpawnPoints[2].GetComponentsInChildren<MeshFilter>(false).ToList();
             _availableSpots.RemoveAt(0);
-            Transform _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
+            MeshFilter _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
             EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
             GameObject _ticket = Instantiate(objEvent.otherPrefabs[0]);
-            _ticket.transform.position = _chosenSpot.position;
-            _ticket.transform.rotation = _chosenSpot.rotation;
+            _ticket.transform.position = _chosenSpot.transform.position;
+            _ticket.transform.rotation = _chosenSpot.transform.rotation;
             _ticket.transform.parent = room.Holder;
             spawnedTicket = _ticket;
             return true;

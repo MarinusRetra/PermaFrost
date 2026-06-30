@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Gameplay
@@ -84,6 +85,21 @@ namespace Gameplay
 
                     break;
                 case "Editor":
+                    var stage = PrefabStageUtility.GetCurrentPrefabStage();
+                    bool inPrefabMode = stage != null;
+
+                    if (inPrefabMode)
+                    {
+                        currentRoomSetup = stage.prefabContentsRoot.GetComponent<RoomSetupManager>();
+                        if (currentRoomSetup)
+                        {
+                            roomVariants = new string[currentRoomSetup.variations.Length];
+                            for(int i = 0; i < currentRoomSetup.variations.Length; i++)
+                            {
+                                roomVariants[i] = currentRoomSetup.variations[i].Name;
+                            }
+                        }
+                    }
                     break;
                 case "Misc":
                     break;
@@ -676,6 +692,9 @@ namespace Gameplay
         static bool boxOn = false;
         static bool nodesOn = false;
         static bool ticketOn = false;
+        public RoomSetupManager currentRoomSetup;
+        public string[] roomVariants;
+        public int selectedVariant = 0;
         private void EditorPage()
         {
             GUILayout.Label("Editor", titleStyle);
@@ -694,6 +713,12 @@ namespace Gameplay
                 ticketOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Ticket Spots in Prefab", ticketOn), "Tickets");
                 boxOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Box Spots in Prefab", boxOn), "Box");
                 nodesOn = PrefabVisible.ChangeObjStatesWName(EditorGUILayout.Toggle("Show Nodes in Prefab", nodesOn), "Nodes");
+            }
+
+            selectedVariant = EditorGUILayout.Popup(selectedVariant, roomVariants);
+            if (GUILayout.Button("Set Variant"))
+            {
+                currentRoomSetup.ActuallyApplyVariant(currentRoomSetup.variations[selectedVariant]);
             }
         }
 

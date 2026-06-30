@@ -12,17 +12,21 @@ namespace Gameplay
         private List<Light> _allCandles = new List<Light>();
         private List<ParticleSystem> _allCandleParticles = new List<ParticleSystem>();
 
-        private void Start()
+        public bool beenCalled = false;
+
+        private void SetupCandles()
         {
             if (_candleHolder)
             {
                 _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToList();
                 _allCandleParticles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+                beenCalled = true;
             }
-            
+
         }
         public void TurnOffCandles()
         {
+            if (!beenCalled) { SetupCandles(); }
             for(int i = 0; i < _allCandles.Count; i++)
             {
                 _allCandles[i].gameObject.SetActive(false);
@@ -35,6 +39,7 @@ namespace Gameplay
 
         public void TurnOnCandles()
         {
+            if (!beenCalled) { SetupCandles(); }
             for (int i = 0; i < _allCandles.Count; i++)
             {
                 _allCandles[i].gameObject.SetActive(true);

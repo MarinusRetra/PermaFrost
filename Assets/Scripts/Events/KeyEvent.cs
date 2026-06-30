@@ -13,11 +13,6 @@ namespace Gameplay
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
-            //find key spot
-            List<Transform> _availableSpots = room.SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
-            _availableSpots.RemoveAt(0);
-            Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
-
             //spawn door
             if (room.RoomEventRefs && room.RoomEventRefs.OpenDoor)
             {
@@ -29,7 +24,7 @@ namespace Gameplay
 
                 //spawn key
                 EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
-                spawnedKey = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, Quaternion.identity);
+                spawnedKey = Instantiate(objEvent.otherPrefabs[0], room.GetRandomItemSpot().position, Quaternion.identity);
                 spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
                 spawnedKey.transform.parent = room.Holder;
             }

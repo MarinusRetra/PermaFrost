@@ -137,8 +137,6 @@ public class Generation : MonoBehaviour
         room.transform.rotation = exit.rotation * Quaternion.Inverse(entry.rotation);
 
         currentCarriage.generationClass = this;
-
-        currentCarriage.SpawnItems();
     }
 
     void PositionGeneratedRoom(GameObject room, Vector3 position)
@@ -154,8 +152,6 @@ public class Generation : MonoBehaviour
         room.transform.rotation = transform.rotation * Quaternion.Inverse(entry.rotation);
 
         currentCarriage.generationClass = this;
-
-        currentCarriage.SpawnItems();
     }
 
 #if UNITY_EDITOR
@@ -371,7 +367,7 @@ public class Generation : MonoBehaviour
     private CarriageClass SpawnWeightedRoom(int index,RoomClass selectedroom)
     {
         GameObject randomRoom = Instantiate(selectedroom.Room);
-        GiveRoomEvents(randomRoom.GetComponent<CarriageClass>(), selectedroom);
+        CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
         GameObject previousRoom = null;
         if (currentParent._initializedRooms.Count != 0)
         {
@@ -392,10 +388,16 @@ public class Generation : MonoBehaviour
 
         randomRoom.name = "Room" + index + selectedroom.RoomName;
 
-        CarriageClass randomCarriage = randomRoom.GetComponent<CarriageClass>();
         randomCarriage.previousCarriage = previousRoom?.GetComponent<CarriageClass>();
         randomCarriage.roomIndex = index + 1;
         randomCarriage.roomParent = currentParent;
+        if (randomCarriage.RoomSetup)
+        {
+            randomCarriage.RoomSetup.ApplyVariant();
+        }
+        randomCarriage.GetItemSpawnPoints();
+        GiveRoomEvents(randomCarriage, selectedroom);
+        randomCarriage.SpawnItems();
         if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
 
         currentParent._initializedRooms.Add(randomRoom);

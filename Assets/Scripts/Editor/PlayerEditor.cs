@@ -718,7 +718,9 @@ namespace Gameplay
             selectedVariant = EditorGUILayout.Popup(selectedVariant, roomVariants);
             if (GUILayout.Button("Set Variant"))
             {
+                currentRoomSetup.TurnOffEverything();
                 currentRoomSetup.ActuallyApplyVariant(currentRoomSetup.variations[selectedVariant]);
+                EditorUtility.SetDirty(currentRoomSetup);
             }
         }
 

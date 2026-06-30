@@ -19,6 +19,7 @@ namespace Gameplay
 
             if (chosenVariant == variations[0]) { return; }
             ActuallyApplyVariant(chosenVariant);
+            gameObject.name += "-" + chosenVariant.Name;
         }
 
         public void ActuallyApplyVariant(RoomVariation chosenVariant)
@@ -33,8 +34,18 @@ namespace Gameplay
             {
                 chosenVariant.ObjectsToTurnOn[i].SetActive(true);
             }
+        }
 
-            gameObject.name += "-" + chosenVariant.Name;
+        public void TurnOffEverything()
+        {
+            for(int i = 0; i < variations.Length; i++)
+            {
+                for (int j = 0; j < variations[i].ObjectsToTurnOn.Length; j++)
+                {
+                    variations[i].ObjectsToTurnOn[j].SetActive(false);
+                }
+
+            }
         }
 
         private RoomVariation ChooseVariant()

@@ -25,13 +25,13 @@ namespace Gameplay
         public override bool FirstEnter(CarriageClass room)
         {
             //find Plate spot
-            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>().ToList();
+            List<Transform> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<Transform>(false).ToList();
             _availableSpots.RemoveAt(0);
             Transform randomLocation = _availableSpots[Random.Range(0, _availableSpots.Count)];
 
             //spawn wraps
             Vector3 doorPos = room.ExitPoint.transform.position;
-            spawnedWraps = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
+            spawnedWraps = Instantiate(scriptable.SpawnablePrefab, doorPos + new Vector3(0,1,0), scriptable.SpawnablePrefab.transform.rotation);
             spawnedWraps.transform.parent = room.Holder;
 
             //spawn plate

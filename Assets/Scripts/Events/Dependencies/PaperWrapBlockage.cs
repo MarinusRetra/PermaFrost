@@ -5,16 +5,17 @@ namespace Gameplay
     public class PaperWrapBlockage : MonoBehaviour
     {
         public Collider MainCollder;
+        [SerializeField] private Animator WrapAnimator;
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            //do animation :D
+            WrapAnimator.enabled = true;
         }
 
         public void Unwrap()
         {
             MainCollder.enabled = false;
-            //do other animation :D
+            WrapAnimator.SetTrigger("Open");
         }
     }
 }

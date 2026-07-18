@@ -11,7 +11,7 @@ namespace Gameplay
         private bool showDetails = false;
         private bool showFun = false;
 
-        [MenuItem("Tools/PlayerEditor")]
+        [MenuItem("Permafrost/PlayerEditor")]
         public static void ShowWindow()
         {
             GetWindow<PlayerEditor>("Testing Utils");

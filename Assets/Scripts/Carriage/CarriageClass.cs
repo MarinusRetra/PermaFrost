@@ -74,9 +74,9 @@ public class CarriageClass : MonoBehaviour
             for(int i = 0; i < Random.Range(0, _maxAmountOfItems + 1); i++)
             {
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, GetRandomItemSpot().position, Quaternion.identity);
+                Transform randSpot = GetRandomItemSpot();
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randSpot.position, randSpot.rotation * chosenItem.HoldObject.transform.rotation);
 
-                //prevent 2 items in 1 spot
                 spawnedItems.Add(newDroppedItem);
             }
         }
@@ -86,7 +86,8 @@ public class CarriageClass : MonoBehaviour
             for (int i = 0; i < Random.Range(0, _maxAmountOfItems + 1); i++)
             {
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, GetRandomItemSpot().position, Quaternion.identity);
+                Transform randSpot = GetRandomItemSpot();
+                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randSpot.position, randSpot.rotation * chosenItem.HoldObject.transform.rotation);
 
                 spawnedItems.Add(newDroppedItem);
             }
@@ -104,7 +105,6 @@ public class CarriageClass : MonoBehaviour
         {
             randomLocation = SanitizedSpawnLocations[Random.Range(0, SanitizedSpawnLocations.Count)];
             SanitizedSpawnLocations.Remove(randomLocation);
-            Debug.Log("We good :D " + gameObject.name);
         }
         else if (AllItemSpawnLocations.Count > 0)
         {
@@ -136,16 +136,18 @@ public class CarriageClass : MonoBehaviour
     private IEnumerator LilbroNeedsToWaitCauseHitboxes()
     {
         yield return new WaitForSeconds(0.1f);
-        List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
-        _spawnPoints.RemoveAt(0);
-        if (_spawnPoints.Count > 0)
-        {
-            for (int i = 0; i < _spawnPoints.Count; i++)
+        if (SpawnPoints.Length > 0) {
+            List<Transform> _spawnPoints = SpawnPoints[0].GetComponentsInChildren<Transform>().ToList();
+            _spawnPoints.RemoveAt(0);
+            if (_spawnPoints.Count > 0)
             {
-                Transform setLocation = _spawnPoints[i];
-                InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, setLocation.position, Quaternion.identity);
-                spawnedItems.Add(newDroppedItem);
+                for (int i = 0; i < _spawnPoints.Count; i++)
+                {
+                    Transform setLocation = _spawnPoints[i];
+                    InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
+                    GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, setLocation.position, setLocation.rotation * chosenItem.HoldObject.transform.rotation);
+                    spawnedItems.Add(newDroppedItem);
+                }
             }
         }
     }

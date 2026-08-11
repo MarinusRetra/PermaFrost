@@ -266,6 +266,8 @@ public class Generation : MonoBehaviour
         if (allowedEvents.Count > 0 && roomClass.AmountOfEventsMax > 0)
         {
             int count = Mathf.Min(roomClass.AmountOfEventsMax, allowedEvents.Count);
+            if (room.roomIndex < 3) { count = Mathf.Min(1, count); }
+            if (room.roomIndex >= 3 && room.roomIndex < 11) { count = Mathf.Min(2, count); }
             for (int i = 0; i < count; i++)
             {
                 int randomIndex = Random.Range(0, allowedEvents.Count);

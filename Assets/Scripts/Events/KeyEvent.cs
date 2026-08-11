@@ -25,7 +25,7 @@ namespace Gameplay
                 //spawn key
                 EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
                 Transform randSpot = room.GetRandomItemSpot();
-                spawnedKey = Instantiate(objEvent.otherPrefabs[0], randSpot.position, randSpot.rotation * objEvent.otherPrefabs[0].transform.rotation);
+                spawnedKey = room.SpawnItem(objEvent.otherPrefabs[0], randSpot);
                 spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
                 spawnedKey.transform.parent = room.Holder;
             }

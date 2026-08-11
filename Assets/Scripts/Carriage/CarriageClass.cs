@@ -66,7 +66,7 @@ public class CarriageClass : MonoBehaviour
             SanitizedSpawnLocations.Add(spawnPoint.transform);
         }
     }
-    public void SpawnItems()
+    public void SpawnRoomItems()
     {
         if (_maxAmountOfItems == 0) return;
         if (SanitizedSpawnLocations.Count > 0)
@@ -75,9 +75,7 @@ public class CarriageClass : MonoBehaviour
             {
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 Transform randSpot = GetRandomItemSpot();
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randSpot.position, randSpot.rotation * chosenItem.HoldObject.transform.rotation);
-
-                spawnedItems.Add(newDroppedItem);
+                SpawnItem(chosenItem, randSpot);
             }
         }
         else if(AllItemSpawnLocations.Count > 0)
@@ -87,15 +85,26 @@ public class CarriageClass : MonoBehaviour
             {
                 InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
                 Transform randSpot = GetRandomItemSpot();
-                GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, randSpot.position, randSpot.rotation * chosenItem.HoldObject.transform.rotation);
-
-                spawnedItems.Add(newDroppedItem);
+                SpawnItem(chosenItem, randSpot);
             }
         }
         else
         {
             Debug.LogError("No item spawn points found. " + gameObject.name);
         }
+    }
+
+    public GameObject SpawnItem(InventoryItem item,Transform location)
+    {
+        GameObject newDroppedItem = Instantiate(item.HoldObject, location.position, location.rotation * item.HoldObject.transform.rotation);
+        spawnedItems.Add(newDroppedItem);
+        return newDroppedItem;
+    }
+    public GameObject SpawnItem(GameObject item, Transform location)
+    {
+        GameObject newDroppedItem = Instantiate(item, location.position, location.rotation * item.transform.rotation);
+        spawnedItems.Add(newDroppedItem);
+        return newDroppedItem;
     }
 
     public Transform GetRandomItemSpot()
@@ -124,6 +133,7 @@ public class CarriageClass : MonoBehaviour
         for(int i = 0; i <  spawnedItems.Count; i++)
         {
             if (spawnedItems[i] == null) { continue; }
+            if(spawnedItems[i].GetComponent<ItemImportance>()) { continue; }
             Destroy(spawnedItems[i]);
         }
     }
@@ -145,8 +155,7 @@ public class CarriageClass : MonoBehaviour
                 {
                     Transform setLocation = _spawnPoints[i];
                     InventoryItem chosenItem = _allowedDrops[Random.Range(0, _allowedDrops.Count)];
-                    GameObject newDroppedItem = Instantiate(chosenItem.HoldObject, setLocation.position, setLocation.rotation * chosenItem.HoldObject.transform.rotation);
-                    spawnedItems.Add(newDroppedItem);
+                    SpawnItem(chosenItem, setLocation);
                 }
             }
         }

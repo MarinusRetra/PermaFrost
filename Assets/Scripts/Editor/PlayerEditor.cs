@@ -649,7 +649,7 @@ namespace Gameplay
                     else
                     {
                         allRooms[j].DespawnItems();
-                        allRooms[j].SpawnItems();
+                        allRooms[j].SpawnRoomItems();
                     }
                 }
 
@@ -665,7 +665,7 @@ namespace Gameplay
                     }
                     else
                     {
-                        allRooms[j].SpawnItems();
+                        allRooms[j].SpawnRoomItems();
                     }
                 }
             }

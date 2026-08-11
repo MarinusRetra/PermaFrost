@@ -397,7 +397,7 @@ public class Generation : MonoBehaviour
         }
         randomCarriage.GetItemSpawnPoints();
         GiveRoomEvents(randomCarriage, selectedroom);
-        randomCarriage.SpawnItems();
+        randomCarriage.SpawnRoomItems();
         if (previousRoom) { previousRoom.GetComponent<CarriageClass>().nextCarriage = randomCarriage; }
 
         currentParent._initializedRooms.Add(randomRoom);

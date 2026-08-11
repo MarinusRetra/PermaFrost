@@ -18,11 +18,11 @@ namespace Gameplay
             else { return; }
 
             if (chosenVariant == variations[0]) { return; }
-            ActuallyApplyVariant(chosenVariant);
+            TurnOnVariantObjects(chosenVariant);
             gameObject.name += "-" + chosenVariant.Name;
         }
 
-        public void ActuallyApplyVariant(RoomVariation chosenVariant)
+        public void TurnOnVariantObjects(RoomVariation chosenVariant)
         {
 
             for (int i = 0; i < variations[0].ObjectsToTurnOn.Length; i++)

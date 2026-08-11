@@ -18,7 +18,7 @@ namespace Gameplay
             {
                 Vector3 doorPos = room.RoomEventRefs.OpenDoor.transform.position;
                 spawnedDoor = Instantiate(scriptable.SpawnablePrefab, doorPos, scriptable.SpawnablePrefab.transform.rotation);
-                spawnedDoor.transform.parent = room.Holder;
+                spawnedDoor.transform.parent = room.InstanceHolder;
 
                 room.RoomEventRefs.OpenDoor.SetActive(false);
 
@@ -27,7 +27,7 @@ namespace Gameplay
                 Transform randSpot = room.GetRandomItemSpot();
                 spawnedKey = room.SpawnItem(objEvent.otherPrefabs[0], randSpot);
                 spawnedKey.GetComponent<ItemImportance>().OnSpawnKill();
-                spawnedKey.transform.parent = room.Holder;
+                spawnedKey.transform.parent = room.InstanceHolder;
             }
             else { Debug.LogWarning("Coulnd spawn key event: No open door."); }
                 return true;

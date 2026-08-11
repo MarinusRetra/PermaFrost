@@ -28,7 +28,11 @@ namespace Gameplay
             return true;
         }
         //First time completing room
-        public override bool FirstExit(CarriageClass room) { return true; }
+        public override bool FirstExit(CarriageClass room) 
+        {
+            Debug.LogWarning("...Where are you going? You reached the end.");
+            return true; 
+        }
         //Leaving room through the way the player came
         public override bool EarlyExit(CarriageClass room) { return true; }
         //Any other time leaving room
@@ -38,7 +42,7 @@ namespace Gameplay
         //Removes any evidence of events existance in room
         public override bool CallForDeletion(CarriageClass room) 
         {
-            Debug.LogWarning("You just Call For Deletion'd the ending cutscene");
+            Debug.LogWarning("You just Call For Deletion'd the ending cutscene...");
             Destroy(this);
             return true; 
         }

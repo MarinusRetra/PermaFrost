@@ -23,7 +23,7 @@ namespace Gameplay
             GameObject _ticket = Instantiate(objEvent.otherPrefabs[0]);
             _ticket.transform.position = _chosenSpot.transform.position;
             _ticket.transform.rotation = _chosenSpot.transform.rotation;
-            _ticket.transform.parent = room.Holder;
+            _ticket.transform.parent = room.InstanceHolder;
             spawnedTicket = _ticket;
             return true;
         }
@@ -45,7 +45,7 @@ namespace Gameplay
             //Spawn tickets please
             GameObject _spawnedTicketsPlease = Instantiate(scriptable.SpawnablePrefab);
             GameObject mainTPObj = _spawnedTicketsPlease.transform.GetChild(0).gameObject;
-            _spawnedTicketsPlease.transform.parent = room.Holder;
+            _spawnedTicketsPlease.transform.parent = room.InstanceHolder;
             Monster ticketsMonster = mainTPObj.GetComponent<Monster>();
             ticketsMonster.CurrentRoom = room.transform;
             ticketsMonster.CurrentCarriage = room;

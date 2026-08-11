@@ -7,10 +7,11 @@ namespace Gameplay
     {
         [SerializeField] private Painting[] _possiblePaintings;
         [SerializeField] private MeshRenderer frameFilter;
+        [SerializeField] private MeshRenderer PaintingRenderer;
         void Start()
         {
             Painting chosenPainting = CalculatePaintingWeight(_possiblePaintings);
-            GetComponent<MeshRenderer>().material = chosenPainting.Mat;
+            PaintingRenderer.material = chosenPainting.Mat;
             if (chosenPainting.RemoveFrame) { frameFilter.enabled = false; }
         }
 

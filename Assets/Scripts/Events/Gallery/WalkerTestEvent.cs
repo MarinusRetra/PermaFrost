@@ -12,7 +12,7 @@ namespace Gameplay
             GameObject _shadowman = Instantiate(scriptable.SpawnablePrefab, new Vector3(-300, -300, -300), new Quaternion(0, 0, 0, 0));
             _shadowman.GetComponent<SlowWalker>().CurrentRoom = room.transform;
             _shadowman.GetComponent<SlowWalker>().StartAttack();
-            _shadowman.transform.parent = room.Holder;
+            _shadowman.transform.parent = room.InstanceHolder;
             return true; 
         }
         //Any other time approaching room

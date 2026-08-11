@@ -32,12 +32,12 @@ namespace Gameplay
             //spawn wraps
             Vector3 doorPos = room.ExitPoint.transform.position;
             spawnedWraps = Instantiate(scriptable.SpawnablePrefab, doorPos + new Vector3(0,1,0), scriptable.SpawnablePrefab.transform.rotation);
-            spawnedWraps.transform.parent = room.Holder;
+            spawnedWraps.transform.parent = room.InstanceHolder;
 
             //spawn plate
             EventMultiObjScriptable objEvent = scriptable as EventMultiObjScriptable;
             spawnedPlate = Instantiate(objEvent.otherPrefabs[0], randomLocation.position, objEvent.otherPrefabs[0].transform.rotation);
-            spawnedPlate.transform.parent = room.Holder;
+            spawnedPlate.transform.parent = room.InstanceHolder;
             spawnedPlate.GetComponent<StandinInPlate>().WrapBlockage = spawnedWraps.GetComponent<PaperWrapBlockage>();
             return true;
         }

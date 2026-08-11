@@ -18,7 +18,7 @@ namespace Gameplay
             Monster shadowMonster = _shadowman.GetComponent<Monster>();
             shadowMonster.CurrentRoom = room.transform;
             shadowMonster.CurrentCarriage = room;
-            _shadowman.transform.parent = room.Holder;
+            _shadowman.transform.parent = room.InstanceHolder;
             return true;
         }
         //Any other time room entered
@@ -35,6 +35,7 @@ namespace Gameplay
         public override bool CallForDeletion(CarriageClass room) 
         {
             Destroy(this);
+            //Shadowman despawns very quickly, no need to force it
             return true; 
         }
     }

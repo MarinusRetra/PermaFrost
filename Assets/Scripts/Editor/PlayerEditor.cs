@@ -8,6 +8,7 @@ namespace Gameplay
 {
     public class PlayerEditor : EditorWindow
     {
+        //THIS IS AN EDITOR SCRIPT, EXPECT LOWER QUALITY CODE
         private bool showDetails = false;
         private bool showFun = false;
 
@@ -719,7 +720,7 @@ namespace Gameplay
             if (GUILayout.Button("Set Variant"))
             {
                 currentRoomSetup.TurnOffEverything();
-                currentRoomSetup.ActuallyApplyVariant(currentRoomSetup.variations[selectedVariant]);
+                currentRoomSetup.TurnOnVariantObjects(currentRoomSetup.variations[selectedVariant]);
                 EditorUtility.SetDirty(currentRoomSetup);
             }
         }

@@ -14,7 +14,7 @@ namespace Gameplay
         public override bool FirstApproach(CarriageClass room)
         {
             spawnedAllEars = Instantiate(scriptable.SpawnablePrefab);
-            spawnedAllEars.transform.parent = room.Holder;
+            spawnedAllEars.transform.parent = room.InstanceHolder;
             spawnedAllEars.transform.localPosition = new Vector3(0, 0, 0);
             spawnedAllEars.GetComponent<NavMeshAgent>().enabled = true;
 

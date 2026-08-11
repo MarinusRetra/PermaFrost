@@ -16,7 +16,7 @@ namespace Gameplay
         public override bool FirstEnter(CarriageClass room)
         {
             spawnedHotDude = Instantiate(scriptable.SpawnablePrefab);
-            spawnedHotDude.transform.parent = room.Holder;
+            spawnedHotDude.transform.parent = room.InstanceHolder;
             Transform _entry = room.transform.Find("Exit");
             spawnedHotDude.transform.position = new Vector3(_entry.position.x, _entry.position.y + 0.1f, _entry.position.z - 0.5f);
             spawnedHotDude.GetComponent<NavMeshAgent>().enabled = true;

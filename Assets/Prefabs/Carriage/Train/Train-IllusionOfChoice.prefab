@@ -150,23 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
   EntryPoint: {fileID: 6842495300412279716}
   ExitPoint: {fileID: 8616358265206272560}
-  PlayerSpawnPoint: {fileID: 0}
-  SpawnPoints:
-  - {fileID: 7722160533237527902}
-  - {fileID: 2631326282669486543}
-  - {fileID: 4654027722521997655}
-  Holder: {fileID: 1990920783939644867}
-  _allowedDrops:
-  - {fileID: 11400000, guid: c45722bfbfe0e5346ac3a6597da584cc, type: 2}
-  - {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
-  - {fileID: 11400000, guid: fef5fa737aa2b48478ed163201aee498, type: 2}
-  - {fileID: 11400000, guid: 83cac72470165be459c69f6c34ccbe23, type: 2}
-  - {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
-  generationClass: {fileID: 0}
   roomIndex: -999
-  _enterTriggered: 0
-  _exitTriggered: 0
-  _triggerTriggered: 0
   OnRecedeEvent:
     m_PersistentCalls:
       m_Calls:
@@ -224,17 +208,30 @@ MonoBehaviour:
   OnFirstApproachEvent:
     m_PersistentCalls:
       m_Calls: []
+  PlayerSpawnPoint: {fileID: 0}
+  SpawnPoints:
+  - {fileID: 7722160533237527902}
+  - {fileID: 2631326282669486543}
+  - {fileID: 4654027722521997655}
+  NodeHolder: {fileID: 4502236476711299394}
+  InstanceHolder: {fileID: 1990920783939644867}
   spawnedEventClasses: []
   _selectedEventClasses: []
+  _allowedDrops:
+  - {fileID: 11400000, guid: c45722bfbfe0e5346ac3a6597da584cc, type: 2}
+  - {fileID: 11400000, guid: 1ec363939d47a5847acc42c4f5a20ce9, type: 2}
+  - {fileID: 11400000, guid: fef5fa737aa2b48478ed163201aee498, type: 2}
+  - {fileID: 11400000, guid: 83cac72470165be459c69f6c34ccbe23, type: 2}
+  - {fileID: 11400000, guid: b1807779e58f870458e1f0652e870411, type: 2}
   _maxAmountOfItems: 2
-  previousCarriage: {fileID: 0}
-  nextCarriage: {fileID: 0}
-  NodeHolder: {fileID: 4502236476711299394}
+  AllItemSpawnLocations: []
+  RemainingSpawnLocations: []
+  generationClass: {fileID: 0}
   RoomEventRefs: {fileID: 4213041804437328968}
   roomParent: {fileID: 0}
-  AllItemSpawnLocations: []
-  SanitizedSpawnLocations: []
   RoomSetup: {fileID: 3403351977354646454}
+  previousCarriage: {fileID: 0}
+  nextCarriage: {fileID: 0}
 --- !u!114 &3502666164960062413
 MonoBehaviour:
   m_ObjectHideFlags: 0

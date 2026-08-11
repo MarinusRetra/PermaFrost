@@ -8,7 +8,7 @@ namespace Gameplay
         [SerializeField] private float _duration;
         private bool _isPlaying;
         private Rigidbody _body;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             _body = GetComponent<Rigidbody>();
@@ -17,7 +17,7 @@ namespace Gameplay
 
         private IEnumerator AutoPlayTime()
         {
-            //play noise after a bit, so if it gets stuck it still works
+            //force play noise after a bit, so if it gets stuck it still works
             yield return new WaitForSeconds(_duration);
             if (!_isPlaying)
             {

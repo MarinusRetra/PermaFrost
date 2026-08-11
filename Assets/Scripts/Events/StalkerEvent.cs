@@ -22,7 +22,7 @@ namespace Gameplay
                 spawnedStalkerClass[i] = spawnedStalker.GetComponent<Stalker>();
                 spawnedStalkerClass[i].CurrentRoom = room.transform;
                 spawnedStalkerClass[i].CurrentCarriage = room;
-                spawnedStalker.transform.parent = room.Holder;
+                spawnedStalker.transform.parent = room.InstanceHolder;
                 spawnedStalkers[i] = spawnedStalker;
             }
             return true;

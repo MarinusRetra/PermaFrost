@@ -28,7 +28,7 @@ namespace Gameplay
 
             //spawn altar
             GameObject _altar = Instantiate(scriptable.SpawnablePrefab);
-            _altar.transform.parent = room.Holder;
+            _altar.transform.parent = room.InstanceHolder;
             _altar.transform.localScale = new Vector3(1, 1, 1);
             _altar.transform.position = _chosenSpot.transform.position;
             _altar.transform.rotation = _chosenSpot.transform.rotation;

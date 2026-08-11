@@ -80,7 +80,7 @@ namespace Gameplay
         private void BreakWindows(CarriageClass room)
         {
             spawnedFreezingArea = Instantiate(scriptable.SpawnablePrefab);
-            spawnedFreezingArea.transform.parent = room.Holder;
+            spawnedFreezingArea.transform.parent = room.InstanceHolder;
             BoxCollider _roomCol = room.GetComponent<BoxCollider>();
             spawnedFreezingArea.transform.localScale = new Vector3(_roomCol.size.x, _roomCol.size.y, _roomCol.size.z - 2);
             spawnedFreezingArea.transform.position = room.transform.position + _roomCol.center;

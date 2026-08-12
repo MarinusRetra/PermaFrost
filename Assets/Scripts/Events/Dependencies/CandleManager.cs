@@ -8,14 +8,15 @@ namespace Gameplay
 {
     public class CandleManager : MonoBehaviour
     {
-        [SerializeField] private GameObject _candleHolder;
-        private List<Light> _allCandles = new List<Light>();
-        private List<ParticleSystem> _allCandleParticles = new List<ParticleSystem>();
+        public GameObject _candleHolder;
+        [SerializeField] private List<Light> _allCandles = new List<Light>();
+        [SerializeField] private List<ParticleSystem> _allCandleParticles = new List<ParticleSystem>();
 
         public bool beenCalled = false;
 
         private void SetupCandles()
         {
+            Debug.LogWarning("Room forced to setup candles itself, Use the Testing Utils/Player Editor to set this trough the editor for optimization");
             if (_candleHolder)
             {
                 _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToList();
@@ -60,5 +61,14 @@ namespace Gameplay
             yield return new WaitForSeconds(3f);
             TurnOnCandles();
         }
+
+#if UNITY_EDITOR
+        public void SetCandleLists(List<Light> lights, List<ParticleSystem> particles)
+        {
+            _allCandleParticles = particles;
+            _allCandles = lights;
+            beenCalled = true;
+        }
+#endif
     }
 }

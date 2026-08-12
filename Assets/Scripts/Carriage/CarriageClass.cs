@@ -48,6 +48,7 @@ public class CarriageClass : MonoBehaviour
     public RoomEventRefs RoomEventRefs;
     public RoomGroupParent roomParent;
     public RoomSetupManager RoomSetup;
+    public CandleManager roomCandleMan;
 
     public CarriageClass previousCarriage;
     public CarriageClass nextCarriage;

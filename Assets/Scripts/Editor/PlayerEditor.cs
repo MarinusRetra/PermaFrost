@@ -91,6 +91,8 @@ namespace Gameplay
 
                     if (inPrefabMode)
                     {
+                        currentRoom = stage.prefabContentsRoot;
+                        currentCarriage = currentRoom.GetComponent<CarriageClass>();
                         currentRoomSetup = stage.prefabContentsRoot.GetComponent<RoomSetupManager>();
                         if (currentRoomSetup)
                         {
@@ -694,6 +696,8 @@ namespace Gameplay
         static bool nodesOn = false;
         static bool ticketOn = false;
         public RoomSetupManager currentRoomSetup;
+        public GameObject currentRoom;
+        public CarriageClass currentCarriage;
         public string[] roomVariants;
         public int selectedVariant = 0;
         private void EditorPage()
@@ -722,6 +726,45 @@ namespace Gameplay
                 currentRoomSetup.TurnOffEverything();
                 currentRoomSetup.TurnOnVariantObjects(currentRoomSetup.variations[selectedVariant]);
                 EditorUtility.SetDirty(currentRoomSetup);
+            }
+
+            GUILayout.Label("Set Room References", headerStyle);
+            if (GUILayout.Button("Set GeneralReferences"))
+            {
+                if(currentCarriage.roomCandleMan == null && currentCarriage.GetComponent<CandleManager>())
+                {
+                    currentCarriage.roomCandleMan = currentCarriage.GetComponent<CandleManager>();
+                }
+                if(currentCarriage.RoomEventRefs == null && currentCarriage.GetComponent<RoomEventRefs>())
+                {
+                    currentCarriage.RoomEventRefs = currentCarriage.GetComponent<RoomEventRefs>();
+                }
+                if(currentCarriage.RoomSetup == null && currentCarriage.GetComponent<RoomSetupManager>())
+                {
+                    currentCarriage.RoomSetup = currentCarriage.GetComponent<RoomSetupManager>();
+                }
+                if(currentCarriage.EntryPoint == null && currentRoom.transform.Find("Entry"))
+                {
+                    currentCarriage.EntryPoint = currentRoom.transform.Find("Entry");
+                }
+                if (currentCarriage.ExitPoint == null && currentRoom.transform.Find("Exit"))
+                {
+                    currentCarriage.ExitPoint = currentRoom.transform.Find("Exit");
+                }
+                if(currentCarriage.InstanceHolder == null && currentRoom.transform.Find("InstanceHolder"))
+                {
+                    currentCarriage.InstanceHolder = currentRoom.transform.Find("InstanceHolder");
+                }
+                if (currentCarriage.NodeHolder == null && currentRoom.transform.Find("NodeHolder"))
+                {
+                    currentCarriage.NodeHolder = currentRoom.transform.Find("NodeHolder");
+                }
+                EditorUtility.SetDirty(currentRoom);
+            }
+            if (currentCarriage && currentCarriage.roomCandleMan && GUILayout.Button("Set Candles") )
+            {
+                currentCarriage.roomCandleMan.SetCandleLists(currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<Light>().ToList(), currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<ParticleSystem>().ToList());
+                EditorUtility.SetDirty(currentRoom);
             }
         }
 

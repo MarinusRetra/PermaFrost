@@ -14,6 +14,9 @@ namespace Gameplay
 
         public bool beenCalled = false;
 
+        /// <summary>
+        /// backup function, set candles through editor for better optimization.
+        /// </summary>
         private void SetupCandles()
         {
             Debug.LogWarning("Room forced to setup candles itself, Use the Testing Utils/Player Editor to set this trough the editor for optimization");

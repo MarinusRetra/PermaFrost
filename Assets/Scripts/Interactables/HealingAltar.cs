@@ -25,6 +25,7 @@ namespace Gameplay
 
         public void DestroyAltar()
         {
+            //CurrentTine prevents player from becoming invulnerable by despawning the altar right after healing.
             if(_currentTine != null)
             {
                 StartCoroutine(WaitForDestroy());
@@ -37,6 +38,7 @@ namespace Gameplay
 
         private IEnumerator WaitForDestroy()
         {
+            //prevent any more interacting
             InteractEvent.RemoveAllListeners();
             Destroy(transform.GetChild(0).gameObject);
             Destroy(GetComponent<Collider>());

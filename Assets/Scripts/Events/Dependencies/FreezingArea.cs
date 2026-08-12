@@ -20,7 +20,7 @@ namespace Gameplay
         {
             if (objec.GetComponent<HotDude>())
             {
-                //HD would block the door is stunned.
+                //HD would block the door if stunned in the wrong spot, softlocking the game.
                 objec.GetComponent<HotDude>().DestroyMonster();
             }
             if (objec.CompareTag("Player"))

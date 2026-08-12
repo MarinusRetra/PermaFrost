@@ -87,11 +87,11 @@ namespace Gameplay
             if (!CanPlay) { isCharging = false; yield break;}
             animator.SetBool("StartBox", true);
             outlineVisual.enabled = true;
-            _currentAudioSource = Soundsystem.PlaySound(_chargeClip, transform.position);
             //Charge sfx
+            _currentAudioSource = Soundsystem.PlaySound(_chargeClip, transform.position);
             yield return new WaitForSeconds(4);
             Destroy(_currentAudioSource);
-            //Actually play
+            //Start draining sanity
             StartBox();
             isCharging = false;
         }

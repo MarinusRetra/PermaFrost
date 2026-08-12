@@ -7,7 +7,7 @@ namespace Gameplay
     {
         [Header("Customization Values")]
 
-        [Tooltip("Put whatever you want to activate after the player stood in the area for a while")]
+        [Tooltip("This event is called after the player has stoon in the area for {TimeBeforeUse} seconds")]
         [SerializeField] private UnityEvent OnEnoughTimeIn;
         [SerializeField] private float TimeBeforeUse;
 
@@ -31,10 +31,8 @@ namespace Gameplay
 
             if (PlayerInArea)
             {
-                //Add time
                 CurrentTime += Time.deltaTime;
 
-                //If we at enough time: Activate EnoughTimeInArea();
                 if (CurrentTime > TimeBeforeUse) { EnoughTimeInArea(); }
             }
             else
@@ -51,10 +49,8 @@ namespace Gameplay
 
         private void EnoughTimeInArea()
         {
-            //So it dont activate again
             WasActivated = true;
 
-            //Does the unity event
             OnEnoughTimeIn.Invoke();
 
             WrapBlockage.Unwrap();
@@ -78,7 +74,6 @@ namespace Gameplay
 
         private void OnPlayerEnter()
         {
-            //Add more if needed
             if (!WasActivated)
             {
                 PlayerInArea = true;
@@ -87,7 +82,6 @@ namespace Gameplay
 
         private void OnPlayerExit()
         {
-            //Add more if needed
             if (!WasActivated)
             {
                 PlayerInArea = false;

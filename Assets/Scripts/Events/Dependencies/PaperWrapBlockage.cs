@@ -6,7 +6,6 @@ namespace Gameplay
     {
         public Collider MainCollder;
         [SerializeField] private Animator WrapAnimator;
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             WrapAnimator.enabled = true;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Gameplay
@@ -11,17 +12,20 @@ namespace Gameplay
     {
         [Header("Movement values")]
         [SerializeField] private InputReader _input;
-		public float CrouchSpeed = 3;
-		public float BaseSpeed = 4;
+		public float CrouchSpeed = 1;
+		public float BaseSpeed = 2;
 
         [Header("Sprint values")]
-        public float SprintSpeed = 7;
-        public int TotalStamina = 10;
-        public int CurrentStamina = 10;
+        public float SprintSpeed = 5;
+        public int TotalStamina = 14;
+        public int CurrentStamina = 13;
         private bool isSprinting = false;
 
         [Header("Camera values")]
         private Transform _camera;
+        [SerializeField] private CinemachineImpulseSource _stepEmitter; // Used to emit an event picked up by the cinemachine for head bobbing.
+        [SerializeField] private float _stepFrequency = 2;
+        [SerializeField] private float _timeSinceLastStep;
         public float _sensitivity = 0.4f;
         [SerializeField] private float _crouchCameraHeight = 0f;
         [SerializeField] private float _standCameraHeight = 0.5f;
@@ -72,7 +76,8 @@ namespace Gameplay
         public void Start()
         {
             _camera = PlrRefs.inst.PlayerCamera.transform;
-            SprintBehav?.MaxSprint(TotalStamina);
+            
+            SprintBehav.MaxSprint(TotalStamina);
             
             //auto lock mouse
             Cursor.lockState = CursorLockMode.Locked;
@@ -111,8 +116,28 @@ namespace Gameplay
         private void Update()
         {
             HandleStamina();
-            if (!CanMove) { return; }
+
+            if (!CanMove) 
+            { 
+                return; 
+            }
+
             _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
+
+            if(_moveDirection != Vector3.zero)
+            {
+                _timeSinceLastStep = (_timeSinceLastStep <= 0) ? _timeSinceLastStep = GetStepFrequency() : _timeSinceLastStep -= Time.deltaTime * _stepFrequency;
+            }
+            else
+            {
+                _timeSinceLastStep = 0.01f;            
+            }
+        }
+
+        private float GetStepFrequency()
+        {
+            _stepEmitter.GenerateImpulseWithForce(_stepFrequency/5);
+            return 1f;
         }
 
         /// <summary>
@@ -158,6 +183,7 @@ namespace Gameplay
             if (!_isCrouching)
             { 
                 _currentMoveSpeed = SprintSpeed;
+                _stepFrequency = _currentMoveSpeed;
                 isSprinting = true;
             }
         }
@@ -165,6 +191,7 @@ namespace Gameplay
         public void HandleSprintCancel()
         {
             _currentMoveSpeed = _isCrouching ? CrouchSpeed : BaseSpeed;
+            _stepFrequency = _currentMoveSpeed;
             isSprinting = false;
         }
 
@@ -216,6 +243,7 @@ namespace Gameplay
             if (_isCrouching || !CanMove) yield break;
 
             _currentMoveSpeed = CrouchSpeed;
+            _stepFrequency = _currentMoveSpeed;
             _isCrouching = true;
 
             float time = 0f;
@@ -251,6 +279,7 @@ namespace Gameplay
             if (!_isCrouching) yield break;
 
             _currentMoveSpeed = BaseSpeed;
+            _stepFrequency = _currentMoveSpeed;
             _isCrouching = false;
 
             float time = 0f;
@@ -315,9 +344,21 @@ namespace Gameplay
 
         public void UpdateSpeed()
         {
-            if (_isCrouching){ _currentMoveSpeed = CrouchSpeed; return; }
-            if ( isSprinting ){ _currentMoveSpeed = SprintSpeed; return; }
+            if (_isCrouching)
+            { 
+                _currentMoveSpeed = CrouchSpeed; 
+                _stepFrequency = _currentMoveSpeed;
+                return; 
+            }
+            
+            if (isSprinting)
+            {   
+                _currentMoveSpeed = SprintSpeed;
+                _stepFrequency = _currentMoveSpeed;
+                return; 
+            }
             _currentMoveSpeed = BaseSpeed;
+            _stepFrequency = _currentMoveSpeed;
         }
 
         private void StartCrouchRoutine(IEnumerator routine)

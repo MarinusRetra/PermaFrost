@@ -482,6 +482,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1671921899471533032}
   - component: {fileID: 475918475996380244}
+  - component: {fileID: 54792485192131373}
   m_Layer: 3
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -549,6 +550,30 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &54792485192131373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4168117785406971383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 0
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &5176859719669386347
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +853,7 @@ GameObject:
   - component: {fileID: 2481520789753704852}
   - component: {fileID: 1058295031561131540}
   - component: {fileID: 5325362770019257925}
+  - component: {fileID: 6059668697042476046}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1045,6 +1071,9 @@ MonoBehaviour:
   SprintSpeed: 5.5
   TotalStamina: 140
   CurrentStamina: 10
+  _stepEmitter: {fileID: 6059668697042476046}
+  _stepFrequency: 1
+  _timeSinceLastStep: 0
   _sensitivity: 0.4
   _crouchCameraHeight: 0
   _standCameraHeight: 0.5
@@ -1152,6 +1181,59 @@ MonoBehaviour:
   PlayerArmCamera: {fileID: 7265793449338088215}
   PlayerArm: {fileID: 1481536307864979823}
   PlayerArmAnimator: {fileID: 1280860117930406147}
+--- !u!114 &6059668697042476046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9188160094882526209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.8
+    ImpulseType: 3
+    DissipationRate: 0.549
+    RawSignal: {fileID: 11400000, guid: bdcd532e527225b4eab9060cff0affb6, type: 2}
+    AmplitudeGain: 2
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0.2
+      SustainTime: 0.3
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 0
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: 0.35, z: 0}
 --- !u!1001 &4208562570966578540
 PrefabInstance:
   m_ObjectHideFlags: 0

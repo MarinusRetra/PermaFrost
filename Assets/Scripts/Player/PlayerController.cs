@@ -23,9 +23,6 @@ namespace Gameplay
 
         [Header("Camera values")]
         private Transform _camera;
-        [SerializeField] private CinemachineImpulseSource _stepEmitter; // Used to emit an event picked up by the cinemachine for head bobbing.
-        [SerializeField] private float _stepFrequency = 2;
-        [SerializeField] private float _timeSinceLastStep;
         public float _sensitivity = 0.4f;
         [SerializeField] private float _crouchCameraHeight = 0f;
         [SerializeField] private float _standCameraHeight = 0.5f;
@@ -44,6 +41,11 @@ namespace Gameplay
         private Vector2 _crouchHitboxHeight = new(1.4f, -0.308f);
         private Vector2 _standHitboxHeight = new(2, 0);
         private Coroutine _currentCrouchRoutine;
+        [Header("Camera Bob")]
+        [SerializeField] private CinemachineImpulseSource _stepEmitter; // Used to emit an event picked up by the cinemachine for head bobbing.
+        [SerializeField] private float _stepFrequency = 2;
+        [SerializeField] private float _timeSinceLastStep;
+        public bool DoHeadBob = true;
 
         [Header("Sprinting")]
         private float _staminaTimer;
@@ -124,6 +126,7 @@ namespace Gameplay
 
             _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
 
+            if (!DoHeadBob) { return; }
             if(_moveDirection != Vector3.zero)
             {
                 _timeSinceLastStep = (_timeSinceLastStep <= 0) ? _timeSinceLastStep = GetStepFrequency() : _timeSinceLastStep -= Time.deltaTime * _stepFrequency;
@@ -180,7 +183,7 @@ namespace Gameplay
 
         private void HandleSprint()
         {
-            if (!_isCrouching)
+            if (!_isCrouching && CurrentStamina > (TotalStamina / 10))
             { 
                 _currentMoveSpeed = SprintSpeed;
                 _stepFrequency = _currentMoveSpeed;
@@ -206,6 +209,7 @@ namespace Gameplay
 
             if (isSprinting && isMoving)
             {
+                if (!CanMove) { return; }
                 CurrentStamina = Mathf.Max(0, CurrentStamina - 2);
 
                 if (CurrentStamina == 0)

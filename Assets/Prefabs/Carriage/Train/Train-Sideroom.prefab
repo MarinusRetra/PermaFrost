@@ -16086,87 +16086,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6884645995789325628}
-    - targetCorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6929876023286201472}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
 --- !u!4 &3843796702505923926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2991414418448237310, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
   m_PrefabInstance: {fileID: 2077367981183612840}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4475513774477848556 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-  m_PrefabInstance: {fileID: 2077367981183612840}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &6884645995789325628
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4475513774477848556}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.08862947, y: 2.3605802, z: 1.1999999}
-  m_Center: {x: -0.0127813285, y: 0.008139907, z: 0}
---- !u!114 &6929876023286201472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4475513774477848556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  IsHovered: 0
-  InteractEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8438181442962533300, guid: 9184420cf9eeb69438b5c7667f951941, type: 3}
-        m_TargetAssemblyTypeName: Gameplay.CutsceneManager, Assembly-CSharp
-        m_MethodName: StartCutsceneStatic
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PaintingSecret
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6929876023286201472}
-        m_TargetAssemblyTypeName: Gameplay.InteractObject, Assembly-CSharp
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PaintingSecret
-          m_BoolArgument: 0
-        m_CallState: 2
-  _outlineScale: 0
-  _outlineMat: {fileID: -876546973899608171, guid: 64a5910ecf7a8be40ad9f765f0749254, type: 3}
 --- !u!1001 &2078574335554369226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17108,82 +17034,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2003017358327545136}
-    - targetCorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2748491584768224961}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
---- !u!1 &1343849439333487808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2506379897944315972, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}
-  m_PrefabInstance: {fileID: 3489793612662836356}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &2003017358327545136
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343849439333487808}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.08862947, y: 2.3605802, z: 1.1999999}
-  m_Center: {x: -0.0127813285, y: 0.008139907, z: 0}
---- !u!114 &2748491584768224961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1343849439333487808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650fc885517557b42b796555f7379dc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gameplay.InteractObject
-  IsHovered: 0
-  InteractEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8438181442962533300, guid: 9184420cf9eeb69438b5c7667f951941, type: 3}
-        m_TargetAssemblyTypeName: Gameplay.CutsceneManager, Assembly-CSharp
-        m_MethodName: StartCutsceneStatic
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PaintingSecret
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2748491584768224961}
-        m_TargetAssemblyTypeName: Gameplay.InteractObject, Assembly-CSharp
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PaintingSecret
-          m_BoolArgument: 0
-        m_CallState: 2
-  _outlineScale: 0
-  _outlineMat: {fileID: -876546973899608171, guid: 64a5910ecf7a8be40ad9f765f0749254, type: 3}
 --- !u!4 &1868324644183133818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2991414418448237310, guid: 7eead8a8624e44e4a8916ea106e1d33e, type: 3}

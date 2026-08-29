@@ -294,15 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
   EntryPoint: {fileID: 3835648490158112974}
   ExitPoint: {fileID: 6900990122434573298}
-  PlayerSpawnPoint: {fileID: 6303089006514430770}
-  SpawnPoints: []
-  Holder: {fileID: 8176943414168072693}
-  _allowedDrops: []
-  generationClass: {fileID: 0}
   roomIndex: -999
-  _enterTriggered: 0
-  _exitTriggered: 0
-  _triggerTriggered: 0
   OnRecedeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -312,14 +304,23 @@ MonoBehaviour:
   OnFirstApproachEvent:
     m_PersistentCalls:
       m_Calls: []
+  PlayerSpawnPoint: {fileID: 6303089006514430770}
+  SpawnPoints: []
+  NodeHolder: {fileID: 0}
+  InstanceHolder: {fileID: 0}
   spawnedEventClasses: []
   _selectedEventClasses: []
+  _allowedDrops: []
   _maxAmountOfItems: 0
-  previousCarriage: {fileID: 0}
-  nextCarriage: {fileID: 0}
-  NodeHolder: {fileID: 0}
+  AllItemSpawnLocations: []
+  RemainingSpawnLocations: []
+  generationClass: {fileID: 0}
   RoomEventRefs: {fileID: 3416835455700493257}
   roomParent: {fileID: 0}
+  RoomSetup: {fileID: 0}
+  roomCandleMan: {fileID: 0}
+  previousCarriage: {fileID: 0}
+  nextCarriage: {fileID: 0}
 --- !u!114 &954384730884478885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.CandleManager
   _candleHolder: {fileID: 4642269268757648210}
+  _allCandles: []
+  _allCandleParticles: []
+  beenCalled: 0
 --- !u!65 &7810573214518832360
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1306,9 +1310,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1214451927459208067, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3144190194560952587, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
       propertyPath: m_Name
       value: LockedDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144190194560952587, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3268579085686564449, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3753252517344322150, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6798457644435491978, guid: c1bd9aee132b09d4fb16c5d7104fdee7, type: 3}
       propertyPath: m_Enabled

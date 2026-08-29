@@ -139,15 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarriageClass
   EntryPoint: {fileID: 6831325335770525698}
   ExitPoint: {fileID: 4663031869211687091}
-  PlayerSpawnPoint: {fileID: 0}
-  SpawnPoints: []
-  Holder: {fileID: 0}
-  _allowedDrops: []
-  generationClass: {fileID: 0}
   roomIndex: -999
-  _enterTriggered: 0
-  _exitTriggered: 0
-  _triggerTriggered: 0
   OnRecedeEvent:
     m_PersistentCalls:
       m_Calls:
@@ -205,14 +197,23 @@ MonoBehaviour:
   OnFirstApproachEvent:
     m_PersistentCalls:
       m_Calls: []
+  PlayerSpawnPoint: {fileID: 0}
+  SpawnPoints: []
+  NodeHolder: {fileID: 6486779151060268592}
+  InstanceHolder: {fileID: 0}
   spawnedEventClasses: []
   _selectedEventClasses: []
+  _allowedDrops: []
   _maxAmountOfItems: 2
-  previousCarriage: {fileID: 0}
-  nextCarriage: {fileID: 0}
-  NodeHolder: {fileID: 6486779151060268592}
+  AllItemSpawnLocations: []
+  RemainingSpawnLocations: []
+  generationClass: {fileID: 0}
   RoomEventRefs: {fileID: 7034179914800432425}
   roomParent: {fileID: 0}
+  RoomSetup: {fileID: 0}
+  roomCandleMan: {fileID: 0}
+  previousCarriage: {fileID: 0}
+  nextCarriage: {fileID: 0}
 --- !u!114 &7715722751448153777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +227,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.CandleManager
   _candleHolder: {fileID: 4314248155731573986}
+  _allCandles: []
+  _allCandleParticles: []
+  beenCalled: 0
 --- !u!65 &8691265676309896004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1491,6 +1495,10 @@ PrefabInstance:
     - target: {fileID: 8601447183501900961, guid: 1f4d5bf7dfb49084c9080590dd9260c8, type: 3}
       propertyPath: m_Name
       value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601447183501900961, guid: 1f4d5bf7dfb49084c9080590dd9260c8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

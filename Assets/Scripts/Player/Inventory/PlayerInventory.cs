@@ -43,7 +43,7 @@ namespace Gameplay
         private void SelectSlot(int numberIn, bool bypassDeselect = false)
         {
             //dont try to select if there is no item
-            if (numberIn >= hotbarSlots.Length || hotbarSlots[numberIn].Item == null)
+            if (hotbarSlots == null || numberIn >= hotbarSlots.Length || numberIn < 0 || hotbarSlots[numberIn].Item == null)
             {
                 return;
             }

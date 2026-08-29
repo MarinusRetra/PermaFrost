@@ -13,6 +13,7 @@ namespace Gameplay
         private void OnEnable()
         {
             _input.LookEvent += HandleLook;
+            _input.PauseEvent += HandlePause;
         }
         /// <summary>
         /// Uses mouse position to or joystick delta to rotate the first person camera.
@@ -25,14 +26,22 @@ namespace Gameplay
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, (_rotationY), 0);
         }
 
+        void HandlePause()
+        {
+            //pausing in main menu would disable the camera, this should fix that
+            _input.SetGameplayActions();
+        }
+
         private void OnDestroy()
         {
             _input.LookEvent -= HandleLook;
+            _input.PauseEvent -= HandlePause;
         }
 
         private void OnDisable()
         {
             _input.LookEvent -= HandleLook;
+            _input.PauseEvent -= HandlePause;
         }
     }
 }

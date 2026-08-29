@@ -110,8 +110,8 @@ namespace Gameplay
         {
             if (context.phase == InputActionPhase.Performed)
             {
-                PauseEvent?.Invoke();
                 SetUIActions();
+                PauseEvent?.Invoke();
             }
         }
 

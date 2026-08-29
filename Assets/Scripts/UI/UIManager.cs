@@ -21,6 +21,7 @@ namespace Gameplay
 
 		public void OnResume()
         {
+			if (!_input) { return; }
 			gameObject.SetActive(false);
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;

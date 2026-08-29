@@ -795,6 +795,11 @@ namespace Gameplay
             GUILayout.Label("Options", headerStyle);
 
             showFun = EditorGUILayout.Toggle("Show fun options", showFun);
+
+            if (GUILayout.Button("SaveSettings") && CheckIfRunning())
+            {
+                FindAnyObjectByType<SettingsManager>().SaveSettings();
+            }
         }
 
         private bool CheckIfRunning(bool shutup = false)

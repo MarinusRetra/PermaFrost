@@ -14,8 +14,8 @@ public class CarriageClass : MonoBehaviour
 
     public int roomIndex = -999;
 
-    private bool _enterTriggered;
-    private bool _exitTriggered;
+    [HideInInspector,SerializeField] private bool _enterTriggered;
+    [HideInInspector, SerializeField] private bool _exitTriggered;
     private bool hasBeenLoaded = false;
     private bool isLoaded = true;
 

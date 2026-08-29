@@ -50,6 +50,11 @@ namespace Gameplay
             StartCoroutine(HandleBehaviour());
         }
 
+        private void Update()
+        {
+            transform.LookAt(PlrRefs.inst.transform);
+        }
+
         private int _amountOfTimesNot = 0;
         private IEnumerator HandleBehaviour()
         {
@@ -57,9 +62,10 @@ namespace Gameplay
             Transform model = transform.GetChild(0);
             while (model.localPosition.y > 0 && !_despawning)
             {
-                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.45f, model.localPosition.z);
+                model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.5f, model.localPosition.z);
                 yield return new WaitForSeconds(0.05f);
             }
+            model.localPosition = new Vector3(model.localPosition.x, 0, model.localPosition.z);
            stalkerCol.enabled = true;
 
             while (!_despawning)

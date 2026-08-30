@@ -19,7 +19,7 @@ namespace Gameplay
         /// </summary>
         private void SetupCandles()
         {
-            Debug.LogWarning("Room forced to setup candles itself, Use the Testing Utils/Player Editor to set this trough the editor for optimization");
+            Debug.LogWarning(gameObject.name + " Room forced to setup candles itself, Use the Testing Utils/Player Editor to set this trough the editor for optimization");
             if (_candleHolder)
             {
                 _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToList();

@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace Gameplay
 {
@@ -763,7 +764,12 @@ namespace Gameplay
             }
             if (currentCarriage && currentCarriage.roomCandleMan && GUILayout.Button("Set Candles") )
             {
-                currentCarriage.roomCandleMan.SetCandleLists(currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<Light>().ToList(), currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<ParticleSystem>().ToList());
+                currentCarriage.roomCandleMan.SetCandleLists(currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<Light>(true).ToArray(), currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<ParticleSystem>(true).ToArray(), currentCarriage.roomCandleMan._candleHolder.GetComponentsInChildren<UniversalAdditionalLightData>(true).ToArray());
+                EditorUtility.SetDirty(currentRoom);
+            }
+            if (currentCarriage && currentCarriage.roomCandleMan && GUILayout.Button("Set Renderers"))
+            {
+                currentCarriage.PutAllDaRenderersInDaArray();
                 EditorUtility.SetDirty(currentRoom);
             }
         }

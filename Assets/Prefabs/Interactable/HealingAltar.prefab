@@ -63,7 +63,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: c441f0ac36245ac4f8f9e2cab9624268, type: 2}
@@ -158,7 +158,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -876546973899608171, guid: 64a5910ecf7a8be40ad9f765f0749254, type: 3}
@@ -279,6 +279,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
       propertyPath: m_Materials.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -298,6 +302,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[3]'
       value: 
       objectReference: {fileID: 3358286361160055449, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
+    - target: {fileID: -7403311903119017887, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -3690844140889522777, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -305,6 +313,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647456052238226961, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5180341570622040462, guid: 2d96d6e49cf7e7141ba18cb34fe0f104, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

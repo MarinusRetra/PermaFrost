@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 
 public class CarriageClass : MonoBehaviour
@@ -52,6 +53,11 @@ public class CarriageClass : MonoBehaviour
 
     public CarriageClass previousCarriage;
     public CarriageClass nextCarriage;
+
+    [SerializeField]
+    private Renderer[] allRoomRenderers;
+    [SerializeField] private Light[] allRoomLights;
+    [SerializeField] private UniversalAdditionalLightData[] allRoomLightData;
 
     //Item Spawning Section
     public void SpawnRoomItems()
@@ -164,6 +170,13 @@ public class CarriageClass : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PutAllDaRenderersInDaArray()
+    {
+        allRoomRenderers = gameObject.GetComponentsInChildren<Renderer>(true);
+        allRoomLightData = gameObject.GetComponentsInChildren<UniversalAdditionalLightData>(true);
+        allRoomLights = gameObject.GetComponentsInChildren<Light>(true);
     }
 #endif
 
@@ -296,5 +309,25 @@ public class CarriageClass : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void SetRoomLightLayer()
+    {
+        uint layer = (uint)(roomIndex % 2 == 0 ? 2 : 4);
+        foreach(Renderer ren in allRoomRenderers)
+        {
+            ren.renderingLayerMask = layer;
+        }
+        foreach (Light li in allRoomLights)
+        {
+            li.renderingLayerMask = roomIndex % 2 == 0 ? 2 : 4;
+        }
+
+        //This is what they call a unity quirk, it doesnt update unless you update this too :D
+        foreach (UniversalAdditionalLightData li in allRoomLightData)
+        {
+            li.renderingLayers = (uint)layer;
+            li.shadowRenderingLayers = (uint)layer;
+        }
     }
 }

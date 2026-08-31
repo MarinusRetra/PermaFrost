@@ -197,7 +197,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_SoftShadowQuality: 0
   m_RenderingLayersMask:
     serializedVersion: 0
-    m_Bits: 1
+    m_Bits: 7
   m_ShadowRenderingLayersMask:
     serializedVersion: 0
     m_Bits: 1
@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 2167895748305581227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -227.23999, y: 1.0999501, z: 271.22998}
+  m_LocalPosition: {x: -134.09012, y: 0.96095, z: 278.19162}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -909,7 +909,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -1071,12 +1071,13 @@ MonoBehaviour:
   SprintSpeed: 5.5
   TotalStamina: 140
   CurrentStamina: 10
-  _stepEmitter: {fileID: 6059668697042476046}
-  _stepFrequency: 1
-  _timeSinceLastStep: 0
   _sensitivity: 0.4
   _crouchCameraHeight: 0
   _standCameraHeight: 0.5
+  _stepEmitter: {fileID: 6059668697042476046}
+  _stepFrequency: 1
+  _timeSinceLastStep: 0
+  DoHeadBob: 1
   _staminaTickRate: 0.05
   SprintBehav: {fileID: 0}
   _timeRemaining: 0
@@ -1298,6 +1299,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2f3ab9be557dc7d429f0fd035341743f, type: 3}
       propertyPath: m_Name
       value: PlayerArm
@@ -1478,6 +1483,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1707992212735795690, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_Name
       value: Lantern
@@ -1493,6 +1502,10 @@ PrefabInstance:
     - target: {fileID: 2766212503428324877, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8032750206264916975, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8702430246359457498, guid: dc9d3d828e3bb8848a2d1bfde5350994, type: 3}
       propertyPath: m_TagString

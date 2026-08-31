@@ -68,7 +68,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
@@ -180,6 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.AllEars
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
+  _currentState: 0
   _playerRadius: 0.6
   _wallRadius: 0.3
   _lastPosRadius: 0.4
@@ -189,6 +191,9 @@ MonoBehaviour:
   _randomTimeBetweenMoves: {x: 3, y: 6}
   _aggroSound: {fileID: 8300000, guid: 0d0dba32b2a5f704a9efd3d970a7cf9b, type: 3}
   _spawnSound: {fileID: 8300000, guid: d45c37531ad25f74c8d58ff848438d83, type: 3}
+  WindowEvent: {fileID: 0}
+  ShadowmanEvent: {fileID: 0}
+  AggroTarget: {fileID: 0}
 --- !u!1001 &9169217153871856783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -256,6 +261,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 5a5a24976d7bca044b2b70cea9a07026, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5a5a24976d7bca044b2b70cea9a07026, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 5a5a24976d7bca044b2b70cea9a07026, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'

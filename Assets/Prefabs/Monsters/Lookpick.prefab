@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4848425359634128704, guid: 013846e022cf39443be6d8cd635637d3, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6905609870639353253, guid: 013846e022cf39443be6d8cd635637d3, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -169,6 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.Lookpick
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
   _transform: {fileID: 5340982935158814970}
   _moveSpeed: 2.5
   _returnSpeed: -2.5

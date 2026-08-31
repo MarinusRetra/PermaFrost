@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace Gameplay
 {
     public class CandleManager : MonoBehaviour
     {
         public GameObject _candleHolder;
-        [SerializeField] private List<Light> _allCandles = new List<Light>();
-        [SerializeField] private List<ParticleSystem> _allCandleParticles = new List<ParticleSystem>();
+        [SerializeField] private Light [] _allCandles;
+        [SerializeField] private ParticleSystem[] _allCandleParticles;
+        [SerializeField] private UniversalAdditionalLightData[] _allCandleLightData;
 
         public bool beenCalled = false;
 
@@ -22,8 +25,8 @@ namespace Gameplay
             Debug.LogWarning(gameObject.name + " Room forced to setup candles itself, Use the Testing Utils/Player Editor to set this trough the editor for optimization");
             if (_candleHolder)
             {
-                _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToList();
-                _allCandleParticles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToList();
+                _allCandles = _candleHolder.GetComponentsInChildren<Light>().ToArray();
+                _allCandleParticles = _candleHolder.GetComponentsInChildren<ParticleSystem>().ToArray();
                 beenCalled = true;
             }
 
@@ -31,11 +34,11 @@ namespace Gameplay
         public void TurnOffCandles()
         {
             if (!beenCalled) { SetupCandles(); }
-            for(int i = 0; i < _allCandles.Count; i++)
+            for(int i = 0; i < _allCandles.Length; i++)
             {
                 _allCandles[i].gameObject.SetActive(false);
             }
-            for (int i = 0; i < _allCandleParticles.Count; i++)
+            for (int i = 0; i < _allCandleParticles.Length; i++)
             {
                 _allCandleParticles[i].Stop();
             }
@@ -44,11 +47,11 @@ namespace Gameplay
         public void TurnOnCandles()
         {
             if (!beenCalled) { SetupCandles(); }
-            for (int i = 0; i < _allCandles.Count; i++)
+            for (int i = 0; i < _allCandles.Length; i++)
             {
                 _allCandles[i].gameObject.SetActive(true);
             }
-            for (int i = 0; i < _allCandleParticles.Count; i++)
+            for (int i = 0; i < _allCandleParticles.Length; i++)
             {
                 _allCandleParticles[i].Play();
             }
@@ -66,10 +69,11 @@ namespace Gameplay
         }
 
 #if UNITY_EDITOR
-        public void SetCandleLists(List<Light> lights, List<ParticleSystem> particles)
+        public void SetCandleLists(Light[] lights, ParticleSystem[] particles, UniversalAdditionalLightData[] lightData)
         {
             _allCandleParticles = particles;
             _allCandles = lights;
+            _allCandleLightData = lightData;
             beenCalled = true;
         }
 #endif

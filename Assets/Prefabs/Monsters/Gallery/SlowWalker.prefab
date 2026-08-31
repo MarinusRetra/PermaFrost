@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.SlowWalker
   CurrentRoom: {fileID: 0}
+  CurrentCarriage: {fileID: 0}
   _shadowmanSpeed: 5
   movement: {fileID: 3954551017534674717}
 --- !u!1 &8627526711204565712
@@ -5009,7 +5010,7 @@ ParticleSystemRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 3691241999760568702, guid: 883f16305aa84b648acf4f9247fd4198, type: 3}

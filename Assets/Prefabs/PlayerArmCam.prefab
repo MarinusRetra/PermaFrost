@@ -216,7 +216,7 @@ MeshRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 7
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -6665181218125701252, guid: 1d6c01e5ab9a3d54baaac95e01faab9b, type: 3}
@@ -261,6 +261,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8806749976137377343}
     m_Modifications:
+    - target: {fileID: -8746058855735016753, guid: 54316d9251bf7284d8f687acbc30f9fd, type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8746058855735016753, guid: 54316d9251bf7284d8f687acbc30f9fd, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 

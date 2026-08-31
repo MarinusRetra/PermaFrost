@@ -143,6 +143,69 @@ MonoBehaviour:
   roomCandleMan: {fileID: 3502666164960062413}
   previousCarriage: {fileID: 0}
   nextCarriage: {fileID: 0}
+  allRoomRenderers:
+  - {fileID: 1377111400216765333}
+  - {fileID: 9164187883775084974}
+  - {fileID: 171450153362162997}
+  - {fileID: 202342020116618002}
+  - {fileID: 583721562727071894}
+  - {fileID: 4563717291609984348}
+  - {fileID: 1804438146322307919}
+  - {fileID: 4466259306287795902}
+  - {fileID: 376426746335403}
+  - {fileID: 2661811658147120474}
+  - {fileID: 2672265228202834421}
+  - {fileID: 136298566909815812}
+  - {fileID: 8663841722005466723}
+  - {fileID: 6687238407493368722}
+  - {fileID: 3679382229560825556}
+  - {fileID: 1728884619610030885}
+  - {fileID: 972487164410189636}
+  - {fileID: 2994619073606599349}
+  - {fileID: 7512807745098759512}
+  - {fileID: 5526808536787429545}
+  - {fileID: 7129007533622267323}
+  - {fileID: 5052655424437098570}
+  - {fileID: 1134123735531501065}
+  - {fileID: 3120086643044000760}
+  - {fileID: 1938557404235670927}
+  - {fileID: 4473994667856113790}
+  - {fileID: 3669303014334905356}
+  - {fileID: 1592596845494151677}
+  - {fileID: 1046737810405835946}
+  - {fileID: 1290275405793791431}
+  - {fileID: 9035590966546224921}
+  - {fileID: 856167073518980463}
+  - {fileID: 4043564673948112231}
+  - {fileID: 7170023295258958895}
+  allRoomLights:
+  - {fileID: 3895476306238972129}
+  - {fileID: 3387960067165285125}
+  - {fileID: 725342261718532699}
+  - {fileID: 6285058895668811213}
+  - {fileID: 2020690460099227002}
+  - {fileID: 2484810572125465834}
+  - {fileID: 5136354508549228278}
+  - {fileID: 5614431225977779733}
+  - {fileID: 2357654642299899303}
+  - {fileID: 3882672771608354337}
+  - {fileID: 2156905664395610018}
+  - {fileID: 2034152838831060259}
+  - {fileID: 6050651006523871807}
+  allRoomLightData:
+  - {fileID: 7849738815523011419}
+  - {fileID: 8494966922093490367}
+  - {fileID: 5832357380784183777}
+  - {fileID: 997933345938902647}
+  - {fileID: 5110094188959446720}
+  - {fileID: 8690696996704974672}
+  - {fileID: 2136856752489405772}
+  - {fileID: 1660187410221182383}
+  - {fileID: 8815882808663545373}
+  - {fileID: 7999055410412062107}
+  - {fileID: 5120173404755794968}
+  - {fileID: 6352485767073608798}
+  - {fileID: 996043053224501770}
 --- !u!114 &3502666164960062413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +243,18 @@ MonoBehaviour:
   - {fileID: 2887861587524454191}
   - {fileID: 4416248820195529897}
   - {fileID: 1532757631660592426}
+  _allCandleLightData:
+  - {fileID: 7849738815523011419}
+  - {fileID: 8494966922093490367}
+  - {fileID: 5832357380784183777}
+  - {fileID: 997933345938902647}
+  - {fileID: 5110094188959446720}
+  - {fileID: 8690696996704974672}
+  - {fileID: 2136856752489405772}
+  - {fileID: 1660187410221182383}
+  - {fileID: 8815882808663545373}
+  - {fileID: 7999055410412062107}
+  - {fileID: 5120173404755794968}
   beenCalled: 1
 --- !u!65 &1994998074850500344
 BoxCollider:
@@ -2066,6 +2141,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!114 &997933345938902647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 2942603646144764275}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!108 &6285058895668811213 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2076,9 +2162,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 2942603646144764275}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &6687238407493368722 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 2942603646144764275}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &6886759691897904965 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 2942603646144764275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8663841722005466723 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 2942603646144764275}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3448689707605314019
@@ -2159,6 +2255,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d67497c0fcffba446ab297bdcb5c709a, type: 3}
   m_PrefabInstance: {fileID: 3448689707605314019}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &4043564673948112231 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: d67497c0fcffba446ab297bdcb5c709a, type: 3}
+  m_PrefabInstance: {fileID: 3448689707605314019}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7170023295258958895 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -3720748212832447028, guid: d67497c0fcffba446ab297bdcb5c709a, type: 3}
+  m_PrefabInstance: {fileID: 3448689707605314019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3604373787870624427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2216,6 +2322,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!114 &1660187410221182383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 3604373787870624427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!4 &4727437929713941587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2226,9 +2343,19 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 3604373787870624427}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &5052655424437098570 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 3604373787870624427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &5614431225977779733 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 3604373787870624427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7129007533622267323 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 3604373787870624427}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4082731446887270984
@@ -2288,6 +2415,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!114 &2136856752489405772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 4082731446887270984}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!108 &5136354508549228278 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2298,9 +2436,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 4082731446887270984}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &5526808536787429545 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 4082731446887270984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &5759069839553432702 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 4082731446887270984}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7512807745098759512 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 4082731446887270984}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4661797775364918558
@@ -2364,6 +2512,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
+--- !u!23 &202342020116618002 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4790937880152937996, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
+  m_PrefabInstance: {fileID: 4661797775364918558}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1334736895085666429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5924476801398435171, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
@@ -2426,6 +2579,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!23 &1804438146322307919 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5323459987582151775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &3895476306238972129 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2436,11 +2594,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 5323459987582151775}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &4466259306287795902 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5323459987582151775}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &4513785195696040553 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 5323459987582151775}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7849738815523011419 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5323459987582151775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &5335991469587681951
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2498,6 +2672,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!23 &1938557404235670927 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5335991469587681951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &3882672771608354337 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2513,6 +2692,22 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 5335991469587681951}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &4473994667856113790 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5335991469587681951}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7999055410412062107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5335991469587681951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &5360725246052652698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2574,6 +2769,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
+--- !u!23 &583721562727071894 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4790937880152937996, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
+  m_PrefabInstance: {fileID: 5360725246052652698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1752717705536519161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5924476801398435171, guid: c63a547c5c931874d8ea3ce81b5ff2d6, type: 3}
@@ -2636,9 +2836,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!23 &376426746335403 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5830835592239097787}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2555017697369973059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5830835592239097787}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &2661811658147120474 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 5830835592239097787}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &2859749534411153805 stripped
@@ -2651,6 +2861,17 @@ Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 5830835592239097787}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8494966922093490367 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 5830835592239097787}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &6743273632663445588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2708,9 +2929,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!23 &972487164410189636 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6743273632663445588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &2484810572125465834 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6743273632663445588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &2994619073606599349 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 6743273632663445588}
   m_PrefabAsset: {fileID: 0}
 --- !u!198 &3085105086508983906 stripped
@@ -2723,6 +2954,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 6743273632663445588}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8690696996704974672 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6743273632663445588}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &6870007924749746457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2780,6 +3022,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!23 &1134123735531501065 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6870007924749746457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &2357654642299899303 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -2790,11 +3037,27 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 6870007924749746457}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &3120086643044000760 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6870007924749746457}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3227214872535926753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8331225128055555832, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 6870007924749746457}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8815882808663545373 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 6870007924749746457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &7062180703367187228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2862,11 +3125,32 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 7062180703367187228}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &1592596845494151677 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7062180703367187228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &2156905664395610018 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 7062180703367187228}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &3669303014334905356 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7062180703367187228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5120173404755794968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7062180703367187228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &7198395891017441732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2934,11 +3218,32 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 7198395891017441732}
   m_PrefabAsset: {fileID: 0}
+--- !u!199 &1728884619610030885 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7198395891017441732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!108 &2020690460099227002 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 7198395891017441732}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &3679382229560825556 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7198395891017441732}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5110094188959446720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 7198395891017441732}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &8502751400055934693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2996,6 +3301,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+--- !u!199 &136298566909815812 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 8366541911305478881, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 8502751400055934693}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &196823879283230931 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 8594157950148789814, guid: 386211115fdc1434aac5b82749b27957, type: 3}
@@ -3011,6 +3321,22 @@ Light:
   m_CorrespondingSourceObject: {fileID: 9218650359852289214, guid: 386211115fdc1434aac5b82749b27957, type: 3}
   m_PrefabInstance: {fileID: 8502751400055934693}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &2672265228202834421 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5830503764580267792, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 8502751400055934693}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5832357380784183777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2670464685979916036, guid: 386211115fdc1434aac5b82749b27957, type: 3}
+  m_PrefabInstance: {fileID: 8502751400055934693}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
 --- !u!1001 &8608205933618687189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3071,6 +3397,11 @@ PrefabInstance:
 --- !u!1 &11266782290137204 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8601447183501900961, guid: 1f4d5bf7dfb49084c9080590dd9260c8, type: 3}
+  m_PrefabInstance: {fileID: 8608205933618687189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4563717291609984348 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5198254591048212873, guid: 1f4d5bf7dfb49084c9080590dd9260c8, type: 3}
   m_PrefabInstance: {fileID: 8608205933618687189}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4614741151934105921 stripped

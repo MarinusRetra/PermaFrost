@@ -2,11 +2,19 @@ using Gameplay;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class PlayerStatusEffects : MonoBehaviour
 {
     private PlayerHealth _playerHP;
+    [SerializeField] VolumeProfile _postProcessing;
+    private ColorAdjustments _colorAdjustments;
+    private ChromaticAberration _chrom;
+    private Bloom _bloo;
+    private LensDistortion _lenny;
+    private WhiteBalance _whi;
 
     [SerializeField] private Slider _insanitySlider;
     [SerializeField] private Slider _freezingSlider;
@@ -14,6 +22,11 @@ public class PlayerStatusEffects : MonoBehaviour
     public void Start()
     {
         _playerHP = PlrRefs.inst.PlayerHealth;
+        _postProcessing.TryGet(out _colorAdjustments);
+        _postProcessing.TryGet(out _chrom);
+        _postProcessing.TryGet(out _bloo);
+        _postProcessing.TryGet(out _lenny);
+        _postProcessing.TryGet(out _whi);
         //Sanity and Frostbite update every second
         StartCoroutine(HandleInsanity());
         StartCoroutine(HandleFrostbite());
@@ -42,7 +55,30 @@ public class PlayerStatusEffects : MonoBehaviour
             if (_insanityCauses.Count > 0) { _currentInsanity += 2; }
             if (_insanityCauses.Count == 0 && _currentInsanity > 0) { _currentInsanity -= 1; }
 
-            _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
+            if(_currentInsanity > 0)
+            {
+                _colorAdjustments.hueShift.value = -(_currentInsanity / 4);
+                _colorAdjustments.hueShift.overrideState = true;
+                _colorAdjustments.contrast.value = 54 + (_currentInsanity / 2);
+                _colorAdjustments.saturation.value = -5 - _currentInsanity;
+                _chrom.intensity.value = (float)(_currentInsanity) / (float)(InsanityDeath);
+                _bloo.intensity.value = (float)(_currentInsanity) / 40;
+                _lenny.intensity.value = (float)(_currentInsanity / 3) / (float)(InsanityDeath);
+            }
+            else
+            {
+                _colorAdjustments.hueShift.value = 0;
+                _colorAdjustments.hueShift.overrideState = false;
+                _colorAdjustments.contrast.value = 54;
+                _colorAdjustments.saturation.value = -5;
+                _chrom.intensity.value = 0;
+                _bloo.intensity.value = 0;
+                _lenny.intensity.value = 0;
+            }
+
+
+
+                _insanitySlider.value = _insanitySlider.maxValue - _currentInsanity;
             _insanitySlider.gameObject.SetActive(_currentInsanity <= 0 ? false : true);
 
             float currentPercent = (float)_insanitySlider.value / (float)_insanitySlider.maxValue;
@@ -108,6 +144,17 @@ public class PlayerStatusEffects : MonoBehaviour
             if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite -= 3; }
 
+            if (_currentFrostbite > 0)
+            {
+                _whi.temperature.value = -_currentFrostbite / 2;
+                _whi.tint.value = -_currentFrostbite / 2;
+            }
+            else
+            {
+                _whi.temperature.value = 0;
+                _whi.tint.value = 0;
+            }
+
             _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
             _freezingSlider.gameObject.SetActive(_currentFrostbite <= 0 ? false : true);
 
@@ -132,5 +179,18 @@ public class PlayerStatusEffects : MonoBehaviour
         if( _currentFrostbite < 0 ) { _currentFrostbite = 0;}
         _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
         _freezingSlider.gameObject.SetActive(_currentFrostbite <= 0 ? false : true);
+    }
+
+    void OnDestroy()
+    {
+        _whi.temperature.value = 0;
+        _whi.tint.value = 0;
+        _colorAdjustments.hueShift.value = 0;
+        _colorAdjustments.hueShift.overrideState = false;
+        _colorAdjustments.contrast.value = 54;
+        _colorAdjustments.saturation.value = -5;
+        _chrom.intensity.value = 0;
+        _bloo.intensity.value = 0;
+        _lenny.intensity.value = 0;
     }
 }

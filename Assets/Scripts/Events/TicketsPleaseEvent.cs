@@ -65,7 +65,6 @@ namespace Gameplay
         //First time completing room
         public override bool FirstExit(CarriageClass room)
         {
-            PlrRefs.inst.PlayerMonsterManager.HasFoundTicket = false;
             return true;
         }
         //Leaving room through the way the player came

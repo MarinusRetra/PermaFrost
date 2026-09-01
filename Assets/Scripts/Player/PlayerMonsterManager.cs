@@ -4,6 +4,7 @@ namespace Gameplay
 {
     public class PlayerMonsterManager : MonoBehaviour
     {
+        [SerializeField] private Animator ticketVisual;
         public bool HasFoundTicket = false;
         public bool InSideroom = false;
 
@@ -76,11 +77,13 @@ namespace Gameplay
         public void GrabTicket()
         {
             HasFoundTicket = true;
+            ticketVisual.SetTrigger("Change");
         }
 
         public void ResetTicket()
         {
             HasFoundTicket = false;
+            ticketVisual.SetTrigger("Change");
         }
     }
 }

@@ -53,6 +53,7 @@ namespace Gameplay
                 }else if (PlrRefs.inst.PlayerMonsterManager.HasFoundTicket)
                 {
                     pacified = true;
+                    PlrRefs.inst.PlayerMonsterManager.ResetTicket();
                 }
             }
         }

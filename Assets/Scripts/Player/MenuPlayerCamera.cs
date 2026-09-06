@@ -15,13 +15,19 @@ namespace Gameplay
             _input.LookEvent += HandleLook;
             _input.PauseEvent += HandlePause;
         }
+
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
         /// <summary>
         /// Uses mouse position to or joystick delta to rotate the first person camera.
         /// </summary>
         void HandleLook(Vector2 obj)
         {
-            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * (_sensitivity * 0.1f), -25f, 25f);
-            _rotationY = Mathf.Clamp(_rotationY += obj.x * (_sensitivity * 0.1f), -30f, 30f);
+            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * (_sensitivity * 0.1f), -15f, 15f);
+            _rotationY = Mathf.Clamp(_rotationY += obj.x * (_sensitivity * 0.1f), -15f, 15f);
 
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, (_rotationY), 0);
         }

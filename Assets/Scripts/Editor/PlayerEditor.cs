@@ -271,6 +271,19 @@ namespace Gameplay
                 UpdateVariables();
                 playerHealth.HealPlayer(true);
             }
+            if (showDetails)
+            {
+                if (GUILayout.Button("Hurt Player") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerHealth.DamagePlayerWithoutCourotine("Testing","Special2");
+                }
+                if (GUILayout.Button("Kill Player") && CheckIfRunning())
+                {
+                    UpdateVariables();
+                    playerHealth.GameOver("Testing");
+                }
+            }
 
             if (GUILayout.Button("Reset effects") && CheckIfRunning())
             {

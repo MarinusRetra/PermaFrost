@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (_isVunerable) 
         {
-            GameOver(cause);
+            GameOver(cause,type);
             yield break;
         }
         
@@ -58,6 +58,14 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(_damageInvincibility);
         _damageInvincible = false;
     }
+
+#if UNITY_EDITOR
+    //Added because the unity editor cannot start courotines.
+    public void DamagePlayerWithoutCourotine(string cause, string type)
+    {
+        StartCoroutine(DamagePlayer(cause,type));
+    }
+#endif
 
     public void GameOver(string deathCause, string deathType = "Default")
     {

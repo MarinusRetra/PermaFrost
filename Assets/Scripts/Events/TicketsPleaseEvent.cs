@@ -8,7 +8,7 @@ namespace Gameplay
     public class TicketsPleaseEvent : EventClass
     {
         //Variables
-        private GameObject spawnedTicketsPlease;
+        public GameObject spawnedTicketsPlease;
         private GameObject spawnedTicket;
 
         //When room spawns in

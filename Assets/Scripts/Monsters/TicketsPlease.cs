@@ -8,6 +8,7 @@ namespace Gameplay
     {
         private NavMeshAgent _agent;
         [SerializeField] private GameObject _hitbox;
+        [SerializeField] private Collider mainBodyCollider;
         private Transform _entryRoom;
 
         private bool _isChasing = false;
@@ -52,10 +53,17 @@ namespace Gameplay
                     StartCoroutine(ChasePlayer());
                 }else if (PlrRefs.inst.PlayerMonsterManager.HasFoundTicket)
                 {
-                    pacified = true;
+                    PacifyTP();
                     PlrRefs.inst.PlayerMonsterManager.ResetTicket();
                 }
             }
+        }
+
+        public void PacifyTP()
+        {
+            if (pacified) { return; }
+            pacified = true;
+            mainBodyCollider.enabled = false;
         }
 
         public override void Deaggro()
@@ -64,6 +72,7 @@ namespace Gameplay
             _isChasing = false;
             _agent.speed = _defaultSpeed;
             _agent.destination = _currentDestination;
+            PacifyTP();
         }
 
         private IEnumerator ChasePlayer()

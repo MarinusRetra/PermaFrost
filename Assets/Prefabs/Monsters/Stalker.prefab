@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 111918870197185419}
   - component: {fileID: 3663845551420543488}
   - component: {fileID: 1287186690484594874}
-  - component: {fileID: 5989669208783998232}
   - component: {fileID: 6810944972995150095}
+  - component: {fileID: 3646865666633050756}
   m_Layer: 6
   m_Name: Stalker
   m_TagString: Enemy
@@ -93,27 +93,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &5989669208783998232
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8244606800680952717}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6810944972995150095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +114,29 @@ MonoBehaviour:
   _roomCorners: []
   _appearSound: {fileID: 8300000, guid: 127fb2c589054d34684e08fb0f6189b2, type: 3}
   _disappearSound: {fileID: 8300000, guid: fb475a8279a54af439ddbf7c482776ea, type: 3}
+--- !u!136 &3646865666633050756
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244606800680952717}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2904155074702860716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,7 +163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ededc872102a1af40973628f0123e943, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ededc872102a1af40973628f0123e943, type: 3}
       propertyPath: m_LocalPosition.z

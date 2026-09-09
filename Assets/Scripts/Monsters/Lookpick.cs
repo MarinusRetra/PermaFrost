@@ -7,9 +7,9 @@ namespace Gameplay
 {
     public class Lookpick : Monster
     {
-        private Collider _collider;
+        [SerializeField] private Collider _collider;
         private PlayerMonsterManager _pmm;
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
         [SerializeField] private Transform _transform;
         [SerializeField] private float _moveSpeed = 0.2f;
         [SerializeField] private float _returnSpeed = -0.6f;
@@ -23,8 +23,6 @@ namespace Gameplay
         {
             _postProcessing.TryGet(out vignette);
             vignette.intensity.overrideState = true;
-            _collider = GetComponent<Collider>();
-            _animator = GetComponentInParent<Animator>();
             _pmm = PlrRefs.inst.PlayerMonsterManager;
             _animator.enabled = false;
             if (_tpToPlayer) { Aggro(); }

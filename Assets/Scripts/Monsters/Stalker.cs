@@ -41,7 +41,7 @@ namespace Gameplay
                 renderer.bounds.max.z- _wallRadius),
                 new Vector3(
                     renderer.bounds.min.x + _wallRadius,
-                    renderer.bounds.min.y + 2,
+                    renderer.bounds.min.y + 1.5f,
                     renderer.bounds.min.z+ _wallRadius)};
 
             transform.position = GetRandomRoomPosition();
@@ -60,6 +60,7 @@ namespace Gameplay
         {
             //Spawning visual
             Transform model = transform.GetChild(0);
+            model.localPosition = new Vector3(model.localPosition.x,10,model.localPosition.z);
             while (model.localPosition.y > 0 && !_despawning)
             {
                 model.localPosition = new Vector3(model.localPosition.x, model.localPosition.y - 0.5f, model.localPosition.z);

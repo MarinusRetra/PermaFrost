@@ -60,7 +60,7 @@ namespace Gameplay
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
                 playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
                 playerArmSound.generator = CurrentSelectedSlot.Item.EquipSound;
-                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
+                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.white;
                 SlotAnimSelect(CurrentSelectedSlot);
                 return;
             }
@@ -74,7 +74,7 @@ namespace Gameplay
                 CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, true);
                 playerArmAnimator.SetInteger("ItemID", CurrentSelectedSlot.Item.ID);
                 playerArmSound.generator = CurrentSelectedSlot.Item.EquipSound;
-                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.black;
+                CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.white;
                 SlotAnimSelect(CurrentSelectedSlot);
             }
         }
@@ -280,7 +280,7 @@ namespace Gameplay
                 return;
             }
 
-            CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.white;
+            CurrentSelectedSlot.SlotGameObject.GetComponent<Image>().color = Color.gray;
             CurrentSelectedSlot.slotAnimator.SetBool(SelectedHash, false);
             _slotIn.slotAnimator.SetBool(DeselectingHash, true);
             _slotIn._deselectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[0].length, _slotIn));
@@ -361,6 +361,7 @@ namespace Gameplay
             Item = itemIn;
             UpdateSprite();
             SlotGameObject.SetActive(true);
+            SlotGameObject.GetComponent<Image>().color = Color.gray;
         }
 
     }

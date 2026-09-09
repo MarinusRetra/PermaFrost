@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Gameplay
@@ -42,6 +43,30 @@ namespace Gameplay
                 nextObjective = nextNode;
             }
             Destroy(transform.parent.gameObject,30);
+        }
+
+        private int failures = 0;
+
+        private IEnumerator ForceGoToNextObjective()
+        {
+            int index = currentIndex;
+
+            yield return new WaitForSeconds(1);
+
+            if(index == currentIndex)
+            {
+                Transform nextNode = nodes.GetChild(currentIndex);
+                if (nextNode)
+                {
+                    nextObjective = nextNode;
+                }
+                failures++;
+                if (failures == 2)
+                {
+                    Destroy(transform.parent.gameObject);
+                }
+                MoveTowards(nodes.GetChild(currentIndex));
+            }
         }
 
         private int transfers = 0;
@@ -96,15 +121,19 @@ namespace Gameplay
             }
             return false;
         }
-
+        Coroutine nextObjCorou;
         public void MoveTowards(Transform node)
         {
+            if(nextObjCorou != null)
+            {
+                StopCoroutine(nextObjCorou);
+            }
             Vector3 lookPos = node.position - affectedObject.transform.position;
             affectedObject.transform.rotation = Quaternion.LookRotation(lookPos);
             rb.angularVelocity = Vector3.zero;
             rb.linearVelocity = Vector3.zero;
             rb.AddForce(lookPos.normalized * speed, ForceMode.Impulse);
-
+            nextObjCorou = StartCoroutine(ForceGoToNextObjective());
         }
         private void Obliterate()
         {

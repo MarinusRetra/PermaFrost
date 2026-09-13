@@ -8,6 +8,8 @@ namespace Gameplay
         [SerializeField] private Painting[] _possiblePaintings;
         [SerializeField] private MeshRenderer frameFilter;
         [SerializeField] private MeshRenderer PaintingRenderer;
+
+        public bool CanFrameless = true;
         void Start()
         {
             Painting chosenPainting = CalculatePaintingWeight(_possiblePaintings);
@@ -20,12 +22,20 @@ namespace Gameplay
             int totalWeight = 0;
             for (int i = 0; i < Paintings.Length; i++)
             {
+                if (!CanFrameless && Paintings[i].RemoveFrame)
+                {
+                    continue;
+                }
                 totalWeight += Paintings[i].Weight;
             }
             int randomChosenWeight = Random.Range(1, totalWeight + 1);
             int roomCheckers = 0;
             for (int i = 0; i < Paintings.Length; i++)
             {
+                if (!CanFrameless && Paintings[i].RemoveFrame)
+                {
+                    continue;
+                }
                 roomCheckers += Paintings[i].Weight;
                 if (roomCheckers > randomChosenWeight || roomCheckers == totalWeight)
                 {

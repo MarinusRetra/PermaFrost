@@ -35,7 +35,7 @@ public class PlayerStatusEffects : MonoBehaviour
     //Sanity related variables
     [Header("Sanity")]
     public int InsanityDeath = 20;
-    [SerializeField] private int _currentInsanity = 0;
+    public int _currentInsanity = 0;
     [SerializeField] private List<string> _insanityCauses = new();
     [SerializeField] private AudioChorusFilter _sanityAudioFilter;
 
@@ -120,8 +120,9 @@ public class PlayerStatusEffects : MonoBehaviour
     //Frostbite related variables
     [Header("Frostbite")]
     public int FrostbiteDeath = 30;
-    [SerializeField] private int _currentFrostbite = 0;
+    public int _currentFrostbite = 0;
     private List<string> _frostbiteCauses = new();
+    private List<string> _heatCauses = new();
 
     private bool _playSoundNextTick = true;
     [SerializeField] private AudioClip _freezeSFX;
@@ -141,8 +142,9 @@ public class PlayerStatusEffects : MonoBehaviour
             if(_playSoundNextTick && _frostbiteCauses.Count > 0) { Soundsystem.PlaySound(_freezeSFX,transform.position,false,true,0.2f).transform.parent = transform.parent; _playSoundNextTick = false; }
 
             //gain or lose frostbite. Unlike insanity you gain more frostbite the more causes you have.
-            if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count); }
+            if (_frostbiteCauses.Count > 0) { _currentFrostbite += (2 * _frostbiteCauses.Count) - (15 * _heatCauses.Count); }
             if (_frostbiteCauses.Count == 0 && _currentFrostbite > 0) { _currentFrostbite -= 3; }
+            if(_currentFrostbite < 0) { _currentFrostbite = 0; }
 
             if (_currentFrostbite > 0)
             {
@@ -179,6 +181,25 @@ public class PlayerStatusEffects : MonoBehaviour
         if( _currentFrostbite < 0 ) { _currentFrostbite = 0;}
         _freezingSlider.value = _freezingSlider.maxValue - _currentFrostbite;
         _freezingSlider.gameObject.SetActive(_currentFrostbite <= 0 ? false : true);
+    }
+
+    public bool AddOvertimeHeat(string heatName, int seconds, bool remove)
+    {
+        if (remove)
+        {
+            _heatCauses.Remove(heatName);
+            return true;
+        }
+        if (_heatCauses.Contains(heatName)) return false;
+        _heatCauses.Add(heatName);
+        StartCoroutine(WaitToRemoveHeat(heatName, seconds));
+        return true;
+    }
+
+    private IEnumerator WaitToRemoveHeat(string heat, int time)
+    {
+        yield return new WaitForSeconds(time);
+        _heatCauses.Remove(heat);
     }
 
     void OnDestroy()

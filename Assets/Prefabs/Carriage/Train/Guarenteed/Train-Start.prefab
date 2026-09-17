@@ -277,7 +277,6 @@ Transform:
   - {fileID: 8176943414168072693}
   - {fileID: 6071019483650629191}
   - {fileID: 2379170178341466690}
-  - {fileID: 1194088897893411747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6160235671753483536
@@ -295,6 +294,8 @@ MonoBehaviour:
   EntryPoint: {fileID: 3835648490158112974}
   ExitPoint: {fileID: 6900990122434573298}
   roomIndex: -999
+  _enterTriggered: 0
+  _exitTriggered: 0
   OnRecedeEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -321,6 +322,9 @@ MonoBehaviour:
   roomCandleMan: {fileID: 0}
   previousCarriage: {fileID: 0}
   nextCarriage: {fileID: 0}
+  allRoomRenderers: []
+  allRoomLights: []
+  allRoomLightData: []
 --- !u!114 &954384730884478885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +340,7 @@ MonoBehaviour:
   _candleHolder: {fileID: 4642269268757648210}
   _allCandles: []
   _allCandleParticles: []
+  _allCandleLightData: []
   beenCalled: 0
 --- !u!65 &7810573214518832360
 BoxCollider:
@@ -802,6 +807,7 @@ Transform:
   - {fileID: 265192168590407206}
   - {fileID: 5266407069618389314}
   - {fileID: 3281784339823085917}
+  - {fileID: 1194088897893411747}
   m_Father: {fileID: 6714479650339210333}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5579007526054300317
@@ -1069,7 +1075,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 345816832423409185}
+    m_TransformParent: {fileID: 1047878082973737645}
     m_Modifications:
     - target: {fileID: 102646975976822128, guid: 81c3acefe2257cc48ae06accd2d938ba, type: 3}
       propertyPath: m_LocalPosition.x

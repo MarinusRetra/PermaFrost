@@ -244,6 +244,11 @@ public class Generation : MonoBehaviour
         {
             allPossibleRooms.Remove(selectedroom);
         }
+
+        if(index - 1 > 0)
+        {
+            currentGroup._initializedCarriages[index - 1].OnRecede(true);
+        }
         return randomCarriage;
     }
 

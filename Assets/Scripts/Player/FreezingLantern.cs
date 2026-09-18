@@ -7,6 +7,8 @@ namespace Gameplay
     public class FreezingLantern : MonoBehaviour
     {
         [SerializeField] private InputReader _input;
+
+        [SerializeField] private Animator playerArmAnimator;
         public bool LanternOn;
 
         //needs to be static for FireGuy

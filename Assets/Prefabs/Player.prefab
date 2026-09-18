@@ -702,6 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.FreezingLantern
   _input: {fileID: 11400000, guid: cb38ef5a545dd4d46a1bd0787bd39f26, type: 2}
+  playerArmAnimator: {fileID: 1280860117930406147}
   LanternOn: 0
   _playerEffects: {fileID: 0}
 --- !u!1 &9114351315538011499
@@ -1097,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253125e44de3b0540af299b0f1dbacf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatusEffects
+  _postProcessing: {fileID: 0}
   _insanitySlider: {fileID: 0}
   _freezingSlider: {fileID: 0}
   InsanityDeath: 40
@@ -1138,6 +1140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1832c113bc8cd4b4caba486417a663fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.PlayerMonsterManager
+  ticketVisual: {fileID: 0}
   HasFoundTicket: 0
   InSideroom: 0
   SelectedCamera: {fileID: 5990134823720351312}

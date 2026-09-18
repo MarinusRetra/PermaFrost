@@ -26,8 +26,8 @@ namespace Gameplay
         /// </summary>
         void HandleLook(Vector2 obj)
         {
-            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * (_sensitivity * 0.1f), -15f, 15f);
-            _rotationY = Mathf.Clamp(_rotationY += obj.x * (_sensitivity * 0.1f), -15f, 35f);
+            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * (_sensitivity * 0.15f), -15f, 15f);
+            _rotationY = Mathf.Clamp(_rotationY += obj.x * (_sensitivity * 0.15f), -15f, 35f);
 
             _camera.localRotation = Quaternion.Euler(_cameraRotationX, (_rotationY), 0);
         }

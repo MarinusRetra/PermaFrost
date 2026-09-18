@@ -31,6 +31,8 @@ namespace Gameplay
         public Animator playerArmAnimator;
         public AudioSource playerArmSound;
 
+        private bool lanternItemBlock = false;
+
         public void Awake()
         {
             _input.HotbarSelectEvent += HandleHotbarSelect;
@@ -38,17 +40,18 @@ namespace Gameplay
             _input.UseEvent += HandleUse;
             _input.DropEvent += HandleDrop;
             _input.UseEventCancelled += HandleCancelUse;
+            _input.LanternEvent += ChangeLanternState;
         }
 
         private void SelectSlot(int numberIn, bool bypassDeselect = false)
         {
             //dont try to select if there is no item
-            if (hotbarSlots == null || numberIn >= hotbarSlots.Length || numberIn < 0 || hotbarSlots[numberIn].Item == null)
+            if (hotbarSlots == null || numberIn >= hotbarSlots.Length || numberIn < 0 || hotbarSlots[numberIn].Item == null )
             {
                 return;
             }
             //if the slot is equipped, unequip it (unless bypassed)
-            if (currentSelectedSlot_ID == numberIn && !bypassDeselect)
+            if (currentSelectedSlot_ID == numberIn && !bypassDeselect || lanternItemBlock)
             {
                 DeselectSlots();
                 return;
@@ -83,7 +86,7 @@ namespace Gameplay
         public void DeselectSlots()
         {
             if (currentSelectedSlot_ID == -1 || currentSelectedSlot_ID == -999) { return; }
-            SlotAnimDeselect(CurrentSelectedSlot);
+            SlotAnimDeselect(CurrentSelectedSlot,true);
             playerArmAnimator.SetInteger("ItemID", 0);
             currentSelectedSlot_ID = -1;
         }
@@ -205,7 +208,7 @@ namespace Gameplay
                 }
             }
 
-            if (GetItemsInInventory() == 0 || !hotbarSlots[currentSlotIn].Item)
+            if (GetItemsInInventory() == 0 || !hotbarSlots[currentSlotIn].Item || lanternItemBlock)
             {
                 DeselectSlots();
             }
@@ -236,6 +239,13 @@ namespace Gameplay
             }
         }
 
+
+        private void ChangeLanternState()
+        {
+            DeselectSlots();
+            lanternItemBlock = !lanternItemBlock;
+        }
+
         void OnDestroy()
         {
             _input.HotbarSelectEvent -= HandleHotbarSelect;
@@ -243,6 +253,7 @@ namespace Gameplay
             _input.UseEvent -= HandleUse;
             _input.DropEvent -= HandleDrop;
             _input.UseEventCancelled -= HandleCancelUse;
+            _input.LanternEvent -= ChangeLanternState;
         }
         void OnDisable()
         {
@@ -251,6 +262,7 @@ namespace Gameplay
             _input.NextPreviousEvent -= HandleHotbarNav;
             _input.UseEvent -= HandleUse;
             _input.UseEventCancelled -= HandleCancelUse;
+            _input.LanternEvent -= ChangeLanternState;
         }
 
         IEnumerator WaitForAnimations(float _timeIn, InventorySlot _slotIn)
@@ -273,9 +285,9 @@ namespace Gameplay
             _slotIn._selectRoutine = StartCoroutine(WaitForAnimations(_slotIn.slotAnimator.runtimeAnimatorController.animationClips[1].length, _slotIn));
         }
 
-        public void SlotAnimDeselect(InventorySlot _slotIn)
+        public void SlotAnimDeselect(InventorySlot _slotIn, bool bypass = false)
         {
-            if (_slotIn._deselectRoutine != null)
+            if (_slotIn._deselectRoutine != null && !bypass)
             {
                 return;
             }

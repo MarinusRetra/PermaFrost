@@ -25,6 +25,9 @@ namespace Gameplay
         [SerializeField] private Slider mainVolumeSlider;
         [SerializeField] private Slider backgroundVolumeSlider;
 
+        [Header("Refs")]
+        [SerializeField] private MenuPlayerCamera menuPlayerCamera;
+
         private void Start()
         {
             CheckAndGetSettings();
@@ -43,6 +46,10 @@ namespace Gameplay
                 PlrRefs.inst.PlayerController._sensitivity = currentSettings.camSensitivity * 0.4f;
                 PlrRefs.inst.PlayerCamera.GetComponent<CinemachineCamera>().Lens.FieldOfView = currentSettings.camFOV;
                 PlrRefs.inst.PlayerController.DoHeadBob = currentSettings.doCamHeadBob;
+            }
+            if(menuPlayerCamera != null)
+            {
+                menuPlayerCamera._sensitivity = currentSettings.camSensitivity * 0.4f;
             }
             _audioMixer.SetFloat("Master", Mathf.Log10(currentSettings.masterVolume) * 20);
             _audioMixer.SetFloat("Background", Mathf.Log10(currentSettings.backgroundVolume) * 20);
@@ -132,11 +139,15 @@ namespace Gameplay
     {
         public float camSensitivity;
         public bool doCamHeadBob;
+        public bool mainMenuMove;
         public float camFOV;
 
         public float masterVolume;
         public float backgroundVolume;
 
         public int windowMode;
+
+        public bool toggleCrouch;
+        public bool toggleSprint;
     }
 }

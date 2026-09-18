@@ -468,6 +468,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 43835261}
   m_CullTransparentMesh: 1
+--- !u!114 &46908377 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3988832386332468966, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &48514094
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1820,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 205756357}
   m_CullTransparentMesh: 1
+--- !u!114 &227346268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6714710510231793760, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
 --- !u!1 &246915984
 GameObject:
   m_ObjectHideFlags: 0
@@ -7792,6 +7814,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945009325}
   m_CullTransparentMesh: 1
+--- !u!114 &959857589 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2506931903035088671, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &965356852
 GameObject:
   m_ObjectHideFlags: 0
@@ -8482,6 +8515,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028574207}
   m_CullTransparentMesh: 1
+--- !u!114 &1037251148 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4137667089878491695, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1048465931
 GameObject:
   m_ObjectHideFlags: 0
@@ -19885,6 +19929,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721063501}
   m_CullTransparentMesh: 1
+--- !u!114 &1734929768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 615128910816355502, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_Dropdown
 --- !u!1 &1751867444
 GameObject:
   m_ObjectHideFlags: 0
@@ -19914,13 +19969,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb554934169ffb149b7b269a17decdec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gameplay.SettingsManager
-  camSensitivitySlider: {fileID: 7480106661056182849}
-  camFovSlider: {fileID: 7480106661056182848}
-  camBobToggle: {fileID: 7480106661056182847}
-  windowModeDropdown: {fileID: 7480106661056182846}
+  camSensitivitySlider: {fileID: 46908377}
+  camFovSlider: {fileID: 2079398037}
+  camBobToggle: {fileID: 227346268}
+  windowModeDropdown: {fileID: 1734929768}
   _audioMixer: {fileID: 24100000, guid: 654342ac98a1dd149b33cffac4a1f938, type: 2}
-  mainVolumeSlider: {fileID: 7480106661056182845}
-  backgroundVolumeSlider: {fileID: 7480106661056182844}
+  mainVolumeSlider: {fileID: 959857589}
+  backgroundVolumeSlider: {fileID: 1037251148}
+  menuPlayerCamera: {fileID: 70324109}
 --- !u!4 &1751867446
 Transform:
   m_ObjectHideFlags: 0
@@ -23765,6 +23821,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050086005}
   m_CullTransparentMesh: 1
+--- !u!114 &2079398037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114564432113702616, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
+  m_PrefabInstance: {fileID: 1463089549}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &2109314348
 GameObject:
   m_ObjectHideFlags: 0
@@ -24480,72 +24547,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
---- !u!114 &7480106661056182844 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4137667089878491695, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &7480106661056182845 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2506931903035088671, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &7480106661056182846 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 615128910816355502, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_Dropdown
---- !u!114 &7480106661056182847 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6714710510231793760, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Toggle
---- !u!114 &7480106661056182848 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114564432113702616, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
---- !u!114 &7480106661056182849 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3988832386332468966, guid: 724ddf8d35b41054a91367b50dd3495b, type: 3}
-  m_PrefabInstance: {fileID: 7480106661056182843}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

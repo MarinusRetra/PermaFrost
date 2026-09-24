@@ -98,12 +98,13 @@ MonoBehaviour:
     HeightValue: 0
     guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: d54714392e46f9a4a832dbcc51e68962, type: 3}
-    Weight: 80
+    Weight: 55
     AmountOfEventsMax: 2
     AllowedEvents:
     - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
     - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
     - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
     RoomName: ReverseAccordian
     onlySpawnOnce: 0
     HeightValue: 0
@@ -131,8 +132,23 @@ MonoBehaviour:
     onlySpawnOnce: 0
     HeightValue: 0
     guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: 1e1936fe7ba89b84d8d9b2b3827ce6f6, type: 3}
+    Weight: 150
+    AmountOfEventsMax: 3
+    AllowedEvents:
+    - {fileID: 11400000, guid: 844f73551e2a4a043ae1b7aeb9195e2d, type: 2}
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
+    - {fileID: 11400000, guid: d0f0dea57e0e3e54e9d803f5883dc6ba, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
+    - {fileID: 11400000, guid: 34a371bd94e9256478af48a8b215693a, type: 2}
+    RoomName: Short
+    onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
   - Room: {fileID: 366001246756394530, guid: b7b86889dd26c524684b691880679941, type: 3}
-    Weight: 125
+    Weight: 90
     AmountOfEventsMax: 3
     AllowedEvents:
     - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
@@ -142,6 +158,20 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 34a371bd94e9256478af48a8b215693a, type: 2}
     RoomName: IllusionOfChoice
     onlySpawnOnce: 0
+    HeightValue: 0
+    guarenteedIndex: 0
+  - Room: {fileID: 366001246756394530, guid: edece5f867e1af647862b52ac59312fa, type: 3}
+    Weight: 10
+    AmountOfEventsMax: 0
+    AllowedEvents:
+    - {fileID: 11400000, guid: 254d77686478b8849bd3d651c900d5f8, type: 2}
+    - {fileID: 11400000, guid: e75ab0a5723f50f45a8360e3f9a2ab75, type: 2}
+    - {fileID: 11400000, guid: bfe24f70f970c084eb097d1af7edecb0, type: 2}
+    - {fileID: 11400000, guid: 5f3055bb4afd08b46861218011c333ad, type: 2}
+    - {fileID: 11400000, guid: 34a371bd94e9256478af48a8b215693a, type: 2}
+    - {fileID: 11400000, guid: 92ce4df3dc08cc74584499b4e1ac7b70, type: 2}
+    RoomName: ChamberOfSeaCritters
+    onlySpawnOnce: 1
     HeightValue: 0
     guarenteedIndex: 0
   GuarenteedRooms: []

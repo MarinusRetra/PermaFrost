@@ -8,12 +8,13 @@ namespace Gameplay
     {
         //Variables
         private MeshFilter _chosenSpot;
-        private GameObject spawnedAltar;
+        public GameObject spawnedAltar;
         private HealingAltar spawnedAltarScript;
 
         //When room spawns in
         public override bool Generate(CarriageClass room)
         {
+            if (spawnedAltar != null) { spawnedAltarScript = spawnedAltar.GetComponent<HealingAltar>(); spawnedAltar.transform.parent = room.InstanceHolder;  return true; }
             List<MeshFilter> _availableSpots = room.SpawnPoints[1].GetComponentsInChildren<MeshFilter>(false).ToList();
             _availableSpots.RemoveAt(0);
             _chosenSpot = _availableSpots[Random.Range(0, _availableSpots.Count)];
@@ -57,6 +58,7 @@ namespace Gameplay
         {
             if (spawnedAltar != null)
             {
+                if(spawnedAltarScript == null) { spawnedAltarScript = spawnedAltar.GetComponent<HealingAltar>(); }
                 spawnedAltarScript?.SetAnimator(PlrRefs.inst.PlayerHealth.IsVulnerable);
             }
             return true; 

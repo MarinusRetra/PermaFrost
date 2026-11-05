@@ -595,9 +595,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.39215687, g: 0.9019608, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.3137255, g: 0.78431374, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.3635217, b: 0.31372547, a: 1}
     m_PressedColor: {r: 0.3137255, g: 0.627451, b: 1, a: 1}
-    m_SelectedColor: {r: 0.39215687, g: 0.9019608, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 0.41807386, b: 0.39215684, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1871,6 +1871,14 @@ PrefabInstance:
       propertyPath: _pauseMenu
       value: 
       objectReference: {fileID: 106102894}
+    - target: {fileID: 2873557629302030239, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: _eventSystem
+      value: 
+      objectReference: {fileID: 771087092}
+    - target: {fileID: 2873557629302030239, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
+      propertyPath: _resumeButton
+      value: 
+      objectReference: {fileID: 127747589}
     - target: {fileID: 4605853214314879402, guid: 42c0db21de0c4e64fbffc4855584c2ad, type: 3}
       propertyPath: _hitUI
       value: 
@@ -2251,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 127747589}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &771087093

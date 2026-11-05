@@ -39,7 +39,7 @@ namespace Gameplay
 
         private void Update()
         {
-            print(_eventSystem.currentSelectedGameObject.name);
+            //print(_eventSystem.currentSelectedGameObject.name);
         }
 
         private void OnDisable()

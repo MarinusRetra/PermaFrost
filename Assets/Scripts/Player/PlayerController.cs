@@ -34,6 +34,8 @@ namespace Gameplay
         private Vector3 _moveDirection;
         private float _moveInputX, _moveInputY;
 
+        private float _lookInputX, _lookInputY;
+
         //Crouch
         private bool _isHoldingCrouch = false;
         private bool _isCrouching = false;
@@ -126,6 +128,12 @@ namespace Gameplay
 
             _moveDirection = transform.right * _moveInputX + transform.forward * _moveInputY;
 
+            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= _lookInputY * _sensitivity, -90f, 90f);
+            _rotationY += _lookInputX * _sensitivity;
+
+            transform.rotation = Quaternion.Euler(0, _rotationY, 0);
+            _camera.localRotation = Quaternion.Euler(_cameraRotationX, 0, 0);
+
             if (!DoHeadBob) { return; }
             if(_moveDirection != Vector3.zero)
             {
@@ -157,12 +165,8 @@ namespace Gameplay
         /// </summary>
         void HandleLook(Vector2 obj)
         {
-            _cameraRotationX = Mathf.Clamp(_cameraRotationX -= obj.y * _sensitivity, -90f, 90f);
-            _rotationY += obj.x * _sensitivity;
-
-            transform.rotation = Quaternion.Euler(0, _rotationY, 0);
-            _camera.localRotation = Quaternion.Euler(_cameraRotationX, 0, 0);
-            // TODO: Make it work properly with the joystick as well.
+            _lookInputX = obj.x;
+            _lookInputY = obj.y;
         }
         public void HandleCrouch()
         {

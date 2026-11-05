@@ -77,6 +77,7 @@ namespace Gameplay
         public event Action CancelEvent;
         public event Action ClickEvent;
         public event Action SubmitEvent;
+        public event Action MiddleClickEvent;
 
         // Cutscene action events
         public event Action SkipEvent;
@@ -220,6 +221,38 @@ namespace Gameplay
             if (context.phase == InputActionPhase.Performed)
             {
                 SubmitEvent?.Invoke();
+            }
+        }
+
+        public void OnMiddleClick(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                MiddleClickEvent?.Invoke();
+            }
+        }
+
+        public void OnRightClick(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                MiddleClickEvent?.Invoke();
+            }
+        }
+
+        public void OnTrackedDevicePosition(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                MiddleClickEvent?.Invoke();
+            }
+        }
+
+        public void OnTrackedDeviceOrientation(InputAction.CallbackContext context)
+        {
+            if (context.phase == InputActionPhase.Performed)
+            {
+                MiddleClickEvent?.Invoke();
             }
         }
 

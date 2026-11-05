@@ -16,7 +16,6 @@ namespace Gameplay
         {
             _input.PauseEvent += HandlePause;
             _input.ResumeEvent += HandleResume;
-            _resumeButton = gameObject;
         }
 
         private void HandlePause()

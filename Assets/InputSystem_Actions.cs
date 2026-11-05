@@ -703,6 +703,42 @@ namespace Controls
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""026e6939-4978-40ed-a4e1-56c21c79b440"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TrackedDevicePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6bd6d76a-14f9-4515-9038-19a084e37d39"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TrackedDeviceOrientation"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""c5a67c4f-1071-4f22-955c-e287f628d20f"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MiddleClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""604fb95f-751e-4b2e-9a3a-3aefdcc1bdaa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -757,7 +793,7 @@ namespace Controls
                     ""id"": ""809f371f-c5e2-4e7a-83a1-d867598f40dd"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=3,y=3)"",
                     ""groups"": """",
                     ""action"": ""Navigate"",
                     ""isComposite"": true,
@@ -1018,11 +1054,66 @@ namespace Controls
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc"",
-                    ""path"": ""*/{Submit}"",
+                    ""id"": ""cdf95e4a-787e-4531-a7fb-e23138ada627"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad;Touch;Joystick;XR"",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93b6d4b4-de65-4e36-9964-623a782e818a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d312eb4-576d-417c-a5de-871b228c3b7c"",
+                    ""path"": ""<XRController>/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""TrackedDevicePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""656f5eec-0a91-4edc-92c2-1e929d5892fb"",
+                    ""path"": ""<XRController>/deviceRotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""TrackedDeviceOrientation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4364c31d-706c-469e-9faf-fde3b106784e"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""MiddleClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe9ddf07-959e-463c-958e-008ed1bce061"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
                     ""action"": ""Submit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1129,7 +1220,7 @@ namespace Controls
                 {
                     ""name"": """",
                     ""id"": ""78fa9e88-97ac-4e1e-bd75-6e3980ea4fb4"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
@@ -1269,6 +1360,10 @@ namespace Controls
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
+            m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
+            m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
+            m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+            m_UI_MiddleClick = m_UI.FindAction("MiddleClick", throwIfNotFound: true);
             m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
             m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
             m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
@@ -1566,6 +1661,10 @@ namespace Controls
         private readonly InputActionMap m_UI;
         private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
         private readonly InputAction m_UI_Navigate;
+        private readonly InputAction m_UI_RightClick;
+        private readonly InputAction m_UI_TrackedDevicePosition;
+        private readonly InputAction m_UI_TrackedDeviceOrientation;
+        private readonly InputAction m_UI_MiddleClick;
         private readonly InputAction m_UI_Submit;
         private readonly InputAction m_UI_Cancel;
         private readonly InputAction m_UI_Point;
@@ -1586,6 +1685,22 @@ namespace Controls
             /// Provides access to the underlying input action "UI/Navigate".
             /// </summary>
             public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/RightClick".
+            /// </summary>
+            public InputAction @RightClick => m_Wrapper.m_UI_RightClick;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/TrackedDevicePosition".
+            /// </summary>
+            public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/TrackedDeviceOrientation".
+            /// </summary>
+            public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+            /// <summary>
+            /// Provides access to the underlying input action "UI/MiddleClick".
+            /// </summary>
+            public InputAction @MiddleClick => m_Wrapper.m_UI_MiddleClick;
             /// <summary>
             /// Provides access to the underlying input action "UI/Submit".
             /// </summary>
@@ -1635,6 +1750,18 @@ namespace Controls
                 @Navigate.started += instance.OnNavigate;
                 @Navigate.performed += instance.OnNavigate;
                 @Navigate.canceled += instance.OnNavigate;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+                @TrackedDevicePosition.started += instance.OnTrackedDevicePosition;
+                @TrackedDevicePosition.performed += instance.OnTrackedDevicePosition;
+                @TrackedDevicePosition.canceled += instance.OnTrackedDevicePosition;
+                @TrackedDeviceOrientation.started += instance.OnTrackedDeviceOrientation;
+                @TrackedDeviceOrientation.performed += instance.OnTrackedDeviceOrientation;
+                @TrackedDeviceOrientation.canceled += instance.OnTrackedDeviceOrientation;
+                @MiddleClick.started += instance.OnMiddleClick;
+                @MiddleClick.performed += instance.OnMiddleClick;
+                @MiddleClick.canceled += instance.OnMiddleClick;
                 @Submit.started += instance.OnSubmit;
                 @Submit.performed += instance.OnSubmit;
                 @Submit.canceled += instance.OnSubmit;
@@ -1664,6 +1791,18 @@ namespace Controls
                 @Navigate.started -= instance.OnNavigate;
                 @Navigate.performed -= instance.OnNavigate;
                 @Navigate.canceled -= instance.OnNavigate;
+                @RightClick.started -= instance.OnRightClick;
+                @RightClick.performed -= instance.OnRightClick;
+                @RightClick.canceled -= instance.OnRightClick;
+                @TrackedDevicePosition.started -= instance.OnTrackedDevicePosition;
+                @TrackedDevicePosition.performed -= instance.OnTrackedDevicePosition;
+                @TrackedDevicePosition.canceled -= instance.OnTrackedDevicePosition;
+                @TrackedDeviceOrientation.started -= instance.OnTrackedDeviceOrientation;
+                @TrackedDeviceOrientation.performed -= instance.OnTrackedDeviceOrientation;
+                @TrackedDeviceOrientation.canceled -= instance.OnTrackedDeviceOrientation;
+                @MiddleClick.started -= instance.OnMiddleClick;
+                @MiddleClick.performed -= instance.OnMiddleClick;
+                @MiddleClick.canceled -= instance.OnMiddleClick;
                 @Submit.started -= instance.OnSubmit;
                 @Submit.performed -= instance.OnSubmit;
                 @Submit.canceled -= instance.OnSubmit;
@@ -1972,6 +2111,34 @@ namespace Controls
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnNavigate(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightClick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "TrackedDevicePosition" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTrackedDevicePosition(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "TrackedDeviceOrientation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "MiddleClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnMiddleClick(InputAction.CallbackContext context);
             /// <summary>
             /// Method invoked when associated input action "Submit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
             /// </summary>

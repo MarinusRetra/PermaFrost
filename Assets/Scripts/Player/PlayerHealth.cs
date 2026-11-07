@@ -2,6 +2,7 @@ using Gameplay;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerHealth : MonoBehaviour
     private bool _isVunerable = false;
 
     [SerializeField]private GameObject _deathUI;
+    [SerializeField] private GameObject _defaultControllerSelectedButton;
     [SerializeField] private GameObject _hitUI;
     [SerializeField] private InputReader _reader;
     [SerializeField] private TMP_Text _deathText;
@@ -82,6 +84,7 @@ public class PlayerHealth : MonoBehaviour
 
         //ui
         _deathUI.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(_defaultControllerSelectedButton);
         transform.Find("CamBrain").parent = _deathUI.transform;
         Destroy(_deathUI.transform.parent.Find("Pause")?.gameObject);
         _deathText.text = "To: " + deathCause;

@@ -627,7 +627,7 @@ namespace Controls
                 {
                     ""name"": """",
                     ""id"": ""90210fc7-eced-4f35-b2c4-438dbed1a9f4"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",

@@ -12,7 +12,7 @@ namespace Gameplay
 		[SerializeField] private GameObject _settingsPanel;
 		[SerializeField] private GameObject[] _StatNamesUI;
 		[SerializeField] private GameObject[] _StatValuesUI;
-		bool _settingsToggle = false;
+		public bool _settingsToggle = false;
 
 		private void Start()
 		{
@@ -21,8 +21,10 @@ namespace Gameplay
 
 		public void OnResume()
         {
+			_settingsToggle = false;
+            _settingsPanel.SetActive(false);
 			if (!_input) { return; }
-			gameObject.SetActive(false);
+            gameObject.SetActive(false);
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 			_input.SetGameplayActions();
@@ -31,7 +33,7 @@ namespace Gameplay
 		public void SettingsToggle()
 		{
 			_settingsToggle = !_settingsToggle;
-			_settingsPanel.SetActive(_settingsToggle);
+			//_settingsPanel.SetActive(_settingsToggle);
 		}
 
 		public void LoadScene(int id) => SceneManager.LoadScene(id); 

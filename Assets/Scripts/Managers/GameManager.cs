@@ -11,6 +11,8 @@ namespace Gameplay
         [SerializeField] private StatTracker _statTrack;
         [SerializeField] private GameObject _resumeButton;
         [SerializeField] private EventSystem _eventSystem;
+        [SerializeField] private GameObject[] onResumeDisable;
+        [SerializeField] private GameObject[] onResumeEnable;
 
         private void Start()
         {
@@ -34,11 +36,14 @@ namespace Gameplay
             _pauseMenu.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-        }
-
-        private void Update()
-        {
-            //print(_eventSystem.currentSelectedGameObject.name);
+            for(int i = 0; i < onResumeDisable.Length; i++)
+            {
+                onResumeDisable[i].SetActive(false);
+            }
+            for (int i = 0; i < onResumeEnable.Length; i++)
+            {
+                onResumeEnable[i].SetActive(true);
+            }
         }
 
         private void OnDisable()
